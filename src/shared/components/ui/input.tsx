@@ -5,8 +5,8 @@ import { cn } from '@/shared/lib/utils/utils';
 
 const inputVariants = cva(
   cn(
-    // Layout & Fixed Sizing
-    'h-12.5 w-82 min-w-0 rounded-lg px-3 py-1 text-sm transition-colors',
+    // Layout & Sizing
+    'h-11.25 w-82 min-w-0 rounded-lg px-3 py-1 text-sm transition-colors',
 
     // Border & Backgrounds
     'border border-input bg-transparent outline-none dark:bg-input/30',
@@ -34,15 +34,40 @@ const inputVariants = cva(
 export interface InputProps
   extends
     React.ComponentProps<typeof InputPrimitive>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  valid?: boolean;
+  invalid?: boolean;
+
+  /** When true, hides the native up/down spinner on number inputs. */
+  hideNumberControls?: boolean;
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
+  (
+    {
+      className,
+      valid,
+      invalid,
+      hideNumberControls = true,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <InputPrimitive
         ref={ref}
         data-slot="input"
-        className={cn(inputVariants({ className }))}
+        data-valid={valid}
+        data-invalid={invalid}
+        aria-invalid={invalid || props['aria-invalid']}
+        className={cn(
+          inputVariants(),
+
+          // Number controls hiding logic
+          hideNumberControls &&
+            '[appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none',
+          className
+        )}
         {...props}
       />
     );
