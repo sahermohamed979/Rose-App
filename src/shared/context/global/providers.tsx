@@ -1,6 +1,7 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactQueryProvider from './providers/react-query-providers';
 import { NextIntlClientProvider } from 'next-intl';
+import { ThemeProvider } from './providers/ThemeProvider';
 
 export default function provides({
   children,
@@ -10,7 +11,16 @@ export default function provides({
   return (
     <ReactQueryProvider>
       <ReactQueryDevtools initialIsOpen={false} />
-      <NextIntlClientProvider> {children}</NextIntlClientProvider>
+      <NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </NextIntlClientProvider>
     </ReactQueryProvider>
   );
 }
