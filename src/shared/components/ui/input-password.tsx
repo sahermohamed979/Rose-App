@@ -1,4 +1,4 @@
-'use  client';
+'use client';
 
 import * as React from 'react';
 import { Eye, EyeOff } from 'lucide-react';
@@ -8,16 +8,22 @@ import { Input } from './input';
 
 const PasswordInput = React.forwardRef<
   HTMLInputElement,
-  React.ComponentProps<typeof Input>
->(({ className, ...props }, ref) => {
+  React.ComponentProps<typeof Input> & { containerClassName?: string }
+>(({ className, containerClassName, ...props }, ref) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <div data-slot="password-input" className="relative w-full ">
+    <div
+      data-slot="password-input"
+      className={cn(
+        'relative flex items-center w-82',
+        containerClassName
+      )}
+    >
       <Input
         type={showPassword ? 'text' : 'password'}
         placeholder="*******"
-        className={cn('pe-10', className)}
+        className={cn('flex-1 pe-10', className)}
         ref={ref}
         {...props}
       />
@@ -28,19 +34,9 @@ const PasswordInput = React.forwardRef<
         onClick={() => setShowPassword((prev) => !prev)}
         aria-label={showPassword ? 'Hide password' : 'Show password'}
         className={cn(
-          // Layout & Sizing
-          'absolute inset-y-0 inset-e-0 flex items-center justify-center rounded-e-lg px-6 transition-colors',
-
-          // Colors
-          'text-muted-foreground ',
-
-          // Hover State
-          'hover:text-foreground',
-
-          // Focus & Rings (Matches Base Input)
+          'absolute inset-y-0 inset-e-0 flex items-center justify-center rounded-e-lg px-3 transition-colors',
+          'text-muted-foreground hover:text-foreground',
           'focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
-
-          // Disabled State
           'disabled:pointer-events-none disabled:opacity-50'
         )}
       >
