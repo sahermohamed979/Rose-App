@@ -11,44 +11,7 @@ import { Input } from '@/shared/components/ui/input';
 
 export default function InputsShowcase() {
   return (
-    <div className="p-8 max-w-3xl mx-auto space-y-12">
-      {/* 1. Standard Input Showcase */}
-      <section className="space-y-6">
-        <h2 className="text-xl font-semibold border-b pb-2">
-          Standard Inputs
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Default State */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Default</label>
-            <Input placeholder="Type something..." />
-          </div>
-
-          {/* Read Only State */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Read Only</label>
-            <Input readOnly value="Read only value" />
-          </div>
-
-          {/* Disabled State */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Disabled</label>
-            <Input disabled placeholder="Disabled input" />
-          </div>
-
-          {/* Error / Invalid State */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-destructive">
-              Error (Invalid)
-            </label>
-            <Input
-              aria-invalid="true"
-              placeholder="Error state input"
-            />
-          </div>
-        </div>
-      </section>
-
+    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       {/* 2. OTP Input Showcase */}
       <section className="space-y-6">
         <h2 className="text-xl font-semibold border-b pb-2">
