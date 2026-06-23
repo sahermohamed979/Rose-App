@@ -5,7 +5,6 @@ import { Upload } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils/utils';
 
-// Extend input props and add containerClassName for layout control
 export interface FileInputProps extends React.ComponentProps<'input'> {
   containerClassName?: string;
 }
@@ -20,9 +19,8 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       setFileName(file ? file.name : '');
-      if (onChange) {
-        onChange(e);
-      }
+
+      onChange?.(e);
     };
 
     return (
@@ -33,7 +31,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           containerClassName
         )}
       >
-        {/* Hidden native file input acting as the interactive layer */}
+        {/* Hidden input */}
         <input
           type="file"
           ref={ref}
@@ -43,42 +41,46 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           {...props}
         />
 
-        {/* Visual representation of the input */}
+        {/* Visual UI */}
         <div
           className={cn(
-            // Layout & Sizing (Matches Base Input)
-            'flex h-10 w-full min-w-0 items-center justify-between gap-1.5 rounded-lg px-3 py-1 text-sm transition-colors',
+            // Layout
+            'flex h-11.25 w-full min-w-0 items-center justify-between gap-2 rounded-lg px-3 py-1 text-sm transition-all duration-200',
 
-            // Border & Backgrounds
-            'border border-input bg-transparent dark:bg-input/30',
+            // Base
+            'bg-bg-plain text-text-plain border border-border-soft outline-none',
 
-            // Hover State
-            'group-hover:ring-2 group-hover:ring-ring/30',
+            // Hover
+            'group-hover:border-border-default group-hover:shadow-subtle-sm group-hover:ring-ring-default',
 
-            // Focus & Rings (Triggered by the hidden peer input)
-            'peer-focus-visible:border-ring peer-focus-visible:ring-3 peer-focus-visible:ring-ring/50',
+            // Focus
+            'peer-focus-visible:border-border-primary peer-focus-visible:ring-[length:var(--ring-default-size)] peer-focus-visible:ring-[color:var(--ring-default)]',
 
-            // Disabled State
-            'peer-disabled:bg-input/50 peer-disabled:opacity-50 dark:peer-disabled:bg-input/80',
+            // Disabled
+            'peer-disabled:pointer-events-none peer-disabled:opacity-60 peer-disabled:bg-bg-subtle peer-disabled:border-border-muted peer-disabled:text-text-subtle',
 
-            // Validation States
-            'peer-aria-invalid:border-destructive peer-aria-invalid:ring-3 peer-aria-invalid:ring-destructive/20 dark:peer-aria-invalid:border-destructive/50 dark:peer-aria-invalid:ring-destructive/40',
+            // Invalid
+            'peer-aria-invalid:border-border-danger peer-aria-invalid:text-text-danger peer-aria-invalid:ring-[length:var(--ring-danger-size)] peer-aria-invalid:ring-[color:var(--ring-danger)] dark:peer-aria-invalid:border-border-danger-saturated',
 
             className
           )}
         >
+          {/* File name */}
           <span
             className={cn(
-              'truncate pe-2 text-sm',
-              fileName ? 'text-foreground' : 'text-muted-foreground'
+              'truncate pe-2',
+              fileName ? 'text-text-plain' : 'text-text-muted'
             )}
           >
             {fileName || 'Select a file...'}
           </span>
 
-          <div className="flex shrink-0 items-center gap-2 text-sm font-medium text-foreground">
-            <Upload className="size-4" />
-            <span>Upload file</span>
+          {/* Action */}
+          <div className="flex shrink-0 items-center gap-2 text-text-plain">
+            <Upload className="size-4 text-text-primary" />
+            <span className="font-medium text-text-primary">
+              Upload file
+            </span>
           </div>
         </div>
       </div>

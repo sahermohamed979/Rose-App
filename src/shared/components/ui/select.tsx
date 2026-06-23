@@ -47,38 +47,37 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       className={cn(
-        // Layout & Fixed Sizing (Matching Base Input)
-        'flex h-11.25 w-82 min-w-0 items-center justify-between gap-1.5 rounded-lg px-3 py-1 text-sm whitespace-nowrap transition-colors select-none outline-none',
+        // Layout
+        'flex h-11.25 w-full min-w-0 items-center justify-between gap-2 rounded-lg px-3 py-1 text-sm transition-all duration-200 select-none outline-none',
 
-        // Border & Backgrounds
-        'border border-input bg-transparent dark:bg-input/30',
+        // Base
+        'bg-bg-plain text-text-plain border border-border-soft',
 
-        // Disabled state
-        'disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 dark:disabled:bg-input/80',
+        // Hover
+        'hover:border-border-default hover:shadow-subtle-sm hover:ring-ring-default',
 
-        // Placeholder
-        'data-placeholder:text-muted-foreground',
+        // Focus
+        'focus-visible:border-border-primary focus-visible:ring-[length:var(--ring-default-size)] focus-visible:ring-[color:var(--ring-default)]',
 
-        // Hover State
-        'hover:ring-2 hover:ring-ring/30',
+        // Disabled
+        'disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-bg-subtle disabled:border-border-muted disabled:text-text-subtle disabled:opacity-60',
 
-        // Focus & rings
-        'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
+        // Invalid
+        'aria-invalid:border-border-danger aria-invalid:text-text-danger aria-invalid:ring-[length:var(--ring-danger-size)] aria-invalid:ring-[color:var(--ring-danger)] dark:aria-invalid:border-border-danger-saturated',
 
-        // Validation States
-        'aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40',
+        // Value + icons
+        '[&>span]:flex-1 [&>span]:truncate',
+        '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4',
 
-        // Value formatting & Icons
-        '*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5',
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
     >
       {children}
+
       <SelectPrimitive.Icon
         render={
-          <ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />
+          <ChevronDownIcon className="size-4 text-text-muted" />
         }
       />
     </SelectPrimitive.Trigger>

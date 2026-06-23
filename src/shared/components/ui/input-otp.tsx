@@ -6,6 +6,8 @@ import { MinusIcon } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils/utils';
 
+/* ---------------- Input OTP Root ---------------- */
+
 function InputOTP({
   className,
   containerClassName,
@@ -17,7 +19,7 @@ function InputOTP({
     <OTPInput
       data-slot="input-otp"
       containerClassName={cn(
-        'cn-input-otp flex items-center has-disabled:pointer-events-none has-disabled:opacity-50',
+        'cn-input-otp flex items-center gap-2 has-disabled:pointer-events-none has-disabled:opacity-60',
         containerClassName
       )}
       spellCheck={false}
@@ -26,6 +28,8 @@ function InputOTP({
     />
   );
 }
+
+/* ---------------- Group ---------------- */
 
 function InputOTPGroup({
   className,
@@ -40,6 +44,8 @@ function InputOTPGroup({
   );
 }
 
+/* ---------------- Slot ---------------- */
+
 function InputOTPSlot({
   index,
   className,
@@ -48,42 +54,54 @@ function InputOTPSlot({
   index: number;
 }) {
   const inputOTPContext = React.useContext(OTPInputContext);
-  const { char, hasFakeCaret, isActive } =
-    inputOTPContext?.slots[index] ?? {};
+
+  const slot = inputOTPContext?.slots?.[index];
+  const char = slot?.char;
+  const hasFakeCaret = slot?.hasFakeCaret;
+  const isActive = slot?.isActive;
+
+  const isInvalid = (inputOTPContext as any)?.isInvalid; // fallback safe
 
   return (
     <div
       data-slot="input-otp-slot"
       data-active={isActive}
+      aria-invalid={isInvalid}
       className={cn(
-        // Layout & Sizing
-        'relative flex h-11.25 w-11.25 items-center justify-center rounded-lg text-sm transition-colors',
+        // Base (same as Input)
+        'relative flex h-11.25 w-11.25 items-center justify-center rounded-lg text-sm transition-all duration-200',
 
-        // Border & Backgrounds
-        'border border-input bg-transparent outline-none dark:bg-input/30',
+        // Base style
+        'bg-bg-plain text-text-plain border border-border-soft outline-none',
 
-        // Hover State
-        'hover:ring-2 hover:ring-ring/30',
+        // Hover (same as Input)
+        'hover:border-border-default hover:shadow-subtle-sm hover:ring-ring-default',
 
-        // Focus (Active) & rings
-        'data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50',
+        // Focus / Active
+        'data-[active=true]:z-10 data-[active=true]:border-border-primary data-[active=true]:ring-[length:var(--ring-default-size)] data-[active=true]:ring-[color:var(--ring-default)]',
 
-        // Validation States
-        'aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40',
+        // Invalid (same as Input)
+        'aria-invalid:border-border-danger aria-invalid:text-text-danger aria-invalid:ring-[length:var(--ring-danger-size)] aria-invalid:ring-[color:var(--ring-danger)] dark:aria-invalid:border-border-danger-saturated',
+
+        // Disabled (same as Input)
+        'disabled:pointer-events-none disabled:opacity-60 disabled:bg-bg-subtle disabled:border-border-muted disabled:text-text-subtle',
 
         className
       )}
       {...props}
     >
       {char}
+
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
+          <div className="h-4 w-px animate-caret-blink bg-text-plain duration-1000" />
         </div>
       )}
     </div>
   );
 }
+
+/* ---------------- Separator ---------------- */
 
 function InputOTPSeparator({
   ...props
@@ -91,7 +109,7 @@ function InputOTPSeparator({
   return (
     <div
       data-slot="input-otp-separator"
-      className="flex items-center [&_svg:not([class*='size-'])]:size-4"
+      className="flex items-center text-text-muted"
       role="separator"
       {...props}
     >
@@ -99,5 +117,7 @@ function InputOTPSeparator({
     </div>
   );
 }
+
+/* ---------------- Export ---------------- */
 
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };

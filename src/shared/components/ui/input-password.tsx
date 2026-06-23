@@ -15,10 +15,7 @@ const PasswordInput = React.forwardRef<
   return (
     <div
       data-slot="password-input"
-      className={cn(
-        'relative flex items-center w-82',
-        containerClassName
-      )}
+      className={cn('relative flex items-center', containerClassName)}
     >
       <Input
         type={showPassword ? 'text' : 'password'}
@@ -35,7 +32,7 @@ const PasswordInput = React.forwardRef<
         aria-label={showPassword ? 'Hide password' : 'Show password'}
         className={cn(
           'absolute inset-y-0 inset-e-0 flex items-center justify-center rounded-e-lg px-3 transition-colors',
-          'text-muted-foreground hover:text-foreground',
+          'text-text-zinc-400 hover:text-foreground',
           'focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
           'disabled:pointer-events-none disabled:opacity-50'
         )}
