@@ -16,10 +16,10 @@ const SearchInput = React.forwardRef<
         data-slot="search-icon"
         className={cn(
           // Layout & Positioning
-          'absolute inset-y-0 inset-s-0 flex pointer-events-none items-center justify-center ps-4',
+          'pointer-events-none absolute inset-y-0 inset-s-0 flex items-center justify-center ps-4',
 
           // Colors
-          'text-muted-foreground',
+          'text-text-muted',
 
           // Disabled State matching the input
           props.disabled && 'opacity-50'
@@ -27,11 +27,12 @@ const SearchInput = React.forwardRef<
       >
         <Search className="size-4" />
       </div>
+
       <Input
+        ref={ref}
         type="search"
         placeholder="Search..."
         className={cn('ps-10', className)}
-        ref={ref}
         {...props}
       />
     </div>

@@ -34,9 +34,9 @@ const PhoneInput = React.forwardRef<
       <RPNInput
         ref={ref}
         data-slot="phone-input"
-        // Use flex layout to ensure the input and container widths are always synced
         className={cn(
-          'relative flex items-center w-full',
+          // Layout
+          'relative flex w-full items-center',
           containerClassName
         )}
         flagComponent={FlagComponent}
@@ -51,20 +51,26 @@ const PhoneInput = React.forwardRef<
     );
   }
 );
+
 PhoneInput.displayName = 'PhoneInput';
 
-// This is the actual text input field where the user types the numbers
 const InputComponent = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<typeof Input>
->(({ className, ...props }, ref) => (
-  <Input
-    ref={ref}
-    // Add padding start (ps-32) to leave empty space for the absolute country selector
-    className={cn('flex-1 ps-32', className)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  return (
+    <Input
+      ref={ref}
+      className={cn(
+        // Leave space for the country selector
+        'flex-1 ps-32',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+
 InputComponent.displayName = 'InputComponent';
 
 type CountrySelectProps = {
@@ -74,7 +80,6 @@ type CountrySelectProps = {
   options: { label: string; value: Country | undefined }[];
 };
 
-// This is the dropdown menu on the left side to select the country code
 const CountrySelect = ({
   disabled,
   value,
@@ -91,19 +96,28 @@ const CountrySelect = ({
     <div
       data-slot="country-select"
       className={cn(
-        // Position it absolutely on the left side of the input container
+        // Layout
         'absolute inset-y-0 inset-s-0 z-10 flex items-center',
-        disabled && 'pointer-events-none opacity-50'
+
+        // Disabled
+        disabled && 'pointer-events-none opacity-60'
       )}
     >
       <div
         className={cn(
-          'relative flex h-full cursor-pointer items-center gap-1.5 rounded-s-lg ps-3 pe-2 transition-colors',
-          // Add hover effect that matches the design system
-          'hover:bg-muted focus-within:bg-muted'
+          // Layout
+          'relative flex h-full items-center gap-1.5 rounded-s-lg ps-3 pe-2 transition-colors',
+
+          // Base
+          'text-text-plain',
+
+          // Hover
+          'hover:bg-bg-subtle',
+
+          // Focus
+          'focus-within:bg-bg-subtle'
         )}
       >
-        {/* Invisible native select element layered on top for functionality */}
         <select
           disabled={disabled}
           value={value || ''}
@@ -114,8 +128,9 @@ const CountrySelect = ({
           <option value="" disabled>
             Select
           </option>
+
           {options
-            .filter((x) => x.value)
+            .filter((option) => option.value)
             .map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -123,22 +138,20 @@ const CountrySelect = ({
             ))}
         </select>
 
-        {/* Visual UI elements */}
         <FlagComponent country={value} countryName={value} />
 
-        <span className="w-14 text-sm font-medium text-foreground mt-px">
+        <span className="mt-px w-14 text-sm font-medium text-text-plain">
           {value
             ? `${value}(+${getCountryCallingCode(value)})`
             : '🌐'}
         </span>
 
-        <ChevronsUpDown className="size-4 shrink-0 text-muted-foreground" />
+        <ChevronsUpDown className="size-4 shrink-0 text-text-muted" />
       </div>
     </div>
   );
 };
 
-// A small helper component to render the country flag
 const FlagComponent = ({
   country,
   countryName,
@@ -147,6 +160,7 @@ const FlagComponent = ({
   countryName: string;
 }) => {
   const Flag = flags[country];
+
   return (
     <span className="flex h-3.5 w-5 shrink-0 overflow-hidden rounded-sm shadow-sm [&_svg]:h-full [&_svg]:w-full">
       {Flag ? (
@@ -157,5 +171,7 @@ const FlagComponent = ({
     </span>
   );
 };
+
+FlagComponent.displayName = 'FlagComponent';
 
 export { PhoneInput };

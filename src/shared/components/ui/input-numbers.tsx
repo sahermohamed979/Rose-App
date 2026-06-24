@@ -7,7 +7,9 @@ import { Input } from './input';
 
 const NumberInput = React.forwardRef<
   HTMLInputElement,
-  React.ComponentProps<typeof Input> & { containerClassName?: string }
+  React.ComponentProps<typeof Input> & {
+    containerClassName?: string;
+  }
 >(
   (
     { className, containerClassName, disabled, ...props },
@@ -15,9 +17,9 @@ const NumberInput = React.forwardRef<
   ) => {
     const internalRef = React.useRef<HTMLInputElement>(null);
 
-    // Merge refs to allow both internal use and parent access
     const handleRef = (element: HTMLInputElement) => {
       internalRef.current = element;
+
       if (typeof forwardedRef === 'function') {
         forwardedRef(element);
       } else if (forwardedRef) {
@@ -25,49 +27,83 @@ const NumberInput = React.forwardRef<
       }
     };
 
-    const handleIncrement = () => {
-      internalRef.current?.stepUp();
-      internalRef.current?.dispatchEvent(
-        new Event('change', { bubbles: true })
+    const updateInputValue = (value: string) => {
+      const input = internalRef.current;
+      if (!input) {
+        return;
+      }
+
+      const nativeValueSetter = Object.getOwnPropertyDescriptor(
+        HTMLInputElement.prototype,
+        'value'
+      )?.set;
+
+      nativeValueSetter?.call(input, value);
+
+      input.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+        })
       );
     };
 
-    const handleDecrement = () => {
-      internalRef.current?.stepDown();
-      internalRef.current?.dispatchEvent(
-        new Event('change', { bubbles: true })
-      );
+    const handleStep = (direction: 1 | -1) => {
+      const input = internalRef.current;
+      if (!input) {
+        return;
+      }
+
+      direction > 0 ? input.stepUp() : input.stepDown();
+
+      updateInputValue(input.value);
     };
 
     return (
       <div
         data-slot="number-input"
         className={cn(
-          'relative flex items-center w-full',
+          // Layout
+          'relative flex w-full items-center',
+
           containerClassName
         )}
       >
         <Input
-          type="number"
-          // Native arrows are hidden automatically by the Base Input styles
-          className={cn('flex-1 pe-8 text-start', className)}
           ref={handleRef}
+          type="number"
           disabled={disabled}
+          className={cn(
+            // Layout
+            'flex-1 pe-8 text-start',
+
+            className
+          )}
           {...props}
         />
 
-        <div className="absolute inset-y-0 inset-e-0 flex flex-col justify-center gap-0.5 pe-3">
-          {/* Up Button */}
+        <div
+          data-slot="number-input-controls"
+          className="absolute inset-y-0 inset-e-0 flex flex-col justify-center gap-0.5 pe-3"
+        >
           <button
             type="button"
             data-slot="increment-button"
-            onClick={handleIncrement}
+            onClick={() => handleStep(1)}
             disabled={disabled}
-            tabIndex={-1} // Prevent focus when tabbing
+            tabIndex={-1}
+            aria-label="Increment"
             className={cn(
-              'flex items-center justify-center transition-colors outline-none',
-              'text-muted-foreground hover:text-foreground',
-              'disabled:pointer-events-none disabled:opacity-50'
+              // Layout
+              'flex items-center justify-center outline-none transition-colors',
+
+              // Base
+              'text-text-muted',
+
+              // Hover
+              'hover:text-text-plain',
+
+              // Disabled
+              'disabled:pointer-events-none disabled:opacity-60'
             )}
           >
             <svg
@@ -78,7 +114,6 @@ const NumberInput = React.forwardRef<
               stroke="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Using stroke to create a slight border radius effect */}
               <polygon
                 points="2,6 8,6 5,2"
                 strokeWidth="2"
@@ -87,17 +122,25 @@ const NumberInput = React.forwardRef<
             </svg>
           </button>
 
-          {/* Down Button */}
           <button
             type="button"
             data-slot="decrement-button"
-            onClick={handleDecrement}
+            onClick={() => handleStep(-1)}
             disabled={disabled}
-            tabIndex={-1} // Prevent focus when tabbing
+            tabIndex={-1}
+            aria-label="Decrement"
             className={cn(
-              'flex items-center justify-center transition-colors outline-none',
-              'text-muted-foreground hover:text-foreground',
-              'disabled:pointer-events-none disabled:opacity-50'
+              // Layout
+              'flex items-center justify-center outline-none transition-colors',
+
+              // Base
+              'text-text-muted',
+
+              // Hover
+              'hover:text-text-plain',
+
+              // Disabled
+              'disabled:pointer-events-none disabled:opacity-60'
             )}
           >
             <svg

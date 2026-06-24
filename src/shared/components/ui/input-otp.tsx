@@ -1,13 +1,16 @@
 'use client';
 
 import * as React from 'react';
-import { OTPInput, OTPInputContext } from 'input-otp';
+import {
+  OTPInput,
+  OTPInputContext,
+  REGEXP_ONLY_DIGITS,
+} from 'input-otp';
 import { MinusIcon } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils/utils';
 
-/* ---------------- Input OTP Root ---------------- */
-
+// Main
 function InputOTP({
   className,
   containerClassName,
@@ -18,6 +21,7 @@ function InputOTP({
   return (
     <OTPInput
       data-slot="input-otp"
+      pattern={REGEXP_ONLY_DIGITS}
       containerClassName={cn(
         'cn-input-otp flex items-center gap-2 has-disabled:pointer-events-none has-disabled:opacity-60',
         containerClassName
@@ -29,8 +33,7 @@ function InputOTP({
   );
 }
 
-/* ---------------- Group ---------------- */
-
+// Group
 function InputOTPGroup({
   className,
   ...props
@@ -44,8 +47,7 @@ function InputOTPGroup({
   );
 }
 
-/* ---------------- Slot ---------------- */
-
+// Slot
 function InputOTPSlot({
   index,
   className,
@@ -60,7 +62,16 @@ function InputOTPSlot({
   const hasFakeCaret = slot?.hasFakeCaret;
   const isActive = slot?.isActive;
 
-  const isInvalid = (inputOTPContext as any)?.isInvalid; // fallback safe
+  // Type-safe check instead of using 'any'
+  // 1. Convert to unknown first
+  // 2. Safely check if it's an object and has the 'isInvalid' key
+  const contextObj = inputOTPContext as unknown;
+  const isInvalid =
+    typeof contextObj === 'object' &&
+    contextObj !== null &&
+    'isInvalid' in contextObj
+      ? Boolean((contextObj as Record<string, unknown>).isInvalid)
+      : undefined;
 
   return (
     <div
@@ -101,8 +112,7 @@ function InputOTPSlot({
   );
 }
 
-/* ---------------- Separator ---------------- */
-
+// Separator
 function InputOTPSeparator({
   ...props
 }: React.ComponentProps<'div'>) {
@@ -118,6 +128,5 @@ function InputOTPSeparator({
   );
 }
 
-/* ---------------- Export ---------------- */
-
+// Exports
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };
