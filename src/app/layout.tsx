@@ -7,13 +7,15 @@ import Providers from '@/shared/context/global/providers';
 const tajawal = Tajawal({
   subsets: ['arabic'],
   variable: '--font-tajawal',
-  weight: ['300', '400', '500', '700', '800', '900'],
+  weight: ['300', '400', '500', '700'],
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const sarabun = Sarabun({
   subsets: ['latin'],
   variable: '--font-sarabun',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '700'],
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const geistMono = Geist_Mono({
