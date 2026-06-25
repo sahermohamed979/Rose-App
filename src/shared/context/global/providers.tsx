@@ -2,7 +2,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactQueryProvider from './providers/react-query-providers';
 import { NextIntlClientProvider } from 'next-intl';
 
-export default function provides({
+export default function Providers({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export default function provides({
   return (
     <ReactQueryProvider>
       <ReactQueryDevtools initialIsOpen={false} />
-      <NextIntlClientProvider> {children}</NextIntlClientProvider>
+      <NextIntlClientProvider>{children}</NextIntlClientProvider>
     </ReactQueryProvider>
   );
 }
