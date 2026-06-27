@@ -3,7 +3,7 @@ import ReactQueryProvider from './providers/react-query-providers';
 import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from './providers/ThemeProvider';
 
-export default function provides({
+export default function Providers({
   children,
 }: Readonly<{
   children: React.ReactNode;
