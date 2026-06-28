@@ -1,59 +1,22 @@
-'use client';
-
-import * as React from 'react';
-import * as z from 'zod';
-
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/navigation';
-
-import { Input } from '@/shared/components/ui/input';
-import { Label } from '@/shared/components/ui/label';
-
-export default function TestPage() {
-  const t = useTranslations('input');
-
-  const { theme, setTheme } = useTheme();
-
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const schema = React.useMemo(
-    () =>
-      z.object({
-        name: z.string().min(1, t('required')),
-      }),
-    [t]
-  );
-
-  type FormValues = z.infer<typeof schema>;
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: '',
-    },
-  });
-
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
-  };
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import Image from 'next/image';
 
   return (
-    <div className="min-h-screen bg-bg-subtle p-8">
-      <div className="mx-auto max-w-md space-y-6 rounded-xl border border-border-soft bg-bg-plain p-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-text-plain">
-            Input Test
+    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+        <Image
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={100}
+          height={20}
+          priority
+        />
+
+        <ThemeToggle />
+        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+          <h1 className="max-w-xs bg-bg-primary text-3xl font-semibold leading-10 tracking-tight  ">
+            To get started, edit the page.tsx file.
           </h1>
 
           <div className="flex gap-2">
