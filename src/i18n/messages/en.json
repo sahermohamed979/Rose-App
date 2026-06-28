@@ -4,6 +4,7 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
   "input": {
     "required": "This field is required",
     "invalidEmail": "Invalid email address",
