@@ -4,5 +4,11 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  "input": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "fileSelected": "File selected"
   }
 }
