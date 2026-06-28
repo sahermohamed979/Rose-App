@@ -1,1 +1,9 @@
-{}
+{
+  "input": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "fileSelected": "تم اختيار الملف"
+  }
+}
