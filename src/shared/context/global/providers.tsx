@@ -11,7 +11,16 @@ export default function Providers({
   return (
     <ReactQueryProvider>
       <ReactQueryDevtools initialIsOpen={false} />
-      <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      <NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </NextIntlClientProvider>
     </ReactQueryProvider>
   );
 }

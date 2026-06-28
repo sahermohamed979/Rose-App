@@ -1,17 +1,25 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Geist_Mono, Tajawal, Sarabun } from 'next/font/google';
 import { cn } from '@/shared/lib/utils/utils';
 import Providers from '@/shared/context/global/providers';
 import { hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const tajawal = Tajawal({
+  subsets: ['arabic'],
+  variable: '--font-tajawal',
+  weight: ['300', '400', '500', '700'],
+  fallback: ['system-ui', 'sans-serif'],
+});
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const sarabun = Sarabun({
   subsets: ['latin'],
+  variable: '--font-sarabun',
+  weight: ['300', '400', '500', '700'],
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const geistMono = Geist_Mono({
@@ -52,10 +60,10 @@ export default async function LocaleLayout({
       className={cn(
         'h-full',
         'antialiased',
-        geistSans.variable,
+        sarabun.variable,
+        tajawal.variable,
         geistMono.variable,
-        'font-sans',
-        inter.variable
+        locale === 'ar' ? 'font-tajawal' : 'font-sans'
       )}
     >
       <body className="min-h-full flex flex-col">
