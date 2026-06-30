@@ -13,12 +13,38 @@ import { Link } from '@/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { Checkbox } from '@/shared/components/ui/checkbox';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  getLoginSchema,
+  LoginFormData,
+} from '../schemas/login-schema';
 
 export default function LoginForm() {
-  const form = useForm();
+  // Translations
   const t = useTranslations('login');
+  const tInput = useTranslations('input');
+
+  // Validation
+  const loginSchema = getLoginSchema(tInput);
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
+
+  // Submit
+  const onSubmit = (data: LoginFormData) => {
+    console.log(data);
+  };
+
   return (
-    <form className="mx-auto w-100 space-y-4">
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="mx-auto w-100 space-y-4"
+    >
       {/* EMAIL */}
       <FieldGroup>
         <Controller
@@ -58,10 +84,10 @@ export default function LoginForm() {
       </FieldGroup>
 
       {/* Link */}
-      <div className="text-right">
+      <div className="text-right rtl:text-left">
         <Link
           href="/forgot-password"
-          className="text-text-primary text-sm font-semibold"
+          className="text-text-primary text-sm font-semibold "
         >
           {t('forgotPassword')}
         </Link>
@@ -72,7 +98,7 @@ export default function LoginForm() {
         name="rememberMe"
         control={form.control}
         render={({ field }) => (
-          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+          <div className="flex items-center space-x-2 rtl:ml-2">
             <Checkbox
               id="rememberMe"
               checked={field.value}
