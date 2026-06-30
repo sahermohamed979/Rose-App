@@ -11,5 +11,13 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "fileSelected": "File selected"
+  },
+  "button": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm"
   }
 }
