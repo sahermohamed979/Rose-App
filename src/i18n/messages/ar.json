@@ -20,16 +20,25 @@
     "delete": "حذف",
     "confirm": "تأكيد"
   },
+  "auth": {
+    "switchLang": "English",
+    "langLabel": "التحويل إلى الإنجليزية",
+    "pageTitle": "المصادقة"
+  },
+  "validation": {
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل وتشمل: حرف كبير وصغير ورقم ورمز خاص",
+    "passwordMatch": "كلمتا المرور غير متطابقتين"
+  },
+  "error": {
+    "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
+  },
   "login": {
     "title": "مرحباً بعودتك",
     "subtitle": "سجّل الدخول إلى حسابك",
-    "email": "البريد الإلكتروني",
-    "password": "كلمة المرور",
-    "forgotPassword": "نسيت كلمة المرور؟",
-    "rememberMe": "تذكرني",
-    "button": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب",
-    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+    "register": "إنشاء حساب"
+  },
+  "register": {
+    "customTitle": "أصبح جزءًا من عائلتنا!"
   }
 }
