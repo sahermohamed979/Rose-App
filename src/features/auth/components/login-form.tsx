@@ -47,23 +47,17 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="mx-auto w-100 space-y-4 "
+      className="mx-auto w-full space-y-4"
     >
-      {/* Error */}
-      {error && (
-        <div className="p-3 text-sm text-center text-red-600 bg-red-50 rounded-md border border-red-200">
-          {t('invalidCredentials')}
-        </div>
-      )}
-      {/* EMAIL */}
+      {/* Username */}
       <FieldGroup>
         <Controller
           name="username"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel>{t('email')}</FieldLabel>
-              <Input placeholder="user@example.com" {...field} />
+              <FieldLabel>{t('userName')}</FieldLabel>
+              <Input placeholder="user123" {...field} />
               {fieldState.error && (
                 <FieldError errors={[fieldState.error]} />
               )}
@@ -123,6 +117,13 @@ export default function LoginForm() {
           </div>
         )}
       />
+
+      {/* Error */}
+      {error && (
+        <div className="p-2 text-sm text-center text-text-danger bg-bg-danger-fade border border-border-danger rounded-lg">
+          {t('invalidCredentials')}
+        </div>
+      )}
 
       {/* Submit Button */}
       <Button
