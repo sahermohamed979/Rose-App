@@ -57,6 +57,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
       className={cn(
         'h-full',
         'antialiased',
