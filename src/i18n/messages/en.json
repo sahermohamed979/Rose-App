@@ -33,10 +33,17 @@
     "networkError": "An error occurred. Please try again"
   },
   "login": {
-    "title": "Welcome back!",
+    "title": "Welcome Back",
     "subtitle": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "button": "Login",
+    "createAccount": "Create one now!",
     "noAccount": "Don't have an account?",
-    "register": "Register"
+    "register": "Register",
+    "invalidCredentials": "Invalid email or password"
   },
   "register": {
     "customTitle": "Become part of our family!"

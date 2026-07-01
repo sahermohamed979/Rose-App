@@ -35,8 +35,15 @@
   "login": {
     "title": "مرحباً بعودتك",
     "subtitle": "سجّل الدخول إلى حسابك",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "button": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب"
+    "createAccount": "أنشئ حساب الأن",
+    "register": "إنشاء حساب",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
   },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!"
