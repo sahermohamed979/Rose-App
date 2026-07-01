@@ -18,6 +18,7 @@ import {
   getLoginSchema,
   LoginFormData,
 } from '../schemas/login-schema';
+import { useLoginMutation } from '../hooks/use-login';
 
 export default function LoginForm() {
   // Translations
@@ -35,15 +36,18 @@ export default function LoginForm() {
     },
   });
 
+  // Custom hook
+  const { mutate: login, isPending, error } = useLoginMutation();
+
   // Submit
   const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+    login(data);
   };
 
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="mx-auto w-100 space-y-4"
+      className="mx-auto w-100 space-y-4 "
     >
       {/* EMAIL */}
       <FieldGroup>
@@ -115,7 +119,12 @@ export default function LoginForm() {
       />
 
       {/* Submit Button */}
-      <Button type="submit" variant="default" className="w-full h-11">
+      <Button
+        type="submit"
+        variant="default"
+        className="w-full h-11"
+        loading={isPending}
+      >
         {t('button')}
       </Button>
     </form>
