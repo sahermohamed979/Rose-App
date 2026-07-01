@@ -19,5 +19,42 @@
     "save": "Save",
     "delete": "Delete",
     "confirm": "Confirm"
+  },
+
+  "register": {
+    "firstName": "First name",
+    "fnPlaceholder": "Jonathan",
+    "lastName": "Last name",
+    "lnPlaceholder": "Adrian",
+    "email": "Email",
+    "emailPlaceholder": "user@example.com",
+    "phone": "Phone",
+    "phonePlaceholder": "1012345678",
+    "gender": "Gender",
+    "genderPlaceholder": "Select gender",
+    "male": "Male",
+    "female": "Female",
+    "password": "Password",
+    "passPlaceholder": "********",
+    "confirmPassword": "Confirm Password",
+    "confirmPassPlaceholder": "********",
+    "submit": "Create Account",
+    "loading": "Creating...",
+    "emailInUse": "Already have an account?",
+    "login": "Login"
+  },
+  "errors": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email format",
+    "phoneRequired": "Phone number is required",
+    "genderRequired": "Gender is required",
+    "passMin": "Password must be at least 8 characters",
+    "passUppercase": "Must contain an uppercase letter",
+    "passNumber": "Must contain a number",
+    "passSpecial": "Must contain a special character",
+    "confirmPassRequired": "Please confirm your password",
+    "passMatch": "Passwords do not match"
   }
 }
