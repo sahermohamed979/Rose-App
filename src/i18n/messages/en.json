@@ -33,6 +33,7 @@
     "networkError": "An error occurred. Please try again"
   },
   "login": {
+    "userName": "User Name",
     "title": "Welcome Back",
     "subtitle": "Sign in to your account",
     "email": "Email",
