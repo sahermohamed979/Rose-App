@@ -49,6 +49,12 @@ export default function LoginForm() {
       onSubmit={form.handleSubmit(onSubmit)}
       className="mx-auto w-100 space-y-4 "
     >
+      {/* Error */}
+      {error && (
+        <div className="p-3 text-sm text-center text-red-600 bg-red-50 rounded-md border border-red-200">
+          {t('invalidCredentials')}
+        </div>
+      )}
       {/* EMAIL */}
       <FieldGroup>
         <Controller
