@@ -4,6 +4,9 @@ import React from 'react';
 import AuthHeader from '@/features/auth/components/authTitle';
 import { useTranslations } from 'next-intl';
 import LangToggle from '@/shared/components/ui/langToggle';
+import authTopSeparator from '@/shared/assets/images/auth-top-separator.png';
+import authBottomSeparator from '@/shared/assets/images/auth-bottom-separator.png';
+import authCover from '@/shared/assets/images/auth-cover.jpg';
 
 const edwardian = localFont({
   src: '../../../features/auth/assets/fonts/edwardianscriptitc.ttf',
@@ -27,8 +30,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <div className="flex w-full max-w-[406px] flex-col items-center ">
           <LangToggle />
 
-          <img
-            src="/shared/assets/images/auth-top-separator.png"
+          <Image
+            src={authTopSeparator}
             alt=""
             aria-hidden
             className="h-auto w-56 select-none mb-10"
@@ -36,8 +39,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
           <div className="w-full mb-5">{children}</div>
 
-          <img
-            src="/shared/assets/images/auth-bottom-separator.png"
+          <Image
+            src={authBottomSeparator}
             alt=""
             aria-hidden
             className="h-auto w-56 select-none mt-10"
@@ -48,7 +51,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       {/* Cover side */}
       <div className="relative hidden w-1/2 bg-bg-primary lg:block">
         <Image
-          src="/shared/assets/images/auth-cover.jpg"
+          src={authCover}
           alt=""
           fill
           priority
