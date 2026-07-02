@@ -76,11 +76,6 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <div className="flex flex-row">
-        <ThemeToggle />
-        <LanguageSwitcher />
-      </div>
-
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         {/* Names Row */}
         <div className="flex flex-row gap-4">
