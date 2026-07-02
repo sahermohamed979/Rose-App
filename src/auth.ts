@@ -1,5 +1,6 @@
 import { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { LoginResponse } from './shared/lib/types/api';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -8,6 +9,7 @@ export const authOptions: AuthOptions = {
       credentials: {
         username: {},
         password: {},
+        rememberMe: {},
       },
       authorize: async (credentials) => {
         const res = await fetch(
@@ -32,27 +34,42 @@ export const authOptions: AuthOptions = {
           id: data.payload.user.id,
           user: data.payload.user,
           token: data.payload.token,
+          remember: credentials?.rememberMe === 'true',
         };
       },
     }),
   ],
   session: {
     strategy: 'jwt',
-    maxAge: 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60,
   },
   jwt: {
     maxAge: 24 * 60 * 60,
   },
   callbacks: {
-    jwt: ({ token, user }) => {
-      if (user) {
+    jwt({ token, user }) {
+      if (user && 'remember' in user) {
         token.user = user.user;
         token.token = user.token;
+
+        token.expireAt =
+          Date.now() +
+          (user.remember
+            ? 30 * 24 * 60 * 60 * 1000
+            : 2 * 60 * 60 * 1000);
       }
+
+      if (token.expireAt && Date.now() > token.expireAt) {
+        return {};
+      }
+
       return token;
     },
     session: ({ session, token }) => {
-      session.user = token.user;
+      if (token.user) {
+        session.user = token.user;
+      }
+
       return session;
     },
   },

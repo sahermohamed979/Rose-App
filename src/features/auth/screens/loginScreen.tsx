@@ -7,7 +7,7 @@ import { Link } from '@/i18n/navigation';
 export default function LoginScreen() {
   const t = useTranslations();
   return (
-    <div className="flex w-full flex-col gap-6">
+    <div className="flex w-full flex-col gap-2">
       <AuthTitle authType="login" title={t('login.title')} />
 
       {/* login form goes here */}
