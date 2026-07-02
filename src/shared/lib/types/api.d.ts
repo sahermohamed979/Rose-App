@@ -26,3 +26,24 @@ interface LoginCredentials {
   username: string;
   password: string;
 }
+
+interface ErrorResponse {
+  status: false;
+  message: string;
+  code?: number;
+}
+
+interface SuccessResponse<T> {
+  status: true;
+  message?: string;
+  code?: number;
+
+  payload: T;
+}
+
+interface SuccessResponseNoPayload {
+  status: true;
+  message?: string;
+}
+
+export type ApiResponse<T> = ErrorResponse | SuccessResponse<T>;
