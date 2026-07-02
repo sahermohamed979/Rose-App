@@ -40,3 +40,19 @@ function mapToRegisterPayload(data: RegisterSchemaType) {
     gender: data.gender.toUpperCase(),
   };
 }
+
+export const resendVerificationEmail = async (email: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/send-email-verification`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to resend email');
+  }
+  return response.json();
+};

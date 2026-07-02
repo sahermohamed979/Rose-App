@@ -40,8 +40,8 @@
     "confirmPassPlaceholder": "********",
     "submit": "إنشاء حساب",
     "loading": "جاري الإنشاء...",
-    "emailInUse": "لديك حساب بالفعل؟",
-    "login": "تسجيل الدخول"
+    "needHelp": "تحتاج لمساعده؟",
+    "contactUs": "تواصل معانا"
   },
   "errors": {
     "firstNameRequired": "الاسم الأول مطلوب",

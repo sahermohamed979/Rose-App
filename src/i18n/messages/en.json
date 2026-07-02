@@ -40,8 +40,8 @@
     "confirmPassPlaceholder": "********",
     "submit": "Create Account",
     "loading": "Creating...",
-    "emailInUse": "Already have an account?",
-    "login": "Login"
+    "needHelp": "Need Help?",
+    "contactUs": "Contact Us"
   },
   "errors": {
     "firstNameRequired": "First name is required",

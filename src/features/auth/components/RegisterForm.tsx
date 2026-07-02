@@ -211,9 +211,9 @@ export default function RegisterForm() {
       </form>
 
       <p className="flex justify-center my-2">
-        {t('register.emailInUse')}
-        <Link href="/login" className="text-text-primary ms-1">
-          {t('register.login')}
+        {t('register.needHelp')}
+        <Link className="text-text-primary ms-1">
+          {t('register.contactUs')}
         </Link>
       </p>
     </div>
