@@ -1,5 +1,13 @@
 'use client';
 
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
+// Components
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
@@ -13,96 +21,123 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import LanguageSwitcher from '@/shared/components/LanguageSwitcher';
+
+// Logic
 import {
-  createRegisterSchema,
+  registerSchema,
   type RegisterSchemaType,
 } from '@/features/auth/schemas/registerSchema';
-import Link from 'next/link';
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import LanguageSwitcher from '@/shared/components/LanguageSwitcher';
+import { registerUser } from '../apis/authApi';
+
+// Helper component for errors to keep JSX clean
+const FormErrorMessage = ({ message }: { message?: string }) => {
+  const t = useTranslations();
+  if (!message) {
+    return null;
+  }
+  return (
+    <p className="text-text-danger text-xs">
+      {t.has(`errors.${message}`)
+        ? t(`errors.${message}`)
+        : t(`errors.${message}`)}
+    </p>
+  );
+};
+
 export default function RegisterForm() {
-  const t = useTranslations('register');
+  const router = useRouter();
+  const t = useTranslations();
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
   } = useForm<RegisterSchemaType>({
-    resolver: zodResolver(createRegisterSchema(t)),
+    resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data: RegisterSchemaType) => {
-    console.log('Form Data:', data);
-    // هنا هنربط بالـ API بتاع زميلك بعد ما يخلص
+    try {
+      await registerUser(data);
+      router.push('/login');
+    } catch (error: any) {
+      if (
+        error.message.includes('verify') ||
+        error.message.includes('otp')
+      ) {
+        router.push('/forgot-password');
+      } else {
+        console.error('Registration error:', error.message);
+      }
+    }
   };
 
   return (
     <div>
-      <div className="flex flex-row ">
+      <div className="flex flex-row">
         <ThemeToggle />
         <LanguageSwitcher />
       </div>
-      <form className="space-y-4 " onSubmit={handleSubmit(onSubmit)}>
+
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        {/* Names Row */}
         <div className="flex flex-row gap-4">
           <div className="space-y-1">
-            <Label>{t('firstName')}</Label>
+            <Label>{t('register.firstName')}</Label>
             <Input
-              placeholder={t('fnPlaceholder')}
+              placeholder={t('register.fnPlaceholder')}
               {...register('firstName')}
               invalid={!!errors.firstName}
             />
-            {errors.firstName && (
-              <p className="text-text-danger text-xs">
-                {errors.firstName.message}
-              </p>
-            )}
+            <FormErrorMessage
+              message={errors.firstName?.message as string}
+            />
           </div>
           <div className="space-y-1">
-            <Label>{t('lastName')}</Label>
+            <Label>{t('register.lastName')}</Label>
             <Input
-              placeholder={t('lnPlaceholder')}
+              placeholder={t('register.lnPlaceholder')}
               {...register('lastName')}
               invalid={!!errors.lastName}
             />
-            {errors.lastName && (
-              <p className="text-text-danger text-xs">
-                {errors.lastName.message}
-              </p>
-            )}
+            <FormErrorMessage
+              message={errors.lastName?.message as string}
+            />
           </div>
         </div>
+
+        {/* Email */}
         <div className="space-y-1">
-          <Label>{t('email')}</Label>
+          <Label>{t('register.email')}</Label>
           <Input
             type="email"
-            placeholder={t('emailPlaceholder')}
+            placeholder={t('register.emailPlaceholder')}
             {...register('email')}
             invalid={!!errors.email}
           />
-          {errors.email && (
-            <p className="text-text-danger text-xs">
-              {errors.email.message}
-            </p>
-          )}
+          <FormErrorMessage
+            message={errors.email?.message as string}
+          />
         </div>
+
+        {/* Phone */}
         <div className="space-y-1">
-          <Label>{t('phone')}</Label>
+          <Label>{t('register.phone')}</Label>
           <PhoneInput
-            placeholder={t('phonePlaceholder')}
+            placeholder={t('register.phonePlaceholder')}
             {...register('phone')}
             invalid={!!errors.phone}
           />
-          {errors.phone && (
-            <p className="text-text-danger text-xs">
-              {errors.phone.message}
-            </p>
-          )}
+          <FormErrorMessage
+            message={errors.phone?.message as string}
+          />
         </div>
+
+        {/* Gender */}
         <div className="space-y-1">
-          <Label>{t('gender')}</Label>
+          <Label>{t('register.gender')}</Label>
           <Controller
             name="gender"
             control={control}
@@ -112,12 +147,16 @@ export default function RegisterForm() {
                 value={field.value}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('genderPlaceholder')} />
+                  <SelectValue
+                    placeholder={t('register.genderPlaceholder')}
+                  />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="male">{t('male')}</SelectItem>
+                  <SelectItem value="male">
+                    {t('register.male')}
+                  </SelectItem>
                   <SelectItem value="female">
-                    {t('female')}
+                    {t('register.female')}
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -125,38 +164,41 @@ export default function RegisterForm() {
           />
           {errors.gender && (
             <p className="text-text-danger text-xs">
+              {/* التحقق من وجود الترجمة وعرضها */}
+
               {t.has(`errors.${errors.gender.message}`)
                 ? t(`errors.${errors.gender.message}`)
                 : t('errors.genderRequired')}
             </p>
           )}
         </div>
+
+        {/* Password Fields */}
         <div className="space-y-1">
-          <Label>{t('password')}</Label>
+          <Label>{t('register.password')}</Label>
           <PasswordInput
-            placeholder={t('passPlaceholder')}
+            placeholder={t('register.passPlaceholder')}
             {...register('password')}
             invalid={!!errors.password}
           />
-          {errors.password && (
-            <p className="text-text-danger text-xs">
-              {errors.password.message}
-            </p>
-          )}
+          <FormErrorMessage
+            message={errors.password?.message as string}
+          />
         </div>
+
         <div className="space-y-1">
-          <Label>{t('confirmPassword')}</Label>
+          <Label>{t('register.confirmPassword')}</Label>
           <PasswordInput
-            placeholder={t('confirmPassPlaceholder')}
+            placeholder={t('register.confirmPassPlaceholder')}
             {...register('confirmPassword')}
             invalid={!!errors.confirmPassword}
           />
-          {errors.confirmPassword && (
-            <p className="text-text-danger text-xs">
-              {errors.confirmPassword.message}
-            </p>
-          )}
+          <FormErrorMessage
+            message={errors.confirmPassword?.message as string}
+          />
         </div>
+
+        {/* Submit */}
         <Button
           type="submit"
           className="w-full"
@@ -164,18 +206,19 @@ export default function RegisterForm() {
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">
-              <i className="fa-solid fa-spinner animate-spin"></i>
-              {t('loading')}
+              <i className="fa-solid fa-spinner animate-spin"></i>{' '}
+              {t('register.loading')}
             </span>
           ) : (
-            <span> {t('submit')}</span>
+            <span>{t('register.submit')}</span>
           )}
         </Button>
       </form>
+
       <p className="flex justify-center my-2">
-        {t('emailInUse')}
-        <Link href="/login" className="text-text-primary">
-          {t('login')}
+        {t('register.emailInUse')}
+        <Link href="/login" className="text-text-primary ms-1">
+          {t('register.login')}
         </Link>
       </p>
     </div>

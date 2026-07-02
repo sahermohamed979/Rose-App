@@ -41,20 +41,23 @@
     "submit": "إنشاء حساب",
     "loading": "جاري الإنشاء...",
     "emailInUse": "لديك حساب بالفعل؟",
-    "login": "تسجيل الدخول",
-    "errors": {
-      "firstNameRequired": "الاسم الأول مطلوب",
-      "lastNameRequired": "اسم العائلة مطلوب",
-      "emailRequired": "البريد الإلكتروني مطلوب",
-      "emailInvalid": "صيغة البريد الإلكتروني غير صحيحة",
-      "phoneRequired": "رقم الهاتف مطلوب",
-      "genderRequired": "يرجى اختيار النوع",
-      "passMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
-      "passUppercase": "يجب أن تحتوي على حرف كبير واحد على الأقل",
-      "passNumber": "يجب أن تحتوي على رقم واحد على الأقل",
-      "passSpecial": "يجب أن تحتوي على رمز خاص واحد على الأقل",
-      "confirmPassRequired": "يرجى تأكيد كلمة المرور",
-      "passMatch": "كلمة المرور غير متطابقة"
-    }
+    "login": "تسجيل الدخول"
+  },
+  "errors": {
+    "firstNameRequired": "الاسم الأول مطلوب",
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "صيغة البريد الإلكتروني غير صحيحة",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "genderRequired": "يرجى اختيار النوع",
+    "passMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+    "passUppercase": "يجب أن تحتوي على حرف كبير واحد على الأقل",
+    "passNumber": "يجب أن تحتوي على رقم واحد على الأقل",
+    "passSpecial": "يجب أن تحتوي على رمز خاص واحد على الأقل",
+    "confirmPassRequired": "يرجى تأكيد كلمة المرور",
+    "passMatch": "كلمة المرور غير متطابقة",
+    "alreadyRegisteredOrVerify": "هذا البريد الإلكتروني مسجل بالفعل، يرجى تفعيل حسابك أو تسجيل الدخول.",
+    "verifyEmailRequired": "يرجى تفعيل البريد الإلكتروني الخاص بك أولاً.",
+    "generalRegistrationFailed": "فشلت عملية التسجيل، يرجى المحاولة لاحقاً."
   }
 }
