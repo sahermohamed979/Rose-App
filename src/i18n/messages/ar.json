@@ -22,6 +22,7 @@
   },
 
   "register": {
+    "customTitle": "أصبح جزءًا من عائلتنا!",
     "firstName": "الاسم الأول",
     "fnPlaceholder": "محمد",
     "lastName": "اسم العائلة",
@@ -59,5 +60,23 @@
     "alreadyRegisteredOrVerify": "هذا البريد الإلكتروني مسجل بالفعل، يرجى تفعيل حسابك أو تسجيل الدخول.",
     "verifyEmailRequired": "يرجى تفعيل البريد الإلكتروني الخاص بك أولاً.",
     "generalRegistrationFailed": "فشلت عملية التسجيل، يرجى المحاولة لاحقاً."
+  },
+  "auth": {
+    "switchLang": "English",
+    "langLabel": "التحويل إلى الإنجليزية",
+    "pageTitle": "المصادقة"
+  },
+  "validation": {
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل وتشمل: حرف كبير وصغير ورقم ورمز خاص",
+    "passwordMatch": "كلمتا المرور غير متطابقتين"
+  },
+  "error": {
+    "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
+  },
+  "login": {
+    "title": "مرحباً بعودتك",
+    "subtitle": "سجّل الدخول إلى حسابك",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "إنشاء حساب"
   }
 }

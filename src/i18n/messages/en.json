@@ -22,6 +22,7 @@
   },
 
   "register": {
+    "customTitle": "Become part of our family!",
     "firstName": "First name",
     "fnPlaceholder": "Jonathan",
     "lastName": "Last name",
@@ -59,5 +60,23 @@
     "alreadyRegisteredOrVerify": "This email is already registered, please verify your email or login.",
     "verifyEmailRequired": "Please verify your email address first.",
     "generalRegistrationFailed": "Registration failed, please try again later."
+  },
+  "auth": {
+    "switchLang": "العربية",
+    "langLabel": "Switch to Arabic",
+    "pageTitle": "Authentication"
+  },
+  "validation": {
+    "passwordWeak": "Password must be at least 8 characters long and include: uppercase letter, lowercase letter, number, and special character",
+    "passwordMatch": "Passwords do not match"
+  },
+  "error": {
+    "networkError": "An error occurred. Please try again"
+  },
+  "login": {
+    "title": "Welcome back!",
+    "subtitle": "Sign in to your account",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
   }
 }

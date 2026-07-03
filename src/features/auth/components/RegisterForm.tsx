@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 // Components
-import { ThemeToggle } from '@/shared/components/ThemeToggle';
+
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { PasswordInput } from '@/shared/components/ui/input-password';
@@ -21,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
-import LanguageSwitcher from '@/shared/components/LanguageSwitcher';
 
 // Logic
 import {
@@ -212,9 +211,9 @@ export default function RegisterForm() {
 
       <p className="flex justify-center my-2">
         {t('register.needHelp')}
-        <Link className="text-text-primary ms-1">
+        <span className="text-text-primary ms-1">
           {t('register.contactUs')}
-        </Link>
+        </span>
       </p>
     </div>
   );
