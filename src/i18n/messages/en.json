@@ -20,7 +20,13 @@
     "delete": "Delete",
     "confirm": "Confirm"
   },
-
+  "Forms": {
+    "required": "This field is required",
+    "tooLong": "Maximum character limit exceeded",
+    "textareaPlaceholder": "Type your message here...",
+    "textareaHeader": "Textarea Test",
+    "textareaLabel": "Message"
+  },
   "register": {
     "customTitle": "Become part of our family!",
     "firstName": "First name",

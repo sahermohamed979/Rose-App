@@ -20,7 +20,13 @@
     "delete": "حذف",
     "confirm": "تأكيد"
   },
-
+  "Forms": {
+    "required": "هذا الحقل مطلوب",
+    "tooLong": "لقد تجاوزت عدد الحروف المسموح بها",
+    "textareaPlaceholder": "اكتب رسالتك هنا",
+    "textareaHeader": "اختبار تيكست اريا",
+    "textareaLabel": "رسالتك "
+  },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!",
     "firstName": "الاسم الأول",
