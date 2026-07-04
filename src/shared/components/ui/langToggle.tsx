@@ -14,7 +14,8 @@ export default function LangToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="link"
+      className=" hover:text-decoration-none text-text-default hover:text-text-primary text-base"
       onClick={() => {
         router.push(pathname, { locale: nextLocale });
       }}
