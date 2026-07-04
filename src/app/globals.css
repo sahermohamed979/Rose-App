@@ -133,6 +133,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sarabun);
   --font-tajawal: var(--font-tajawal);
+  --font-edwardian: var(--font-edwardian);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
