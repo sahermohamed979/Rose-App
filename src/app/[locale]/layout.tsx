@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import '../globals.css';
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
@@ -68,7 +69,12 @@ export default async function LocaleLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="flex justify-end items-center p-4">
+            <ThemeToggle />
+          </div>
+          {children}
+        </Providers>
       </body>
     </html>
   );
