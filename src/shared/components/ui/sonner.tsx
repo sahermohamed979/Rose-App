@@ -9,12 +9,14 @@ import {
   TriangleAlertIcon,
   XIcon,
 } from 'lucide-react';
-
+import { useLocale } from 'next-intl';
 const toastBase =
   'cn-toast  flex  min-h-[53px] items-center gap-3 rounded-lg border px-4 py-3 shadow-[var(--shadow-subtle-sm)]';
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = 'system' } = useTheme();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   return (
     <Sonner
@@ -60,6 +62,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       closeButton
       expand={true}
       duration={3000}
+      position={isRTL ? 'bottom-left' : 'bottom-right'}
       {...props}
     />
   );
