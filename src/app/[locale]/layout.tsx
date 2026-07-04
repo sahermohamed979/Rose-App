@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import '../globals.css';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { Toaster } from '@/shared/components/ui/sonner';
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
@@ -74,6 +75,7 @@ export default async function LocaleLayout({
             <ThemeToggle />
           </div>
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

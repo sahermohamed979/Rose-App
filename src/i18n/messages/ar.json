@@ -40,5 +40,11 @@
   },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!"
+  },
+  "toast": {
+    "success": "نجاح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومة"
   }
 }
