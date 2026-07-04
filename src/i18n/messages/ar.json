@@ -19,5 +19,11 @@
     "save": "حفظ",
     "delete": "حذف",
     "confirm": "تأكيد"
+  },
+  "toast": {
+    "success": "نجاح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومة"
   }
 }

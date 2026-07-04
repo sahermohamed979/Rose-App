@@ -19,5 +19,11 @@
     "save": "Save",
     "delete": "Delete",
     "confirm": "Confirm"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
   }
 }
