@@ -70,5 +70,11 @@
       "passwordResetError": "Something went wrong. Please try again",
       "linkExpiredOrInvalid": "Link expired or invalid"
     }
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
   }
 }
