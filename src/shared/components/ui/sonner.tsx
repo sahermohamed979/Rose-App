@@ -18,6 +18,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = 'system' } = useTheme();
   const locale = useLocale();
   const isRTL = locale === 'ar';
+
   return (
     <Sonner
       theme={theme as ToasterProps['theme']}
