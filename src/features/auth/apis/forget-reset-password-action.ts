@@ -1,4 +1,4 @@
-'use clint';
+'use server';
 
 import { HEADERS } from '@/shared/context/api.constants';
 import { emailSchema } from '../schemas/forget-password-schema';
