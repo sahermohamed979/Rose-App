@@ -66,7 +66,7 @@ export default function ForgetPasswordForm() {
                   {/* error field */}
                   {fieldState.invalid && (
                     <FieldError
-                      errors={[fieldState.error ?? errors.form]}
+                      errors={[fieldState.error ?? errors.email]}
                     />
                   )}
                 </Field>

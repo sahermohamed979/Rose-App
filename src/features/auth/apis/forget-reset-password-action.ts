@@ -27,7 +27,7 @@ export const forgetPassword = async (email: emailInput) => {
       {
         method: 'POST',
         headers: HEADERS.jsonBody,
-        body: JSON.stringify(result.data.email),
+        body: JSON.stringify(result.data),
       }
     );
 
@@ -37,6 +37,7 @@ export const forgetPassword = async (email: emailInput) => {
       return {
         success: false,
         message: data.message || 'Failed to send email',
+        status: data.status,
       };
     }
 
