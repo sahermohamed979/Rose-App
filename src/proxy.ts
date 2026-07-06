@@ -19,10 +19,11 @@ export default async function middleware(req: NextRequest) {
   const isLoggedIn = !!token;
 
   const pathname = req.nextUrl.pathname;
+  const locale = pathname.split('/')[1] || 'en';
 
   // Remove locale prefix to get clean path
   // /en/login → /login
-  const cleanPath = pathname.replace(/^\/[a-z]{2}/, '');
+  const cleanPath = pathname.replace(/^\/[a-z]{2}(?=\/|$)/, '');
 
   const isAuthPage = authPages.some((page) =>
     cleanPath.startsWith(page)
@@ -33,17 +34,16 @@ export default async function middleware(req: NextRequest) {
 
   // Logged in user tries to visit login/register
   if (isLoggedIn && isAuthPage) {
-    return NextResponse.redirect(new URL('/en', req.url));
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 
   // Guest tries to visit protected page
   if (!isLoggedIn && isProtectedPage) {
     const returnUrl = encodeURIComponent(pathname);
     return NextResponse.redirect(
-      new URL(`/en/login?returnUrl=${returnUrl}`, req.url)
+      new URL(`/${locale}/login?returnUrl=${returnUrl}`, req.url)
     );
   }
-
   //  next-intl
   return intlMiddleware(req);
 }

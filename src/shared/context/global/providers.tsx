@@ -20,7 +20,6 @@ export default function Providers({
           disableTransitionOnChange
         >
           <AuthProvider>{children}</AuthProvider>{' '}
-          {/* Session provider */}
         </ThemeProvider>
       </NextIntlClientProvider>
     </ReactQueryProvider>
