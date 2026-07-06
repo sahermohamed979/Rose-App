@@ -1,4 +1,3 @@
-import React from 'react';
 import AuthTitle from '../components/authTitle';
 import { useTranslations } from 'next-intl';
 
