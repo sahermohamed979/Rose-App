@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import localFont from 'next/font/local';
 import React from 'react';
-import AuthHeader from '@/features/auth/components/authTitle';
-import { useTranslations } from 'next-intl';
 import LangToggle from '@/shared/components/ui/langToggle';
 import authTopSeparator from '@/shared/assets/images/auth-top-separator.png';
 import authBottomSeparator from '@/shared/assets/images/auth-bottom-separator.png';
@@ -22,7 +20,6 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const t = useTranslations();
   return (
     <div className={`${edwardian.variable} flex min-h-screen w-full`}>
       {/* Form side */}
@@ -37,7 +34,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             className="h-auto w-56 select-none mb-10"
           />
 
-          <div className="w-full mb-5">{children}</div>
+          <div className="w-full ">{children}</div>
 
           <Image
             src={authBottomSeparator}
