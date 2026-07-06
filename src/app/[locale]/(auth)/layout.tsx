@@ -49,14 +49,14 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             src={darkAuthBottomSeparator}
             alt=""
             aria-hidden
-            className="h-auto w-56 select-none mb-10 text-center hidden dark:block"
+            className="h-auto w-56 select-none mt-10 text-center hidden dark:block"
           />
 
           <Image
             src={authBottomSeparator}
             alt=""
             aria-hidden
-            className="h-auto w-56 select-none mb-10 text-center dark:hidden"
+            className="h-auto w-56 select-none mt-10 text-center dark:hidden"
           />
         </div>
       </div>

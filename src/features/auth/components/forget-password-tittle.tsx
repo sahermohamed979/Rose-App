@@ -14,7 +14,7 @@ export default function ForgetTittles({
   action,
 }: AuthTitleProps) {
   return (
-    <div className="border-b border-border-muted pb-2 w-full">
+    <div className="border-b pb-4 w-full">
       <h1 className="font-semibold text-2xl text-text-plain flex items-center gap-2">
         {icon && (
           <span className="cursor-pointer inline-block p-1.5 bg-bg-primary rounded-lg ">

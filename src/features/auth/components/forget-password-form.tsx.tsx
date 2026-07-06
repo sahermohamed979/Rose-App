@@ -73,7 +73,7 @@ export default function ForgetPasswordForm() {
               )}
             />
             <Button
-              className={`w-full mt-9 bg-maroon-600`}
+              className={`w-full mt-9 `}
               type="submit"
               disabled={isPending}
             >
@@ -92,7 +92,7 @@ export default function ForgetPasswordForm() {
             </span>
             <Link
               href="/register"
-              className="text-maroon-700 font-bold"
+              className=" font-bold text-text-primary "
             >
               {t('forgotPw.step1.register')}
             </Link>
