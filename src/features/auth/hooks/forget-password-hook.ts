@@ -34,6 +34,10 @@ export function useForgetPassword() {
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: emailInput) => {
       const response = await forgetPassword(values);
+
+      if (!response.status) {
+        throw new Error(response.message);
+      }
       return response;
     },
 
@@ -42,8 +46,10 @@ export function useForgetPassword() {
       setEmail(data.email);
       toast.success(t('forgotPw.step1.emailSentSuccess'));
     },
-    onError: () => {
-      toast.error(t('forgotPw.step1.emailSentError'));
+    onError: (error) => {
+      toast.error(
+        t('forgotPw.step3.linkExpiredOrInvalid') ?? error.message
+      );
     },
   });
 
