@@ -121,7 +121,9 @@ export default function LoginForm() {
       {/* Error */}
       {error && (
         <div className="p-2 text-sm text-center text-text-danger bg-bg-danger-fade border border-border-danger rounded-lg">
-          {t('invalidCredentials')}
+          {error.message === 'networkError'
+            ? t('networkError')
+            : t('invalidCredentials')}
         </div>
       )}
 

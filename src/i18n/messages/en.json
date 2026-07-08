@@ -44,7 +44,8 @@
     "createAccount": "Create one now!",
     "noAccount": "Don't have an account?",
     "register": "Register",
-    "invalidCredentials": "Invalid email or password"
+    "invalidCredentials": "Invalid email or password",
+    "networkError": "An error occurred. Please try again"
   },
   "register": {
     "customTitle": "Become part of our family!"
