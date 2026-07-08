@@ -10,51 +10,41 @@ import {
 export const authOptions: AuthOptions = {
   providers: [
     Credentials({
-      name: 'login',
+      name: 'Credentials',
       credentials: {
-        username: {},
-        password: {},
-        rememberMe: {},
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {
-        try {
-          const res = await fetch(
-            `${process.env.NEXT_API_URL}/auth/login`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                username: credentials?.username,
-                password: credentials?.password,
-              } as LoginCredentials),
-            }
-          );
-
-          if (!res.ok && res.status !== 401 && res.status !== 400) {
-            throw new Error('networkError');
+        const res = await fetch(
+          `${process.env.NEXT_API_URL}/auth/login`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: credentials?.username,
+              password: credentials?.password,
+            } as LoginCredentials),
           }
-          const data: ApiResponse<LoginPayload> = await res.json();
+        );
 
-          if (!data.status) {
-            throw new Error('invalidCredentials');
-          }
-
-          return {
-            id: data.payload.user.id,
-            user: data.payload.user,
-            token: data.payload.token,
-          };
-        } catch (error: any) {
-          if (
-            error.message === 'invalidCredentials' ||
-            error.message === 'networkError'
-          ) {
-            throw error;
-          }
+        if (!res.ok && res.status !== 401 && res.status !== 400) {
           throw new Error('networkError');
         }
+
+        const data: ApiResponse<LoginPayload> = await res.json();
+
+        if (!data.status) {
+          throw new Error('invalidCredentials');
+        }
+
+        return {
+          id: data.payload.user.id,
+          user: data.payload.user,
+          token: data.payload.token,
+        };
       },
     }),
   ],
