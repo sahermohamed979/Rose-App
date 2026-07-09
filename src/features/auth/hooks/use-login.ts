@@ -2,8 +2,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@/i18n/navigation';
 import { LoginFormData } from '../schemas/login-schema';
 import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 export const useLoginMutation = () => {
+  // Hooks
+  const params = useSearchParams();
   const router = useRouter();
 
   return useMutation({
@@ -12,7 +15,6 @@ export const useLoginMutation = () => {
         redirect: false,
         username: values.username,
         password: values.password,
-        remember: values.rememberMe,
       });
 
       if (result?.error) {
@@ -22,7 +24,7 @@ export const useLoginMutation = () => {
       return result;
     },
     onSuccess: () => {
-      router.push('/dashboard');
+      router.push(params.get('redirect') ?? '/');
     },
   });
 };
