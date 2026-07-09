@@ -23,7 +23,8 @@
   "auth": {
     "switchLang": "العربية",
     "langLabel": "Switch to Arabic",
-    "pageTitle": "Authentication"
+    "pageTitle": "Authentication",
+    "headerTitle": "Become part of our Family!"
   },
   "validation": {
     "passwordWeak": "Password must be at least 8 characters long and include: uppercase letter, lowercase letter, number, and special character",
@@ -39,7 +40,64 @@
     "register": "Register"
   },
   "register": {
-    "customTitle": "Become part of our family!"
+    "customTitle": "Become part of our family!",
+    "email": "Email",
+    "register": "Register",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "edit": "edit",
+    "login": "Login",
+    "aboutYou": "Tell us more aboute you",
+    "fewDetails": "A few details to get started",
+    "strongPassword": "Create a strong password",
+    "securePassword": "Choose a secure password to protect your account",
+    "firstName": "First name",
+    "fnPlaceholder": "Zeo",
+    "lastName": "Last name",
+    "lnPlaceholder": "Adrian",
+    "username": "Username",
+    "usernamePlaceholder": "Zeo123",
+    "phone": "Phone",
+    "phonePlaceholder": "1012345678",
+    "gender": "Gender",
+    "genderPlaceholder": "Select gender",
+    "male": "Male",
+    "female": "Female",
+    "password": "Password",
+    "passPlaceholder": "********",
+    "confirmPassword": "Confirm Password",
+    "confirmPassPlaceholder": "********",
+    "submit": "Create Account",
+    "loading": "Creating...",
+    "needHelp": "Need Help?",
+    "contactUs": "Contact Us",
+    "next": "Next",
+    "step1": "1",
+    "step2": "2",
+    "step3": "3",
+    "step4": "4",
+    "otp": {
+      "title": "Enter the OTP Code",
+      "subtitle": "We have sent a 6-digit code to {email}",
+      "submitButton": "Verify Code",
+      "resend": "Send a new code",
+      "resendTimer": "Resend in {s}s",
+      "invalid": "Invalid OTP code",
+      "expired": "Code expired. Please request a new one."
+    },
+    "errors": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "usernameRequired": "username is required",
+      "usernameShort": "username Too Short",
+      "phoneRequired": "Phone number is required",
+      "genderRequired": "Gender is required",
+      "passPolicy": "Password must be at least 8 characters long, including an uppercase letter, a number, and a special character.",
+      "passMatch": "Password do not match",
+      "alreadyRegisteredOrVerify": "This email is already registered, please verify your email or login.",
+      "verifyEmailRequired": "Please verify your email address first.",
+      "generalRegistrationFailed": "Registration failed, please try again later."
+    }
   },
   "toast": {
     "success": "Success",

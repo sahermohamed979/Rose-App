@@ -71,9 +71,6 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>
-          <div className="flex justify-end items-center p-4">
-            <ThemeToggle />
-          </div>
           {children}
           <Toaster />
         </Providers>
