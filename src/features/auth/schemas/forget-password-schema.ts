@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
-export const emailSchema = z.object({
-  email: z
-    .string({ message: 'email is required' })
-    .pipe(z.email('Please enter a valid email address')),
-});
+export const emailSchema = (t: (key: string) => string) =>
+  z.object({
+    email: z
+      .string({ message: t('step1.emailRequired') })
+      .pipe(z.email(t('step1.validEmail'))),
+  });

@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import ResetPasswordForm from '../components/reset-password-form';
-import ForgetTittles from '../components/forget-password-tittle';
+import ForgetTittles from '../components/forgot-password-tittle';
 import { Link } from '@/i18n/navigation';
 
 export default function ResetPasswordScreen() {

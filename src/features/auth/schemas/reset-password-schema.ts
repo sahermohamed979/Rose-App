@@ -1,28 +1,23 @@
 import { z } from 'zod';
-export const resetPasswordSchema = z
-  .object({
-    newPassword: z
-      .string({ message: 'Password is required' })
-      .min(8, 'Password must be at least 8 characters')
-      .regex(
-        /[A-Z]/,
-        'Password must include at least one uppercase letter'
-      )
-      .regex(
-        /[a-z]/,
-        'Password must include at least one lowercase letter'
-      )
-      .regex(/[0-9]/, 'Password must include at least one number')
-      .regex(
-        /[^A-Za-z0-9]/,
-        'Password must include at least one special character'
-      ),
-    confirmPassword: z.string({
-      message: 'Please confirm your password',
-    }),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  })
-  .strict();
+export const resetPasswordSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      newPassword: z
+        .string({ message: t('passwordSchema.passwordRequired') })
+        .min(8, t('passwordSchema.passwordMinLength'))
+        .regex(/[A-Z]/, t('passwordSchema.passwordUppercase'))
+        .regex(/[a-z]/, t('passwordSchema.passwordLowercase'))
+        .regex(/[0-9]/, t('passwordSchema.passwordNumber'))
+        .regex(
+          /[^A-Za-z0-9]/,
+          t('passwordSchema.passwordSpecialCharacter')
+        ),
+      confirmPassword: z.string({
+        message: t('passwordSchema.confirmPasswordRequired'),
+      }),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t('passwordSchema.passwordsDoNotMatch'),
+      path: ['confirmPassword'],
+    })
+    .strict();

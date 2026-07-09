@@ -69,6 +69,21 @@
       "passwordResetSuccess": "Your password has been successfully reset.",
       "passwordResetError": "Something went wrong. Please try again",
       "linkExpiredOrInvalid": "Link expired or invalid"
+    },
+
+    "emailSchema": {
+      "emailRequired": "Email is required",
+      "validEmail": "Please enter a valid email"
+    },
+    "passwordSchema": {
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "passwordUppercase": "Password must include at least one uppercase letter",
+      "passwordLowercase": "Password must include at least one lowercase letter",
+      "passwordNumber": "Password must include at least one number",
+      "passwordSpecialCharacter": "Password must include at least one special character",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDoNotMatch": "Passwords do not match"
     }
   },
   "toast": {

@@ -22,6 +22,7 @@ interface ForgetResponseError {
 export type ForgetResponse =
   | ForgetResponseSuccess
   | ForgetResponseError;
-export type emailInput = z.infer<typeof emailSchema>;
-
-export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+export type EmailInput = z.infer<ReturnType<typeof emailSchema>>;
+export type ResetPasswordInput = z.infer<
+  ReturnType<typeof resetPasswordSchema>
+>;

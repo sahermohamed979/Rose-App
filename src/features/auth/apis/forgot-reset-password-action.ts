@@ -10,7 +10,7 @@ import {
 import { resetPasswordSchema } from '../schemas/reset-password-schema';
 
 // api call to send the email to the backend
-export const forgetPassword = async (email: emailInput) => {
+export const forgotPassword = async (email: emailInput) => {
   // validate the email
   const result = emailSchema.safeParse(email);
 
@@ -23,7 +23,7 @@ export const forgetPassword = async (email: emailInput) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`,
       {
         method: 'POST',
         headers: HEADERS.jsonBody,
@@ -76,7 +76,7 @@ export const resetPassword = async (
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/reset-password`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`,
       {
         method: 'POST',
         headers: HEADERS.jsonBody,

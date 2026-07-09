@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { forgetPassword } from '../apis/forget-reset-password-action';
-import { emailInput } from '../types/forget-reset-password-types';
+import { forgotPassword } from '../apis/forgot-reset-password-action';
+import { EmailInput } from '../types/forget-reset-password-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { emailSchema } from '../schemas/forget-password-schema';
@@ -10,30 +10,33 @@ import { useTranslations } from 'next-intl';
 
 export function useForgetPassword() {
   // Translation
-  const t = useTranslations();
+  const t = useTranslations('forgotPw');
   // State
-
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [email, setEmail] = useState('');
+
+  //schema
+  const schema = emailSchema(t);
   // hook form
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<emailInput>({
+  } = useForm<EmailInput>({
     defaultValues: { email: '' },
     mode: 'onSubmit',
-    resolver: zodResolver(emailSchema),
+    resolver: zodResolver(schema),
   });
 
   // Submit Email mutation
-  const onSubmitEmail = async (values: emailInput) => {
+  const onSubmitEmail = async (values: EmailInput) => {
     mutate(values);
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: emailInput) => {
-      const response = await forgetPassword(values);
+    mutationFn: async (values: EmailInput) => {
+      const response = await forgotPassword(values);
 
       if (!response.status) {
         throw new Error(response.message);
@@ -41,15 +44,13 @@ export function useForgetPassword() {
       return response;
     },
 
-    onSuccess: (response, data: emailInput) => {
+    onSuccess: (response, data: EmailInput) => {
       setStep(2);
       setEmail(data.email);
-      toast.success(t('forgotPw.step1.emailSentSuccess'));
+      toast.success(t('step1.emailSentSuccess'));
     },
-    onError: (error) => {
-      toast.error(
-        t('forgotPw.step3.linkExpiredOrInvalid') ?? error.message
-      );
+    onError: (error: Error) => {
+      toast.error(error.message || t('step3.linkExpiredOrInvalid'));
     },
   });
 

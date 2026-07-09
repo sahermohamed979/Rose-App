@@ -4,25 +4,31 @@ import { resetPasswordSchema } from '../schemas/reset-password-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ResetPasswordInput } from '../types/forget-reset-password-types';
 import { useMutation } from '@tanstack/react-query';
-import { resetPassword } from '../apis/forget-reset-password-action';
+import { resetPassword } from '../apis/forgot-reset-password-action';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
-export default function useRestPassword(token: string) {
+export default function useResetPassword(token: string) {
   // TRANSLATIONS
-  const t = useTranslations();
+  const t = useTranslations('forgotPw');
+  // ROUTER
+
+  const router = useRouter();
+  //schema
+  const schema = resetPasswordSchema(t);
   // FORM
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ResetPasswordInput>({
     defaultValues: {
       newPassword: '',
       confirmPassword: '',
     },
     mode: 'onSubmit',
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(schema),
   });
 
   // handle submit data that comes from the controller and pass it to the mutation
@@ -49,10 +55,11 @@ export default function useRestPassword(token: string) {
 
     onSuccess: () => {
       toast.success(t('forgotPw.step3.passwordResetSuccess'));
+      router.push('/login');
     },
     onError: (error) => {
       toast.error(
-        t('forgotPw.step3.linkExpiredOrInvalid') ?? error.message
+        error.message ?? t('forgotPw.step3.linkExpiredOrInvalid')
       );
     },
   });
