@@ -11,7 +11,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Eye, EyeOff, Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import useRestPassword from '../hooks/reset-password-hook';
+import useResetPassword from '../hooks/reset-password-hook';
 import { useState } from 'react';
 
 export default function ResetPasswordForm() {
@@ -22,9 +22,11 @@ export default function ResetPasswordForm() {
   const token = params.token as string;
   // STATE for showing password or not
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
   // HOOK to get the control, handleSubmit, errors, onSubmit, isPending
   const { control, handleSubmit, errors, onSubmit, isPending } =
-    useRestPassword(token);
+    useResetPassword(token);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,7 +52,7 @@ export default function ResetPasswordForm() {
                   id={field.name}
                   aria-invalid={fieldState.invalid}
                   placeholder="********"
-                  autoComplete="false"
+                  autoComplete="new-password"
                   type={showPassword ? 'text' : 'password'}
                   required
                 />
@@ -59,9 +61,9 @@ export default function ResetPasswordForm() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <Eye size={20} className="text-gray-400 " />
+                    <EyeOff size={20} className="text-text-muted " />
                   ) : (
-                    <EyeOff size={20} className="text-gray-400 " />
+                    <Eye size={20} className="text-text-muted " />
                   )}
                 </span>
               </div>
@@ -96,18 +98,20 @@ export default function ResetPasswordForm() {
                   id={field.name}
                   aria-invalid={fieldState.invalid}
                   placeholder="********"
-                  autoComplete="false"
-                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   required
                 />
                 <span
                   className="absolute top-3 ltr:right-3 rtl:left-3 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }
                 >
-                  {showPassword ? (
-                    <Eye size={20} className="text-gray-400 " />
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} className="text-text-muted " />
                   ) : (
-                    <EyeOff size={20} className="text-gray-400 " />
+                    <Eye size={20} className="text-text-muted " />
                   )}
                 </span>
               </div>
@@ -124,7 +128,7 @@ export default function ResetPasswordForm() {
         />
         {/* submit button */}
         <Button
-          className={`w-full mt-8.5 bg-maroon-600`}
+          className={`w-full mt-8.5 bg-bg-primary`}
           type="submit"
           disabled={isPending}
         >

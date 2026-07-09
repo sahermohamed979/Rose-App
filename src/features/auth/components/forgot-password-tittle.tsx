@@ -6,7 +6,7 @@ interface AuthTitleProps {
   icon?: boolean;
   action?: () => void;
 }
-export default function ForgetTittles({
+export default function ForgotPasswordTittles({
   title,
   description,
   email,
@@ -20,7 +20,7 @@ export default function ForgetTittles({
           <span className="cursor-pointer inline-block p-1.5 bg-bg-primary rounded-lg ">
             <ChevronLeft
               size={18}
-              className="text-white"
+              className="text-white rtl:rotate-180"
               onClick={action}
             />
           </span>
@@ -33,7 +33,7 @@ export default function ForgetTittles({
         {description}
       </span>
       {email && (
-        <span className="text-base  font-normal text-blue-600 ">
+        <span className="text-base  font-normal text-text-info ">
           {email}
         </span>
       )}

@@ -1,5 +1,6 @@
 import { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { LoginResponse } from './shared/lib/types/api';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -11,7 +12,7 @@ export const authOptions: AuthOptions = {
       },
       authorize: async (credentials) => {
         const res = await fetch(
-          `${process.env.NEXT_API_URL}/auth/login`,
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
           {
             method: 'POST',
             headers: {
