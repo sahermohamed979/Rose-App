@@ -33,10 +33,12 @@
     "networkError": "An error occurred. Please try again"
   },
   "login": {
-    "title": "Welcome back!",
-    "subtitle": "Sign in to your account",
-    "noAccount": "Don't have an account?",
-    "register": "Register"
+    "email-placeholder": "email@examble.com",
+    "email": "Email",
+    "password": "Password",
+    "forgot-password": "Forget Password?",
+    "remember-me": "Remember me",
+    "login": "Login"
   },
   "register": {
     "customTitle": "Become part of our family!"
