@@ -88,10 +88,10 @@ export default function LoginForm() {
       </FieldGroup>
 
       {/* Link */}
-      <div className="text-right rtl:text-left">
+      <div className="text-end">
         <Link
           href="/forgot-password"
-          className="text-text-primary text-sm font-semibold "
+          className="text-text-primary text-sm font-semibold"
         >
           {t('forgotPassword')}
         </Link>
@@ -102,7 +102,7 @@ export default function LoginForm() {
         name="rememberMe"
         control={form.control}
         render={({ field }) => (
-          <div className="flex items-center space-x-2 rtl:ml-2">
+          <div className="flex items-center gap-2">
             <Checkbox
               id="rememberMe"
               checked={field.value}

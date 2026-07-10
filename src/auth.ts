@@ -4,7 +4,6 @@ import {
   ApiResponse,
   LoginCredentials,
   LoginPayload,
-  LoginResponse,
 } from './shared/lib/types/api';
 
 export const authOptions: AuthOptions = {
@@ -12,8 +11,9 @@ export const authOptions: AuthOptions = {
     Credentials({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        username: {},
+        password: {},
+        rememberMe: {},
       },
       authorize: async (credentials) => {
         const res = await fetch(
@@ -30,14 +30,16 @@ export const authOptions: AuthOptions = {
           }
         );
 
-        if (!res.ok && res.status !== 401 && res.status !== 400) {
-          throw new Error('networkError');
-        }
-
         const data: ApiResponse<LoginPayload> = await res.json();
 
-        if (!data.status) {
+        // Inavlid credentials
+        if (data.code === 400 || data.code === 401) {
           throw new Error('invalidCredentials');
+        }
+
+        // Server error
+        if (!data.status) {
+          throw new Error('networkError');
         }
 
         return {
