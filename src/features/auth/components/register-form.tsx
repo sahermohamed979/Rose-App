@@ -37,15 +37,21 @@ import { useOtpTimer } from '../hooks/otp-timer';
 import { PhoneInput } from '@/shared/components/ui/input-phone';
 import { PasswordInput } from '@/shared/components/ui/input-password';
 
+interface RegisterFormProps {
+  currentStep: number;
+  setStep: (step: number) => void;
+}
 export default function Registerform() {
+  const [step, setStep] = useState(1);
+  const [part, setPart] = useState(3);
+  const [email, setEmail] = useState('');
   const t = useTranslations('register');
   const translateError = (key?: string) =>
     key ? t(`errors.${key}` as Parameters<typeof t>[0]) : '';
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const step = Number(searchParams.get('step')) || 1;
-  const emailFromUrl = searchParams.get('email') ?? '';
+
   const { timeLeft, resetTimer, canResend } = useOtpTimer();
   const {
     control,
@@ -64,36 +70,21 @@ export default function Registerform() {
   const [otp, setOtp] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
 
-  useEffect(() => {
-    if (emailFromUrl) {
-      setValue('email', emailFromUrl);
-    }
-  }, [emailFromUrl, setValue]);
-
-  const goToStep = (nextStep: number, email?: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('step', String(nextStep));
-    if (email) {
-      params.set('email', email);
-    }
-    router.replace(`${pathname}?${params.toString()}`);
-  };
-
   const handleStep1 = async () => {
     const valid = await trigger('email');
     if (!valid) {
       return;
     }
 
-    const email = watch('email');
+    const email = getValues('email');
+
     setIsVerifying(true);
     try {
       const response = await verifyEmail(email);
       if (response.status === true) {
         toast.success(response.message);
-        setValue('email', email);
         resetTimer();
-        goToStep(2, email);
+        setStep(2);
       } else {
         toast.error(response.message);
       }
@@ -103,7 +94,12 @@ export default function Registerform() {
   };
 
   const handleStep2 = async () => {
-    const email = emailFromUrl || watch('email');
+    const email = getValues('email');
+
+    if (!email) {
+      toast.error(t('errors.emailMissing'));
+      return;
+    }
 
     if (!otp || otp.length !== 6) {
       toast.error(t('otp.invalid'));
@@ -113,10 +109,11 @@ export default function Registerform() {
     setIsVerifying(true);
     try {
       const response = await confirmEmailVerification({ email, otp });
+
       if (response.status === true) {
         toast.success(response.message);
-        setValue('email', email);
-        goToStep(3, email);
+        // setValue مش محتاجة هنا لأن الإيميل هو هو اللي في الفورم
+        setStep(3);
       } else {
         toast.error(response.message);
       }
@@ -126,11 +123,16 @@ export default function Registerform() {
   };
 
   const handleResend = async () => {
-    const email = emailFromUrl || watch('email');
+    if (!email) {
+      toast.error(t('errors.emailMissing'));
+      return;
+    }
+
     resetTimer();
     setIsVerifying(true);
     try {
       const response = await verifyEmail(email);
+
       if (response.status === true) {
         toast.success(response.message);
       } else {
@@ -149,16 +151,20 @@ export default function Registerform() {
       'phone',
       'gender',
     ]);
+
     if (valid) {
-      goToStep(4, emailFromUrl || watch('email'));
+      setStep(4);
+      setPart(4);
+    } else {
+      toast.error(t('errors.fillAllFields'));
     }
   };
-
   const onFinalSubmit = handleSubmit(
     (data) => {
       mutate({
         ...data,
-        email: emailFromUrl || data.email,
+
+        email: email,
       });
     },
     (formErrors) => {
@@ -173,12 +179,14 @@ export default function Registerform() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted at step:', step);
     if (step === 1) {
       return handleStep1();
     }
     if (step === 2) {
       return handleStep2();
     }
+
     if (step === 4) {
       return onFinalSubmit(e);
     }
@@ -236,77 +244,134 @@ export default function Registerform() {
         {step === 3 && (
           <FieldGroup className="gap-4">
             <div className="flex flex-row gap-4">
-              <Field className="flex-1">
-                <FieldLabel>{t('firstName')}*</FieldLabel>
-                <Input
-                  placeholder={t('fnPlaceholder')}
-                  {...register('firstName')}
-                />
-                {errors.firstName && (
-                  <FieldError
-                    errors={[{ message: errors.firstName.message }]}
-                  />
+              {/* first name */}
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field
+                    className="flex-1"
+                    data-invalid={fieldState.invalid}
+                  >
+                    <FieldLabel htmlFor="firstName">
+                      {t('firstName')}{' '}
+                      <span className="text-text-danger">*</span>
+                    </FieldLabel>
+                    <Input
+                      aria-invalid={fieldState.invalid}
+                      id="firstName"
+                      placeholder={t('fnPlaceholder')}
+                      {...register('firstName')}
+                    />
+                    {fieldState.invalid && (
+                      <FieldError
+                        errors={[
+                          fieldState.error ?? errors.firstName,
+                        ]}
+                      />
+                    )}
+                  </Field>
                 )}
-              </Field>
+              />
 
-              <Field className="flex-1">
-                <FieldLabel>{t('lastName')}*</FieldLabel>
-                <Input
-                  placeholder={t('lnPlaceholder')}
-                  {...register('lastName')}
-                />
-                {errors.lastName && (
-                  <FieldError
-                    errors={[{ message: errors.lastName.message }]}
-                  />
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field
+                    className="flex-1"
+                    data-invalid={fieldState.invalid}
+                  >
+                    <FieldLabel htmlFor="lastName">
+                      {t('lastName')}{' '}
+                      <span className="text-text-danger">*</span>
+                    </FieldLabel>
+                    <Input
+                      id="lastName"
+                      aria-invalid={fieldState.invalid}
+                      placeholder={t('lnPlaceholder')}
+                      {...register('lastName')}
+                    />
+                    {fieldState.invalid && (
+                      <FieldError
+                        errors={[fieldState.error ?? errors.lastName]}
+                      />
+                    )}
+                  </Field>
                 )}
-              </Field>
+              />
             </div>
 
-            <Field>
-              <FieldLabel>{t('username')}*</FieldLabel>
-              <Input
-                placeholder={t('usernamePlaceholder')}
-                {...register('username')}
-              />
-              {errors.username && (
-                <FieldError
-                  errors={[{ message: errors.username.message }]}
-                />
-              )}
-            </Field>
-
-            <Field>
-              <FieldLabel>{t('phone')}</FieldLabel>
-              <Controller
-                name="phone"
-                control={control}
-                render={({ field }) => (
-                  <PhoneInput
-                    placeholder={t('phonePlaceholder')}
-                    value={field.value}
-                    onChange={field.onChange}
+            <Controller
+              name="username"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="username">
+                    {t('username')}
+                    <span className="text-text-danger">*</span>
+                  </FieldLabel>
+                  <Input
+                    id="username"
+                    aria-invalid={fieldState.invalid}
+                    placeholder={t('usernamePlaceholder')}
+                    {...register('username')}
                   />
-                )}
-              />
-              {errors.phone && (
-                <FieldError
-                  errors={[{ message: errors.phone.message }]}
-                />
+                  {fieldState.invalid && (
+                    <FieldError
+                      errors={[fieldState.error ?? errors.username]}
+                    />
+                  )}
+                </Field>
               )}
-            </Field>
+            />
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field
+                  data-invalid={fieldState.invalid}
+                  className="gap-1"
+                >
+                  <FieldLabel htmlFor="phone">
+                    {t('phone')}
+                  </FieldLabel>
 
-            <Field>
-              <FieldLabel>{t('gender')}</FieldLabel>
-              <Controller
-                name="gender"
-                control={control}
-                render={({ field }) => (
+                  <PhoneInput
+                    id="phone"
+                    aria-invalid={fieldState.invalid}
+                    placeholder={t('phonePlaceholder')}
+                    {...register('phone')}
+                  />
+                  {/* </div> */}
+
+                  {fieldState.invalid && (
+                    <FieldError
+                      errors={[fieldState.error ?? errors.phone]}
+                    />
+                  )}
+                </Field>
+              )}
+            />
+
+            {/* gender */}
+            <Controller
+              name="gender"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="gender">
+                    {t('gender')}
+                  </FieldLabel>
+
                   <Select
                     onValueChange={field.onChange}
-                    value={field.value ?? null}
+                    value={field.value ?? ''}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger
+                      id="gender"
+                      aria-invalid={fieldState.invalid}
+                    >
                       <SelectValue
                         placeholder={t('genderPlaceholder')}
                       />
@@ -320,18 +385,16 @@ export default function Registerform() {
                       </SelectItem>
                     </SelectContent>
                   </Select>
-                )}
-              />
-              {errors.gender && (
-                <FieldError
-                  errors={[
-                    {
-                      message: translateError(errors.gender.message),
-                    },
-                  ]}
-                />
+
+                  {/* الـ Error مكانه هنا، جوه الـ render */}
+                  {fieldState.error && (
+                    <FieldError
+                      errors={[fieldState.error ?? errors.gender]}
+                    />
+                  )}
+                </Field>
               )}
-            </Field>
+            />
 
             <Button
               type="button"
@@ -341,49 +404,60 @@ export default function Registerform() {
               {t('next')}{' '}
               <ArrowRight size={18} className="rtl:rotate-180" />
             </Button>
-            <div className="w-full border-b border-border-soft mt-8 mb-3" />
           </FieldGroup>
         )}
 
         {step === 4 && (
           <FieldGroup className="gap-4">
-            <Field>
-              <FieldLabel>{t('password')}*</FieldLabel>
-              <PasswordInput
-                placeholder={t('passPlaceholder')}
-                {...register('password')}
-              />
-              {errors.password && (
-                <FieldError
-                  errors={[
-                    {
-                      message: translateError(
-                        errors.password.message
-                      ),
-                    },
-                  ]}
-                />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="password">
+                    {t('password')}
+                    <span className="text-text-danger">*</span>
+                  </FieldLabel>
+                  <PasswordInput
+                    id="password"
+                    aria-invalid={fieldState.invalid}
+                    placeholder={t('passPlaceholder')}
+                    {...register('password')}
+                  />
+                  {errors.password && (
+                    <FieldError
+                      errors={[fieldState.error ?? errors.password]}
+                    />
+                  )}
+                </Field>
               )}
-            </Field>
+            />
 
-            <Field>
-              <FieldLabel>{t('confirmPassword')}*</FieldLabel>
-              <PasswordInput
-                placeholder={t('confirmPassPlaceholder')}
-                {...register('confirmPassword')}
-              />
-              {errors.confirmPassword && (
-                <FieldError
-                  errors={[
-                    {
-                      message: translateError(
-                        errors.confirmPassword.message
-                      ),
-                    },
-                  ]}
-                />
+            <Controller
+              name="confirmPassword"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="confirmPassword">
+                    {t('confirmPassword')}
+                    <span className="text-text-danger">*</span>
+                  </FieldLabel>
+                  <PasswordInput
+                    id="confirmPassword"
+                    aria-invalid={fieldState.invalid}
+                    placeholder={t('confirmPassPlaceholder')}
+                    {...register('confirmPassword')}
+                  />
+                  {errors.confirmPassword && (
+                    <FieldError
+                      errors={[
+                        fieldState.error ?? errors.confirmPassword,
+                      ]}
+                    />
+                  )}
+                </Field>
               )}
-            </Field>
+            />
           </FieldGroup>
         )}
 
@@ -392,7 +466,7 @@ export default function Registerform() {
             className="w-full mt-9 mb-9 font-medium"
             variant={'default'}
             loading={isLoading}
-            disabled={step === 1 && !watch('email')}
+            disabled={isLoading || (step === 1 && !formState.isValid)}
             type="submit"
           >
             {step === 2 ? (

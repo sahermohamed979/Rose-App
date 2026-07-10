@@ -38,7 +38,10 @@ export type RegisterResponse =
   RegisterResponseSuccess | RegisterResponseError;
 
 // TypeScript type derived from Zod schema for form data
-export type RegisterSchemaType = z.infer<typeof registerSchema>;
+export type RegisterSchemaType = z.infer<
+  ReturnType<typeof registerSchema>
+>;
+
 export type EmailVerificationSchemaType = z.infer<
   typeof emailVerificationSchema
 >;

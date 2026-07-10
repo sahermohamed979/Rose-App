@@ -5,18 +5,25 @@ import UserInfoTitle from '@/features/auth/components/user-info-title';
 import { Stepper } from '../components/stepper';
 import { useSearchParams } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
+import { useEffect, useState } from 'react';
 export default function RegisterScreen() {
   const t = useTranslations();
   const searchParams = useSearchParams();
-  const step = Number(searchParams.get('step')) || 1;
+  const [step, setStep] = useState(1);
+  useEffect(() => {
+    console.log('Current step is:', step);
+  }, [step]);
   const email = searchParams.get('email') || 'example@example.com';
   return (
     <div className="flex w-full flex-col gap-3">
       {/* header */}
       <AuthTitle authType="register" title={t('auth.headerTitle')} />
       {/* stepper */}
-      {step !== 1 && <Stepper currentStep={step} />}
-
+      {step !== 1 ? (
+        <Stepper currentStep={step} onStepChange={setStep} />
+      ) : (
+        <p> الآن في الخطوة الأولى</p>
+      )}
       {/* current step title */}
       <UserInfoTitle email={email} />
       {/* Register form goes here */}
