@@ -13,8 +13,10 @@ import {
 } from '@/features/auth/schemas/register-schema';
 
 export const registerUser = async (data: RegisterSchemaType) => {
+  const t = (key: string) => key;
   // 1. Check schema
-  const result = registerSchema.safeParse(data);
+  const schema = registerSchema(t);
+  const result = schema.safeParse(data);
 
   if (!result.success) {
     return {
@@ -25,7 +27,7 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}auth/register`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,7 +60,7 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
 export const verifyEmail = async (email: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}auth/send-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/send-email-verification`,
     {
       method: 'POST',
       headers: {
@@ -92,7 +94,7 @@ export const confirmEmailVerification = async (
     };
   }
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}auth/confirm-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/confirm-email-verification`,
     {
       method: 'POST',
       headers: {
