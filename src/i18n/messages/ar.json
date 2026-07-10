@@ -33,10 +33,12 @@
     "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
   },
   "login": {
-    "title": "مرحباً بعودتك",
-    "subtitle": "سجّل الدخول إلى حسابك",
-    "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب"
+    "email-placeholder": "البريد الالكتروني",
+    "email": "البريد الالكتروني",
+    "password": "كلمة المرور",
+    "forgot-password": "هل نسيت كلمة المرور؟",
+    "remember-me": "تذكرني",
+    "login": "ادخل"
   },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!"

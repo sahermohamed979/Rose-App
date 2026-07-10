@@ -6,8 +6,9 @@ export const authOptions: AuthOptions = {
     Credentials({
       name: 'login',
       credentials: {
-        username: {},
+        email: {},
         password: {},
+        rememberMe: {},
       },
       authorize: async (credentials) => {
         const res = await fetch(
@@ -18,7 +19,7 @@ export const authOptions: AuthOptions = {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              username: credentials?.username,
+              username: credentials?.email, // API accepts username for now
               password: credentials?.password,
             }),
           }
@@ -32,23 +33,34 @@ export const authOptions: AuthOptions = {
           id: data.payload.user.id,
           user: data.payload.user,
           token: data.payload.token,
+          rememberMe: credentials?.rememberMe === 'true',
         };
       },
     }),
   ],
   session: {
     strategy: 'jwt',
-    maxAge: 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60, // Must be 30 days, otherwise browser deletes cookie after 1 day
   },
   jwt: {
-    maxAge: 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60, // Must match session maxAge
   },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
         token.user = user.user;
         token.token = user.token;
+        // rememberMe is on the top-level 'user' object returned from authorize
+        token.rememberMe = user.rememberMe;
       }
+
+      // Dynamic expiration based on rememberMe
+      if (token.rememberMe) {
+        token.exp = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days
+      } else {
+        token.exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 1 day
+      }
+
       return token;
     },
     session: ({ session, token }) => {
