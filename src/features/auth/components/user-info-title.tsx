@@ -1,18 +1,25 @@
 'use client';
+
 import { Button } from '@/shared/components/ui/button';
 import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 
-export default function UserInfoTitle({ email }: { email: string }) {
-  const searchParams = useSearchParams();
-  const step = Number(searchParams.get('step')) || 1; // Get current step from URL, default to 1
+interface UserInfoTitleProps {
+  email: string;
+  currentStep: number;
+  onStepChange: (step: number) => void;
+}
+
+export default function UserInfoTitle({
+  email,
+  currentStep,
+  onStepChange,
+}: UserInfoTitleProps) {
   const t = useTranslations();
-  const router = useRouter();
+
   return (
     <>
       {/* step2 titles */}
-      <div className={step !== 2 ? 'hidden' : 'block'}>
+      <div className={currentStep !== 2 ? 'hidden' : 'block'}>
         <div className="border-b border-border-soft pb-6 mb-6">
           <h1 className="text-text-plain font-bold text-[30px] leading-[100%]">
             {t('register.createAccount')}
@@ -27,8 +34,8 @@ export default function UserInfoTitle({ email }: { email: string }) {
           <span>
             <Button
               variant="link"
-              className="p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
-              onClick={() => router.push('/register?step=1')}
+              className="ms-[2px] p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
+              onClick={() => onStepChange(1)}
             >
               {' '}
               {t('register.edit')}
@@ -37,7 +44,7 @@ export default function UserInfoTitle({ email }: { email: string }) {
         </div>
       </div>
       {/* step3 titles */}
-      <div className={step !== 3 ? 'hidden' : 'block'}>
+      <div className={currentStep !== 3 ? 'hidden' : 'block'}>
         <div className="border-b border-border-soft pb-6 mb-6">
           <h1 className="text-text-plain font-bold text-[30px] leading-[100%]">
             {t('register.createAccount')}
@@ -49,7 +56,7 @@ export default function UserInfoTitle({ email }: { email: string }) {
         </div>
       </div>
       {/* step4 titles */}
-      <div className={step !== 4 ? 'hidden' : 'block'}>
+      <div className={currentStep !== 4 ? 'hidden' : 'block'}>
         <div className="border-b border-border-soft pb-6 mb-6">
           <h1 className="text-text-plain font-bold text-[30px] leading-[100%]">
             {t('register.createAccount')}

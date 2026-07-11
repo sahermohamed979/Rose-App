@@ -13,7 +13,9 @@ import { useTranslations } from 'next-intl';
 export function useRegister() {
   const router = useRouter();
   const t = useTranslations('register');
+  // form schema with translations
   const schema = registerSchema(t);
+  // form schema with translations
   console.log(t('errors.emailInvalid'));
   // Form initialization with Zod validation
   const {
@@ -26,7 +28,7 @@ export function useRegister() {
     watch,
     getValues,
   } = useForm<RegisterSchemaType>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: zodResolver(schema),
     shouldUnregister: false,
     defaultValues: {
@@ -59,9 +61,8 @@ export function useRegister() {
       console.error(error.message);
     },
   });
-
+  // Wrap mutation for form submission
   const onSubmit = (values: RegisterSchemaType) => {
-    console.log('Sending to API:', values);
     mutate(values);
   };
 

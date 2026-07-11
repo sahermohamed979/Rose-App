@@ -99,7 +99,8 @@
       "passMatch": "Password do not match",
       "alreadyRegisteredOrVerify": "This email is already registered, please verify your email or login.",
       "verifyEmailRequired": "Please verify your email address first.",
-      "generalRegistrationFailed": "Registration failed, please try again later."
+      "generalRegistrationFailed": "Registration failed, please try again later.",
+      "fillAllFields": "Please fill all fields"
     }
   },
   "toast": {
