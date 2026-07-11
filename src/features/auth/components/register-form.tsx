@@ -6,7 +6,7 @@ import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
 import { ArrowRight, MoveRightIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import {
   confirmEmailVerification,
@@ -40,19 +40,24 @@ import { PasswordInput } from '@/shared/components/ui/input-password';
 interface RegisterFormProps {
   currentStep: number;
   setStep: (step: number) => void;
+  onEmailChange: (email: string) => void;
 }
-export default function Registerform() {
-  const [step, setStep] = useState(1);
+export default function Registerform({
+  currentStep,
+  setStep,
+  onEmailChange,
+}: RegisterFormProps) {
+  // states
   const [part, setPart] = useState(3);
-  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+  // hooks &transilations
   const t = useTranslations('register');
+  const { timeLeft, resetTimer, canResend } = useOtpTimer();
+  // Form controller hooks
   const translateError = (key?: string) =>
     key ? t(`errors.${key}` as Parameters<typeof t>[0]) : '';
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const { timeLeft, resetTimer, canResend } = useOtpTimer();
+  // Form controller hooks
   const {
     control,
     handleSubmit,
@@ -61,23 +66,17 @@ export default function Registerform() {
     errors,
     isPending,
     trigger,
-    setValue,
-    watch,
     getValues,
     formState,
   } = useRegister();
 
-  const [otp, setOtp] = useState('');
-  const [isVerifying, setIsVerifying] = useState(false);
-
+  // Handle email verification (Step 1: Send OTP)
   const handleStep1 = async () => {
     const valid = await trigger('email');
     if (!valid) {
       return;
     }
-
     const email = getValues('email');
-
     setIsVerifying(true);
     try {
       const response = await verifyEmail(email);
@@ -92,15 +91,13 @@ export default function Registerform() {
       setIsVerifying(false);
     }
   };
-
+  // Confirm OTP verification (Step 2: Submit Code)
   const handleStep2 = async () => {
-    const email = getValues('email');
-
-    if (!email) {
+    const currentEmail = getValues('email');
+    if (!currentEmail) {
       toast.error(t('errors.emailMissing'));
       return;
     }
-
     if (!otp || otp.length !== 6) {
       toast.error(t('otp.invalid'));
       return;
@@ -108,11 +105,13 @@ export default function Registerform() {
 
     setIsVerifying(true);
     try {
-      const response = await confirmEmailVerification({ email, otp });
-
+      const response = await confirmEmailVerification({
+        email: currentEmail,
+        otp,
+      });
       if (response.status === true) {
         toast.success(response.message);
-        // setValue مش محتاجة هنا لأن الإيميل هو هو اللي في الفورم
+
         setStep(3);
       } else {
         toast.error(response.message);
@@ -121,9 +120,10 @@ export default function Registerform() {
       setIsVerifying(false);
     }
   };
-
+  // Re-trigger OTP request
   const handleResend = async () => {
-    if (!email) {
+    const currentEmail = getValues('email');
+    if (!currentEmail) {
       toast.error(t('errors.emailMissing'));
       return;
     }
@@ -131,7 +131,7 @@ export default function Registerform() {
     resetTimer();
     setIsVerifying(true);
     try {
-      const response = await verifyEmail(email);
+      const response = await verifyEmail(currentEmail);
 
       if (response.status === true) {
         toast.success(response.message);
@@ -142,7 +142,7 @@ export default function Registerform() {
       setIsVerifying(false);
     }
   };
-
+  // Personal Info Validation (Transition from Step 3 to 4)
   const handleNext = async () => {
     const valid = await trigger([
       'firstName',
@@ -159,12 +159,12 @@ export default function Registerform() {
       toast.error(t('errors.fillAllFields'));
     }
   };
+  // Final Registration Submission (Step 4)
   const onFinalSubmit = handleSubmit(
     (data) => {
       mutate({
         ...data,
-
-        email: email,
+        email: getValues('email'),
       });
     },
     (formErrors) => {
@@ -176,43 +176,51 @@ export default function Registerform() {
       }
     }
   );
-
+  // Form Routing Logic
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted at step:', step);
-    if (step === 1) {
+    console.log('Form submitted at step:', currentStep);
+    if (currentStep === 1) {
       return handleStep1();
     }
-    if (step === 2) {
+    if (currentStep === 2) {
       return handleStep2();
     }
 
-    if (step === 4) {
+    if (currentStep === 4) {
       return onFinalSubmit(e);
     }
   };
-
+  // loading state for API requests
   const isLoading =
     isVerifying || isPending || formState.isSubmitting;
 
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        {step === 1 && (
+        {/* step1 : email input */}
+        {currentStep === 1 && (
           <div className="gap-y-1.5 flex flex-col">
             <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               placeholder={t('email')}
-              {...register('email')}
+              {...register('email', {
+                onBlur: (e) => {
+                  onEmailChange(e.target.value);
+                },
+              })}
             />
+
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="text-text-danger">
+                {errors.email.message}
+              </p>
             )}
           </div>
         )}
-
-        {step === 2 && (
+        {/* step2 : otp verification */}
+        {currentStep === 2 && (
           <div className="gap-y-1.5 flex flex-col items-center">
             <InputOTP maxLength={6} value={otp} onChange={setOtp}>
               <InputOTPGroup>
@@ -224,6 +232,7 @@ export default function Registerform() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
+            {/* OTP Resend Logic */}
             {!canResend ? (
               <p className="text-sm text-text-muted mt-2">
                 {t('otp.resendTimer', { s: timeLeft })}
@@ -240,8 +249,8 @@ export default function Registerform() {
             )}
           </div>
         )}
-
-        {step === 3 && (
+        {/* step3 : personal information */}
+        {currentStep === 3 && (
           <FieldGroup className="gap-4">
             <div className="flex flex-row gap-4">
               {/* first name */}
@@ -406,8 +415,8 @@ export default function Registerform() {
             </Button>
           </FieldGroup>
         )}
-
-        {step === 4 && (
+        {/* step4 : password security */}
+        {currentStep === 4 && (
           <FieldGroup className="gap-4">
             <Controller
               name="password"
@@ -460,18 +469,22 @@ export default function Registerform() {
             />
           </FieldGroup>
         )}
-
-        {step !== 3 && (
+        {/* form submit button  */}
+        {currentStep !== 3 && (
           <Button
             className="w-full mt-9 mb-9 font-medium"
             variant={'default'}
             loading={isLoading}
-            disabled={isLoading || (step === 1 && !formState.isValid)}
+            disabled={
+              isLoading ||
+              (currentStep === 1 && errors.email !== undefined) || // مقفول لو فيه خطأ
+              (currentStep === 1 && !getValues('email')) // مقفول لو فاضي
+            }
             type="submit"
           >
-            {step === 2 ? (
+            {currentStep === 2 ? (
               t('otp.submitButton')
-            ) : step === 4 ? (
+            ) : currentStep === 4 ? (
               t('submit')
             ) : (
               <>

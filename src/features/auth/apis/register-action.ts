@@ -11,12 +11,15 @@ import {
   otpVerificationSchema,
   registerSchema,
 } from '@/features/auth/schemas/register-schema';
-
-export const registerUser = async (data: RegisterSchemaType) => {
+// user registeration
+export const registerUser = async (
+  registrationDetails: RegisterSchemaType
+) => {
   const t = (key: string) => key;
-  // 1. Check schema
+  //  Check schema
   const schema = registerSchema(t);
-  const result = schema.safeParse(data);
+  // validate data wih zod
+  const result = schema.safeParse(registrationDetails);
 
   if (!result.success) {
     return {
@@ -26,6 +29,7 @@ export const registerUser = async (data: RegisterSchemaType) => {
   }
 
   try {
+    // send request to api
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       {
@@ -37,8 +41,8 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
     const res: RegisterResponse = await response.json();
 
-    // 2. Check API status
-    if (!res.status) {
+    //  Check API status
+    if (!response.ok || !res.status) {
       return {
         success: false,
         message: res.message || 'Registration failed',
@@ -50,15 +54,13 @@ export const registerUser = async (data: RegisterSchemaType) => {
       message: res.message,
     };
   } catch (error) {
-    // Handle network errors
-    return {
-      success: false,
-      message: 'Server unreachable',
-    };
+    console.error('Registration Error:', error);
+    return { success: false, message: 'Server unreachable' };
   }
 };
-
+// request otp verfication email
 export const verifyEmail = async (email: string) => {
+  // Trigger verification email send
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/send-email-verification`,
     {
@@ -70,6 +72,7 @@ export const verifyEmail = async (email: string) => {
     }
   );
   if (!response.ok) {
+    // Handle error response from server
     const error = await response.json().catch(() => ({
       message: `Request failed (${response.status})`,
     }));
@@ -80,19 +83,22 @@ export const verifyEmail = async (email: string) => {
   }
   return response.json();
 };
-
+// validate otp code
 export const confirmEmailVerification = async (
-  data: OtpVerificationSchemaType & EmailVerificationSchemaType
+  verificationDetails: OtpVerificationSchemaType &
+    EmailVerificationSchemaType
 ) => {
+  // Validate inputs before calling API
   const result = otpVerificationSchema
     .merge(emailVerificationSchema)
-    .safeParse(data);
+    .safeParse(verificationDetails);
   if (!result.success) {
     return {
       status: false,
       message: 'Invalid input data',
     };
   }
+  // Submit OTP and email for verification
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/confirm-email-verification`,
     {
@@ -100,9 +106,13 @@ export const confirmEmailVerification = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: data.email, code: data.otp }),
+      body: JSON.stringify({
+        email: verificationDetails.email,
+        code: verificationDetails.otp,
+      }),
     }
   );
+  // Handle verification failure
   if (!response.ok) {
     const error = await response.json().catch(() => ({
       message: `Request failed (${response.status})`,
