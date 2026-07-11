@@ -122,6 +122,10 @@
   --shadow-soft-lg: 0 4px 18px rgb(0 0 0 / 10%);
 
   /* Ring */
+
+  --color-ring-default: var(--ring-default);
+  --color-ring-danger: var(--ring-danger);
+  /* Size */
   --ring-default-size: 3px;
   --ring-danger-size: 3px;
 

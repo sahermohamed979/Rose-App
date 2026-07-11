@@ -11,5 +11,13 @@
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "fileSelected": "تم اختيار الملف"
+  },
+  "button": {
+    "loading": "جار التحميل...",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد"
   }
 }
