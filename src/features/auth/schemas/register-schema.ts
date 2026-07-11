@@ -1,57 +1,58 @@
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 
 export const registerSchema = (t: (key: string) => string) =>
   z
     .object({
       username: z
         .string()
-        .min(1, { message: t('register.errors.usernameRequired') })
-        .min(3, { message: t('register.errors.usernameShort') }),
+        .min(1, { message: t('errors.usernameRequired') })
+        .min(3, { message: t('errors.usernameShort') }),
       email: z
         .string()
-        .min(1, { message: t('register.errors.emailRequired') })
+        .min(1, { message: t('errors.verifyEmailRequired') })
         .refine(
           (email) => email.includes('@') && email.includes('.'),
           {
-            message: t('register.errors.emailInvalid'),
+            message: t('errors.emailInvalid'),
           }
         ),
       password: z
         .string()
-        .min(8, { message: t('register.errors.passPolicy') })
+        .min(8, { message: t('errors.passPolicy') })
         .refine(
           (val) =>
             /[A-Z]/.test(val) &&
             /[0-9]/.test(val) &&
             /[^A-Za-z0-9]/.test(val),
           {
-            message: t('register.errors.passPolicy'),
+            message: t('errors.passPolicy'),
           }
         ),
       confirmPassword: z
         .string()
-        .min(1, { message: t('register.errors.passMatch') }),
+        .min(1, { message: t('errors.passMatch') }),
       firstName: z
         .string()
-        .min(1, { message: t('register.errors.firstNameRequired') }),
+        .min(1, { message: t('errors.firstNameRequired') }),
       lastName: z
         .string()
-        .min(1, { message: t('register.errors.lastNameRequired') }),
+        .min(1, { message: t('errors.lastNameRequired') }),
       gender: z.enum(['MALE', 'FEMALE'], {
         error: () => ({
-          message: t('register.errors.genderRequired'),
+          message: t('errors.genderRequired'),
         }),
       }),
       phone: z
         .string()
-        .min(1, { message: t('register.errors.phoneRequired') }),
+        .min(1, { message: t('errors.phoneRequired') }),
     })
     .refine((data) => data.password === data.confirmPassword, {
-      message: t('register.errors.passMatch'),
+      message: t('errors.passMatch'),
       path: ['confirmPassword'],
     });
 
 export const otpVerificationSchema = (t: (key: string) => string) =>
   z.object({
-    code: z.string().min(6, { message: t('register.otp.oInvalid') }),
+    code: z.string().min(6, { message: t('otp.invalid') }),
   });

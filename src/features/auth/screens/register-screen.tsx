@@ -21,7 +21,11 @@ export default function RegisterScreen() {
         <Stepper currentStep={step} onStepChange={setStep} />
       )}
       {/* current step title */}
-      <UserInfoTitle email={displayEmail} currentStep={step} />
+      <UserInfoTitle
+        email={displayEmail}
+        currentStep={step}
+        onStepChange={setStep}
+      />
       {/* Register form goes here */}
       <RegisterForm
         currentStep={step}
@@ -44,8 +48,8 @@ export default function RegisterScreen() {
           </p>
         </div>
       ) : (
-        <div className="border-border-muted border-t pt-4 text-center ">
-          <p className="flex justify-center my-2">
+        <div className="border-border-muted border-t mt-9 text-center ">
+          <p className="flex justify-center mt-5">
             {t('register.needHelp')}
             <span className="text-text-primary ms-1">
               {t('register.contactUs')}

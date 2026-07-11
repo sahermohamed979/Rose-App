@@ -3,7 +3,6 @@
 import {
   RegisterSchemaType,
   RegisterResponse,
-  EmailVerificationSchemaType,
   OtpVerificationSchemaType,
 } from '@/features/auth/types/register-types';
 import {
@@ -84,13 +83,13 @@ export const verifyEmail = async (email: string) => {
 };
 // validate otp code
 export const confirmEmailVerification = async (
-  verificationDetails: OtpVerificationSchemaType &
-    EmailVerificationSchemaType
+  verificationDetails: OtpVerificationSchemaType & { email: string }
 ) => {
   const t = (key: string) => key;
   const schema = otpVerificationSchema(t);
   // Validate inputs before calling API
   const result = schema.safeParse(verificationDetails);
+
   if (!result.success) {
     return {
       status: false,
@@ -109,7 +108,7 @@ export const confirmEmailVerification = async (
       },
       body: JSON.stringify({
         email: verificationDetails.email,
-        code: verificationDetails.otp,
+        code: result.data.code,
       }),
     }
   );
@@ -123,5 +122,6 @@ export const confirmEmailVerification = async (
       message: error.message,
     };
   }
+
   return response.json();
 };

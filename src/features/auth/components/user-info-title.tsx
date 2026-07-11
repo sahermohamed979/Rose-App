@@ -1,17 +1,21 @@
 'use client';
+
 import { Button } from '@/shared/components/ui/button';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+
+interface UserInfoTitleProps {
+  email: string;
+  currentStep: number;
+  onStepChange: (step: number) => void;
+}
 
 export default function UserInfoTitle({
   email,
   currentStep,
-}: {
-  email: string;
-  currentStep: number;
-}) {
+  onStepChange,
+}: UserInfoTitleProps) {
   const t = useTranslations();
-  const router = useRouter();
+
   return (
     <>
       {/* step2 titles */}
@@ -30,8 +34,8 @@ export default function UserInfoTitle({
           <span>
             <Button
               variant="link"
-              className="p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
-              onClick={() => router.push('/register?step=1')}
+              className="ms-[2px] p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
+              onClick={() => onStepChange(1)}
             >
               {' '}
               {t('register.edit')}

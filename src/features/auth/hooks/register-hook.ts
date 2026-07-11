@@ -10,9 +10,11 @@ import { toast } from 'sonner';
 
 export function useRegister() {
   const router = useRouter();
-  const t = useTranslations();
+  const t = useTranslations('register');
   // form schema with translations
   const schema = registerSchema(t);
+  // form schema with translations
+  console.log(t('errors.emailInvalid'));
   // Form initialization with Zod validation
   const {
     control,
@@ -24,7 +26,7 @@ export function useRegister() {
     watch,
     getValues,
   } = useForm<RegisterSchemaType>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: zodResolver(schema),
     shouldUnregister: false,
     defaultValues: {
