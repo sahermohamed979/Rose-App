@@ -36,6 +36,8 @@ import { useRegister } from '../hooks/register-hook';
 import { useOtpTimer } from '../hooks/otp-timer';
 import { PhoneInput } from '@/shared/components/ui/input-phone';
 import { PasswordInput } from '@/shared/components/ui/input-password';
+import { useEmailVerification } from '../hooks/email-verification-hook';
+import { useOtpVerification } from '../hooks/otp-verification-hook';
 
 export default function Registerform() {
   const t = useTranslations('register');
@@ -60,17 +62,19 @@ export default function Registerform() {
     getValues,
     formState,
   } = useRegister();
-
+  const {
+    verifyEmailMutate,
+    isVerifyEmailPending,
+    // errors: emailVerificationErrors
+  } = useEmailVerification();
+  const { confirmOtpMutate, isConfirmOtpPending } =
+    useOtpVerification();
   const [otp, setOtp] = useState('');
+  const [otpError, setOtpError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [emailValue, setEmailValue] = useState('');
-
-  // useEffect(() => {
-  //   if (emailFromUrl) {
-  //     setValue('email', emailFromUrl);
-  //     setEmailValue(emailFromUrl);
-  //   }
-  // }, [emailFromUrl, setValue]);
+  const translateOtpError = (key: string) =>
+    key ? t(`otp.${key}` as Parameters<typeof t>[0]) : '';
 
   const goToStep = (nextStep: number, email?: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -88,20 +92,14 @@ export default function Registerform() {
     }
 
     const email = getValues('email');
-    setIsVerifying(true);
-    try {
-      const response = await verifyEmail(email);
-      if (response.status === true) {
-        toast.success(response.message);
-        setValue('email', email);
+    verifyEmailMutate(email, {
+      onSuccess: () => {
         resetTimer();
+        setEmailValue(email);
+        setOtp('');
         goToStep(2, email);
-      } else {
-        toast.error(response.message);
-      }
-    } finally {
-      setIsVerifying(false);
-    }
+      },
+    });
   };
 
   const handleStep2 = async () => {
@@ -109,38 +107,37 @@ export default function Registerform() {
 
     if (!otp || otp.length !== 6) {
       toast.error(t('otp.invalid'));
+      setOtpError(t('otp.invalid'));
       return;
     }
+    setOtpError('');
 
-    setIsVerifying(true);
-    try {
-      const response = await confirmEmailVerification({ email, otp });
-      if (response.status === true) {
-        toast.success(response.message);
-        setValue('email', email);
-        goToStep(3, email);
-      } else {
-        toast.error(response.message);
+    confirmOtpMutate(
+      { email, code: otp },
+      {
+        onSuccess: () => {
+          setOtpError('');
+          setValue('email', email);
+          goToStep(3, email);
+        },
+        onError: (error: Error) => {
+          setOtpError(translateOtpError(error.message));
+        },
       }
-    } finally {
-      setIsVerifying(false);
-    }
+    );
   };
 
   const handleResend = async () => {
-    const email = emailFromUrl || getValues('email');
+    const email = getValues('email');
     resetTimer();
-    setIsVerifying(true);
-    try {
-      const response = await verifyEmail(email);
-      if (response.status === true) {
-        toast.success(response.message);
-      } else {
-        toast.error(response.message);
-      }
-    } finally {
-      setIsVerifying(false);
-    }
+    setOtp('');
+
+    verifyEmailMutate(email, {
+      onSuccess: () => {
+        resetTimer();
+        goToStep(2, email);
+      },
+    });
   };
 
   const handleNext = async () => {
@@ -209,32 +206,39 @@ export default function Registerform() {
         )}
 
         {step === 2 && (
-          <div className="gap-y-1.5 flex flex-col items-center">
-            <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-            {!canResend ? (
-              <p className="text-sm text-text-muted mt-2">
-                {t('otp.resendTimer', { s: timeLeft })}
-              </p>
-            ) : (
-              <Button
-                type="button"
-                variant={'link'}
-                className="p-0 ms-auto text-sm text-text-plain leading-none mt-7"
-                onClick={handleResend}
-              >
-                {t('otp.resend')}
-              </Button>
-            )}
-          </div>
+          <>
+            <div className="gap-y-1.5 flex flex-col items-center rtl:direction-ltr">
+              <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+            <div>
+              {otpError && (
+                <p className="text-red-500 text-start">{otpError}</p>
+              )}
+              {!canResend ? (
+                <p className=" flex justify-end text-sm text-text-muted mt-2">
+                  {t('otp.resendTimer', { s: timeLeft })}
+                </p>
+              ) : (
+                <Button
+                  type="button"
+                  variant={'link'}
+                  className="flex p-0 ms-auto text-sm text-text-plain leading-none mt-7"
+                  onClick={handleResend}
+                >
+                  {t('otp.resend')}
+                </Button>
+              )}
+            </div>
+          </>
         )}
 
         {step === 3 && (

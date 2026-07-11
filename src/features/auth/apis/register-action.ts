@@ -10,11 +10,14 @@ import {
   registerSchema,
 } from '@/features/auth/schemas/register-schema';
 
-export const registerUser = async (data: RegisterSchemaType) => {
-  // 1. Check schema
+export const registerUser = async (
+  registrationDetails: RegisterSchemaType
+) => {
   const t = (key: string) => key;
+  //  Check schema
   const schema = registerSchema(t);
-  const result = schema.safeParse(data);
+  // validate data wih zod
+  const result = schema.safeParse(registrationDetails);
 
   if (!result.success) {
     return {
@@ -35,8 +38,8 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
     const res: RegisterResponse = await response.json();
 
-    // 2. Check API status
-    if (!res.status) {
+    //  Check API status
+    if (!response.ok || !res.status) {
       return {
         success: false,
         message: res.message || 'Registration failed',
@@ -48,15 +51,14 @@ export const registerUser = async (data: RegisterSchemaType) => {
       message: res.message,
     };
   } catch (error) {
-    // Handle network errors
-    return {
-      success: false,
-      message: 'Server unreachable',
-    };
+    console.error('Registration Error:', error);
+    return { success: false, message: 'Server unreachable' };
   }
 };
 
+// request otp verfication email
 export const verifyEmail = async (email: string) => {
+  // Trigger verification email send
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/send-email-verification`,
     {
@@ -68,6 +70,7 @@ export const verifyEmail = async (email: string) => {
     }
   );
   if (!response.ok) {
+    // Handle error response from server
     const error = await response.json().catch(() => ({
       message: `Request failed (${response.status})`,
     }));
@@ -78,13 +81,15 @@ export const verifyEmail = async (email: string) => {
   }
   return response.json();
 };
-
+// validate otp code
 export const confirmEmailVerification = async (
-  data: OtpVerificationSchemaType & { email: string }
+  verificationDetails: OtpVerificationSchemaType & { email: string }
 ) => {
   const t = (key: string) => key;
   const schema = otpVerificationSchema(t);
-  const result = schema.safeParse(data);
+  // Validate inputs before calling API
+  const result = schema.safeParse(verificationDetails);
+
   if (!result.success) {
     return {
       status: false,
@@ -93,7 +98,7 @@ export const confirmEmailVerification = async (
       errors: [{ path: 'code', message: 'invalid' }],
     };
   }
-
+  // Submit OTP and email for verification
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/confirm-email-verification`,
     {
@@ -102,11 +107,21 @@ export const confirmEmailVerification = async (
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: data.email,
+        email: verificationDetails.email,
         code: result.data.code,
       }),
     }
   );
+  // Handle verification failure
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({
+      message: `Request failed (${response.status})`,
+    }));
+    return {
+      status: false,
+      message: error.message,
+    };
+  }
 
   return response.json();
 };

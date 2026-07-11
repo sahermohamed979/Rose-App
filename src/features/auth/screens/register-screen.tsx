@@ -3,24 +3,35 @@ import RegisterForm from '../components/register-form';
 import AuthTitle from '@/features/auth/components/authTitle';
 import UserInfoTitle from '@/features/auth/components/user-info-title';
 import { Stepper } from '../components/stepper';
-import { useSearchParams } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
+import { useState } from 'react';
 export default function RegisterScreen() {
+  // translations
   const t = useTranslations();
-  const searchParams = useSearchParams();
-  const step = Number(searchParams.get('step')) || 1;
-  const email = searchParams.get('email') || 'example@example.com';
+  // State for step flow
+  const [step, setStep] = useState(1);
+  // State for email display
+  const [displayEmail, setDisplayEmail] = useState('');
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col gap-3">
       {/* header */}
       <AuthTitle authType="register" title={t('auth.headerTitle')} />
-      {/* stepper */}
-      {step !== 1 && <Stepper currentStep={step} />}
-
+      {/* Stepper (hidden on step 1) */}
+      {step !== 1 && (
+        <Stepper currentStep={step} onStepChange={setStep} />
+      )}
       {/* current step title */}
-      <UserInfoTitle email={email} />
+      <UserInfoTitle
+        email={displayEmail}
+        currentStep={step}
+        onStepChange={setStep}
+      />
       {/* Register form goes here */}
-      <RegisterForm />
+      <RegisterForm
+        currentStep={step}
+        setStep={setStep}
+        onEmailChange={setDisplayEmail}
+      />
 
       {/* footer*/}
       {step === 1 ? (
@@ -37,7 +48,7 @@ export default function RegisterScreen() {
           </p>
         </div>
       ) : (
-        <div className="border-border-muted border-t mt-9  text-center ">
+        <div className="border-border-muted border-t mt-9 text-center ">
           <p className="flex justify-center mt-5">
             {t('register.needHelp')}
             <span className="text-text-primary ms-1">
