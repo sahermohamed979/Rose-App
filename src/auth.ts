@@ -46,19 +46,17 @@ export const authOptions: AuthOptions = {
           id: data.payload.user.id,
           user: data.payload.user,
           token: data.payload.token,
+          remember: credentials?.rememberMe === 'true',
         };
       },
     }),
   ],
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60,
-  },
   callbacks: {
     jwt({ token, user }) {
       if (user) {
         token.user = user.user;
         token.accessToken = user.token;
+        token.remember = user.remember;
       }
       return token;
     },

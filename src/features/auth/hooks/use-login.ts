@@ -15,6 +15,7 @@ export const useLoginMutation = () => {
         redirect: false,
         username: values.username,
         password: values.password,
+        rememberMe: values.rememberMe,
       });
 
       if (result?.error) {
