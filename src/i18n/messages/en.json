@@ -96,6 +96,7 @@
       "passMatch": "Password do not match",
       "alreadyRegisteredOrVerify": "This email is already registered, please verify your email or login.",
       "verifyEmailRequired": "Please verify your email address first.",
+      "emailInvalid": "Please enter a valid email address.",
       "generalRegistrationFailed": "Registration failed, please try again later."
     }
   },

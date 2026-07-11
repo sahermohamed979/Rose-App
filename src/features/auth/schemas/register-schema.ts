@@ -10,12 +10,7 @@ export const registerSchema = (t: (key: string) => string) =>
       email: z
         .string()
         .min(1, { message: t('register.errors.verifyEmailRequired') })
-        .refine(
-          (email) => email.includes('@') && email.includes('.'),
-          {
-            message: 'emailInvalid',
-          }
-        ),
+        .email({ message: t('register.errors.emailInvalid') }),
       password: z
         .string()
         .min(8, { message: t('register.errors.passPolicy') })
@@ -25,7 +20,7 @@ export const registerSchema = (t: (key: string) => string) =>
             /[0-9]/.test(val) &&
             /[^A-Za-z0-9]/.test(val),
           {
-            message: 'passPolicy',
+            message: t('register.errors.passPolicy'),
           }
         ),
       confirmPassword: z
@@ -55,9 +50,7 @@ export const emailVerificationSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'verifyEmailRequired' })
-    .refine((email) => email.includes('@') && email.includes('.'), {
-      message: 'emailInvalid',
-    }),
+    .email({ message: 'emailInvalid' }),
 });
 export const otpVerificationSchema = z.object({
   otp: z.string().min(6, { message: 'otpRequired' }),

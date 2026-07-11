@@ -1,18 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../apis/register-action';
-import {
-  RegisterSchemaType,
-  RegisterResponse,
-} from '../types/register-types';
+import { RegisterSchemaType } from '../types/register-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { registerSchema } from '../schemas/register-schema';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 export function useRegister() {
   const router = useRouter();
   const t = useTranslations();
+  // form schema with translations
   const schema = registerSchema(t);
   // Form initialization with Zod validation
   const {
@@ -25,7 +24,7 @@ export function useRegister() {
     watch,
     getValues,
   } = useForm<RegisterSchemaType>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: zodResolver(schema),
     shouldUnregister: false,
     defaultValues: {
@@ -40,7 +39,7 @@ export function useRegister() {
     },
   });
 
-  // Registration mutation handling
+  // Handle registration API call
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: RegisterSchemaType) => {
       const response = await registerUser(values);
@@ -50,15 +49,16 @@ export function useRegister() {
       }
       return response;
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       router.push('/login');
     },
 
-    onError: (error) => {},
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
-
+  // Wrap mutation for form submission
   const onSubmit = (values: RegisterSchemaType) => {
-    console.log('Sending to API:', values);
     mutate(values);
   };
 

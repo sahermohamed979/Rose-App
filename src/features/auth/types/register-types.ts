@@ -5,9 +5,8 @@ import {
   registerSchema,
 } from '../schemas/register-schema';
 
-/**
- * Standard API response structure for successful registration
- */
+//   API response structure for successful registration
+
 interface RegisterResponseSuccess {
   status: true;
   code: number;
@@ -15,17 +14,15 @@ interface RegisterResponseSuccess {
   data?: RegisterSchemaType;
 }
 
-/**
- * Validation error details for specific form fields
- */
+// Validation error details for specific form fields
+
 interface ValidationError {
   path: string;
   message: string;
 }
 
-/**
- * API response structure for registration failures
- */
+// API response structure for registration failures
+
 interface RegisterResponseError {
   status: false;
   code: number;
@@ -41,10 +38,11 @@ export type RegisterResponse =
 export type RegisterSchemaType = z.infer<
   ReturnType<typeof registerSchema>
 >;
-
+// TypeScript type derived from Zod schema for email verification
 export type EmailVerificationSchemaType = z.infer<
   typeof emailVerificationSchema
 >;
+// TypeScript type derived from Zod schema for otp verifiaction
 export type OtpVerificationSchemaType = z.infer<
   typeof otpVerificationSchema
 >;
