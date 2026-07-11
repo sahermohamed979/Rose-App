@@ -6,11 +6,16 @@ export const registerSchema = (t: (key: string) => string) =>
       username: z
         .string()
         .min(1, { message: t('register.errors.usernameRequired') })
-        .min(3, { message: 'usernameShort' }),
+        .min(3, { message: t('register.errors.usernameShort') }),
       email: z
         .string()
-        .min(1, { message: t('register.errors.verifyEmailRequired') })
-        .email({ message: t('register.errors.emailInvalid') }),
+        .min(1, { message: t('register.errors.emailRequired') })
+        .refine(
+          (email) => email.includes('@') && email.includes('.'),
+          {
+            message: t('register.errors.emailInvalid'),
+          }
+        ),
       password: z
         .string()
         .min(8, { message: t('register.errors.passPolicy') })
@@ -46,12 +51,7 @@ export const registerSchema = (t: (key: string) => string) =>
       path: ['confirmPassword'],
     });
 
-export const emailVerificationSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'verifyEmailRequired' })
-    .email({ message: 'emailInvalid' }),
-});
-export const otpVerificationSchema = z.object({
-  otp: z.string().min(6, { message: 'otpRequired' }),
-});
+export const otpVerificationSchema = (t: (key: string) => string) =>
+  z.object({
+    code: z.string().min(6, { message: t('register.otp.oInvalid') }),
+  });

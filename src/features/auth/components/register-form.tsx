@@ -352,7 +352,6 @@ export default function Registerform({
                     placeholder={t('phonePlaceholder')}
                     {...register('phone')}
                   />
-                  {/* </div> */}
 
                   {fieldState.invalid && (
                     <FieldError
@@ -395,7 +394,6 @@ export default function Registerform({
                     </SelectContent>
                   </Select>
 
-                  {/* الـ Error مكانه هنا، جوه الـ render */}
                   {fieldState.error && (
                     <FieldError
                       errors={[fieldState.error ?? errors.gender]}
@@ -477,8 +475,8 @@ export default function Registerform({
             loading={isLoading}
             disabled={
               isLoading ||
-              (currentStep === 1 && errors.email !== undefined) || // مقفول لو فيه خطأ
-              (currentStep === 1 && !getValues('email')) // مقفول لو فاضي
+              (currentStep === 1 && errors.email !== undefined) ||
+              (currentStep === 1 && !getValues('email'))
             }
             type="submit"
           >
