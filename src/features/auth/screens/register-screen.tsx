@@ -11,7 +11,7 @@ export default function RegisterScreen() {
   const step = Number(searchParams.get('step')) || 1;
   const email = searchParams.get('email') || 'example@example.com';
   return (
-    <div className="flex w-full flex-col gap-3">
+    <div className="flex w-full flex-col">
       {/* header */}
       <AuthTitle authType="register" title={t('auth.headerTitle')} />
       {/* stepper */}
@@ -37,8 +37,8 @@ export default function RegisterScreen() {
           </p>
         </div>
       ) : (
-        <div className="border-border-muted border-t pt-4 text-center ">
-          <p className="flex justify-center my-2">
+        <div className="border-border-muted border-t mt-9  text-center ">
+          <p className="flex justify-center mt-5">
             {t('register.needHelp')}
             <span className="text-text-primary ms-1">
               {t('register.contactUs')}

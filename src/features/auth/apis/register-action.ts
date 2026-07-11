@@ -3,18 +3,18 @@
 import {
   RegisterSchemaType,
   RegisterResponse,
-  EmailVerificationSchemaType,
   OtpVerificationSchemaType,
 } from '@/features/auth/types/register-types';
 import {
-  emailVerificationSchema,
   otpVerificationSchema,
   registerSchema,
 } from '@/features/auth/schemas/register-schema';
 
 export const registerUser = async (data: RegisterSchemaType) => {
   // 1. Check schema
-  const result = registerSchema.safeParse(data);
+  const t = (key: string) => key;
+  const schema = registerSchema(t);
+  const result = schema.safeParse(data);
 
   if (!result.success) {
     return {
@@ -25,7 +25,7 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}auth/register`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,7 @@ export const registerUser = async (data: RegisterSchemaType) => {
 
 export const verifyEmail = async (email: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}auth/send-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/send-email-verification`,
     {
       method: 'POST',
       headers: {
@@ -80,35 +80,33 @@ export const verifyEmail = async (email: string) => {
 };
 
 export const confirmEmailVerification = async (
-  data: OtpVerificationSchemaType & EmailVerificationSchemaType
+  data: OtpVerificationSchemaType & { email: string }
 ) => {
-  const result = otpVerificationSchema
-    .merge(emailVerificationSchema)
-    .safeParse(data);
+  const t = (key: string) => key;
+  const schema = otpVerificationSchema(t);
+  const result = schema.safeParse(data);
   if (!result.success) {
     return {
       status: false,
-      message: 'Invalid input data',
+      code: 400,
+      message: 'Validation failed',
+      errors: [{ path: 'code', message: 'invalid' }],
     };
   }
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}auth/confirm-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/confirm-email-verification`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: data.email, code: data.otp }),
+      body: JSON.stringify({
+        email: data.email,
+        code: result.data.code,
+      }),
     }
   );
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({
-      message: `Request failed (${response.status})`,
-    }));
-    return {
-      status: false,
-      message: error.message,
-    };
-  }
+
   return response.json();
 };

@@ -8,10 +8,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { registerSchema } from '../schemas/register-schema';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function useRegister() {
   const router = useRouter();
-
+  const t = useTranslations('register');
+  const schema = registerSchema(t);
+  console.log(t('errors.emailInvalid'));
   // Form initialization with Zod validation
   const {
     control,
@@ -24,7 +27,7 @@ export function useRegister() {
     getValues,
   } = useForm<RegisterSchemaType>({
     mode: 'onSubmit',
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(schema),
     shouldUnregister: false,
     defaultValues: {
       username: '',

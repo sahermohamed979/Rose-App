@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import {
-  emailVerificationSchema,
+  // emailVerificationSchema,
   otpVerificationSchema,
   registerSchema,
 } from '../schemas/register-schema';
@@ -39,10 +39,24 @@ export type RegisterResponse =
   | RegisterResponseError;
 
 // TypeScript type derived from Zod schema for form data
-export type RegisterSchemaType = z.infer<typeof registerSchema>;
-export type EmailVerificationSchemaType = z.infer<
-  typeof emailVerificationSchema
+export type RegisterSchemaType = z.infer<
+  ReturnType<typeof registerSchema>
 >;
+// export type EmailVerificationSchemaType = z.infer<
+//   ReturnType<typeof emailVerificationSchema>
+// >;
 export type OtpVerificationSchemaType = z.infer<
-  typeof otpVerificationSchema
+  ReturnType<typeof otpVerificationSchema>
 >;
+
+export type ApiValidationError = { path: string; message: string };
+
+/** Raw API response from confirm-email-verification */
+export type OtpConfirmApiResponse =
+  | { status: true; code: number; message: string }
+  | {
+      status: false;
+      code: number;
+      message: string;
+      errors?: ApiValidationError[];
+    };
