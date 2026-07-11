@@ -36,12 +36,15 @@ import { useRegister } from '../hooks/register-hook';
 import { useOtpTimer } from '../hooks/otp-timer';
 import { PhoneInput } from '@/shared/components/ui/input-phone';
 import { PasswordInput } from '@/shared/components/ui/input-password';
+import { useEmailVerification } from '../hooks/email-verification-hook';
+import { useOtpVerification } from '../hooks/otp-verification-hook';
 
 interface RegisterFormProps {
   currentStep: number;
   setStep: (step: number) => void;
   onEmailChange: (email: string) => void;
 }
+
 export default function Registerform({
   currentStep,
   setStep,
@@ -51,12 +54,23 @@ export default function Registerform({
   const [part, setPart] = useState(3);
   const [otp, setOtp] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
+  const [otpError, setOtpError] = useState('');
+  const [emailValue, setEmailValue] = useState('');
   // hooks &transilations
   const t = useTranslations('register');
   const { timeLeft, resetTimer, canResend } = useOtpTimer();
-  // Form controller hooks
+
   const translateError = (key?: string) =>
     key ? t(`errors.${key}` as Parameters<typeof t>[0]) : '';
+  const translateOtpError = (key: string) =>
+    key ? t(`otp.${key}` as Parameters<typeof t>[0]) : '';
+  const {
+    verifyEmailMutate,
+    isVerifyEmailPending,
+    // errors: emailVerificationErrors
+  } = useEmailVerification();
+  const { confirmOtpMutate, isConfirmOtpPending } =
+    useOtpVerification();
   // Form controller hooks
   const {
     control,
@@ -70,55 +84,51 @@ export default function Registerform({
     formState,
   } = useRegister();
 
-  // Handle email verification (Step 1: Send OTP)
   const handleStep1 = async () => {
     const valid = await trigger('email');
     if (!valid) {
       return;
     }
+
     const email = getValues('email');
-    setIsVerifying(true);
-    try {
-      const response = await verifyEmail(email);
-      if (response.status === true) {
-        toast.success(response.message);
+    verifyEmailMutate(email, {
+      onSuccess: () => {
         resetTimer();
+        setEmailValue(email);
+        console.log(isVerifyEmailPending, 'isVerifyEmailPending');
+        setOtp('');
         setStep(2);
-      } else {
-        toast.error(response.message);
-      }
-    } finally {
-      setIsVerifying(false);
-    }
+      },
+    });
   };
-  // Confirm OTP verification (Step 2: Submit Code)
+
   const handleStep2 = async () => {
     const currentEmail = getValues('email');
     if (!currentEmail) {
       toast.error(t('errors.emailMissing'));
       return;
     }
+
     if (!otp || otp.length !== 6) {
       toast.error(t('otp.invalid'));
+      setOtpError(t('otp.invalid'));
       return;
     }
+    setOtpError('');
 
-    setIsVerifying(true);
-    try {
-      const response = await confirmEmailVerification({
-        email: currentEmail,
-        otp,
-      });
-      if (response.status === true) {
-        toast.success(response.message);
-
-        setStep(3);
-      } else {
-        toast.error(response.message);
+    confirmOtpMutate(
+      { email: currentEmail, code: otp },
+      {
+        onSuccess: () => {
+          setOtpError('');
+          onEmailChange(currentEmail);
+          setStep(3);
+        },
+        onError: (error: Error) => {
+          setOtpError(translateOtpError(error.message));
+        },
       }
-    } finally {
-      setIsVerifying(false);
-    }
+    );
   };
   // Re-trigger OTP request
   const handleResend = async () => {
@@ -127,21 +137,17 @@ export default function Registerform({
       toast.error(t('errors.emailMissing'));
       return;
     }
-
     resetTimer();
-    setIsVerifying(true);
-    try {
-      const response = await verifyEmail(currentEmail);
+    setOtp('');
 
-      if (response.status === true) {
-        toast.success(response.message);
-      } else {
-        toast.error(response.message);
-      }
-    } finally {
-      setIsVerifying(false);
-    }
+    verifyEmailMutate(currentEmail, {
+      onSuccess: () => {
+        resetTimer();
+        setStep(2);
+      },
+    });
   };
+
   // Personal Info Validation (Transition from Step 3 to 4)
   const handleNext = async () => {
     const valid = await trigger([
@@ -193,8 +199,10 @@ export default function Registerform({
   };
   // loading state for API requests
   const isLoading =
-    isVerifying || isPending || formState.isSubmitting;
-
+    isVerifyEmailPending ||
+    isConfirmOtpPending ||
+    isPending ||
+    formState.isSubmitting;
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
@@ -206,48 +214,47 @@ export default function Registerform({
               id="email"
               placeholder={t('email')}
               {...register('email', {
-                onBlur: (e) => {
-                  onEmailChange(e.target.value);
-                },
+                onChange: (e) => onEmailChange(e.target.value),
               })}
             />
-
             {errors.email && (
-              <p className="text-text-danger">
-                {errors.email.message}
-              </p>
+              <p className="text-red-500">{errors.email.message}</p>
             )}
           </div>
         )}
         {/* step2 : otp verification */}
         {currentStep === 2 && (
-          <div className="gap-y-1.5 flex flex-col items-center">
-            <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-            {/* OTP Resend Logic */}
-            {!canResend ? (
-              <p className="text-sm text-text-muted mt-2">
-                {t('otp.resendTimer', { s: timeLeft })}
-              </p>
-            ) : (
-              <Button
-                type="button"
-                variant={'link'}
-                className="p-0 ms-auto text-sm text-text-plain leading-none mt-7"
-                onClick={handleResend}
-              >
-                {t('otp.resend')}
-              </Button>
-            )}
-          </div>
+          <>
+            <div className="gap-y-1.5 flex flex-col items-center rtl:direction-ltr">
+              <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+                <InputOTPGroup>
+                  {Array.from({ length: 6 }, (_, index) => (
+                    <InputOTPSlot key={index} index={index} />
+                  ))}
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+            <div>
+              {otpError && (
+                <p className="text-red-500 text-start">{otpError}</p>
+              )}
+              {/* otp resend OTP logic */}
+              {!canResend ? (
+                <p className=" flex justify-end text-sm text-text-muted mt-2">
+                  {t('otp.resendTimer', { s: timeLeft })}
+                </p>
+              ) : (
+                <Button
+                  type="button"
+                  variant={'link'}
+                  className="flex p-0 ms-auto text-sm text-text-plain leading-none mt-7"
+                  onClick={handleResend}
+                >
+                  {t('otp.resend')}
+                </Button>
+              )}
+            </div>
+          </>
         )}
         {/* step3 : personal information */}
         {currentStep === 3 && (
@@ -270,7 +277,7 @@ export default function Registerform({
                       aria-invalid={fieldState.invalid}
                       id="firstName"
                       placeholder={t('fnPlaceholder')}
-                      {...register('firstName')}
+                      {...field}
                     />
                     {fieldState.invalid && (
                       <FieldError
@@ -299,7 +306,7 @@ export default function Registerform({
                       id="lastName"
                       aria-invalid={fieldState.invalid}
                       placeholder={t('lnPlaceholder')}
-                      {...register('lastName')}
+                      {...field}
                     />
                     {fieldState.invalid && (
                       <FieldError
@@ -324,7 +331,7 @@ export default function Registerform({
                     id="username"
                     aria-invalid={fieldState.invalid}
                     placeholder={t('usernamePlaceholder')}
-                    {...register('username')}
+                    {...field}
                   />
                   {fieldState.invalid && (
                     <FieldError
@@ -350,8 +357,12 @@ export default function Registerform({
                     id="phone"
                     aria-invalid={fieldState.invalid}
                     placeholder={t('phonePlaceholder')}
-                    {...register('phone')}
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
                   />
+                  {/* </div> */}
 
                   {fieldState.invalid && (
                     <FieldError
@@ -394,6 +405,7 @@ export default function Registerform({
                     </SelectContent>
                   </Select>
 
+                  {/* الـ Error مكانه هنا، جوه الـ render */}
                   {fieldState.error && (
                     <FieldError
                       errors={[fieldState.error ?? errors.gender]}
@@ -429,7 +441,7 @@ export default function Registerform({
                     id="password"
                     aria-invalid={fieldState.invalid}
                     placeholder={t('passPlaceholder')}
-                    {...register('password')}
+                    {...field}
                   />
                   {errors.password && (
                     <FieldError
@@ -453,7 +465,7 @@ export default function Registerform({
                     id="confirmPassword"
                     aria-invalid={fieldState.invalid}
                     placeholder={t('confirmPassPlaceholder')}
-                    {...register('confirmPassword')}
+                    {...field}
                   />
                   {errors.confirmPassword && (
                     <FieldError

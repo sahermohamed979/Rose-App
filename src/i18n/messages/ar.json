@@ -99,7 +99,8 @@
       "passMatch": "كلمة المرور غير متطابقة",
       "alreadyRegisteredOrVerify": "هذا البريد الإلكتروني مسجل بالفعل، يرجى تفعيل حسابك أو تسجيل الدخول.",
       "verifyEmailRequired": "يرجى تفعيل البريد الإلكتروني الخاص بك أولاً.",
-      "generalRegistrationFailed": "فشلت عملية التسجيل، يرجى المحاولة لاحقاً."
+      "generalRegistrationFailed": "فشلت عملية التسجيل، يرجى المحاولة لاحقاً.",
+      "fillAllFields": "يرجى إدخال جميع الحقول"
     }
   },
   "toast": {
