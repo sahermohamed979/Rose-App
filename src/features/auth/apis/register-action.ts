@@ -7,7 +7,6 @@ import {
   OtpVerificationSchemaType,
 } from '@/features/auth/types/register-types';
 import {
-  emailVerificationSchema,
   otpVerificationSchema,
   registerSchema,
 } from '@/features/auth/schemas/register-schema';
@@ -88,14 +87,16 @@ export const confirmEmailVerification = async (
   verificationDetails: OtpVerificationSchemaType &
     EmailVerificationSchemaType
 ) => {
+  const t = (key: string) => key;
+  const schema = otpVerificationSchema(t);
   // Validate inputs before calling API
-  const result = otpVerificationSchema
-    .merge(emailVerificationSchema)
-    .safeParse(verificationDetails);
+  const result = schema.safeParse(verificationDetails);
   if (!result.success) {
     return {
       status: false,
-      message: 'Invalid input data',
+      code: 400,
+      message: 'Validation failed',
+      errors: [{ path: 'code', message: 'invalid' }],
     };
   }
   // Submit OTP and email for verification

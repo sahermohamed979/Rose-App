@@ -83,9 +83,12 @@
       "resend": "Send a new code",
       "resendTimer": "Resend in {s}s",
       "invalid": "Invalid OTP code",
-      "expired": "Code expired. Please request a new one."
+      "expired": "Code expired. Please request a new one.",
+      "otpInvalid": "Invalid OTP code"
     },
     "errors": {
+      "emailInvalid": "Invalid email address",
+      "emailRequired": "Email is required",
       "firstNameRequired": "First name is required",
       "lastNameRequired": "Last name is required",
       "usernameRequired": "username is required",
@@ -96,7 +99,6 @@
       "passMatch": "Password do not match",
       "alreadyRegisteredOrVerify": "This email is already registered, please verify your email or login.",
       "verifyEmailRequired": "Please verify your email address first.",
-      "emailInvalid": "Please enter a valid email address.",
       "generalRegistrationFailed": "Registration failed, please try again later."
     }
   },

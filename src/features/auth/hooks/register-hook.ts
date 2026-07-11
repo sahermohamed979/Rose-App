@@ -24,7 +24,7 @@ export function useRegister() {
     watch,
     getValues,
   } = useForm<RegisterSchemaType>({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: zodResolver(schema),
     shouldUnregister: false,
     defaultValues: {
