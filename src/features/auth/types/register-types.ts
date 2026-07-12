@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import {
-  // emailVerificationSchema,
   otpVerificationSchema,
   registerSchema,
 } from '../schemas/register-schema';
@@ -38,16 +37,13 @@ export type RegisterResponse =
 export type RegisterSchemaType = z.infer<
   ReturnType<typeof registerSchema>
 >;
-// export type EmailVerificationSchemaType = z.infer<
-//   ReturnType<typeof emailVerificationSchema>
-// >;
 export type OtpVerificationSchemaType = z.infer<
   ReturnType<typeof otpVerificationSchema>
 >;
 
 export type ApiValidationError = { path: string; message: string };
 
-/** Raw API response from confirm-email-verification */
+//  Raw API response from confirm-email-verification
 export type OtpConfirmApiResponse =
   | { status: true; code: number; message: string }
   | {

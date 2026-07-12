@@ -1,11 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { verifyEmail } from '../apis/register-action';
 import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
-// import { EmailVerificationSchemaType } from "../types/register-types";
-// import { emailVerificationSchema } from "../schemas/register-schema";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
 
 export function useEmailVerification() {
   const { mutate, isPending } = useMutation({

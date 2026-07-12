@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { useTranslations } from 'next-intl';
 
 export const registerSchema = (t: (key: string) => string) =>
   z
