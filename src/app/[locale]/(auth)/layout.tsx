@@ -1,15 +1,13 @@
 import Image from 'next/image';
 import localFont from 'next/font/local';
 import React from 'react';
-import AuthHeader from '@/features/auth/components/authTitle';
-import { useTranslations } from 'next-intl';
 import LangToggle from '@/shared/components/ui/langToggle';
 import authTopSeparator from '@/shared/assets/images/auth-top-separator.png';
 import authBottomSeparator from '@/shared/assets/images/auth-bottom-separator.png';
 import darkAuthTopSeparator from '@/shared/assets/images/dark-auth-top-separator.png';
 import darkAuthBottomSeparator from '@/shared/assets/images/dark-auth-bottom-separator.png';
 import authCover from '@/shared/assets/images/auth-cover.jpg';
-import { useTheme } from 'next-themes';
+
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 
 const edwardian = localFont({
@@ -26,8 +24,6 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const t = useTranslations();
-
   return (
     <div className={`${edwardian.variable} flex min-h-screen w-full`}>
       {/* Form side */}

@@ -13,8 +13,7 @@ export function useRegister() {
   const t = useTranslations('register');
   // form schema with translations
   const schema = registerSchema(t);
-  // form schema with translations
-  console.log(t('errors.emailInvalid'));
+
   // Form initialization with Zod validation
   const {
     control,

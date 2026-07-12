@@ -51,8 +51,7 @@ export const registerUser = async (
       success: true,
       message: res.message,
     };
-  } catch (error) {
-    console.error('Registration Error:', error);
+  } catch {
     return { success: false, message: 'Server unreachable' };
   }
 };
