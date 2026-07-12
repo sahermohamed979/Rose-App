@@ -25,7 +25,7 @@ export default function OtpVerificationStep({
   canResend,
   timeLeft,
 }: OtpProps) {
-  // hooks &transilations
+  //  transilations
   const t = useTranslations('register');
 
   return (
