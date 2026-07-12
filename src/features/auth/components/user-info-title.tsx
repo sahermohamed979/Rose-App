@@ -14,6 +14,7 @@ export default function UserInfoTitle({
   currentStep,
   onStepChange,
 }: UserInfoTitleProps) {
+  // translations
   const t = useTranslations();
 
   return (
@@ -34,7 +35,7 @@ export default function UserInfoTitle({
           <span>
             <Button
               variant="link"
-              className="ms-[2px] p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
+              className="ms-.5 p-0 text-text-primary leading-none hover:text-text-primary-saturated text-sm"
               onClick={() => onStepChange(1)}
             >
               {' '}

@@ -41,6 +41,7 @@ export default function UserInfoStep({
   errors,
   trigger,
 }: userInfoProps) {
+  // translations
   const t = useTranslations('register');
 
   // Personal Info Validation (Transition from Step 3 to 4)

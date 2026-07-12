@@ -28,10 +28,11 @@ export default function Registerform({
   // states
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
-  // hooks &transilations
+  // transilations
   const t = useTranslations('register');
+  // hooks
   const { timeLeft, resetTimer, canResend } = useOtpTimer();
-
+  // erorr helper
   const translateError = (key?: string) =>
     key ? t(`errors.${key}` as Parameters<typeof t>[0]) : '';
   const translateOtpError = (key: string) =>
@@ -55,7 +56,7 @@ export default function Registerform({
     getValues,
     formState,
   } = useRegister();
-
+  //  handle email(step1)
   const handleStep1 = async () => {
     const valid = await trigger('email');
     if (!valid) {
@@ -71,7 +72,7 @@ export default function Registerform({
       },
     });
   };
-
+  // handle otp(step2)
   const handleStep2 = async () => {
     const currentEmail = getValues('email');
     if (!currentEmail) {
@@ -100,6 +101,7 @@ export default function Registerform({
       }
     );
   };
+  // handle resend otp
   const handleResend = async () => {
     const currentEmail = getValues('email');
     if (!currentEmail) {
