@@ -19,5 +19,35 @@
     "save": "Save",
     "delete": "Delete",
     "confirm": "Confirm"
+  },
+  "auth": {
+    "switchLang": "العربية",
+    "langLabel": "Switch to Arabic",
+    "pageTitle": "Authentication"
+  },
+  "validation": {
+    "passwordWeak": "Password must be at least 8 characters long and include: uppercase letter, lowercase letter, number, and special character",
+    "passwordMatch": "Passwords do not match"
+  },
+  "error": {
+    "networkError": "An error occurred. Please try again"
+  },
+  "login": {
+    "userName": "User Name",
+    "title": "Welcome Back",
+    "subtitle": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "button": "Login",
+    "createAccount": "Create one now!",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "invalidCredentials": "Invalid email or password",
+    "networkError": "An error occurred. Please try again"
+  },
+  "register": {
+    "customTitle": "Become part of our family!"
   }
 }
