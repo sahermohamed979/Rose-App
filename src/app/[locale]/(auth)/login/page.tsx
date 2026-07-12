@@ -1,9 +1,6 @@
+import LoginScreen from '@/features/auth/screens/loginScreen';
 import React from 'react';
 
-export default function Loginpage() {
-  return (
-    <div>
-      <h1>Login</h1>
-    </div>
-  );
+export default function LoginPage() {
+  return <LoginScreen />;
 }

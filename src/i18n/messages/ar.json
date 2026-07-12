@@ -34,10 +34,19 @@
     "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
   },
   "login": {
+    "userName": "اسم المستخدم",
     "title": "مرحباً بعودتك",
     "subtitle": "سجّل الدخول إلى حسابك",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "button": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب"
+    "createAccount": "أنشئ حساب الأن",
+    "register": "إنشاء حساب",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "networkError": ".حدث خطاء ما. يرجى المحاولة مجدداً"
   },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!",
