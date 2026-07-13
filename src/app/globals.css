@@ -290,8 +290,8 @@
   --bg-overlay: rgb(0 0 0 / 50%);
 
   /* Background - Primary */
-  --bg-primary: var(--maroon-800);
-  --bg-primary-saturated: var(--maroon-700);
+  --bg-primary: var(--maroon-700);
+  --bg-primary-saturated: var(--maroon-600);
   --bg-primary-faint: var(--maroon-100);
   --bg-primary-fade: var(--maroon-50);
 
@@ -333,6 +333,7 @@
 
   /* Border - Primary */
   --border-primary: var(--maroon-800);
+  --border-primary-saturated: var(--maroon-600);
   --border-primary-faint: var(--maroon-100);
   --border-primary-fade: var(--maroon-50);
 
@@ -372,7 +373,7 @@
   --text-inverse: white;
 
   /* Text - Primary */
-  --text-primary: var(--maroon-800);
+  --text-primary: var(--maroon-700);
   --text-primary-faint: var(--maroon-100);
   --text-primary-fade: var(--maroon-50);
 
@@ -554,6 +555,7 @@
 
   /* Border - Primary */
   --border-primary: var(--soft-pink-300);
+  --border-primary-saturated: var(--soft-pink-400);
   --border-primary-faint: color-mix(
     in srgb,
     var(--soft-pink-300) 75%,
@@ -625,7 +627,7 @@
   --text-inverse: var(--zinc-800);
 
   /* Text - Primary */
-  --text-primary: var(--soft-pink-300);
+  --text-primary: var(--soft-pink-200);
   --text-primary-faint: color-mix(
     in srgb,
     var(--soft-pink-300) 75%,
