@@ -21,6 +21,7 @@ import * as React from 'react';
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react';
+import { cn } from '@/shared/lib/utils/utils';
 
 // ─── Primitive sub-components ─────────────────────────────────────────────────
 
@@ -29,11 +30,12 @@ function BreadcrumbRoot({
   className,
   ...props
 }: React.ComponentProps<'nav'>) {
+  // --- Render ---
   return (
     <nav
       aria-label="breadcrumb"
       data-slot="breadcrumb"
-      className={`w-full ${className ?? ''}`}
+      className={cn('w-full', className)}
       {...props}
     />
   );
@@ -44,10 +46,14 @@ function BreadcrumbList({
   className,
   ...props
 }: React.ComponentProps<'ol'>) {
+  // --- Render ---
   return (
     <ol
       data-slot="breadcrumb-list"
-      className={`flex flex-wrap items-center gap-1 text-sm min-w-0 ${className ?? ''}`}
+      className={cn(
+        'flex flex-wrap items-center gap-1 text-sm min-w-0',
+        className
+      )}
       {...props}
     />
   );
@@ -58,10 +64,14 @@ function BreadcrumbItem({
   className,
   ...props
 }: React.ComponentProps<'li'>) {
+  // --- Render ---
   return (
     <li
       data-slot="breadcrumb-item"
-      className={`inline-flex items-center gap-1 min-w-0 ${className ?? ''}`}
+      className={cn(
+        'inline-flex items-center gap-1 min-w-0',
+        className
+      )}
       {...props}
     />
   );
@@ -76,12 +86,13 @@ function BreadcrumbLink({
   render,
   ...props
 }: useRender.ComponentProps<'a'>) {
+  // --- Render ---
   return useRender({
     defaultTagName: 'a',
     props: mergeProps<'a'>(
       {
-        className: `
-          font-medium leading-none whitespace-nowrap
+        className: cn(
+          `font-medium leading-none whitespace-nowrap
           [color:var(--text-soft)]
           hover:[color:var(--text-default)]
           transition-colors duration-150
@@ -89,9 +100,9 @@ function BreadcrumbLink({
           rounded-sm
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[var(--maroon-500)]/40
-          ${className ?? ''}
-        `,
+          focus-visible:ring-[var(--maroon-500)]/40`,
+          className
+        ),
       },
       props
     ),
@@ -105,18 +116,19 @@ function BreadcrumbPage({
   className,
   ...props
 }: React.ComponentProps<'span'>) {
+  // --- Render ---
   return (
     <span
       data-slot="breadcrumb-page"
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={`
-        font-semibold leading-none whitespace-nowrap
+      className={cn(
+        `font-semibold leading-none whitespace-nowrap
         [color:var(--maroon-500)]
-        truncate max-w-[12rem] sm:max-w-none
-        ${className ?? ''}
-      `}
+        truncate max-w-[12rem] sm:max-w-none`,
+        className
+      )}
       {...props}
     />
   );
@@ -128,12 +140,16 @@ function BreadcrumbSeparator({
   className,
   ...props
 }: React.ComponentProps<'li'>) {
+  // --- Render ---
   return (
     <li
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={`[&>svg]:size-3.5 [&>svg]:shrink-0 [color:var(--text-soft)] ${className ?? ''}`}
+      className={cn(
+        '[&>svg]:size-3.5 [&>svg]:shrink-0 [color:var(--text-soft)]',
+        className
+      )}
       {...props}
     >
       {/* rtl:rotate-180 flips the chevron for right-to-left layouts */}
@@ -147,12 +163,16 @@ function BreadcrumbEllipsis({
   className,
   ...props
 }: React.ComponentProps<'span'>) {
+  // --- Render ---
   return (
     <span
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       aria-hidden="true"
-      className={`inline-flex size-5 items-center justify-center [&>svg]:size-4 [color:var(--text-soft)] ${className ?? ''}`}
+      className={cn(
+        'inline-flex size-5 items-center justify-center [&>svg]:size-4 [color:var(--text-soft)]',
+        className
+      )}
       {...props}
     >
       <MoreHorizontalIcon />
@@ -184,9 +204,11 @@ export function Breadcrumb({
   maxVisible = 4,
   className,
 }: BreadcrumbProps) {
+  // --- State ---
   // Tracks whether the user clicked "…" to reveal all crumbs
   const [expanded, setExpanded] = React.useState(false);
 
+  // --- Logic ---
   if (!items || items.length === 0) {
     return null;
   }
@@ -202,6 +224,7 @@ export function Breadcrumb({
     ? [items[0], null, ...items.slice(lastIndex - 1)]
     : items;
 
+  // --- Render ---
   return (
     <BreadcrumbRoot className={className}>
       <BreadcrumbList>
