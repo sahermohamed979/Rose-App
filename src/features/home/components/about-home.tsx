@@ -5,6 +5,7 @@ import img3 from '@/shared/assets/images/about-home (3).png';
 import Image from 'next/image';
 import { Button } from '@/shared/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
+import SectionSubtitle from './section-subtitle';
 
 const AboutSection = () => {
   const features = [
@@ -45,9 +46,7 @@ const AboutSection = () => {
 
       {/* About*/}
       <div className="w-full md:w-1/2">
-        <span className="text-text-secondary font-bold tracking-[25%] text-sm uppercase block mb-2">
-          ABOUT
-        </span>
+        <SectionSubtitle Text="Home" className="mx-auto" />
 
         <h2 className="text-3xl md:text-4xl text-text-primary font-bold leading-snug mb-5">
           Delivering the{' '}
