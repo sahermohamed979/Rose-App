@@ -25,7 +25,11 @@ export const useLoginMutation = () => {
       return result;
     },
     onSuccess: () => {
-      router.push(params.get('redirect') ?? '/');
+      const callbackUrl =
+        new URLSearchParams(window.location.search).get(
+          'callbackUrl'
+        ) || '/';
+      location.href = callbackUrl;
     },
   });
 };
