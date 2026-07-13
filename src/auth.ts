@@ -40,27 +40,36 @@ export const authOptions: AuthOptions = {
   ],
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // Must be 30 days, otherwise browser deletes cookie after 1 day
+    // 30 days is the maximum allowed age; actual cookie lifetime is
+    // controlled per-login by the /api/auth/remember endpoint.
+    maxAge: 30 * 24 * 60 * 60,
   },
   jwt: {
-    maxAge: 30 * 24 * 60 * 60, // Must match session maxAge
+    maxAge: 30 * 24 * 60 * 60,
+  },
+  // By omitting a maxAge on the cookie, it becomes a session cookie
+  // (deleted when the browser closes) by default.
+  // The /api/auth/remember endpoint upgrades it to a persistent cookie
+  // when the user checks "Remember me".
+  cookies: {
+    sessionToken: {
+      name: 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax' as const,
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        // No maxAge → session cookie (cleared on browser close)
+      },
+    },
   },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
         token.user = user.user;
         token.token = user.token;
-        // rememberMe is on the top-level 'user' object returned from authorize
         token.rememberMe = user.rememberMe;
       }
-
-      // Dynamic expiration based on rememberMe
-      if (token.rememberMe) {
-        token.exp = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days
-      } else {
-        token.exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 1 day
-      }
-
       return token;
     },
     session: ({ session, token }) => {

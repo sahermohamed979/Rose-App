@@ -20,8 +20,10 @@ export default async function middleware(req: NextRequest) {
 
   const pathname = req.nextUrl.pathname;
 
-  // Remove locale prefix to get clean path
-  // /en/login → /login
+  // Remove locale prefix to get clean path, and capture the active locale
+  // e.g. /en/login → cleanPath: /login, locale: en
+  const localeMatch = pathname.match(/^\/([a-z]{2})/);
+  const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
   const cleanPath = pathname.replace(/^\/[a-z]{2}/, '');
 
   const isAuthPage = authPages.some((page) =>
@@ -31,16 +33,16 @@ export default async function middleware(req: NextRequest) {
     cleanPath.startsWith(page)
   );
 
-  // Logged in user tries to visit login/register
+  // Logged in user tries to visit login/register → redirect to locale home
   if (isLoggedIn && isAuthPage) {
-    return NextResponse.redirect(new URL('/en', req.url));
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 
-  // Guest tries to visit protected page
+  // Guest tries to visit protected page → redirect to locale login
   if (!isLoggedIn && isProtectedPage) {
     const returnUrl = encodeURIComponent(pathname);
     return NextResponse.redirect(
-      new URL(`/en/login?returnUrl=${returnUrl}`, req.url)
+      new URL(`/${locale}/login?returnUrl=${returnUrl}`, req.url)
     );
   }
 

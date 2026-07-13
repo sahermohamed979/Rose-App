@@ -33,12 +33,15 @@
     "networkError": "An error occurred. Please try again"
   },
   "login": {
-    "email-placeholder": "email@examble.com",
+    "title": "Welcome Back",
+    "subtitle": "Sign in to your account",
     "email": "Email",
+    "emailPlaceholder": "email@example.com",
     "password": "Password",
-    "forgot-password": "Forget Password?",
-    "remember-me": "Remember me",
-    "login": "Login"
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember me",
+    "submitButton": "Login",
+    "invalidCredentials": "Invalid credentials. Please check your username and password."
   },
   "register": {
     "customTitle": "Become part of our family!"
