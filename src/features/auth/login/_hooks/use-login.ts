@@ -7,9 +7,11 @@ import { useState } from 'react';
 import { LoginFormValues } from '../_schema/login.schema';
 
 export default function useLogin() {
+  // --- State ---
   const router = useRouter();
   const [apiError, setApiError] = useState<string | null>(null);
 
+  // --- Mutation ---
   const { isPending, mutate: login } = useMutation({
     mutationFn: async (values: LoginFormValues) => {
       setApiError(null);
@@ -28,18 +30,24 @@ export default function useLogin() {
         );
       }
 
-      return response;
+      // Return rememberMe so onSuccess can upgrade the cookie if needed
+      return { rememberMe: values.rememberMe };
     },
-    onSuccess: () => {
+    onSuccess: async ({ rememberMe }) => {
+      // If "Remember me" was checked, upgrade the session cookie to a
+      // persistent cookie (maxAge: 30 days) via the remember endpoint.
+      // Without this, the cookie is a session cookie and is deleted on browser close.
+      if (rememberMe) {
+        await fetch('/api/auth/remember', { method: 'POST' });
+      }
+
       const callbackUrl =
         new URLSearchParams(window.location.search).get(
           'callbackUrl'
         ) || '/';
 
-      setTimeout(() => {
-        router.push(callbackUrl);
-        router.refresh();
-      }, 1500);
+      router.push(callbackUrl);
+      router.refresh();
     },
     onError: (error: Error) => {
       setApiError(error.message);

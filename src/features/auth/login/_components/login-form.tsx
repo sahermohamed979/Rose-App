@@ -26,6 +26,7 @@ export default function LoginForm() {
 
   const { login, isPending, apiError } = useLogin();
 
+  // --- Form setup ---
   const methods = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -43,18 +44,15 @@ export default function LoginForm() {
     formState: { errors },
   } = methods;
 
+  // --- Handlers ---
   const onSubmit: SubmitHandler<LoginFormValues> = (values) => {
     login(values);
   };
 
+  // --- Render ---
   return (
     <form
-      onSubmit={handleSubmit(onSubmit, (errs) =>
-        console.error(
-          '[Zod validation errors - submit blocked]',
-          errs
-        )
-      )}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-5"
     >
       {/* Email */}
@@ -66,7 +64,7 @@ export default function LoginForm() {
             {...register('email')}
             type="email"
             autoComplete="email"
-            placeholder={t('email-placeholder')}
+            placeholder={t('emailPlaceholder')}
             invalid={!!errors.email}
           />
         </FieldContent>
@@ -92,7 +90,7 @@ export default function LoginForm() {
             href="/forget-password"
             className="text-xs text-primary underline-offset-4 hover:underline ltr:ml-auto rtl:mr-auto mt-1"
           >
-            {t('forgot-password')}
+            {t('forgotPassword')}
           </Link>
         </div>
       </Field>
@@ -117,7 +115,7 @@ export default function LoginForm() {
               htmlFor="rememberMe"
               className="font-normal cursor-pointer"
             >
-              {t('remember-me')}
+              {t('rememberMe')}
             </FieldLabel>
           </Field>
         )}
@@ -126,7 +124,7 @@ export default function LoginForm() {
       {/* API Error */}
       {apiError && (
         <div className="p-3 mt-2 rounded-lg bg-bg-danger text-text-inverse text-sm border border-border-danger">
-          {apiError}
+          {t('invalidCredentials')}
         </div>
       )}
 
@@ -136,7 +134,7 @@ export default function LoginForm() {
         loading={isPending}
         className="w-full mt-2"
       >
-        {t('login')}
+        {t('submitButton')}
       </Button>
     </form>
   );

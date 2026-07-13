@@ -33,12 +33,15 @@
     "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
   },
   "login": {
-    "email-placeholder": "البريد الالكتروني",
-    "email": "البريد الالكتروني",
+    "title": "مرحباً بعودتك",
+    "subtitle": "سجّل الدخول إلى حسابك",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "البريد الإلكتروني",
     "password": "كلمة المرور",
-    "forgot-password": "هل نسيت كلمة المرور؟",
-    "remember-me": "تذكرني",
-    "login": "ادخل"
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "rememberMe": "تذكّرني",
+    "submitButton": "تسجيل الدخول",
+    "invalidCredentials": "بيانات غير صحيحة. يرجى التحقق من اسم المستخدم وكلمة المرور."
   },
   "register": {
     "customTitle": "أصبح جزءًا من عائلتنا!"
