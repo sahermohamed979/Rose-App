@@ -60,6 +60,7 @@
   --color-bg-danger-saturated: var(--bg-danger-saturated);
   --color-bg-danger-faint: var(--bg-danger-faint);
   --color-bg-danger-fade: var(--bg-danger-fade);
+  --color-bg-carosel: var(--bg-carosel);
 
   /* Border Semantic */
   --color-border-plain: var(--border-plain);
@@ -289,6 +290,9 @@
   --bg-elevated: rgb(0 0 0 / 20%);
   --bg-overlay: rgb(0 0 0 / 50%);
 
+  /* Bg Carosel */
+  --bg-carosel: var(--maroon-50);
+
   /* Background - Primary */
   --bg-primary: var(--maroon-700);
   --bg-primary-saturated: var(--maroon-600);
@@ -480,6 +484,8 @@
     var(--soft-pink-300) 25%,
     transparent
   );
+
+  --bg-carosel: var(--zinc-700);
 
   /* Background - Info */
   --bg-info: var(--blue-500);
