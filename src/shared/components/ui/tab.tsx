@@ -28,6 +28,7 @@
 
 import * as React from 'react';
 import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
+import { cn } from '@/shared/lib/utils/utils';
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
@@ -37,11 +38,15 @@ function Tabs({
   orientation = 'horizontal',
   ...props
 }: TabsPrimitive.Root.Props) {
+  // --- Render ---
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
       data-orientation={orientation}
-      className={`group/tabs flex gap-2 data-horizontal:flex-col ${className ?? ''}`}
+      className={cn(
+        'group/tabs flex gap-2 data-horizontal:flex-col',
+        className
+      )}
       {...props}
     />
   );
@@ -49,20 +54,21 @@ function Tabs({
 
 /** Container for the tab triggers. Has a border and background-plain. */
 function TabsList({ className, ...props }: TabsPrimitive.List.Props) {
+  // --- Render ---
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
-      className={`
-        group/tabs-list
+      className={cn(
+        `group/tabs-list
         inline-flex w-fit items-center justify-center
         rounded-xl p-0
         [background-color:var(--bg-plain)]
         group-data-horizontal/tabs:h-11
         group-data-vertical/tabs:h-fit
         group-data-vertical/tabs:flex-col
-        group-data-vertical/tabs:gap-2
-        ${className ?? ''}
-      `}
+        group-data-vertical/tabs:gap-2`,
+        className
+      )}
       {...props}
     />
   );
@@ -82,11 +88,12 @@ function TabsTrigger({
   className,
   ...props
 }: TabsPrimitive.Tab.Props) {
+  // --- Render ---
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
-      className={`
-        relative inline-flex h-full flex-1
+      className={cn(
+        `relative inline-flex h-full flex-1
         items-center justify-center gap-2
         border border-border
         group-data-horizontal/tabs:-ms-px group-data-horizontal/tabs:first:ms-0
@@ -130,10 +137,9 @@ function TabsTrigger({
         data-disabled:![background-color:var(--bg-muted)]
         data-disabled:![color:var(--text-muted)]
         data-disabled:opacity-100
-        data-disabled:!shadow-none
-
-        ${className ?? ''}
-      `}
+        data-disabled:!shadow-none`,
+        className
+      )}
       {...props}
     />
   );
@@ -144,10 +150,11 @@ function TabsContent({
   className,
   ...props
 }: TabsPrimitive.Panel.Props) {
+  // --- Render ---
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
-      className={`flex-1 text-sm outline-none ${className ?? ''}`}
+      className={cn('flex-1 text-sm outline-none', className)}
       {...props}
     />
   );
@@ -191,6 +198,7 @@ export function Tab({
   orientation = 'horizontal',
   className,
 }: TabProps) {
+  // --- Logic ---
   if (!items || items.length === 0) {
     return null;
   }
@@ -199,6 +207,7 @@ export function Tab({
   const fallbackDefaultValue =
     defaultValue ?? items[0].value ?? items[0].label ?? '0';
 
+  // --- Render ---
   return (
     <Tabs
       defaultValue={fallbackDefaultValue}

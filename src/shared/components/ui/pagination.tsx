@@ -26,7 +26,8 @@ import {
 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 
-import { useFormatter, useLocale } from 'next-intl';
+import { cn } from '@/shared/lib/utils/utils';
+import { useFormatter, useLocale, useTranslations } from 'next-intl';
 
 export interface PaginationProps {
   currentPage: number;
@@ -87,9 +88,11 @@ export function Pagination({
   onPageChange,
   className,
 }: PaginationProps) {
+  // --- Logic ---
   const items = getPaginationItems(currentPage, totalPages);
   const locale = useLocale();
   const format = useFormatter();
+  const t = useTranslations('pagination');
 
   const formatNumber = (num: number) => {
     return format.number(num, {
@@ -100,19 +103,20 @@ export function Pagination({
   // Base styling for all pagination buttons to make them square boxes
   const btnClass = 'h-10 min-w-10 p-0 text-sm';
 
+  // --- Render ---
   return (
     <nav
       role="navigation"
       aria-label="pagination"
-      className={`flex flex-wrap items-center gap-2 ${className ?? ''}`}
+      className={cn('flex flex-wrap items-center gap-2', className)}
     >
       {/* First Page Button */}
       <Button
         variant="outline"
-        className={`${btnClass} !border-border-muted`}
+        className={cn(btnClass, '!border-border-muted')}
         disabled={currentPage <= 1}
         onClick={() => onPageChange(1)}
-        aria-label="Go to first page"
+        aria-label={t('first')}
       >
         <ChevronsLeft className="size-4 rtl:-scale-x-100" />
       </Button>
@@ -120,10 +124,10 @@ export function Pagination({
       {/* Previous Page Button */}
       <Button
         variant="outline"
-        className={`${btnClass} !border-border-muted`}
+        className={cn(btnClass, '!border-border-muted')}
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
-        aria-label="Go to previous page"
+        aria-label={t('previous')}
       >
         <ChevronLeft className="size-4 rtl:-scale-x-100" />
       </Button>
@@ -146,9 +150,12 @@ export function Pagination({
           <Button
             key={item}
             variant={isActive ? 'default' : 'outline'}
-            className={`${btnClass} ${!isActive ? '!border-border-muted' : ''}`}
+            className={cn(
+              btnClass,
+              !isActive && '!border-border-muted'
+            )}
             onClick={() => onPageChange(item)}
-            aria-label={`Go to page ${item}`}
+            aria-label={t('goToPage', { page: item })}
             aria-current={isActive ? 'page' : undefined}
           >
             {formatNumber(item)}
@@ -159,10 +166,10 @@ export function Pagination({
       {/* Next Page Button */}
       <Button
         variant="outline"
-        className={`${btnClass} !border-border-muted`}
+        className={cn(btnClass, '!border-border-muted')}
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(currentPage + 1)}
-        aria-label="Go to next page"
+        aria-label={t('next')}
       >
         <ChevronRight className="size-4 rtl:-scale-x-100" />
       </Button>
@@ -170,10 +177,10 @@ export function Pagination({
       {/* Last Page Button */}
       <Button
         variant="outline"
-        className={`${btnClass} !border-border-muted`}
+        className={cn(btnClass, '!border-border-muted')}
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(totalPages)}
-        aria-label="Go to last page"
+        aria-label={t('last')}
       >
         <ChevronsRight className="size-4 rtl:-scale-x-100" />
       </Button>
