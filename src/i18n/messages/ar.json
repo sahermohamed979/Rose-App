@@ -119,5 +119,15 @@
     "error": "خطأ",
     "warning": "تحذير",
     "info": "معلومة"
+  },
+  "header": {
+    "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "headerLogin": "تسجيل الدخول",
+    "home": "الرئيسة",
+    "products": "المنتجات",
+    "occasions": "المناسبات",
+    "categories": "التصنيفات",
+    "contact": "تواصل معنا",
+    "about": "حول"
   }
 }

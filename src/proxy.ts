@@ -6,7 +6,7 @@ import { routing } from './i18n/routing';
 const intlMiddleware = createMiddleware(routing);
 
 // Auth pages - logged in users can't visit these
-const authPages = ['/login', '/register', '/forgot-password'];
+export const authPages = ['/login', '/register', '/forgot-password'];
 
 // Protected pages - guests can't visit these
 const protectedPages = ['/dashboard', '/profile', '/home'];
