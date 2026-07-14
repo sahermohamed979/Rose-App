@@ -23,7 +23,8 @@
   "auth": {
     "switchLang": "English",
     "langLabel": "التحويل إلى الإنجليزية",
-    "pageTitle": "المصادقة"
+    "pageTitle": "المصادقة",
+    "headerTitle": "اصبح جزء من عائلتنا"
   },
   "validation": {
     "passwordWeak": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل وتشمل: حرف كبير وصغير ورقم ورمز خاص",
@@ -33,13 +34,85 @@
     "networkError": ".حدث خطأ ما. يرجى المحاولة مجدداً"
   },
   "login": {
+    "userName": "اسم المستخدم",
     "title": "مرحباً بعودتك",
     "subtitle": "سجّل الدخول إلى حسابك",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "button": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب"
+    "createAccount": "أنشئ حساب الأن",
+    "register": "إنشاء حساب",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "networkError": ".حدث خطاء ما. يرجى المحاولة مجدداً"
   },
   "register": {
-    "customTitle": "أصبح جزءًا من عائلتنا!"
+    "customTitle": "أصبح جزءًا من عائلتنا!",
+    "email": "البريد الإلكتروني",
+    "register": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب؟",
+    "edit": "تعديل",
+    "login": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "aboutYou": "أخبرنا المزيد عنك",
+    "fewDetails": "بعض التفاصيل للبدء",
+    "strongPassword": "أنشئ كلمة مرور قوية",
+    "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
+    "firstName": "الاسم الأول",
+    "fnPlaceholder": "محمد",
+    "lastName": "اسم العائلة",
+    "lnPlaceholder": "أحمد",
+    "username": "اسم المستخدم",
+    "usernamePlaceholder": "Mohamed123",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "1012345678",
+    "gender": "الجنس",
+    "genderPlaceholder": "اختر الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "password": "كلمة المرور",
+    "passPlaceholder": "********",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "confirmPassPlaceholder": "********",
+    "submit": "إنشاء حساب",
+    "loading": "جاري الإنشاء...",
+    "needHelp": "تحتاج لمساعده؟",
+    "contactUs": "تواصل معانا",
+    "next": "التالي",
+    "step1": "١",
+    "step2": "٢",
+    "step3": "٣",
+    "step4": "٤",
+    "otp": {
+      "title": "أدخل رمز التحقق",
+      "subtitle": "لقد أرسلنا رمز التحقق إلى {email}",
+      "submitButton": "تحقق من الرمز",
+      "resend": "أرسل رمزاً جديداً",
+      "resendTimer": "إعادة الإرسال في {s}ثانية",
+      "invalid": "رمز التحقق غير صحيح",
+      "expired": "انتهت صلاحيه الرمز. يرجى طلب رمز جديد.",
+      "otpInvalid": "رمز التحقق غير صحيح"
+    },
+    "errors": {
+      "emailInvalid": "عنوان بريد إلكتروني غير صالح",
+      "emailRequired": "يرجى إدخال عنوان بريد إلكتروني",
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "usernameRequired": "اسم المستخدم مطلوب",
+      "usernameShort": "اسم المستخدم قصير جدا",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "genderRequired": "يرجى اختيار النوع",
+      "passPolicy": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وتتضمن حرفاً كبيراً، ورقماً، ورمزاً خاصاً.",
+      "passMatch": "كلمة المرور غير متطابقة",
+      "alreadyRegisteredOrVerify": "هذا البريد الإلكتروني مسجل بالفعل، يرجى تفعيل حسابك أو تسجيل الدخول.",
+      "verifyEmailRequired": "يرجى تفعيل البريد الإلكتروني الخاص بك أولاً.",
+      "generalRegistrationFailed": "فشلت عملية التسجيل، يرجى المحاولة لاحقاً.",
+      "fillAllFields": "يرجى إدخال جميع الحقول",
+      "emailMissing": "البريد الإلكتروني مطلوب للمتابعة.",
+      "accountCreated": "تم إنشاء الحساب بنجاح!"
+    }
   },
   "forgotPw": {
     "step1": {

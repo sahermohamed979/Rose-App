@@ -18,7 +18,7 @@ interface LoginResponse {
 }
 
 interface LoginPayload {
-  user: User;
+  user: IUser;
   token: string;
 }
 

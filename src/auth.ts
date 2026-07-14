@@ -1,14 +1,19 @@
-import { AuthOptions } from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { LoginResponse } from './shared/lib/types/api';
+import {
+  ApiResponse,
+  LoginCredentials,
+  LoginPayload,
+} from './shared/lib/types/api';
 
 export const authOptions: AuthOptions = {
   providers: [
     Credentials({
-      name: 'login',
+      name: 'Credentials',
       credentials: {
         username: {},
         password: {},
+        rememberMe: {},
       },
       authorize: async (credentials) => {
         const res = await fetch(
@@ -21,39 +26,44 @@ export const authOptions: AuthOptions = {
             body: JSON.stringify({
               username: credentials?.username,
               password: credentials?.password,
-            }),
+            } as LoginCredentials),
           }
         );
-        const data: LoginResponse = await res.json();
+
+        const data: ApiResponse<LoginPayload> = await res.json();
+
+        // Inavlid credentials
+        if (data.code === 400 || data.code === 401) {
+          throw new Error('invalidCredentials');
+        }
+
+        // Server error
         if (!data.status) {
-          return null;
+          throw new Error('networkError');
         }
 
         return {
           id: data.payload.user.id,
           user: data.payload.user,
           token: data.payload.token,
+          remember: credentials?.rememberMe === 'true',
         };
       },
     }),
   ],
-  session: {
-    strategy: 'jwt',
-    maxAge: 24 * 60 * 60,
-  },
-  jwt: {
-    maxAge: 24 * 60 * 60,
-  },
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt({ token, user }) {
       if (user) {
         token.user = user.user;
-        token.token = user.token;
+        token.accessToken = user.token;
+        token.remember = user.remember;
       }
       return token;
     },
     session: ({ session, token }) => {
-      session.user = token.user;
+      if (token.user) {
+        session.user = token.user;
+      }
       return session;
     },
   },
