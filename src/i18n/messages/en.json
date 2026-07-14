@@ -119,5 +119,15 @@
     "error": "Error",
     "warning": "Warning",
     "info": "Info"
+  },
+  "header": {
+    "searchPlaceholder": "What awesome gift are you looking for?",
+    "headerLogin": "Login",
+    "home": "home",
+    "products": "products",
+    "occasions": "occasions",
+    "categories": "categories",
+    "contact": "contact",
+    "about": "about"
   }
 }
