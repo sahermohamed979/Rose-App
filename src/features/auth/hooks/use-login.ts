@@ -1,13 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from '@/i18n/navigation';
 import { LoginFormData } from '../schemas/login-schema';
 import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
 
 export const useLoginMutation = () => {
   // Hooks
-  const params = useSearchParams();
-  const router = useRouter();
 
   return useMutation({
     mutationFn: async (values: LoginFormData) => {
@@ -25,7 +21,11 @@ export const useLoginMutation = () => {
       return result;
     },
     onSuccess: () => {
-      router.push(params.get('redirect') ?? '/');
+      const callbackUrl =
+        new URLSearchParams(window.location.search).get(
+          'callbackUrl'
+        ) || '/';
+      location.href = callbackUrl;
     },
   });
 };

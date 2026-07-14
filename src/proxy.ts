@@ -44,6 +44,16 @@ export default async function middleware(req: NextRequest) {
       new URL(`/${locale}/login?returnUrl=${returnUrl}`, req.url)
     );
   }
+  // Reset password protected page
+  if (cleanPath.startsWith('/reset-password')) {
+    const searchParamsToken = req.nextUrl.searchParams.get('token');
+
+    if (!searchParamsToken) {
+      return NextResponse.redirect(
+        new URL(`/${locale}/forgot-password`, req.url)
+      );
+    }
+  }
   //  next-intl
   return intlMiddleware(req);
 }
