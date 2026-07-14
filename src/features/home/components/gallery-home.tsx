@@ -3,17 +3,20 @@ import Image from 'next/image';
 import galleryColumns from '../consts/gallery-data';
 import HeaderTitle from './headr-title';
 import SectionSubtitle from './section-subtitle';
+import { useTranslations } from 'next-intl';
 
 const GallerySection = () => {
+  // Translation
+  const t = useTranslations('home');
   return (
     <section className="max-w-7xl mx-auto py-16 px-5 font-sans">
       {/* Title*/}
       <div className="text-center mb-10">
-        <SectionSubtitle Text="Gallery" className="mx-auto" />
-        <HeaderTitle
-          text="Check Out our Wonderful Gallery"
+        <SectionSubtitle
+          Text={t('gallery.label')}
           className="mx-auto"
         />
+        <HeaderTitle text={t('gallery.title')} className="mx-auto" />
       </div>
 
       {/* Gallery*/}

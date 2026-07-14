@@ -11,6 +11,7 @@ import {
 import SectionSubtitle from './section-subtitle';
 import { testimonialsData } from '../consts/testimonials-data';
 import HeaderTitle from './headr-title';
+import { useLocale, useTranslations } from 'next-intl';
 
 // Data
 const extendedTestimonials = [
@@ -19,6 +20,10 @@ const extendedTestimonials = [
 ];
 
 const TestimonialsSection = () => {
+  // Translation
+  const t = useTranslations('home');
+  const locale = useLocale();
+
   // Plugins
   const [plugin] = useState(() =>
     AutoScroll({
@@ -32,9 +37,12 @@ const TestimonialsSection = () => {
       {/* Title */}
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center mb-12">
-          <SectionSubtitle Text="Testimonials" className="mx-auto" />
+          <SectionSubtitle
+            Text={t('testimonials.label')}
+            className="mx-auto"
+          />
           <HeaderTitle
-            text="Real Words from Happy Customers"
+            text={t('testimonials.title')}
             className="mx-auto"
           />
         </div>
@@ -46,14 +54,15 @@ const TestimonialsSection = () => {
           opts={{
             align: 'start',
             loop: true,
-            dragFree: true, 
-            watchDrag: true, 
+            dragFree: true,
+            watchDrag: true,
+            direction: locale === 'ar' ? 'rtl' : 'ltr',
           }}
           plugins={[plugin]}
           onMouseEnter={() => plugin.stop()}
           onMouseLeave={() => plugin.play()}
-          onMouseUp={() => plugin.play()} 
-          onTouchEnd={() => plugin.play()} 
+          onMouseUp={() => plugin.play()}
+          onTouchEnd={() => plugin.play()}
           className="w-full"
         >
           {/* Testimonials */}
@@ -70,7 +79,7 @@ const TestimonialsSection = () => {
                       alt={testimonial.name}
                       width={96}
                       height={96}
-                      draggable={false} 
+                      draggable={false}
                       className="w-24 h-24 rounded-full object-cover border-4 border-border-inverse"
                     />
                   </div>
