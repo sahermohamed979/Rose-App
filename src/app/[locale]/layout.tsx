@@ -6,7 +6,10 @@ import { hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+
 import '../globals.css';
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { Toaster } from '@/shared/components/ui/sonner';
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
@@ -57,6 +60,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
       className={cn(
         'h-full',
         'antialiased',
@@ -67,7 +71,10 @@ export default async function LocaleLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

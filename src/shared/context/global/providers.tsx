@@ -2,6 +2,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactQueryProvider from './providers/react-query-providers';
 import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from './providers/ThemeProvider';
+import AuthProvider from './providers/auth-provider';
 
 export default function Providers({
   children,
@@ -14,11 +15,11 @@ export default function Providers({
       <NextIntlClientProvider>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <AuthProvider>{children}</AuthProvider>{' '}
         </ThemeProvider>
       </NextIntlClientProvider>
     </ReactQueryProvider>
