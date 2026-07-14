@@ -15,7 +15,7 @@ export default function Providers({
       <NextIntlClientProvider>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
