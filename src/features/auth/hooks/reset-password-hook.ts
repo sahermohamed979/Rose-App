@@ -7,14 +7,17 @@ import { useMutation } from '@tanstack/react-query';
 import { resetPassword } from '../apis/forgot-reset-password-action';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function useResetPassword(token: string) {
+export default function useResetPassword() {
   // TRANSLATIONS
   const t = useTranslations('forgotPw');
-  // ROUTER
 
+  // searchPrams
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+
   //schema
   const schema = resetPasswordSchema(t);
   // FORM
@@ -39,28 +42,28 @@ export default function useResetPassword(token: string) {
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: ResetPasswordInput) => {
       // check if the token is valid
-      if (!token) {
-        throw new Error(t('forgotPw.step3.linkExpiredOrInvalid'));
-      }
 
+      if (!token) {
+        throw new Error(t('step3.linkExpiredOrInvalid'));
+      }
       // call the reset password api
       const response = await resetPassword(token, values);
       // check if the response is not success
       if (!response.status) {
         throw new Error(response.message);
       }
+      console.log('response: ', response);
 
       return response;
     },
 
     onSuccess: () => {
-      toast.success(t('forgotPw.step3.passwordResetSuccess'));
-      router.push('/login');
+      toast.success(t('step3.passwordResetSuccess'));
+
+      router.replace('/');
     },
     onError: (error) => {
-      toast.error(
-        error.message ?? t('forgotPw.step3.linkExpiredOrInvalid')
-      );
+      toast.error(error.message ?? t('step3.linkExpiredOrInvalid'));
     },
   });
 
