@@ -20,6 +20,13 @@
     "delete": "حذف",
     "confirm": "تأكيد"
   },
+  "pagination": {
+    "previous": "السابق",
+    "next": "التالي",
+    "first": "الصفحة الأولى",
+    "last": "الصفحة الأخيرة",
+    "goToPage": "انتقل إلى الصفحة {page}"
+  },
   "auth": {
     "switchLang": "English",
     "langLabel": "التحويل إلى الإنجليزية",
