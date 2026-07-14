@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl';
 import ResetPasswordForm from '../components/reset-password-form';
 import ForgetTittles from '../components/forgot-password-title';
 import { Link } from '@/i18n/navigation';
+import SkeletonsResetPassword from '@/features/auth/skeletons/skeletons-reset-password';
+import { Suspense } from 'react';
 
 export default function ResetPasswordScreen() {
   const t = useTranslations();
@@ -13,7 +15,9 @@ export default function ResetPasswordScreen() {
         description={t('forgotPw.step3.subtitle')}
       />
       {/* form */}
-      <ResetPasswordForm />
+      <Suspense fallback={<SkeletonsResetPassword />}>
+        <ResetPasswordForm />
+      </Suspense>
       {/* footer  */}
       <div className="text-center text-sm  border-t mt-9">
         <span className=" text-sm mt-6 inline-block font-medium text-text-plain   ">

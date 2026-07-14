@@ -96,7 +96,6 @@ export const resetPassword = async (
         message: data.message || 'Failed to reset password',
       };
     }
-    console.log(data);
     return data;
   } catch (error) {
     return {
