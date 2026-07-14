@@ -46,15 +46,15 @@ const AboutSection = () => {
 
       {/* About*/}
       <div className="w-full md:w-1/2">
-        <SectionSubtitle Text="Home" className="mx-auto" />
-
+        <SectionSubtitle Text="About" className="mx-auto" />
+        {/* Title */}
         <h2 className="text-3xl md:text-4xl text-text-primary font-bold leading-snug mb-5">
           Delivering the{' '}
           <span className="text-text-secondary">Finest</span> Gift
           Boxes for Your{' '}
           <span className="text-text-secondary">Special</span> Moments
         </h2>
-
+        {/* Description */}
         <p className="text-text-soft text-base leading-relaxed mb-8 font-normal">
           Make every moment memorable with our premium gift boxes.
           Carefully curated and beautifully packaged, each box is
@@ -63,7 +63,7 @@ const AboutSection = () => {
           our gift boxes are crafted to leave a lasting impression —
           because thoughtful gifting starts here.
         </p>
-
+        {/* Button */}
         <Button
           className="bg-bg-primary-saturated text-text-inverse mb-5 text-base font-normal"
           variant="default"

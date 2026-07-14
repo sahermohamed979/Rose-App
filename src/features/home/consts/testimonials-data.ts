@@ -1,6 +1,5 @@
 import { StaticImageData } from 'next/image';
 
-// استدعاء صور العملاء (عدل المسارات للصور اللي عندك)
 import avatar1 from '@/shared/assets/images/Testominail(1).png';
 import avatar2 from '@/shared/assets/images/Testominail(2).png';
 import avatar3 from '@/shared/assets/images/Testominail(3).png';
@@ -19,7 +18,7 @@ export const testimonialsData: Testimonial[] = [
     id: 1,
     name: 'Jake Miller',
     avatar: avatar1,
-    rating: 4, // 4 نجوم مليانة وواحدة فاضية زي التصميم
+    rating: 5, 
     text: "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
     date: 'January 12, 2025',
   },
@@ -35,7 +34,7 @@ export const testimonialsData: Testimonial[] = [
     id: 3,
     name: 'Max Turner',
     avatar: avatar3,
-    rating: 4,
+    rating: 3,
     text: 'The team truly cares about every order. I always feel confident when I buy flowers from here. The checkout process was sup...',
     date: 'January 12, 2025',
   },
