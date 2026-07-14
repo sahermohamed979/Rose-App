@@ -166,5 +166,32 @@
     "error": "Error",
     "warning": "Warning",
     "info": "Info"
+  },
+  "footer": {
+    "logo": {
+      "title": "Rose E-Commerce App",
+      "copyright": "All rights reserved | 2025"
+    },
+    "nav": {
+      "title": "Discover our website",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "faq": "FAQs"
+    },
+    "newsletter": {
+      "title1": "Get",
+      "titleHighlight": "20%",
+      "title2": "Off Discount Coupon",
+      "subtitle": "By subscribing to our newsletter",
+      "emailPlaceholder": "Enter Your Email",
+      "subscribe": "Subscribe",
+      "successMessage": "Successfully subscribed!"
+    }
   }
 }
