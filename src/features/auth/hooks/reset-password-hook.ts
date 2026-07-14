@@ -52,7 +52,6 @@ export default function useResetPassword() {
       if (!response.status) {
         throw new Error(response.message);
       }
-      console.log('response: ', response);
 
       return response;
     },

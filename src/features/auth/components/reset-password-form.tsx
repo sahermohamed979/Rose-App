@@ -10,23 +10,19 @@ import { Input } from '@/shared/components/ui/input';
 import { Button } from '@/shared/components/ui/button';
 import { Eye, EyeOff, Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
 import useResetPassword from '../hooks/reset-password-hook';
 import { useState } from 'react';
 
 export default function ResetPasswordForm() {
   // TRANSLATIONS
   const t = useTranslations();
-  // PARAMS to get the token form url
-  const params = useParams();
-  const token = params.token as string;
   // STATE for showing password or not
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState(false);
-  // HOOK to get the control, handleSubmit, errors, onSubmit, isPending
+  // custom hook
   const { control, handleSubmit, errors, onSubmit, isPending } =
-    useResetPassword(token);
+    useResetPassword();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
