@@ -3,7 +3,7 @@ import { forgotPassword } from '../apis/forgot-reset-password-action';
 import { EmailInput } from '../types/forget-reset-password-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { emailSchema } from '../schemas/forget-password-schema';
+import { forgotPasswordEmailSchema } from '../schemas/forget-password-schema';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
@@ -16,7 +16,7 @@ export function useForgetPassword() {
   const [email, setEmail] = useState('');
 
   //schema
-  const schema = emailSchema(t);
+  const schema = forgotPasswordEmailSchema(t);
   // hook form
 
   const {
@@ -31,12 +31,16 @@ export function useForgetPassword() {
 
   // Submit Email mutation
   const onSubmitEmail = async (values: EmailInput) => {
-    mutate(values);
+    const body = {
+      ...values,
+      redirectUrl: `${window.location.origin}/reset-password`,
+    };
+    mutate(body);
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: EmailInput) => {
-      const response = await forgotPassword(values);
+    mutationFn: async (body: EmailInput) => {
+      const response = await forgotPassword(body);
 
       if (!response.status) {
         throw new Error(response.message);

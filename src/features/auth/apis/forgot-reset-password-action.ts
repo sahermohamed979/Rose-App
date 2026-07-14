@@ -1,22 +1,23 @@
 'use server';
 
 import { HEADERS } from '@/shared/context/api.constants';
-import { emailSchema } from '../schemas/forget-password-schema';
+import { forgotPasswordEmailSchema } from '../schemas/forget-password-schema';
 import {
-  emailInput,
+  EmailInput,
   ForgetResponse,
   ResetPasswordInput,
 } from '../types/forget-reset-password-types';
 import { resetPasswordSchema } from '../schemas/reset-password-schema';
-
+import { getTranslations } from 'next-intl/server';
 // api call to send the email to the backend
-export const forgotPassword = async (email: emailInput) => {
+export const forgotPassword = async (email: EmailInput) => {
+  //
+  const t = await getTranslations('forgotPw');
   // validate the email
-  const result = emailSchema.safeParse(email);
-
+  const result = forgotPasswordEmailSchema(t).safeParse(email);
   if (!result.success) {
     return {
-      success: false,
+      status: false,
       message: result.error.message,
     };
   }
@@ -35,12 +36,10 @@ export const forgotPassword = async (email: emailInput) => {
 
     if (!data.status) {
       return {
-        success: false,
+        status: false,
         message: data.message || 'Failed to send email',
-        status: data.status,
       };
     }
-
     return data;
   } catch (error) {
     return {
@@ -60,16 +59,16 @@ export const resetPassword = async (
   // check if the token is valid
   if (!token) {
     return {
-      success: false,
+      status: false,
       message: 'Link expired or invalid',
     };
   }
+  const t = await getTranslations('forgotPw');
   // validate the reset password form
-  const result = resetPasswordSchema.safeParse(values);
-
+  const result = resetPasswordSchema(t).safeParse(values);
   if (!result.success) {
     return {
-      success: false,
+      status: false,
       message: result.error.message,
     };
   }
@@ -93,15 +92,15 @@ export const resetPassword = async (
 
     if (!data.status) {
       return {
-        success: false,
+        status: false,
         message: data.message || 'Failed to reset password',
-        status: data.status,
       };
     }
+    console.log(data);
     return data;
   } catch (error) {
     return {
-      success: false,
+      status: false,
       message:
         error instanceof Error
           ? error.message

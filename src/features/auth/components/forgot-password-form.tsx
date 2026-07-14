@@ -10,7 +10,7 @@ import { Input } from '@/shared/components/ui/input';
 import { LoaderCircle, MoveRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Controller } from 'react-hook-form';
-import ForgotPasswordTittles from './forgot-password-tittle';
+import ForgotPasswordTitles from './forgot-password-title';
 import { useForgetPassword } from '../hooks/forgot-password-hook';
 
 export default function ForgotPasswordForm() {
@@ -34,7 +34,7 @@ export default function ForgotPasswordForm() {
       {/* Step 1: send   email  */}
       {step === 1 && (
         <>
-          <ForgotPasswordTittles
+          <ForgotPasswordTitles
             title={t('forgotPw.step1.title')}
             description={t('forgotPw.step1.subtitle')}
           />
@@ -104,7 +104,7 @@ export default function ForgotPasswordForm() {
       {step === 2 && (
         <div className="flex-col space-y-3   ">
           <div className="flex items-center gap-3">
-            <ForgotPasswordTittles
+            <ForgotPasswordTitles
               title={t('forgotPw.step2.title')}
               description={t('forgotPw.step2.subtitle')}
               email={email}

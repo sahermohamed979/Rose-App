@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { emailSchema } from '../schemas/forget-password-schema';
+import { forgotPasswordEmailSchema } from '../schemas/forget-password-schema';
 import { resetPasswordSchema } from '../schemas/reset-password-schema';
 
 interface ForgetResponseSuccess {
@@ -15,14 +15,16 @@ interface ValidationError {
 
 interface ForgetResponseError {
   status: false;
-  code: number;
   message: string;
-  errors: ValidationError[];
+  code?: number;
+  errors?: ValidationError[];
 }
 export type ForgetResponse =
   | ForgetResponseSuccess
   | ForgetResponseError;
-export type EmailInput = z.infer<ReturnType<typeof emailSchema>>;
+export type EmailInput = z.infer<
+  ReturnType<typeof forgotPasswordEmailSchema>
+>;
 export type ResetPasswordInput = z.infer<
   ReturnType<typeof resetPasswordSchema>
 >;

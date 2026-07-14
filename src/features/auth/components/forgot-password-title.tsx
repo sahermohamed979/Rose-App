@@ -6,7 +6,7 @@ interface AuthTitleProps {
   icon?: boolean;
   action?: () => void;
 }
-export default function ForgotPasswordTittles({
+export default function ForgotPasswordTitles({
   title,
   description,
   email,

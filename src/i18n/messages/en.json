@@ -50,7 +50,9 @@
       "emailSentSuccess": "Reset link sent successfully",
       "hint": "Don’t have an account yet? ",
       "register": " Create one now!",
-      "emailSentError": "Something went wrong. Please try again"
+      "emailSentError": "Something went wrong. Please try again",
+      "validEmail": "Please enter a valid email",
+      "emailRequired": "Email is required"
     },
     "step2": {
       "title": "Password Reset Sent",
