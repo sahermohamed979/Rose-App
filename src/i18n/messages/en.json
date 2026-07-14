@@ -20,6 +20,13 @@
     "delete": "Delete",
     "confirm": "Confirm"
   },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "first": "First page",
+    "last": "Last page",
+    "goToPage": "Go to page {page}"
+  },
   "auth": {
     "switchLang": "العربية",
     "langLabel": "Switch to Arabic",
