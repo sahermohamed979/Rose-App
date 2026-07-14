@@ -6,6 +6,7 @@ import { hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+
 import '../globals.css';
 import { Toaster } from '@/shared/components/ui/sonner';
 import HeaderWrapper from '@/features/home/components/header-wrapper';

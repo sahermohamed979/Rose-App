@@ -10,6 +10,7 @@ import {
   XIcon,
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
+
 const toastBase =
   'cn-toast  flex  min-h-[53px] items-center gap-3 rounded-lg border px-4 py-3 shadow-[var(--shadow-subtle-sm)]';
 

@@ -22,7 +22,7 @@ const buttonVariants = cva(
           'bg-transparent text-text-plain  enabled:hover:bg-bg-soft data-[hover=true]:bg-bg-soft dark:disabled:bg-bg-muted dark:enabled:text-text-plain  dark:enabled:bg-transparent dark:enabled:hover:bg-bg-soft dark:data-[hover=true]:bg-bg-soft',
         destructive:
           'bg-bg-danger text-text-inverse enabled:hover:bg-bg-danger-saturated data-[hover=true]:bg-bg-danger-saturated dark:disabled:bg-bg-muted',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'text-primary underline-offset-4 hover:underline ',
       },
       size: {
         default:
