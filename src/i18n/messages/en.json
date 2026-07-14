@@ -114,6 +114,53 @@
       "accountCreated": "Account created successfully!"
     }
   },
+  "forgotPw": {
+    "step1": {
+      "title": "Forgot Password?",
+      "subtitle": "Worry not, we’ll send you instructions to help you reset it.",
+      "next": "Next",
+      "emailLabel": "Email",
+      "emailSentSuccess": "Reset link sent successfully",
+      "hint": "Don’t have an account yet? ",
+      "register": " Create one now!",
+      "emailSentError": "Something went wrong. Please try again",
+      "validEmail": "Please enter a valid email",
+      "emailRequired": "Email is required"
+    },
+    "step2": {
+      "title": "Password Reset Sent",
+      "subtitle": "We have sent a password reset link to:",
+      "description": "Please check your inbox and follow the instructions to reset your password.",
+      "description2": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+      "help": "Need help? ",
+      "contact": "Contact us"
+    },
+    "step3": {
+      "title": "Create new password",
+      "subtitle": "Set a strong password to secure your account.",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "submit": "Reset Password",
+      "passwordResetSuccess": "Your password has been successfully reset.",
+      "passwordResetError": "Something went wrong. Please try again",
+      "linkExpiredOrInvalid": "Link expired or invalid"
+    },
+
+    "emailSchema": {
+      "emailRequired": "Email is required",
+      "validEmail": "Please enter a valid email"
+    },
+    "passwordSchema": {
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "passwordUppercase": "Password must include at least one uppercase letter",
+      "passwordLowercase": "Password must include at least one lowercase letter",
+      "passwordNumber": "Password must include at least one number",
+      "passwordSpecialCharacter": "Password must include at least one special character",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDoNotMatch": "Passwords do not match"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
