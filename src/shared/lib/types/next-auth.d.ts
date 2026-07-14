@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
-import { JWT } from 'next-auth/jwt';
+import { IUser } from './api';
 
 declare module 'next-auth' {
   interface User {
-    user: User;
+    user: IUser;
     token: string;
+    remember?: boolean;
   }
 
   interface Session {
@@ -14,7 +14,7 @@ declare module 'next-auth' {
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    user: User;
+    user: IUser;
     token: string;
   }
 }
