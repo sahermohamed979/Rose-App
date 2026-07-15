@@ -177,6 +177,9 @@
   "header": {
     "searchPlaceholder": "What awesome gift are you looking for?",
     "headerLogin": "Login",
+    "deliver": "Deliver to:",
+    "country": "Cairo",
+    "hello": "Hello",
     "home": "home",
     "products": "products",
     "occasions": "occasions",

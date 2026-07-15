@@ -9,7 +9,6 @@ import { setRequestLocale } from 'next-intl/server';
 
 import '../globals.css';
 import { Toaster } from '@/shared/components/ui/sonner';
-import HeaderWrapper from '@/features/home/components/header-wrapper';
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
@@ -72,7 +71,6 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>
-          <HeaderWrapper />
           {children}
           <Toaster />
         </Providers>
