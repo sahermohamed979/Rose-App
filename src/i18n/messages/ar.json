@@ -176,11 +176,14 @@
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
+    "deliver": "توصيل الي :",
+    "country": "القاهره",
+    "hello": "مرحبا",
     "home": "الرئيسة",
     "products": "المنتجات",
     "occasions": "المناسبات",
-    "categories": "التصنيفات",
+    "categories": "الفئات",
     "contact": "تواصل معنا",
-    "about": "حول"
+    "about": " حول الموقع"
   }
 }
