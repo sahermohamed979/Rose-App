@@ -5,10 +5,7 @@ interface StyledHeadingProps {
   className?: string;
 }
 
-const HeaderTitle: React.FC<StyledHeadingProps> = ({
-  text,
-  className = '',
-}) => {
+function HeaderTitle({ text, className = '' }: StyledHeadingProps) {
   return (
     <div className={`relative w-max py-2 ${className}`}>
       {/* Pill Background */}
@@ -23,6 +20,6 @@ const HeaderTitle: React.FC<StyledHeadingProps> = ({
       </h2>
     </div>
   );
-};
+}
 
 export default HeaderTitle;

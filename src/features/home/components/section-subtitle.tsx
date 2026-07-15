@@ -5,10 +5,10 @@ interface SectionSubtitleProps {
   className?: string;
 }
 
-const SectionSubtitle = ({
+function SectionSubtitle({
   Text,
   className = '',
-}: SectionSubtitleProps) => {
+}: SectionSubtitleProps) {
   return (
     <span
       className={`text-text-secondary font-bold tracking-[25%] text-sm uppercase block mb-2 ${className}`}
@@ -16,6 +16,6 @@ const SectionSubtitle = ({
       {Text}
     </span>
   );
-};
+}
 
 export default SectionSubtitle;

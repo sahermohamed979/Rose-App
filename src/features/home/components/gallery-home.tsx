@@ -5,9 +5,10 @@ import HeaderTitle from './headr-title';
 import SectionSubtitle from './section-subtitle';
 import { useTranslations } from 'next-intl';
 
-const GallerySection = () => {
+function GallerySection() {
   // Translation
   const t = useTranslations('home');
+
   return (
     <section className="max-w-7xl mx-auto py-16 px-5 font-sans">
       {/* Title*/}
@@ -38,6 +39,6 @@ const GallerySection = () => {
       </div>
     </section>
   );
-};
+}
 
 export default GallerySection;

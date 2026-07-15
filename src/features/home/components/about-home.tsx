@@ -10,9 +10,11 @@ import SectionSubtitle from './section-subtitle';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 
-const AboutSection = () => {
-  // Hookss
+function AboutSection() {
+  // Translations
   const t = useTranslations('home.about');
+
+  // Hooks
   const router = useRouter();
 
   // Data
@@ -33,6 +35,7 @@ const AboutSection = () => {
           <div className="absolute -bottom-0.5 rotate-3 -left-6 rtl:left-auto rtl:-right-6 w-full h-101 border-5 border-bg-primary-saturated rounded-[50px_120px_120px_120px] z-0"></div>
           <Image
             src={img3}
+            placeholder="blur"
             alt="Purple Gift Box"
             className="relative w-full h-96 aspect-3/4 object-cover rounded-[50px_120px_120px_120px] z-10"
           />
@@ -42,11 +45,13 @@ const AboutSection = () => {
         <div className="flex flex-row sm:flex-col gap-6 w-full sm:w-2/5">
           <Image
             src={img1}
+            placeholder="blur"
             alt="Wrapped Gift"
             className="w-full aspect-square rounded-full object-cover"
           />
           <Image
             src={img2}
+            placeholder="blur"
             alt="Gift with Balloons"
             className="w-full aspect-4/3 rounded-[50px_100px_100px_50px] object-cover"
           />
@@ -100,6 +105,6 @@ const AboutSection = () => {
       </div>
     </section>
   );
-};
+}
 
 export default AboutSection;
