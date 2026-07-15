@@ -1,14 +1,10 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-/**
- * FooterLogo Component
- * Displays the brand logo and copyright information in the footer.
- */
 export default function FooterLogo() {
+  // Translate footer logo
   const t = useTranslations('footer.logo');
 
-  // --- Render ---
   return (
     <div className="flex flex-col items-center text-center lg:items-start lg:text-left gap-4">
       {/* Brand Logo Container */}

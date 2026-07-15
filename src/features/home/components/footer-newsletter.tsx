@@ -30,14 +30,13 @@ export default function FooterNewsletter() {
     defaultValues: { email: '' },
   });
 
-  // --- Handlers ---
+  // ---Submit Handlers ---
   const onSubmit = (values: SubscribeFormValues) => {
     subscribe(values, {
       onSuccess: () => reset(),
     });
   };
 
-  // --- Render ---
   return (
     <div className="flex flex-col gap-4">
       {/* Headings */}
