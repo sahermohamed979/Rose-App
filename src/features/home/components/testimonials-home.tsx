@@ -12,6 +12,7 @@ import SectionSubtitle from './section-subtitle';
 import { testimonialsData } from '../consts/testimonials-data';
 import HeaderTitle from './headr-title';
 import { useLocale, useTranslations } from 'next-intl';
+import { cn } from '@/shared/lib/utils/utils';
 
 // Data
 const extendedTestimonials = [
@@ -19,7 +20,7 @@ const extendedTestimonials = [
   ...testimonialsData,
 ];
 
-const TestimonialsSection = () => {
+function TestimonialsSection() {
   // Translation
   const t = useTranslations('home');
   const locale = useLocale();
@@ -95,11 +96,12 @@ const TestimonialsSection = () => {
                       <Star
                         key={i}
                         size={16}
-                        className={` shrink-0 ${
+                        className={cn(
+                          'shrink-0',
                           i < testimonial.rating
                             ? 'fill-[#FBA707] text-[#ffb800]'
-                            : ' text-[#FBA707]'
-                        }`}
+                            : 'text-[#FBA707]'
+                        )}
                       />
                     ))}
                   </div>
@@ -121,6 +123,6 @@ const TestimonialsSection = () => {
       </div>
     </section>
   );
-};
+}
 
 export default TestimonialsSection;
