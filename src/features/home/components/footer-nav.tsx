@@ -22,7 +22,6 @@ export default function FooterNav() {
     { label: t('faq'), href: '/faq' },
   ];
 
-  // --- Render ---
   return (
     <div className="flex flex-col gap-3">
       {/* Title */}
