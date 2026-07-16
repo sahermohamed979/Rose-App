@@ -69,7 +69,7 @@ export default async function LocaleLayout({
         locale === 'ar' ? 'font-tajawal' : 'font-sans'
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col ">
         <Providers>
           {children}
           <Toaster />
