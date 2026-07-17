@@ -176,11 +176,21 @@
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
-    "home": "الرئيسة",
-    "products": "المنتجات",
-    "occasions": "المناسبات",
-    "categories": "التصنيفات",
-    "contact": "تواصل معنا",
-    "about": "حول"
+    "deliver": "توصيل الي :",
+    "country": "القاهره",
+    "hello": "مرحبا",
+    "searchResult": "نتائج البحث",
+    "suggestedProduct": "منتجات قد تعجبك",
+    "noProducts": "لم يتم العثور علي منتجات",
+    "searchSchema": "البحث مطلوب",
+    "searchError": "فشل البحث. حاول مجدداً.",
+    "subHeader": {
+      "home": "الرئيسة",
+      "products": "المنتجات",
+      "occasions": "المناسبات",
+      "categories": "الفئات",
+      "contact": "تواصل معنا",
+      "about": " حول الموقع"
+    }
   }
 }
