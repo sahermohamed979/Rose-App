@@ -14,7 +14,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function SubHeader() {
-  const t = useTranslations('header');
+  const t = useTranslations('header.subHeader');
   const pathname = usePathname();
   // sub header links
   const navLinks = [
@@ -43,7 +43,7 @@ export default function SubHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex flex-row gap-2 p-3 transition-all ${
+              className={`flex flex-row gap-2 p-3 text-[16px] transition-all ${
                 isActive
                   ? ' border-soft-pink-200 border-b-2  text-soft-pink-200 dark:border-maroon-800 dark:text-maroon-800'
                   : ' text-text-inverse'
