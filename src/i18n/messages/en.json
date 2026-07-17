@@ -180,11 +180,18 @@
     "deliver": "Deliver to:",
     "country": "Cairo",
     "hello": "Hello",
-    "home": "home",
-    "products": "products",
-    "occasions": "occasions",
-    "categories": "categories",
-    "contact": "contact",
-    "about": "about"
+    "searchResult": "Search Result",
+    "suggestedProduct": "Products you may like",
+    "noProducts": "No products found",
+    "searchSchema": "Search query is required",
+    "searchError": "Search failed. Try again",
+    "subHeader": {
+      "home": "home",
+      "products": "products",
+      "occasions": "occasions",
+      "categories": "categories",
+      "contact": "contact",
+      "about": "about"
+    }
   }
 }
