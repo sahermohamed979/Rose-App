@@ -1,3 +1,4 @@
+'use client';
 import { usePathname } from '@/i18n/navigation';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import { Input } from '@/shared/components/ui/input';

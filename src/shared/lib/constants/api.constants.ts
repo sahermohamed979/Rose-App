@@ -6,3 +6,4 @@ export const HEADERS = {
     Authorization: `Bearer ${token}`,
   }),
 };
+export const DEFAULT_PAGINATION = 6;
