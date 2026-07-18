@@ -18,20 +18,24 @@ export default function SubHeader() {
   const pathname = usePathname();
   // sub header links
   const navLinks = [
-    { href: '/', label: 'home', icon: <Home /> },
-    { href: '/products', label: 'products', icon: <Gift /> },
+    { href: '/', label: 'subHeaderHome', icon: <Home /> },
+    { href: '/products', label: 'subHeaderProducts', icon: <Gift /> },
     {
       href: ' /categories',
-      label: 'categories',
+      label: 'subHeaderCategories',
       icon: <ClipboardList />,
     },
     {
       href: '/occasions',
-      label: 'occasions',
+      label: 'subHeaderOccasions',
       icon: <PartyPopper />,
     },
-    { href: '/contact', label: 'contact', icon: <Headset /> },
-    { href: '/about', label: 'about', icon: <Info /> },
+    {
+      href: '/contact',
+      label: 'subHeaderContact',
+      icon: <Headset />,
+    },
+    { href: '/about', label: 'subHederAbout', icon: <Info /> },
   ];
   return (
     <div>

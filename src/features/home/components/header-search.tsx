@@ -1,70 +1,46 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { fetchSuggestedProducts } from '../apis/search-action';
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import {
+  fetchSuggestedProducts,
+  searchProducts,
+} from '../apis/search-action';
 import { useDebounce } from '../hooks/use-debounce';
 import { Input } from '@/shared/components/ui/input';
-import { SearchIcon } from 'lucide-react';
+import { SearchIcon, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { SearchSkeleton } from '../skeletons/skeletons-search';
 import Link from 'next/link';
-
-interface Product {
-  id: string;
-  title: string;
-  price: number;
-  discountPrice?: number;
-  rating: number;
-}
+import { Product } from '../types/search-types';
+import Image from 'next/image';
 
 export default function HeaderSearch() {
-  // States
+  //  search input state
   const [query, setQuery] = useState('');
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  // Search dropdown visibility state
   const [isFocused, setIsFocused] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
+  // Debounced search query for API performance
   const debouncedQuery = useDebounce(query, 300);
-  // translations
+  // Translations
   const t = useTranslations('header');
 
-  // Fetch initial data
-  useEffect(() => {
-    const loadInitialData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetchSuggestedProducts();
-        if (response?.success) {
-          setAllProducts(response.data);
-        } else {
-          setError(t('searchError'));
-        }
-      } catch (err) {
-        setError(t('searchError'));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadInitialData();
-  }, [t]);
-
-  // Handle product filtering
-  const results = useMemo(() => {
-    if (debouncedQuery.trim().length < 2) {
-      return allProducts;
-    }
-
-    return allProducts.filter((product) =>
-      product.title
-        .toLowerCase()
-        .includes(debouncedQuery.toLowerCase())
-    );
-  }, [debouncedQuery, allProducts]);
-
+  // Fetch data using React Query
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['products', debouncedQuery],
+    queryFn: () =>
+      debouncedQuery.length >= 2
+        ? searchProducts(debouncedQuery)
+        : fetchSuggestedProducts(),
+    enabled: isFocused,
+  });
+  // search filter
+  const results = (data?.data || []).filter((product) =>
+    product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+  );
   return (
     <div className="relative w-full grow">
+      {/* Search input area */}
       <div className="relative min-w-50 flex items-center">
         <div className="absolute ps-3 flex items-center pointer-events-none">
           <SearchIcon className="w-5 h-5 text-text-muted" />
@@ -80,19 +56,19 @@ export default function HeaderSearch() {
         />
       </div>
 
-      {/* Search results dropdown */}
+      {/* Results dropdown */}
       {isFocused && (
         <div className="absolute top-full mt-2 w-full bg-bg-plain shadow-lg border rounded-lg z-50">
-          {error ? (
+          {isError ? (
             <div className="p-4 text-center text-text-danger text-sm font-bold">
-              {error}
+              {t('searchError')}
             </div>
           ) : isLoading ? (
             <SearchSkeleton />
           ) : (
             <>
-              <div className="p-2 text-sm text-text-soft font-bold border-b">
-                {query.length > 0
+              <div className="p-2 text-sm text-text-primary font-bold border-b">
+                {debouncedQuery.length >= 2
                   ? t('searchResult')
                   : t('suggestedProduct')}
               </div>
@@ -102,38 +78,65 @@ export default function HeaderSearch() {
                   <Link
                     href={`/products/${product.id}`}
                     key={product.id}
-                    className="block hover:bg-bg-subtle transition-colors border-b"
+                    className="flex items-center gap-4 p-4 hover:bg-bg-subtle transition-colors border-b"
                     onClick={() => setIsFocused(false)}
                   >
-                    <div className="p-4 flex items-center justify-between">
-                      <span className="font-semibold text-text-plain truncate w-2/3">
-                        {product.title}
-                      </span>
+                    <div className="w-16 h-16 shrink-0">
+                      <Image
+                        width={80}
+                        height={80}
+                        src={product.cover}
+                        alt={product.title}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                    </div>
 
-                      <div className="flex flex-col items-end gap-1">
-                        <div className="flex items-center gap-2 text-sm">
-                          <span
-                            className={
-                              product.discountPrice
-                                ? 'line-through text-text-subtle text-xs'
-                                : 'font-bold text-text-plain'
-                            }
-                          >
+                    {/* Product details */}
+                    <div className="grow flex flex-col justify-center">
+                      <h3 className="font-semibold text-sm text-text-plain">
+                        {product.title
+                          .split(
+                            new RegExp(`(${debouncedQuery})`, 'gi')
+                          )
+                          .map((part, i) =>
+                            part.toLowerCase() ===
+                            debouncedQuery.toLowerCase() ? (
+                              <span
+                                key={i}
+                                className="text-text-secondary"
+                              >
+                                {part}
+                              </span>
+                            ) : (
+                              part
+                            )
+                          )}
+                      </h3>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-text-plain text-lg">
+                          {product.discountPrice || product.price} EGP
+                        </span>
+                        {product.discountPrice && (
+                          <span className="line-through text-text-subtle text-xs">
                             {product.price} EGP
                           </span>
-                          {product.discountPrice && (
-                            <span className="text-text-danger font-bold">
-                              {product.discountPrice} EGP
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center text-xs text-yellow-500">
-                          ★{' '}
-                          <span className="ms-1 text-text-default">
-                            {product.rating}
-                          </span>
-                        </div>
+                        )}
                       </div>
+                    </div>
+
+                    {/* Rating display */}
+                    <div className="flex items-center gap-1 text-sm shrink-0">
+                      <Star className="w-4 h-4 fill-text-warning text-text-warning" />
+                      <span className="text-text-plain font-medium">
+                        {t('searchRating')}{' '}
+                        <span className="font-bold">
+                          {product.rating.toFixed(1)}/5
+                        </span>
+                        <span className="text-text-info ml-1">
+                          ({product.reviewsCount} {t('productRating')}
+                          )
+                        </span>
+                      </span>
                     </div>
                   </Link>
                 ))
