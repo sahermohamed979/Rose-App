@@ -180,18 +180,20 @@
     "deliver": "Deliver to:",
     "country": "Cairo",
     "hello": "Hello",
-    "searchResult": "Search Result",
-    "suggestedProduct": "Products you may like",
+    "searchResult": "Search Result:",
+    "suggestedProduct": "Products you may like:",
     "noProducts": "No products found",
     "searchSchema": "Search query is required",
     "searchError": "Search failed. Try again",
+    "searchRating": "Rating:",
+    "productRating": "rating",
     "subHeader": {
-      "home": "home",
-      "products": "products",
-      "occasions": "occasions",
-      "categories": "categories",
-      "contact": "contact",
-      "about": "about"
+      "subHeaderHome": "home",
+      "subHeaderProducts": "products",
+      "subHeaderOccasions": "occasions",
+      "subHeaderCategories": "categories",
+      "subHeaderContact": "contact",
+      "subHederAbout": "about"
     }
   }
 }

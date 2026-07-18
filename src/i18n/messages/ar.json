@@ -179,18 +179,20 @@
     "deliver": "توصيل الي :",
     "country": "القاهره",
     "hello": "مرحبا",
-    "searchResult": "نتائج البحث",
-    "suggestedProduct": "منتجات قد تعجبك",
+    "searchResult": ":نتائج البحث",
+    "suggestedProduct": ":منتجات قد تعجبك",
     "noProducts": "لم يتم العثور علي منتجات",
     "searchSchema": "البحث مطلوب",
     "searchError": "فشل البحث. حاول مجدداً.",
+    "searchRating": "التقييم:",
+    "productRating": "تقيم",
     "subHeader": {
-      "home": "الرئيسة",
-      "products": "المنتجات",
-      "occasions": "المناسبات",
-      "categories": "الفئات",
-      "contact": "تواصل معنا",
-      "about": " حول الموقع"
+      "subHeaderHome": "الرئيسة",
+      "subHeaderProducts": "المنتجات",
+      "subHeaderOccasions": "المناسبات",
+      "subHeaderCategories": "الفئات",
+      "subHeaderContact": "تواصل معنا",
+      "subHederAbout": " حول الموقع"
     }
   }
 }
