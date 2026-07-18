@@ -52,6 +52,7 @@ interface IPaginationResponse<T> {
 
 interface SuccessResponseNoPayload {
   status: true;
+  code?: number;
   message?: string;
 }
 

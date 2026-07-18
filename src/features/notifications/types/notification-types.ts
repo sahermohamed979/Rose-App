@@ -1,4 +1,4 @@
-export interface NotificationData {
+export interface NotificationType {
   id: string;
   userId: string;
   type: string;
