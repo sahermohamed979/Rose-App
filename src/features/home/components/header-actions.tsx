@@ -1,12 +1,10 @@
 'use client';
 
-import React from 'react';
 import {
   LocationEdit,
   User,
   ShoppingCart,
   Heart,
-  Bell,
   ChevronDown,
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
@@ -15,6 +13,7 @@ import LangToggle from '@/shared/components/ui/langToggle';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import HeaderSearch from './header-search';
+import NotificationsContainer from '../../notifications/components/notifications-container';
 
 export default function HeaderActions() {
   const { data: session, status } = useSession();
@@ -24,7 +23,6 @@ export default function HeaderActions() {
   // static counts
   const cartCount = '8';
   const favoriteCount = '8';
-  const notificationCount = '8';
 
   return (
     <div className="flex items-center w-full">
@@ -92,14 +90,7 @@ export default function HeaderActions() {
         </Link>
 
         {/* Notifications link */}
-        <Link href="/" className="relative">
-          <Bell className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && (
-            <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-              {notificationCount}
-            </span>
-          )}
-        </Link>
+        <NotificationsContainer status={status} />
 
         {/* Language and Theme toggles */}
         <div className="flex items-center gap-2 border-s ps-4 border-border-muted">

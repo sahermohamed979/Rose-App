@@ -1,27 +1,32 @@
 import {
   DropdownMenu,
-  DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from '@/shared/components/ui/dropdown-menu';
 import { Button } from '@base-ui/react/button';
-import { Check, EllipsisVertical, Trash2 } from 'lucide-react';
-import { NotificationData } from '../../types/notification-types';
+import { EllipsisVertical } from 'lucide-react';
+import { NotificationType } from '../types/notification-types';
 import { Link } from '@/i18n/navigation';
+import { cn } from '@/shared/lib/utils/utils';
+import NotificationButtons from './notification-buttons';
 
 export default function NotificationCard({
-  notification,
+  notificationData,
 }: {
-  notification: NotificationData;
+  notificationData: NotificationType;
 }) {
   return (
-    <div className="w-full flex flex-col px-3 py-2 border-t border-border-soft max-h-[100px] h-auto  ">
+    <div
+      className={cn(
+        `w-full flex flex-col px-3 py-2 border-t border-border-soft max-h-[100px] h-auto`,
+        notificationData.isRead && 'bg-bg-soft'
+      )}
+    >
       <div className="max-w-[304px]">
         <div className=" flex items-center justify-between">
-          <Link href={notification.link}>
+          <Link href={notificationData.link}>
             <h3 className="text-text-plain font-semibold">
-              {notification.title}
+              {notificationData.title}
             </h3>
           </Link>
           <span>
@@ -39,29 +44,15 @@ export default function NotificationCard({
                 }
               />
               <DropdownMenuContent className="w-full p-2.5">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem className=" ">
-                    <Check size={18} />
-                    <span className="text-sm text-text-plain">
-                      Mark as read
-                    </span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem variant="default">
-                    <Trash2
-                      size={18}
-                      className="text-bg-danger-saturated text-sm "
-                    />
-                    <span className="text-sm text-text-plain ">
-                      Delete notification
-                    </span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
+                <NotificationButtons
+                  notificationData={notificationData}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </span>
         </div>
         <p className=" text-text-soft line-clamp-3 text-sm/4.5 overflow-hidden">
-          {notification.message}
+          {notificationData.message}
         </p>
       </div>
     </div>

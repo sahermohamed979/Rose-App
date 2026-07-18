@@ -5,7 +5,7 @@ import {
 } from '@/shared/lib/types/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { DEFAULT_PAGINATION } from '@/shared/lib/constants/api.constants';
-import { NOTIFICATION_OPTIONS } from '../components/notifications/constants/notification-prams';
+import { NOTIFICATION_OPTIONS } from '../constants/notification-prams';
 import { NotificationData } from '../types/notification-types';
 
 export default function UseNotificationList() {
