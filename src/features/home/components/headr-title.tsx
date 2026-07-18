@@ -1,21 +1,18 @@
 import React from 'react';
 
 interface StyledHeadingProps {
-  text: string;
+  text: React.ReactNode;
   className?: string;
 }
 
-const HeaderTitle: React.FC<StyledHeadingProps> = ({
-  text,
-  className = '',
-}) => {
+function HeaderTitle({ text, className = '' }: StyledHeadingProps) {
   return (
     <div className={`relative w-max py-2 ${className}`}>
       {/* Pill Background */}
-      <div className="absolute bottom-1 h-[33%] w-[72%] bg-bg-secondary-faint rounded-r-full -z-10" />
+      <div className="absolute bottom-1 inset-s-0 h-[33%] w-[72%] bg-bg-secondary-faint rounded-e-full -z-10" />
 
       {/* Underline */}
-      <div className="absolute bottom-1 h-1 w-[28%] bg-bg-secondary" />
+      <div className="absolute bottom-1 inset-s-0 h-1 w-[28%] bg-bg-secondary" />
 
       {/* Main Text */}
       <h2 className="text-4xl font-extrabold text-text-primary">
@@ -23,6 +20,6 @@ const HeaderTitle: React.FC<StyledHeadingProps> = ({
       </h2>
     </div>
   );
-};
+}
 
 export default HeaderTitle;
