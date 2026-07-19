@@ -9,7 +9,7 @@ import {
 } from '@/shared/components/ui/tabs';
 import ProductCard from './product-card';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { OccasionType } from '../types/occasions';
 import { ProductType } from '../types/product';
 import {
@@ -19,8 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
+import { Link } from '@/i18n/navigation';
+import { ArrowRightIcon } from 'lucide-react';
 const tabTriggerClassName =
-  'bg-transparent border-none py-0 leading-none enabled:data-active:bg-transparent text-zinc-700 dark:text-text-muted enabled:data-active:text-text-primary enabled:hover:bg-transparent enabled:hover:text-text-primary enabled:data-active:shadow-none enabled:active:shadow-none';
+  'text-base font-medium bg-transparent border-none py-0 leading-none enabled:data-active:bg-transparent text-zinc-700 dark:text-text-muted enabled:data-active:text-text-primary enabled:hover:bg-transparent enabled:hover:text-text-primary enabled:data-active:shadow-none enabled:active:shadow-none';
 
 export default function MostPopular({
   occasions,
@@ -33,7 +35,7 @@ export default function MostPopular({
 }) {
   const t = useTranslations('home');
   const router = useRouter();
-
+  const locale = useLocale();
   // const chosenOcassions = occasions.filter((occasion) => occasion.title === 'Wedding' || occasion.title === 'Anniversary' || occasion.title === 'Birthday' || occasion.title === 'Engagement')
   const hasNoOccasions = occasions.length === 0;
   const selectedOccasion =
@@ -47,7 +49,7 @@ export default function MostPopular({
   // )
 
   return (
-    <div>
+    <div className="mb-[138px]">
       {hasNoOccasions && (
         <>
           <HeaderTitle text={t('mostPopular')} />
@@ -111,11 +113,26 @@ export default function MostPopular({
             value={activeOccasionId}
           >
             {ProductsByOccasion.length > 0 ? (
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
-                {ProductsByOccasion.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
+                  {ProductsByOccasion.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+                <div className="flex justify-end py-3 mt-10">
+                  <Link
+                    href={`/products?occasion=${encodeURIComponent(selectedOccasion.title.toLowerCase())}`}
+                    className="flex items-center gap-2 text-base font-bold text-text-primary"
+                  >
+                    {t('viewAll')}
+                    {locale === 'ar' ? (
+                      <ArrowRightIcon className="w-4 h-4 text-text-primary rotate-180" />
+                    ) : (
+                      <ArrowRightIcon className="w-4 h-4 text-text-primary" />
+                    )}
+                  </Link>
+                </div>
+              </>
             ) : (
               <div className="flex min-h-[180px] items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
                 {t('noProductsAvailable')}
