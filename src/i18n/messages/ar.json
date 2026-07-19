@@ -192,5 +192,20 @@
       "contact": "تواصل معنا",
       "about": " حول الموقع"
     }
+  },
+  "userMenu": {
+    "account": "حسابي",
+    "orders": "طلباتي",
+    "addresses": "عناويني",
+    "dashboard": "لوحة التحكم",
+    "logout": "تسجيل الخروج"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تعيين الكل كمقروء",
+    "clearAll": "حذف الكل",
+    "markRead": "تعيين كمقروء",
+    "delete": "حذف",
+    "empty": "لا توجد إشعارات حتى الآن"
   }
 }

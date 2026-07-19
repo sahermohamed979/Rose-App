@@ -67,7 +67,7 @@ export async function markAllAsRead(req: NextRequest) {
 // mark all as read server action
 export async function markAllAsReadServerAction() {
   const jwt = await getAuthToken();
-  const token = jwt?.token;
+  const token = jwt?.accessToken;
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/mark-all-read`,
@@ -81,6 +81,7 @@ export async function markAllAsReadServerAction() {
 
     const payload: ApiResponse<SuccessResponseNoPayload> =
       await response.json();
+    console.log('payload', payload);
     return payload;
   } catch (error) {
     return error;
@@ -90,7 +91,7 @@ export async function markAllAsReadServerAction() {
 // mark one as read server action
 export async function markOneAsReadServerAction(id: string) {
   const jwt = await getAuthToken();
-  const token = jwt?.token;
+  const token = jwt?.accessToken;
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
@@ -98,12 +99,17 @@ export async function markOneAsReadServerAction(id: string) {
         method: 'PATCH',
         headers: {
           ...HEADERS.authorization(token!),
+          ...HEADERS.jsonBody,
         },
+        body: JSON.stringify({
+          isRead: true,
+        }),
       }
     );
 
     const payload: ApiResponse<SuccessResponseNoPayload> =
       await response.json();
+
     return payload;
   } catch (error) {
     return error;
@@ -112,7 +118,8 @@ export async function markOneAsReadServerAction(id: string) {
 // delete one notification server action
 export async function clearAllNotificationsServerAction() {
   const jwt = await getAuthToken();
-  const token = jwt?.token;
+
+  const token = jwt?.accessToken;
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/clear-all`,
@@ -126,6 +133,30 @@ export async function clearAllNotificationsServerAction() {
 
     const payload: ApiResponse<SuccessResponseNoPayload> =
       await response.json();
+
+    return payload;
+  } catch (error) {
+    return error;
+  }
+}
+// mark one as read server action
+export async function clearOneNotificationServerAction(id: string) {
+  const jwt = await getAuthToken();
+  const token = jwt?.accessToken;
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
+      {
+        method: 'Delete',
+        headers: {
+          ...HEADERS.authorization(token!),
+        },
+      }
+    );
+
+    const payload: ApiResponse<SuccessResponseNoPayload> =
+      await response.json();
+
     return payload;
   } catch (error) {
     return error;
