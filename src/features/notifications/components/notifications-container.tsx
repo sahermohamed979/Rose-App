@@ -38,7 +38,6 @@ export default function NotificationsContainer({
     () => notificationData?.pages?.flatMap((page) => page.data) || [],
     [notificationData]
   );
-  console.log(notificationData);
   // Mark all as read hook
   const { mutate: markAllAsRead } = useMarkAllAsRead();
   // Clear all notifications hook

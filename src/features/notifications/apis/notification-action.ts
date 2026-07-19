@@ -81,7 +81,6 @@ export async function markAllAsReadServerAction() {
 
     const payload: ApiResponse<SuccessResponseNoPayload> =
       await response.json();
-    console.log('payload', payload);
     return payload;
   } catch (error) {
     return error;
