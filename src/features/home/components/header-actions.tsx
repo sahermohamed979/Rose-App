@@ -5,7 +5,6 @@ import {
   User,
   ShoppingCart,
   Heart,
-  ChevronDown,
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
@@ -14,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import HeaderSearch from './header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
+import HeaderDropdown from './header-dropdown';
 
 export default function HeaderActions() {
   const { data: session, status } = useSession();
@@ -48,11 +48,11 @@ export default function HeaderActions() {
               <span className="text-[12px] text-text-default">
                 {t('hello')}
               </span>
-              <p className="text-[14px] font-bold text-text-primary">
+              <span className="text-[14px] font-bold text-text-primary">
                 {session?.user?.firstName}
-              </p>
+              </span>
             </div>
-            <ChevronDown className="w-4 h-4" />
+            <HeaderDropdown name={session?.user?.firstName} />
           </div>
         ) : (
           <div className="flex items-center gap-1 px-2">

@@ -18,46 +18,62 @@ import {
 import { cn } from '@/shared/lib/utils/utils';
 import useMarkAllAsRead from '../hooks/mark-all-read-hook';
 import useClearAllNotifications from '../hooks/clear-notification-all-hook';
+import { useTranslations } from 'next-intl';
 export default function NotificationsContainer({
   status,
 }: {
   status: string;
 }) {
+  // Translation
+  const t = useTranslations();
+  // Notification Hook
   const {
     data: notificationData,
     fetchNextPage: fetchNextNotification,
     hasNextPage: hasNextNotification,
     isPending,
   } = useNotificationList();
+  // Memoize notifications
   const memoNotifications = useMemo(
     () => notificationData?.pages?.flatMap((page) => page.data) || [],
     [notificationData]
   );
+  console.log(notificationData);
+  // Mark all as read hook
   const { mutate: markAllAsRead } = useMarkAllAsRead();
+  // Clear all notifications hook
   const { mutate: clearAllNotifications } =
     useClearAllNotifications();
 
   return (
     <DropdownMenu>
+      {/*  Dropdown menu trigger */}
       <DropdownMenuTrigger
         render={
           <button className="relative">
             <Bell className="w-5 h-5 cursor-pointer" />
             {status === 'authenticated' && (
-              <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
+              <span
+                className={cn(
+                  `absolute -top-2 -right-2 bg-bg-danger text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm`,
+                  notificationData?.pages[0]?.metadata.total === 0 &&
+                    'hidden'
+                )}
+              >
                 {notificationData?.pages[0]?.metadata.total}
               </span>
             )}
           </button>
         }
       />
+      {/*  Dropdown menu content */}
       <DropdownMenuContent
         className={` min-h-[300px] max-h-[571px] w-[336px] p-0 `}
       >
         <div className=" flex flex-col ">
           {/* notification header  */}
           <div className="py-4 px-4 bg-bg-primary-saturated  rounded-t-xl text-text-inverse font-bold text-xl ">
-            Notifications (
+            {t('notifications.title')} (
             {notificationData?.pages[0]?.metadata.total})
           </div>
           {/* filter and sort buttons */}
@@ -75,9 +91,9 @@ export default function NotificationsContainer({
             >
               {' '}
               <BrushCleaning size={18} className="" />
-              clear Notifications
+              {t('notifications.clearAll')}
             </button>
-            <span
+            <button
               onClick={() => markAllAsRead()}
               className={cn(
                 `cursor-pointer flex items-center gap-2 text-text-plain font-semibold text-xs`,
@@ -85,23 +101,25 @@ export default function NotificationsContainer({
                   'text-text-muted cursor-not-allowed'
               )}
             >
-              <CheckCheck size={18} /> mark all as read
-            </span>
+              <CheckCheck size={18} />{' '}
+              {t('notifications.markAllRead')}
+            </button>
           </div>
           {/* notification card  */}
           {isPending ||
             (notificationData?.pages[0]?.metadata.total === 0 ? (
-              <div className="flex-1 flex items-center justify-center">
+              <div className=" flex  h-[224px] items-center justify-center">
                 {' '}
                 <div className="flex flex-col gap-2 items-center">
                   <BellOff size={50} className="text-text-soft" />
                   <h2 className="text-text-soft font-medium text-sm">
-                    No notifications to display.
+                    {t('notifications.empty')}
                   </h2>
                 </div>
               </div>
             ) : (
               <div className="flex-1 ">
+                {/* Infinite scroll component */}
                 <InfiniteScroll
                   className="flex flex-col   justify-items-center [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
                   dataLength={memoNotifications?.length || 0}
