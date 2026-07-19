@@ -29,7 +29,7 @@ export const registerUser = async (
   try {
     // send request to api
     const response = await fetch(
-      `${process.env.NEXT_API_URL}/auth/register`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -59,7 +59,7 @@ export const registerUser = async (
 export const verifyEmail = async (email: string) => {
   // Trigger verification email send
   const response = await fetch(
-    `${process.env.NEXT_API_URL}/auth/send-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/send-email-verification`,
     {
       method: 'POST',
       headers: {
@@ -99,7 +99,7 @@ export const confirmEmailVerification = async (
   }
   // Submit OTP and email for verification
   const response = await fetch(
-    `${process.env.NEXT_API_URL}/auth/confirm-email-verification`,
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/confirm-email-verification`,
     {
       method: 'POST',
       headers: {
