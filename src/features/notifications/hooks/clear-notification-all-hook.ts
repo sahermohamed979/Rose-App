@@ -12,7 +12,6 @@ export default function useClearAllNotifications() {
       queryClient.invalidateQueries({
         queryKey: NOTIFICATION_OPTIONS.list(1, DEFAULT_PAGINATION),
       });
-      console.log('clear all notifications');
     },
   });
   return { mutate };
