@@ -69,8 +69,11 @@ export default function HeaderActions() {
 
       {/* Action icons  */}
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
-        {/* Heart link */}
-        <Link href="/login" className="relative">
+        {/* wish-list link */}
+        <Link
+          href={status === 'authenticated' ? '/wish-list' : '/login'}
+          className="relative"
+        >
           <Heart className="w-5 h-5 cursor-pointer" />
           {status === 'authenticated' && (
             <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
@@ -80,7 +83,10 @@ export default function HeaderActions() {
         </Link>
 
         {/* Cart link */}
-        <Link href="/login" className="relative">
+        <Link
+          href={status === 'authenticated' ? '/cart' : '/login'}
+          className="relative"
+        >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
           {status === 'authenticated' && (
             <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
