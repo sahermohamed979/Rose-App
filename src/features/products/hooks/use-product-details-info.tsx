@@ -18,7 +18,6 @@ export function useProductInfo(
     },
 
     enabled: !!productId,
-    initialData: initialData,
     staleTime: 5 * 60 * 1000,
   });
 }
