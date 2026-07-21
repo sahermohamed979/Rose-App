@@ -35,7 +35,7 @@ export default function SubHeader() {
       label: 'subHeaderContact',
       icon: <Headset />,
     },
-    { href: '/about', label: 'subHederAbout', icon: <Info /> },
+    { href: '/about', label: 'subHeaderAbout', icon: <Info /> },
   ];
   return (
     <div>
@@ -54,7 +54,7 @@ export default function SubHeader() {
               }`}
             >
               {link.icon}
-              {t(link.label)}
+              {t(`${link.label}`)}
             </Link>
           );
         })}

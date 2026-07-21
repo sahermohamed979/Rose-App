@@ -21,7 +21,7 @@ import { useTranslations } from 'next-intl';
 export default function HeaderDropdown({ name }: { name: string }) {
   // Translation
 
-  const t = useTranslations();
+  const t = useTranslations('header');
   return (
     <DropdownMenu>
       <DropdownMenuTrigger

@@ -25,7 +25,7 @@ export default function NotificationsContainer({
   status: string;
 }) {
   // Translation
-  const t = useTranslations();
+  const t = useTranslations('header');
   // Notification Hook
   const {
     data: notificationData,
@@ -37,6 +37,13 @@ export default function NotificationsContainer({
   const memoNotifications = useMemo(
     () => notificationData?.pages?.flatMap((page) => page.data) || [],
     [notificationData]
+  );
+  // count unread notifications
+  const readCount = useMemo(
+    () =>
+      memoNotifications.filter((item) => item.isRead === false)
+        .length,
+    [memoNotifications]
   );
   // Mark all as read hook
   const { mutate: markAllAsRead } = useMarkAllAsRead();
@@ -55,11 +62,10 @@ export default function NotificationsContainer({
               <span
                 className={cn(
                   `absolute -top-2 -right-2 bg-bg-danger text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm`,
-                  notificationData?.pages[0]?.metadata.total === 0 &&
-                    'hidden'
+                  readCount === 0 && 'hidden'
                 )}
               >
-                {notificationData?.pages[0]?.metadata.total}
+                {readCount}
               </span>
             )}
           </button>
@@ -72,8 +78,7 @@ export default function NotificationsContainer({
         <div className=" flex flex-col ">
           {/* notification header  */}
           <div className="py-4 px-4 bg-bg-primary-saturated  rounded-t-xl text-text-inverse font-bold text-xl ">
-            {t('notifications.title')} (
-            {notificationData?.pages[0]?.metadata.total})
+            {t('notifications.title')} ({readCount})
           </div>
           {/* filter and sort buttons */}
           <div className="flex  justify-between p-2.5">
@@ -94,9 +99,10 @@ export default function NotificationsContainer({
             </button>
             <button
               onClick={() => markAllAsRead()}
+              disabled={readCount === 0}
               className={cn(
                 `cursor-pointer flex items-center gap-2 text-text-plain font-semibold text-xs`,
-                notificationData?.pages[0]?.metadata.total === 0 &&
+                readCount === 0 &&
                   'text-text-muted cursor-not-allowed'
               )}
             >
