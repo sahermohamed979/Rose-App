@@ -15,13 +15,15 @@ import {
   MapPinHouse,
   ScrollText,
 } from 'lucide-react';
-import { signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 export default function HeaderDropdown({ name }: { name: string }) {
   // Translation
 
   const t = useTranslations('header');
+  // get user role
+  const { data: session } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -56,14 +58,14 @@ export default function HeaderDropdown({ name }: { name: string }) {
             {t('userMenu.orders')}
           </DropdownMenuItem>
         </DropdownMenuGroup>
-
-        <DropdownMenuGroup>
-          <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
-            <Settings size={16} />
-            <Link href="/Dashboard">{t('userMenu.dashboard')}</Link>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-
+        {session?.user?.role === 'ADMIN' && (
+          <DropdownMenuGroup>
+            <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
+              <Settings size={16} />
+              <Link href="/dashboard">{t('userMenu.dashboard')}</Link>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        )}
         {/* Log out — separated at bottom */}
         <DropdownMenuItem
           className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer"

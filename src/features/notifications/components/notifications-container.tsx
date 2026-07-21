@@ -19,6 +19,7 @@ import { cn } from '@/shared/lib/utils/utils';
 import useMarkAllAsRead from '../hooks/mark-all-read-hook';
 import useClearAllNotifications from '../hooks/clear-notification-all-hook';
 import { useTranslations } from 'next-intl';
+import NotificationsSkeleton from '../skeletons/notifications-skeleton';
 export default function NotificationsContainer({
   status,
 }: {
@@ -111,37 +112,36 @@ export default function NotificationsContainer({
             </button>
           </div>
           {/* notification card  */}
-          {isPending ||
-            (notificationData?.pages[0]?.metadata.total === 0 ? (
-              <div className=" flex  h-[224px] items-center justify-center">
-                {' '}
-                <div className="flex flex-col gap-2 items-center">
-                  <BellOff size={50} className="text-text-soft" />
-                  <h2 className="text-text-soft font-medium text-sm">
-                    {t('notifications.empty')}
-                  </h2>
-                </div>
+          {isPending ? (
+            <NotificationsSkeleton />
+          ) : notificationData?.pages[0]?.metadata.total === 0 ? (
+            <div className="flex h-[224px] items-center justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <BellOff size={50} className="text-text-soft" />
+                <h2 className="text-text-soft font-medium text-sm">
+                  {t('notifications.empty')}
+                </h2>
               </div>
-            ) : (
-              <div className="flex-1 ">
-                {/* Infinite scroll component */}
-                <InfiniteScroll
-                  className="flex flex-col   justify-items-center [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-                  dataLength={memoNotifications?.length || 0}
-                  next={fetchNextNotification}
-                  hasMore={!!hasNextNotification}
-                  height={450}
-                  loader={<></>}
-                >
-                  {memoNotifications?.map((notification) => (
-                    <NotificationCard
-                      key={notification.id}
-                      notificationData={notification}
-                    />
-                  ))}
-                </InfiniteScroll>
-              </div>
-            ))}
+            </div>
+          ) : (
+            <div className="flex-1">
+              <InfiniteScroll
+                className="flex flex-col justify-items-center [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                dataLength={memoNotifications?.length || 0}
+                next={fetchNextNotification}
+                hasMore={!!hasNextNotification}
+                height={450}
+                loader={<></>}
+              >
+                {memoNotifications?.map((notification) => (
+                  <NotificationCard
+                    key={notification.id}
+                    notificationData={notification}
+                  />
+                ))}
+              </InfiniteScroll>
+            </div>
+          )}
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
