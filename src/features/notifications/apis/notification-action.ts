@@ -13,6 +13,7 @@ import { getAuthToken } from '@/shared/lib/actions/getToken';
 
 // get all notifications
 export async function getAllNotification(req: NextRequest) {
+  const locale = req.headers.get('Accept-Language') || 'en';
   const token = await getToken({ req });
   if (!token?.accessToken) {
     return RESPONSES.Unauthorized;
@@ -26,6 +27,7 @@ export async function getAllNotification(req: NextRequest) {
       method: 'GET',
       headers: {
         ...HEADERS.authorization(token.accessToken),
+        'Accept-Language': locale,
       },
     }
   );
@@ -36,39 +38,19 @@ export async function getAllNotification(req: NextRequest) {
   return payload;
 }
 
-// mark all as read
-export async function markAllAsRead(req: NextRequest) {
-  const token = await getToken({ req });
+// mark all as read server action
+export async function markAllAsReadServerAction() {
+  const token = await getAuthToken();
   if (!token?.accessToken) {
     return RESPONSES.Unauthorized;
   }
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/notifications/mark-all-as-read`,
-    {
-      method: 'PUT',
-      headers: {
-        ...HEADERS.authorization(token.accessToken),
-      },
-    }
-  );
-
-  const payload: ApiResponse<NotificationType> =
-    await response.json();
-
-  return payload;
-}
-// mark all as read server action
-export async function markAllAsReadServerAction() {
-  const jwt = await getAuthToken();
-  const token = jwt?.accessToken;
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/mark-all-read`,
       {
         method: 'PATCH',
         headers: {
-          ...HEADERS.authorization(token!),
+          ...HEADERS.authorization(token.accessToken),
         },
       }
     );
@@ -83,15 +65,17 @@ export async function markAllAsReadServerAction() {
 
 // mark one as read server action
 export async function markOneAsReadServerAction(id: string) {
-  const jwt = await getAuthToken();
-  const token = jwt?.accessToken;
+  const token = await getAuthToken();
+  if (!token?.accessToken) {
+    return RESPONSES.Unauthorized;
+  }
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
       {
         method: 'PATCH',
         headers: {
-          ...HEADERS.authorization(token!),
+          ...HEADERS.authorization(token.accessToken),
           ...HEADERS.jsonBody,
         },
         body: JSON.stringify({
@@ -110,16 +94,17 @@ export async function markOneAsReadServerAction(id: string) {
 }
 // delete one notification server action
 export async function clearAllNotificationsServerAction() {
-  const jwt = await getAuthToken();
-
-  const token = jwt?.accessToken;
+  const token = await getAuthToken();
+  if (!token?.accessToken) {
+    return RESPONSES.Unauthorized;
+  }
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/clear-all`,
       {
         method: 'DELETE',
         headers: {
-          ...HEADERS.authorization(token!),
+          ...HEADERS.authorization(token.accessToken),
         },
       }
     );
@@ -134,15 +119,17 @@ export async function clearAllNotificationsServerAction() {
 }
 // mark one as read server action
 export async function clearOneNotificationServerAction(id: string) {
-  const jwt = await getAuthToken();
-  const token = jwt?.accessToken;
+  const token = await getAuthToken();
+  if (!token?.accessToken) {
+    return RESPONSES.Unauthorized;
+  }
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
       {
-        method: 'Delete',
+        method: 'DELETE',
         headers: {
-          ...HEADERS.authorization(token!),
+          ...HEADERS.authorization(token.accessToken),
         },
       }
     );
