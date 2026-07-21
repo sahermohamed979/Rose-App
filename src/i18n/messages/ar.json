@@ -172,5 +172,20 @@
     "error": "خطأ",
     "warning": "تحذير",
     "info": "معلومة"
-  }
+  },
+  "productReview": {
+    "title": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingSingular": "تقييم",
+    "ratingPlural": "تقييمات",
+    "noReviewsYet": "لا توجد تقييمات حتى الآن.",
+    "noReviewsTitle": "لا توجد تقييمات حتى الآن",
+    "noReviewsDescription": "كن أول من يشارك رأيه في هذا المنتج.",
+    "loadError": "فشل تحميل التقييمات. يرجى المحاولة مرة أخرى.",
+    "customerReviews": "تقييمات العملاء",
+    "starLabel": "التقييم: {value} من {max} نجوم",
+    "starSingular": "{n} نجمة",
+    "starPlural": "{n} نجوم"
+  },
+  "productReview.loadError": "فشل تحميل التقييمات. يرجى المحاولة مرة أخرى."
 }

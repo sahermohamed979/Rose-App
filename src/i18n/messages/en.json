@@ -152,7 +152,6 @@
       "passwordResetError": "Something went wrong. Please try again",
       "linkExpiredOrInvalid": "Link expired or invalid"
     },
-
     "emailSchema": {
       "emailRequired": "Email is required",
       "validEmail": "Please enter a valid email"
@@ -173,5 +172,20 @@
     "error": "Error",
     "warning": "Warning",
     "info": "Info"
-  }
+  },
+  "productReview": {
+    "title": "Product Reviews",
+    "generalRating": "General rating:",
+    "ratingSingular": "rating",
+    "ratingPlural": "ratings",
+    "noReviewsYet": "No reviews yet.",
+    "noReviewsTitle": "No reviews yet",
+    "noReviewsDescription": "Be the first to share your thoughts about this product.",
+    "loadError": "Failed to load reviews. Please try again.",
+    "customerReviews": "Customer reviews",
+    "starLabel": "Rating: {value} out of {max} stars",
+    "starSingular": "{n} star",
+    "starPlural": "{n} stars"
+  },
+  "productReview.loadError": "Failed to load reviews. Please try again."
 }
