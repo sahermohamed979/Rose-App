@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 function BrandsSection() {
   // Translation
-  const t = useTranslations('home');
+  const t = useTranslations('header.home');
 
   return (
     <section className="py-10 px-5 max-w-7xl mx-auto ">

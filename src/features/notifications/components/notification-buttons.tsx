@@ -16,7 +16,7 @@ export default function NotificationButtons({
   notificationData: NotificationType;
 }) {
   // Translation
-  const t = useTranslations();
+  const t = useTranslations('header');
   // Mark one as read hook
   const { mutate: markOneAsRead } = useMarkOneAsRead();
   // Clear one notification hook
