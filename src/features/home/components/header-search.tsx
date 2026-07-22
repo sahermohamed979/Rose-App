@@ -11,9 +11,9 @@ import { Input } from '@/shared/components/ui/input';
 import { SearchIcon, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { SearchSkeleton } from '../skeletons/skeletons-search';
-import Link from 'next/link';
 import { Product } from '../types/search-types';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 export default function HeaderSearch() {
   //  search input state
@@ -38,16 +38,33 @@ export default function HeaderSearch() {
   const results = (data?.data || []).filter((product) =>
     product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
   );
+  // highlight match search result
+  const highlightMatch = (title: string, query: string) => {
+    if (!query) {
+      return title;
+    }
+
+    const parts = title.split(new RegExp(`(${query})`, 'gi'));
+    return parts.map((part, i) =>
+      part.toLowerCase() === query.toLowerCase() ? (
+        <span key={i} className="text-base text-text-secondary">
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  };
   return (
-    <div className="relative w-full grow">
+    <div className="relative w-full grow  ">
       {/* Search input area */}
-      <div className="relative min-w-50 flex items-center">
+      <div className="relative min-w-50 flex items-center ">
         <div className="absolute ps-3 flex items-center pointer-events-none">
           <SearchIcon className="w-5 h-5 text-text-muted" />
         </div>
 
         <Input
-          className="ps-10 pe-4 w-full h-10 border rounded-lg"
+          className="ps-10 pe-4 w-full h-10 border rounded-lg bg-bg-plain"
           type="search"
           placeholder={t('searchPlaceholder')}
           onChange={(e) => setQuery(e.target.value)}
@@ -93,24 +110,11 @@ export default function HeaderSearch() {
 
                     {/* Product details */}
                     <div className="grow flex flex-col justify-center">
-                      <h3 className="font-semibold text-sm text-text-plain">
-                        {product.title
-                          .split(
-                            new RegExp(`(${debouncedQuery})`, 'gi')
-                          )
-                          .map((part, i) =>
-                            part.toLowerCase() ===
-                            debouncedQuery.toLowerCase() ? (
-                              <span
-                                key={i}
-                                className="text-text-secondary"
-                              >
-                                {part}
-                              </span>
-                            ) : (
-                              part
-                            )
-                          )}
+                      <h3 className="font-semibold text-sm text-text-plain line-clamp-1">
+                        {highlightMatch(
+                          product.title,
+                          debouncedQuery
+                        )}
                       </h3>
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-text-plain text-lg">
