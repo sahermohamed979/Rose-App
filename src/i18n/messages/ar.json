@@ -172,5 +172,18 @@
     "error": "خطأ",
     "warning": "تحذير",
     "info": "معلومة"
+  },
+  "ProductDetails": {
+    "notFound": "المنتج غير موجود",
+    "unitsInStock": "{count} وحدة في المخزن",
+    "outOfStock": "نفد من المخزن",
+    "ratingLabel": "التقييم:",
+    "ratingsCount": "{count} تقييمات",
+    "addToFavorites": "أضف إلى المفضلة",
+    "addToCart": "أضف إلى السلة",
+    "errorTitle": "حدث خطأ ما",
+    "errorDescription": "تعذر تحميل المنتج، يرجى المحاولة مرة أخرى لاحقًا.",
+    "backToProducts": "العودة إلى المنتجات",
+    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود."
   }
 }
