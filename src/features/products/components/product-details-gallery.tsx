@@ -52,7 +52,7 @@ export function ProductGallery({
       {/* Main Carousel */}
       <Carousel
         setApi={setApi}
-        className="w-full relative group"
+        className="w-full relative group "
         opts={{ loop: true, direction: direction }}
         dir={direction}
       >
@@ -63,8 +63,7 @@ export function ProductGallery({
                 <Image
                   src={image}
                   alt={`${title} - image ${index + 1}`}
-                  width={800}
-                  height={500}
+                  fill
                   className="object-cover"
                 />
               </div>
@@ -73,12 +72,12 @@ export function ProductGallery({
         </CarouselContent>
       </Carousel>
       {/* Thumbnails */}
-      <div className="flex gap-3 mt-4 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-2 mt-2 overflow-x-auto pb-2 scrollbar-hide">
         {images.map((image, index) => (
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            className={`group relative h-24 w-24 shrink-0 rounded-lg overflow-hidden border-2 transition-colors ${
+            className={`group relative h-24 w-22 shrink-0 rounded-lg overflow-hidden border-2 transition-colors ${
               current === index
                 ? 'border-border-primary'
                 : 'border-transparent '

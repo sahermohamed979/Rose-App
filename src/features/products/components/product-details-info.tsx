@@ -42,7 +42,7 @@ export default function ProductDetailsInfo({
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 w-full">
       <ProductGallery images={images} title={product.title} />
 
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between h-full">
         <div>
           <h1 className="text-3xl text-text-plain font-semibold">
             {product.title}
@@ -67,7 +67,7 @@ export default function ProductDetailsInfo({
             locale={locale}
           />
 
-          <article className="max-h-56 overflow-y-auto">
+          <article className="max-h-56 overflow-y-auto text-text-default font-normal">
             {product.description}
           </article>
         </div>
