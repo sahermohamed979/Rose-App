@@ -31,8 +31,7 @@ interface RegisterResponseError {
 
 // Unified registration response type
 export type RegisterResponse =
-  | RegisterResponseSuccess
-  | RegisterResponseError;
+  RegisterResponseSuccess | RegisterResponseError;
 
 // TypeScript type derived from Zod schema for form data
 export type RegisterSchemaType = z.infer<

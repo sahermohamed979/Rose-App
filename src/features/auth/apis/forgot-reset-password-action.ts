@@ -1,6 +1,6 @@
 'use server';
 
-import { HEADERS } from '@/shared/context/api.constants';
+import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { forgotPasswordEmailSchema } from '../schemas/forget-password-schema';
 import {
   EmailInput,
