@@ -8,6 +8,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '@/shared/components/ui/carousel';
+import { useLocale } from 'next-intl';
 
 interface ProductGalleryProps {
   images: string[];
@@ -21,17 +22,30 @@ export function ProductGallery({
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
+  const locale = useLocale();
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+
   useEffect(() => {
-    if (!api) return;
+    if (!api) {
+      return;
+    }
 
-    setCurrent(api.selectedScrollSnap());
-
-    api.on('select', () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
+    };
+
+    onSelect();
+
+    api.on('select', onSelect);
+
+    return () => {
+      api.off('select', onSelect);
+    };
   }, [api]);
 
-  if (!images?.length) return null;
+  if (!images?.length) {
+    return null;
+  }
 
   return (
     <div>
@@ -39,7 +53,8 @@ export function ProductGallery({
       <Carousel
         setApi={setApi}
         className="w-full relative group"
-        opts={{ loop: true }}
+        opts={{ loop: true, direction: direction }}
+        dir={direction}
       >
         <CarouselContent>
           {images.map((image, index) => (
@@ -66,7 +81,7 @@ export function ProductGallery({
             className={`group relative h-24 w-24 shrink-0 rounded-lg overflow-hidden border-2 transition-colors ${
               current === index
                 ? 'border-border-primary'
-                : 'border-transparent hover:border-gray-400'
+                : 'border-transparent '
             }`}
           >
             {/* Thumbnail */}
