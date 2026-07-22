@@ -2,7 +2,7 @@
 import { useLocale } from 'next-intl';
 import { ProductGallery } from './product-details-gallery';
 import { useProductInfo } from '../hooks/use-product-details-info';
-import { ProductDetailsSkeleton } from '../skeletons/product-details-skelton';
+import { ProductDetailsSkeleton } from '../skeletons/product-details.skelton';
 import ProductDetailsPrice from './product-details-price';
 import ProductStockBadge from './product-details-stock';
 import ProductRating from './product-details-ratings';
