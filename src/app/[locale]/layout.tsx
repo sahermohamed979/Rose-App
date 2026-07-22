@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
 import '../globals.css';
-import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import { Toaster } from '@/shared/components/ui/sonner';
 
 const tajawal = Tajawal({
