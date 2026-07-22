@@ -11,11 +11,15 @@ export function useProductInfo(
 
     queryFn: async () => {
       const response = await getProductDetailsInfo(productId);
+
       if (!response.status) {
         throw new Error(response.message);
       }
+
       return response.payload.product;
     },
+
+    initialData,
 
     enabled: !!productId,
     staleTime: 5 * 60 * 1000,

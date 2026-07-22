@@ -1,4 +1,3 @@
-'use server';
 import { ApiResponse } from '@/shared/lib/types/api';
 import { ProductDetailsResponse } from '@/shared/lib/types/product-details';
 
