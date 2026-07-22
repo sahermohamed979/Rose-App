@@ -173,5 +173,14 @@
     "error": "Error",
     "warning": "Warning",
     "info": "Info"
+  },
+  "products": {
+    "noProductMatch": " No products found matching your filters.",
+    "tryClear": "Try clearing or changing your filters to see more results.",
+    "new": "NEW",
+    "outOfStock": " OUT OF STOCK",
+    "hot": "Hot",
+    "addToWishList": "Add to wishlist",
+    "removeFromWishList": "Remove From wishlist"
   }
 }
