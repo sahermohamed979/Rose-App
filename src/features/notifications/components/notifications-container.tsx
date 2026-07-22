@@ -57,7 +57,10 @@ export default function NotificationsContainer({
       {/*  Dropdown menu trigger */}
       <DropdownMenuTrigger
         render={
-          <button className="relative">
+          <button
+            className="relative"
+            disabled={status !== 'authenticated'}
+          >
             <Bell className="w-5 h-5 cursor-pointer" />
             {status === 'authenticated' && (
               <span
