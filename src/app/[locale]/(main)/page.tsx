@@ -1,6 +1,16 @@
-import Home from '@/features/home/screens/Home';
+import Home from '@/features/home/screens/home';
 import React from 'react';
 
-export default function page() {
-  return <Home />;
+type HomeSearchParams = {
+  occasion?: string | string[];
+};
+
+interface PageProps {
+  searchParams: Promise<HomeSearchParams>;
+}
+
+export default async function Page({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+
+  return <Home searchParams={resolvedSearchParams} />;
 }

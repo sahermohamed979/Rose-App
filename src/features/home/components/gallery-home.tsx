@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 function GallerySection() {
   // Translation
-  const t = useTranslations('header.home');
+  const t = useTranslations('home');
 
   return (
     <section className="max-w-7xl mx-auto py-16 px-5 font-sans">

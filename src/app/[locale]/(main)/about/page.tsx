@@ -1,6 +1,6 @@
-import Home from '@/features/home/screens/Home';
+import Home from '@/features/home/screens/home';
 import React from 'react';
 
 export default function page() {
-  return <Home />;
+  return <div>about page</div>;
 }
