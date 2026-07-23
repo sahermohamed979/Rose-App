@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import {
   ApiResponse,
@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
       },
       authorize: async (credentials) => {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+          `${process.env.NEXT_API_URL}/auth/login`,
           {
             method: 'POST',
             headers: {
