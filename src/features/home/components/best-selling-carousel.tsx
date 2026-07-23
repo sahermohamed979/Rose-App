@@ -26,10 +26,6 @@ export default function BestSellingCarousel({
         loop: true,
         direction,
         slidesToScroll: 1,
-        // slides: {
-        //   // perView: 3,
-        //   perGroup: 3,
-        // },
       }}
     >
       <CarouselContent className="-ms-6">

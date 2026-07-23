@@ -36,17 +36,10 @@ export default function MostPopular({
   const t = useTranslations('home');
   const router = useRouter();
   const locale = useLocale();
-  // const chosenOcassions = occasions.filter((occasion) => occasion.title === 'Wedding' || occasion.title === 'Anniversary' || occasion.title === 'Birthday' || occasion.title === 'Engagement')
   const hasNoOccasions = occasions.length === 0;
   const selectedOccasion =
     occasions.find((occasion) => occasion.id === activeOccasionId) ??
     occasions[0];
-  // const productsByOccasion = await Promise.all(
-  //   chosenOcassions.map(async (occasion) => ({
-  //     occasionId: occasion.id,
-  //     products: await getProductsByFilters({ page: 1, limit: 13, occasionId: occasion.id }),
-  //   }))
-  // )
 
   return (
     <div className="mb-[138px]">
@@ -62,7 +55,7 @@ export default function MostPopular({
         <Tabs value={activeOccasionId ?? occasions[0].id}>
           <div className=" flex justify-between">
             <HeaderTitle text={t('mostPopular')} />
-            <TabsList className="hidden md:flex">
+            <TabsList className="hidden md:flex bg-transparent">
               {occasions.map((occasion) => (
                 <TabsTrigger
                   key={occasion.id}
@@ -74,7 +67,6 @@ export default function MostPopular({
                     )
                   }
                 >
-                  {/* {t(`${occasion.title.toLowerCase()}`)} */}
                   {occasion.title}
                 </TabsTrigger>
               ))}
@@ -114,7 +106,7 @@ export default function MostPopular({
           >
             {ProductsByOccasion.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
+                <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
                   {ProductsByOccasion.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}

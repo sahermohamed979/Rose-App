@@ -7,6 +7,7 @@ import Bestselling from '../components/best-selling';
 import { Suspense } from 'react';
 import MostPopular from '../components/most-popular';
 import { ProductType } from '../types/product';
+import { OccasionType } from '../types/occasions';
 
 interface HomeProps {
   searchParams: {
@@ -19,7 +20,12 @@ export default async function Home({
   searchParams: HomeProps['searchParams'];
 }) {
   let bestSellingProducts: ProductType[] = [];
-  const occasions = await getOccasions({ page: 1, limit: 4 });
+  let occasions: OccasionType[] = [];
+  try {
+    occasions = await getOccasions({ page: 1, limit: 4 });
+  } catch (error) {
+    console.error('Failed to fetch occasions:', error);
+  }
   const occasionParam = searchParams?.occasion;
   const activeOccasionName =
     typeof occasionParam === 'string' ? occasionParam : undefined;
@@ -31,15 +37,17 @@ export default async function Home({
     ) ?? occasions[0];
   const activeOccasionId = activeOccasion?.id;
 
-  const ProductsByOccasion = await getProductsByFilters({
-    page: 1,
-    limit: 13,
-    occasionId: activeOccasionId,
-  });
+  const ProductsByOccasion = activeOccasionId
+    ? await getProductsByFilters({
+        page: 1,
+        limit: 13,
+        occasionId: activeOccasionId,
+      })
+    : [];
   bestSellingProducts = await getProductsByFilters({
     page: 1,
     limit: 6,
-    minRating: 3,
+    // minRating: 3,
     sortBy: 'bestSelling',
     sortOrder: 'desc',
   });

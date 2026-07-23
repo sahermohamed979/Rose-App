@@ -1,45 +1,54 @@
+'use client';
 import { ProductType } from '../types/product';
+import { useTranslations } from 'next-intl';
 import { ShoppingCartIcon, Star, StarIcon } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
+import { Link } from '@/i18n/navigation';
 
 export default function ProductCard({
   product,
 }: {
   product: ProductType;
 }) {
-  // console.log(product, 'product');
+  const t = useTranslations('');
   const discountPrice: number =
     Number(product.price) * (1 - Number(product.discountValue) / 100);
   const nowDate = new Date().getTime();
   const updatedAt = new Date(product.updatedAt).getTime();
   const isNew = nowDate - updatedAt < 1000 * 60 * 60 * 24 * 7;
-  // console.log(product, isNew, discountPrice);
 
   return (
     <div className="w-full max-w-[302px] ">
-      <div
+      <Link
+        href={`/products/${product.id}`}
+        aria-label={product.title}
         style={{ backgroundImage: `url(${product.cover})` }}
         className={
-          'aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
+          'block aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
         }
       >
         <div className="absolute top-2 right-2 rtl:left-2 flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
             <Badge variant="destructive" className="">
-              Out of stock
+              {t('productBadges.outOfStock')}
             </Badge>
           )}
           {isNew && (
-            <Badge className="bg-white text-zinc-700">New</Badge>
+            <Badge className="bg-white text-zinc-700 hover:bg-white hover:text-zinc-700">
+              {t('productBadges.new')}
+            </Badge>
           )}
           {Number(product.discountValue) >= 20 && (
-            <Badge variant="secondary" className="">
-              Hot
+            <Badge
+              variant="secondary"
+              className="dark:bg-maroon-50 dark:text-maroon-600"
+            >
+              {t('productBadges.hot')}
             </Badge>
           )}
         </div>
-      </div>
+      </Link>
       {/* <Image src={product.cover} alt={product.title} width={302} height={272}
                 className=' object-cover h-[272px] w-[302px] rounded-2xl mb-4' quality={100} /> */}
       <h2
@@ -49,7 +58,7 @@ export default function ProductCard({
              leading-none mb-3
               truncate w-full"
       >
-        {product.title}
+        <Link href={`/products/${product.id}`}>{product.title}</Link>
       </h2>
       <div className="flex  justify-between ">
         {/* Rating stars and Price */}
@@ -79,14 +88,22 @@ export default function ProductCard({
           </div>
           {/* Price */}
           <p className="text-base font-medium  leading-none">
-            <span className="text-text-primary me-1">
-              {product.price}
-            </span>
-            <span className="text-text-muted line-through">
-              {product.discountType === 'PERCENT'
-                ? discountPrice
-                : `$${product.discountValue}% off`}
-            </span>
+            {product.discountValue ? (
+              <>
+                <span className="text-text-primary me-1">
+                  {product.discountType === 'PERCENT'
+                    ? `${discountPrice} ${t('currency')}`
+                    : `${product.discountValue}% off`}
+                </span>
+                <span className="text-text-muted line-through">
+                  {`${product.price} ${t('currency')}`}
+                </span>
+              </>
+            ) : (
+              <span className="text-text-primary">
+                {`${product.price} ${t('currency')}`}
+              </span>
+            )}
           </p>
         </div>
         {/*add to cart button*/}

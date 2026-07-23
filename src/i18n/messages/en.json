@@ -145,6 +145,7 @@
       "title": "Trusted by over <highlight>4.5k+</highlight> companies"
     },
     "bestSelling": "Best Selling",
+    "bestSellingSubtitle": "<secondary>Check Out </secondary>What Everyone’s<secondary> Buying</secondary><br></br>Right Now",
     "viewAll": "View All",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -157,5 +158,11 @@
     "exploreGifts": "Explore gifts",
     "bestSellingDescription": "Not sure what to choose?\nStart with our best sellers, these are the gifts our customers keep coming back for.\nWhether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
     "noProductsAvailable": "No products available for this occasion right now."
+  },
+  "currency": "EGP",
+  "productBadges": {
+    "outOfStock": "Out of Stock",
+    "new": "New",
+    "hot": "Hot"
   }
 }
