@@ -157,7 +157,8 @@
     "addToWishlist": "Add to Wishlist",
     "exploreGifts": "Explore gifts",
     "bestSellingDescription": "Not sure what to choose?\nStart with our best sellers, these are the gifts our customers keep coming back for.\nWhether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-    "noProductsAvailable": "No products available for this occasion right now."
+    "noProductsAvailable": "No products available for this occasion right now.",
+    "faliureToLoad": "Failed to load products. Please try again"
   },
   "currency": "EGP",
   "productBadges": {

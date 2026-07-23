@@ -1,67 +1,25 @@
-import {
-  getOccasions,
-  getProductsByFilters,
-} from '../apis/home-products-actions';
-
 import Bestselling from '../components/best-selling';
 import { Suspense } from 'react';
-import MostPopular from '../components/most-popular';
-import { ProductType } from '../types/product';
-import { OccasionType } from '../types/occasions';
+import MostPopularSection from '../components/most-popular-section';
+import ProductCardSkeletonGrid from '../skeltons/product-card-skeleton';
+import MostPopularSkeleton from '../skeltons/most-popular-skelton';
 
 interface HomeProps {
   searchParams: {
     occasion?: string | string[];
   };
 }
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams: HomeProps['searchParams'];
 }) {
-  let bestSellingProducts: ProductType[] = [];
-  let occasions: OccasionType[] = [];
-  try {
-    occasions = await getOccasions({ page: 1, limit: 4 });
-  } catch (error) {
-    console.error('Failed to fetch occasions:', error);
-  }
-  const occasionParam = searchParams?.occasion;
-  const activeOccasionName =
-    typeof occasionParam === 'string' ? occasionParam : undefined;
-  const activeOccasion =
-    occasions.find(
-      (occasion) =>
-        occasion.title.toLowerCase() ===
-        activeOccasionName?.toLowerCase()
-    ) ?? occasions[0];
-  const activeOccasionId = activeOccasion?.id;
-
-  const ProductsByOccasion = activeOccasionId
-    ? await getProductsByFilters({
-        page: 1,
-        limit: 13,
-        occasionId: activeOccasionId,
-      })
-    : [];
-  bestSellingProducts = await getProductsByFilters({
-    page: 1,
-    limit: 6,
-    // minRating: 3,
-    sortBy: 'bestSelling',
-    sortOrder: 'desc',
-  });
-
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="container mx-auto">
-        <Bestselling bestSellingProducts={bestSellingProducts} />
-        <MostPopular
-          occasions={occasions}
-          ProductsByOccasion={ProductsByOccasion}
-          activeOccasionId={activeOccasionId}
-        />
-      </div>
-    </Suspense>
+    <div className="container mx-auto">
+      <Bestselling />
+      <Suspense fallback={<MostPopularSkeleton />}>
+        <MostPopularSection searchParams={searchParams} />
+      </Suspense>
+    </div>
   );
 }
