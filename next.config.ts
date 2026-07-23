@@ -8,8 +8,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'rose-app.elevate-bootcamp.cloud',
-        port: '',
-        pathname: '/storage/**',
+        pathname: 'storage/entities/product/**',
       },
     ],
   },

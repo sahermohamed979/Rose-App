@@ -26,7 +26,7 @@ export default function NotificationsContainer({
   status: string;
 }) {
   // Translation
-  const t = useTranslations('header');
+  const t = useTranslations('');
   // Notification Hook
   const {
     data: notificationData,
