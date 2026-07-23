@@ -13,7 +13,7 @@ interface HomeProps {
     occasion?: string | string[];
   };
 }
-export default function Home({
+export default function HomeScreen({
   searchParams,
 }: {
   searchParams: HomeProps['searchParams'];

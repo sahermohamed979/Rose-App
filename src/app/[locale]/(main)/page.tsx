@@ -1,5 +1,4 @@
-import Home from '@/features/home/screens/home';
-import React from 'react';
+import Home from '@/features/home/screens/home-screen';
 
 type HomeSearchParams = {
   occasion?: string | string[];
