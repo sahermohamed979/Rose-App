@@ -38,21 +38,20 @@ export const getProductsByFilters = async ({
       {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       }
     );
     const data = await response.json();
-
     if (!response.ok) {
       console.error('Failed to fetch products:', data.message);
-      return [];
+      throw new Error(data.message || 'Failed to fetch products');
     }
 
     return data.payload.data as ProductType[];
   } catch (error) {
     console.error('Failed to fetch products:', error);
-    return [];
+    throw error;
   }
 };
 export const getOccasions = async ({
@@ -76,12 +75,12 @@ export const getOccasions = async ({
 
     if (!response.ok) {
       console.error('Failed to fetch occasions:', data.message);
-      return [];
+      throw new Error(data.message || 'Failed to fetch occasions');
     }
 
     return data.payload.data as OccasionType[];
   } catch (error) {
     console.error('Failed to fetch occasions:', error);
-    return [];
+    throw error;
   }
 };

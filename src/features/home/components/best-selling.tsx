@@ -31,11 +31,12 @@ export default async function Bestselling({
       leading-none 
       mb-[10px]"
           >
-            <span className=" text-text-secondary">Check Out </span>
-            What Everyone’s
-            <span className="text-text-secondary"> Buying</span>
-            <br />
-            Right Now
+            {t.rich('bestSellingSubtitle', {
+              secondary: (chunks) => (
+                <span className="text-text-secondary">{chunks}</span>
+              ),
+              br: () => <br />,
+            })}
           </p>
           <p
             className="text-base
@@ -63,7 +64,7 @@ export default async function Bestselling({
             bestSellingProducts={bestSellingProducts}
           />
         ) : (
-          <div className="flex min-h-[272px] items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
+          <div className="flex min-h-68 items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
             We could not load best selling products right now.
           </div>
         )}
