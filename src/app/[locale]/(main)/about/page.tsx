@@ -1,4 +1,4 @@
-import Home from '@/features/home/screens/home';
+import Home from '@/features/home/screens/home-screen';
 import React from 'react';
 
 export default function page() {
