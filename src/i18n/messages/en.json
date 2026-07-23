@@ -193,6 +193,21 @@
       "subHeaderCategories": "categories",
       "subHeaderContact": "contact",
       "subHeaderAbout": "about"
+    },
+    "userMenu": {
+      "account": "Account",
+      "orders": "Orders",
+      "addresses": "Addresses",
+      "dashboard": "Dashboard",
+      "logout": "Logout"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "markAllRead": "Mark all as read",
+      "clearAll": "Clear all",
+      "markRead": "Mark as read",
+      "delete": "Delete",
+      "empty": "No notifications yet"
     }
   },
   "footer": {
@@ -222,21 +237,7 @@
       "successMessage": "Successfully subscribed!"
     }
   },
-  "userMenu": {
-    "account": "Account",
-    "orders": "Orders",
-    "addresses": "Addresses",
-    "dashboard": "Dashboard",
-    "logout": "Logout"
-  },
-  "notifications": {
-    "title": "Notifications",
-    "markAllRead": "Mark all as read",
-    "clearAll": "Clear all",
-    "markRead": "Mark as read",
-    "delete": "Delete",
-    "empty": "No notifications yet"
-  },
+
   "home": {
     "about": {
       "label": "About",
