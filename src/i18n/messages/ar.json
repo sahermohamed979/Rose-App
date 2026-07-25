@@ -173,29 +173,26 @@
     "warning": "تحذير",
     "info": "معلومة"
   },
-  "home": {
-    "about": {
-      "label": "عن الموقع",
-      "title": "نقدم <highlight>أفضل</highlight> صناديق الهدايا لمناسباتك <highlight>الخاصة</highlight>",
-      "description": "اجعل كل لحظة لا تُنسى مع صناديق الهدايا الفاخرة لدينا. كل صندوق يتم تنسيقه بعناية وتغليفه بشكل جميل، ومليء بعناصر مختارة خصيصاً لإبهار من تحب. سواء كان ذلك لعيد ميلاد أو مجرد كلمة 'شكراً'، صُممت هدايانا لتترك انطباعاً يدوم.",
-      "discover": "اكتشف",
-      "features": {
-        "price": "أسعار تنافسية وتسوق سهل",
-        "quality": "جودة فاخرة وتغليف أنيق",
-        "occasion": "مثالية لكل المناسبات",
-        "delivery": "توصيل سريع وموثوق"
-      }
-    },
-    "gallery": {
-      "label": "معرض صورنا",
-      "title": "تصفح معرض صورنا الرائع"
-    },
-    "testimonials": {
-      "label": "أراء عملائنا",
-      "title": "كلمات حقيقية من عملاء سعداء"
-    },
-    "partners": {
-      "title": "موثوق بنا من قِبل أكثر من <highlight>4500</highlight> شركة"
+  "header": {
+    "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "headerLogin": "تسجيل الدخول",
+    "deliver": "توصيل الي :",
+    "country": "القاهره",
+    "hello": "مرحبا",
+    "searchResult": ":نتائج البحث",
+    "suggestedProduct": ":منتجات قد تعجبك",
+    "noProducts": "لم يتم العثور علي منتجات",
+    "searchSchema": "البحث مطلوب",
+    "searchError": "فشل البحث. حاول مجدداً.",
+    "searchRating": "التقييم:",
+    "productRating": "تقيم",
+    "subHeader": {
+      "subHeaderHome": "الرئيسة",
+      "subHeaderProducts": "المنتجات",
+      "subHeaderOccasions": "المناسبات",
+      "subHeaderCategories": "الفئات",
+      "subHeaderContact": "تواصل معنا",
+      "subHeaderAbout": " حول الموقع"
     }
   },
   "footer": {
@@ -224,5 +221,66 @@
       "subscribe": "اشتراك",
       "successMessage": "تم الاشتراك بنجاح!"
     }
+  },
+  "userMenu": {
+    "account": "حسابي",
+    "orders": "طلباتي",
+    "addresses": "عناويني",
+    "dashboard": "لوحة التحكم",
+    "logout": "تسجيل الخروج"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تعيين الكل كمقروء",
+    "clearAll": "حذف الكل",
+    "markRead": "تعيين كمقروء",
+    "delete": "حذف",
+    "empty": "لا توجد إشعارات حتى الآن"
+  },
+  "home": {
+    "about": {
+      "label": "عن الموقع",
+      "title": "نقدم <highlight>أفضل</highlight> صناديق الهدايا لمناسباتك <highlight>الخاصة</highlight>",
+      "description": "اجعل كل لحظة لا تُنسى مع صناديق الهدايا الفاخرة لدينا. كل صندوق يتم تنسيقه بعناية وتغليفه بشكل جميل، ومليء بعناصر مختارة خصيصاً لإبهار من تحب. سواء كان ذلك لعيد ميلاد أو مجرد كلمة 'شكراً'، صُممت هدايانا لتترك انطباعاً يدوم.",
+      "discover": "اكتشف",
+      "features": {
+        "price": "أسعار تنافسية وتسوق سهل",
+        "quality": "جودة فاخرة وتغليف أنيق",
+        "occasion": "مثالية لكل المناسبات",
+        "delivery": "توصيل سريع وموثوق"
+      }
+    },
+    "gallery": {
+      "label": "معرض صورنا",
+      "title": "تصفح معرض صورنا الرائع"
+    },
+    "testimonials": {
+      "label": "أراء عملائنا",
+      "title": "كلمات حقيقية من عملاء سعداء"
+    },
+    "partners": {
+      "title": "موثوق بنا من قِبل أكثر من <highlight>4500</highlight> شركة"
+    },
+    "bestSelling": "الأكثر مبيعاً",
+    "bestSellingSubtitle": "<secondary>اكتشف </secondary>ما يشتريه الجميع<secondary> الآن</secondary><br></br>في هذا الوقت",
+    "viewAll": "عرض الكل",
+    "mostPopular": "الأكثر شعبية",
+    "viewMore": "عرض المزيد",
+    "wedding": "زفاف",
+    "birthday": "عيد ميلاد",
+    "anniversary": "ذكرى سنوية",
+    "engagement": "خطوبة",
+    "addToCart": "أضف إلى السلة",
+    "addToWishlist": "أضف إلى المفضلة",
+    "exploreGifts": "اكتشف الهدايا",
+    "bestSellingDescription": "لست متأكداً ماذا تختار؟\nابدأ بالأكثر مبيعاً لدينا، فهذه هي الهدايا التي يعود عملاؤنا لاختيارها باستمرار.\nسواء كنت تحتفل بعيد ميلاد أو ذكرى سنوية أو زفاف، اختياراتنا الأفضل ستترك انطباعاً لا ينسى.",
+    "noProductsAvailable": "لا يوجد منتجات متاحة لهذه المناسبة في الوقت الحالي.",
+    "faliureToLoad": "فشل تحميل المنتجات. حاول مجدداً"
+  },
+  "currency": "جنيه مصري",
+  "productBadges": {
+    "outOfStock": "غير متاح",
+    "new": "جديد",
+    "hot": "عرض مميز"
   }
 }

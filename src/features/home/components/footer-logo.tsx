@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import footerLogoImage from '@/shared/assets/images/footer-logo-image.png';
+import footerLogo from '@/shared/assets/images/footer-logo-image.png';
 
 export default function FooterLogo() {
   // Translate footer logo
@@ -11,7 +11,7 @@ export default function FooterLogo() {
       {/* Brand Logo Container */}
       <div className="relative w-60 h-56 md:w-48 md:h-48">
         <Image
-          src={footerLogoImage}
+          src={footerLogo}
           alt="Rose Logo"
           fill
           className="object-cover"
