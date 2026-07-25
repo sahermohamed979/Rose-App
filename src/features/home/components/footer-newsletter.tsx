@@ -28,7 +28,10 @@ export default function FooterNewsletter() {
   } = useForm<SubscribeFormValues>({
     resolver: zodResolver(subscribeSchema),
     defaultValues: { email: '' },
+    mode: 'onBlur',
   });
+
+  const { onBlur: onEmailBlur, ...emailRegister } = register('email');
 
   // ---Submit Handlers ---
   const onSubmit = (values: SubscribeFormValues) => {
@@ -63,7 +66,8 @@ export default function FooterNewsletter() {
           )}
         >
           <Input
-            {...register('email')}
+            {...emailRegister}
+            onBlur={onEmailBlur}
             type="email"
             placeholder={t('emailPlaceholder')}
             className="flex-1 bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:border-transparent hover:border-transparent hover:shadow-none hover:ring-0 px-4 text-sm text-text-muted placeholder:text-text-muted"
