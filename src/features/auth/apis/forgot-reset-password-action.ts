@@ -1,6 +1,6 @@
 'use server';
 
-import { HEADERS } from '@/shared/context/api.constants';
+import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { forgotPasswordEmailSchema } from '../schemas/forget-password-schema';
 import {
   EmailInput,
@@ -24,7 +24,7 @@ export const forgotPassword = async (email: EmailInput) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`,
+      `${process.env.NEXT_API_URL}/auth/forgot-password`,
       {
         method: 'POST',
         headers: HEADERS.jsonBody,
@@ -75,7 +75,7 @@ export const resetPassword = async (
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`,
+      `${process.env.NEXT_API_URL}/auth/reset-password`,
       {
         method: 'POST',
         headers: HEADERS.jsonBody,

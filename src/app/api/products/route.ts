@@ -17,10 +17,17 @@ export async function GET(request: Request) {
     searchParams.set('sortOrder', 'desc');
   }
   // Convert search parameters to a query string
-  const queryString = searchParams.toString();
+
   // Build the external API URL with query string
-  const baseUrl = `${process.env.API_URL}/products`;
-  const url = `${baseUrl}?${queryString}`;
+
+  const query = searchParams.get('query') || '';
+
+  // Build external API URL
+  const baseUrl = `${process.env.NEXT_API_URL}/products`;
+  const url = query
+    ? `${baseUrl}`
+    : `${baseUrl}?sortBy=bestSelling&sortOrder=desc`;
+
   // Fetch from external API
   const response = await fetch(url, {
     headers: {
