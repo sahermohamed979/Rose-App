@@ -152,7 +152,6 @@
       "passwordResetError": "Something went wrong. Please try again",
       "linkExpiredOrInvalid": "Link expired or invalid"
     },
-
     "emailSchema": {
       "emailRequired": "Email is required",
       "validEmail": "Please enter a valid email"
@@ -187,5 +186,115 @@
     "errorDescription": "We couldn't load this product. Please try again later.",
     "backToProducts": "Back to products",
     "productDoesNotExist": "The product you are looking for does not exist."
+  },
+  "header": {
+    "searchPlaceholder": "What awesome gift are you looking for?",
+    "headerLogin": "Login",
+    "deliver": "Deliver to:",
+    "country": "Cairo",
+    "hello": "Hello",
+    "searchResult": "Search Result:",
+    "suggestedProduct": "Products you may like:",
+    "noProducts": "No products found",
+    "searchSchema": "Search query is required",
+    "searchError": "Search failed. Try again",
+    "searchRating": "Rating:",
+    "productRating": "rating",
+    "subHeader": {
+      "subHeaderHome": "home",
+      "subHeaderProducts": "products",
+      "subHeaderOccasions": "occasions",
+      "subHeaderCategories": "categories",
+      "subHeaderContact": "contact",
+      "subHeaderAbout": "about"
+    }
+  },
+  "footer": {
+    "logo": {
+      "title": "Rose E-Commerce App",
+      "copyright": "All rights reserved | 2025"
+    },
+    "nav": {
+      "title": "Discover our website",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "faq": "FAQs"
+    },
+    "newsletter": {
+      "title1": "Get",
+      "titleHighlight": "20%",
+      "title2": "Off Discount Coupon",
+      "subtitle": "By subscribing to our newsletter",
+      "emailPlaceholder": "Enter Your Email",
+      "subscribe": "Subscribe",
+      "successMessage": "Successfully subscribed!"
+    }
+  },
+  "userMenu": {
+    "account": "Account",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "clearAll": "Clear all",
+    "markRead": "Mark as read",
+    "delete": "Delete",
+    "empty": "No notifications yet"
+  },
+  "home": {
+    "about": {
+      "label": "About",
+      "title": "Delivering the <highlight>Finest</highlight> Gift Boxes for Your <highlight>Special</highlight> Moments",
+      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, or a simple 'thank you,' our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
+      "discover": "Discover",
+      "features": {
+        "price": "Competitive Prices & Easy Shopping",
+        "quality": "Premium Quality & Elegant Packaging",
+        "occasion": "Perfect for Every Occasion",
+        "delivery": "Fast & Reliable Delivery"
+      }
+    },
+    "gallery": {
+      "label": "Gallery",
+      "title": "Check Out our Wonderful Gallery"
+    },
+    "testimonials": {
+      "label": "Testimonials",
+      "title": "What Our Customers Say"
+    },
+    "partners": {
+      "title": "Trusted by over <highlight>4.5k+</highlight> companies"
+    },
+    "bestSelling": "Best Selling",
+    "bestSellingSubtitle": "<secondary>Check Out </secondary>What Everyone’s<secondary> Buying</secondary><br></br>Right Now",
+    "viewAll": "View All",
+    "mostPopular": "Most Popular",
+    "viewMore": "View More",
+    "wedding": "Wedding",
+    "birthday": "Birthday",
+    "anniversary": "Anniversary",
+    "engagement": "Engagement",
+    "addToCart": "Add to Cart",
+    "addToWishlist": "Add to Wishlist",
+    "exploreGifts": "Explore gifts",
+    "bestSellingDescription": "Not sure what to choose?\nStart with our best sellers, these are the gifts our customers keep coming back for.\nWhether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "noProductsAvailable": "No products available for this occasion right now.",
+    "faliureToLoad": "Failed to load products. Please try again"
+  },
+  "currency": "EGP",
+  "productBadges": {
+    "outOfStock": "Out of Stock",
+    "new": "New",
+    "hot": "Hot"
   }
 }
