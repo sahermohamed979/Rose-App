@@ -61,7 +61,7 @@ export default function FooterNewsletter() {
       >
         <div
           className={cn(
-            'relative w-full md:w-96 flex items-center bg-bg-default rounded-full border border-transparent',
+            'relative w-full md:w-96 flex items-center bg-zinc-500 dark:bg-maroon-800 rounded-full border border-transparent',
             'transition-colors focus-within:border-border-primary overflow-hidden'
           )}
         >
@@ -70,13 +70,13 @@ export default function FooterNewsletter() {
             onBlur={onEmailBlur}
             type="email"
             placeholder={t('emailPlaceholder')}
-            className="flex-1 bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:border-transparent hover:border-transparent hover:shadow-none hover:ring-0 px-4 text-sm text-text-muted placeholder:text-text-muted"
+            className="flex-1 bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:border-transparent hover:border-transparent hover:shadow-none hover:ring-0 px-4 text-sm text-white placeholder:text-text-muted"
             disabled={isPending}
           />
           <Button
             type="submit"
             loading={isPending}
-            className="h-11 rounded-full bg-bg-primary-fade text-text-primary hover:text-text-primary-faint hover:bg-bg-primary-faint px-6 font-medium gap-2"
+            className="h-11 rounded-full bg-bg-primary-fade text-text-primary hover:text-text-primary-faint hover:bg-bg-primary-faint dark:hover:text-white dark:hover:bg-maroon-700 px-6 font-medium gap-2"
           >
             {t('subscribe')}{' '}
             <ArrowRight className="w-4 h-4 rtl:-scale-x-100" />

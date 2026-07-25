@@ -1,5 +1,5 @@
 'use client';
-import { usePathname } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 
 import {
   ClipboardList,
@@ -10,7 +10,6 @@ import {
   PartyPopper,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import React from 'react';
 
 export default function SubHeader() {
@@ -21,7 +20,7 @@ export default function SubHeader() {
     { href: '/', label: 'subHeaderHome', icon: <Home /> },
     { href: '/products', label: 'subHeaderProducts', icon: <Gift /> },
     {
-      href: ' /categories',
+      href: '/categories',
       label: 'subHeaderCategories',
       icon: <ClipboardList />,
     },
@@ -47,7 +46,7 @@ export default function SubHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex flex-row gap-2 p-3 text-[16px] transition-all ${
+              className={`flex flex-row gap-2 py-2 px-3 text-[16px] transition-all ${
                 isActive
                   ? ' border-soft-pink-200 border-b-2  text-soft-pink-200 dark:border-maroon-800 dark:text-maroon-800'
                   : ' text-text-inverse'
