@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 // Schema for search input validation
-export const searchSchema = (t: (key: string) => string) =>
+export const searchSchema = () =>
   z.object({
-    query: z.string().min(1, { message: t('searchSchema') }),
+    query: z.string().min(1, { message: 'Search query is required' }),
   });
 
 // Schema for an individual product
