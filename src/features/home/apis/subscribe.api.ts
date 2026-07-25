@@ -1,27 +1,32 @@
+'use server';
+
+import type { ApiResponse } from '@/shared/lib/types/api';
 import { SubscribeFormValues } from '../schemas/subscribe.schema';
 
-/**
- * API function to handle newsletter subscription requests.
- * TODO: Replace this placeholder with the actual API implementation once provided by the backend team.
- */
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function subscribeToNewsletter(
   values: SubscribeFormValues
 ): Promise<{ success: boolean; message: string }> {
-  // --- Logic ---
-  // Space reserved for the actual fetch/axios call:
-  // const response = await fetch('https://api.example.com/subscribe', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(values),
-  // });
-  // return response.json();
-
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        success: true,
-        message: 'Successfully subscribed to the newsletter!',
-      });
-    }, 1000);
+  const res = await fetch(`${BASE_URL}/subscriptions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(values),
   });
+
+  const data: ApiResponse<unknown> = await res.json();
+  console.log(data);
+
+  if (!data.status) {
+    return {
+      success: false,
+      message:
+        data.message || 'Subscription failed. Please try again.',
+    };
+  }
+
+  return {
+    success: true,
+    message: data.message || 'Successfully subscribed!',
+  };
 }
