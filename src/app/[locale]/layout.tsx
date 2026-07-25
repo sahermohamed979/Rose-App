@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
 import '../globals.css';
-import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import { Toaster } from '@/shared/components/ui/sonner';
 
 const tajawal = Tajawal({
@@ -70,7 +69,7 @@ export default async function LocaleLayout({
         locale === 'ar' ? 'font-tajawal' : 'font-sans'
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col ">
         <Providers>
           {children}
           <Toaster />

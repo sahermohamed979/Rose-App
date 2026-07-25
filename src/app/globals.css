@@ -763,3 +763,11 @@
     @apply font-sans;
   }
 }
+/* x sign in search input */
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%239CA3AF' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 6.586L12.293 2.293a1 1 0 111.414 1.414L9.414 8l4.293 4.293a1 1 0 01-1.414 1.414L8 9.414l-4.293 4.293a1 1 0 01-1.414-1.414L6.586 8 2.293 3.707a1 1 0 011.414-1.414L8 6.586z'/%3E%3C/svg%3E");
+  cursor: pointer;
+}
