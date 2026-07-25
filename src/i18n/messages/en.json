@@ -179,9 +179,10 @@
     "tryClear": "Try clearing or changing your filters to see more results.",
     "new": "NEW",
     "outOfStock": " OUT OF STOCK",
-    "hot": "Hot",
+    "hot": "HOT",
     "addToWishList": "Add to wishlist",
-    "removeFromWishList": "Remove From wishlist"
+    "removeFromWishList": "Remove From wishlist",
+    "loadingProducts":"Loading products..."
   },
   "ProductDetails": {
     "notFound": "Product not found",
