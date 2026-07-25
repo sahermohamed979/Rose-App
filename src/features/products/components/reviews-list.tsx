@@ -2,11 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { MessageSquareOff } from 'lucide-react';
-import { useProductReviews } from '../hooks/use-product-reviews';
 import { ReviewCard } from './review-card';
 import { ReviewCardSkeleton } from './review-card-skeleton';
+import type { Review } from '../types/product-types';
 
-// Empty State
 function EmptyReviews() {
   const t = useTranslations('productReview');
 
@@ -26,22 +25,31 @@ function EmptyReviews() {
     </div>
   );
 }
-
-interface ReviewsListProps {
-  productId: string;
+// skeleton for fallback when loading reviews
+export function ReviewsListSkeleton() {
+  return (
+    <div
+      className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border-soft flex max-h-[367px] flex-col gap-4 overflow-y-auto pe-1"
+      role="list"
+      aria-busy={true}
+    >
+      {[...Array(3)].map((_, i) => (
+        <ReviewCardSkeleton key={i} />
+      ))}
+    </div>
+  );
 }
 
-export function ReviewsList({ productId }: ReviewsListProps) {
-  // translation
+interface ReviewsListProps {
+  reviews?: Review[];
+  isError?: boolean;
+}
+
+export function ReviewsList({
+  reviews = [],
+  isError = false,
+}: ReviewsListProps) {
   const t = useTranslations('productReview');
-
-  // hook to get reviews
-  const { data, isLoading, isError } = useProductReviews({
-    productId,
-  });
-
-  // extract reviews
-  const reviews = data?.data ?? [];
 
   return (
     <section
@@ -50,17 +58,10 @@ export function ReviewsList({ productId }: ReviewsListProps) {
     >
       {/* Scrollable list */}
       <div
-        className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border-soft flex max-h-[367px] flex-col gap-4 overflow-y-auto pr-1"
+        className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border-soft flex max-h-[367px] flex-col gap-4 overflow-y-auto pe-1"
         role="list"
-        aria-busy={isLoading}
       >
-        {isLoading ? (
-          <>
-            {[...Array(3)].map((_, i) => (
-              <ReviewCardSkeleton key={i} />
-            ))}
-          </>
-        ) : isError ? (
+        {isError ? (
           <div className="flex flex-col items-center gap-2 py-8 text-center">
             <p className="text-sm text-text-danger">
               {t('loadError')}
@@ -70,9 +71,7 @@ export function ReviewsList({ productId }: ReviewsListProps) {
           <EmptyReviews />
         ) : (
           reviews.map((review) => (
-            <div key={review.id} role="listitem">
-              <ReviewCard review={review} />
-            </div>
+            <ReviewCard key={review.id} review={review} />
           ))
         )}
       </div>

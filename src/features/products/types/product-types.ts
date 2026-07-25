@@ -48,14 +48,13 @@ export interface ReviewUser {
   firstName: string;
   lastName: string;
   username: string;
-  email: string;
 }
 
 export interface Review {
   id: string;
   rating: number;
-  title: string;
-  body: string;
+  headline: string;
+  content: string;
   productId: string;
   userId: string;
   createdAt: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { StarRating } from '@/shared/components/ui/star-rating';
 
 interface OverallRatingProps {
@@ -13,14 +13,25 @@ export function OverallRating({
   rating,
   ratingsCount,
 }: OverallRatingProps) {
-  // translation
   const t = useTranslations('productReview');
-
+  const locale = useLocale();
   const hasRatings = ratingsCount > 0;
+  const ratingUnitLabel =
+    ratingsCount === 1 ? t('ratingSingular') : t('ratingPlural');
+
+  const formattedRating = new Intl.NumberFormat(locale, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+    numberingSystem: locale === 'ar' ? 'arab' : 'latn',
+  }).format(rating);
+
+  const formattedCount = new Intl.NumberFormat(locale, {
+    numberingSystem: locale === 'ar' ? 'arab' : 'latn',
+  }).format(ratingsCount);
 
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-xl font-semi-bold text-text-plain">
+      <p className="text-xl font-semibold text-text-plain">
         {t('generalRating')}
       </p>
 
@@ -28,15 +39,10 @@ export function OverallRating({
         <>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold text-text-plain">
-              {rating.toFixed(1)}
+              {formattedRating}
             </span>
             <span className="text-sm text-text-muted">
-              ({ratingsCount}{' '}
-              {ratingsCount === 1
-                ? //   singular and plural
-                  t('ratingSingular')
-                : t('ratingPlural')}
-              )
+              ({formattedCount} {ratingUnitLabel})
             </span>
           </div>
           <StarRating value={rating} size="lg" readOnly />

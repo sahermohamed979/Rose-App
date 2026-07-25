@@ -87,7 +87,7 @@ function StarRating({
               <Star
                 className={cn(
                   sizeMap[size],
-                  'absolute inset-0 fill-yellow-400 text-yellow-400 transition-colors pointer-events-none'
+                  'absolute inset-0 fill-text-warning text-text-warning transition-colors pointer-events-none'
                 )}
                 style={{ clipPath }}
                 strokeWidth={1.5}

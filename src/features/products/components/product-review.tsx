@@ -1,23 +1,46 @@
-'use client';
+/**
+ * you only need to pass the product id and the component will handle the rest
+ * for example:
+ * <ProductReview productId="1" />
+ *
+ */
 
-import { useTranslations } from 'next-intl';
+import { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
 import { OverallRating } from './rating';
-import { ReviewsList } from './reviews-list';
+import { ReviewsList, ReviewsListSkeleton } from './reviews-list';
+import {
+  getProductReviews,
+  getProductById,
+} from '../apis/product-reviews.actions';
 
 interface ProductReviewProps {
   productId: string;
-  rating: number;
-  ratingsCount: number;
   className?: string;
 }
 
-export function ProductReview({
+export async function ProductReview({
   productId,
-  rating,
-  ratingsCount,
   className = '',
 }: ProductReviewProps) {
-  const t = useTranslations('productReview');
+  const t = await getTranslations('productReview');
+
+  const [productResponse, reviewsResponse] = await Promise.all([
+    getProductById(productId),
+    getProductReviews({ productId }),
+  ]);
+
+  const rating = productResponse.status
+    ? productResponse.payload.product.rating
+    : 0;
+  const ratingsCount = productResponse.status
+    ? productResponse.payload.product.ratings
+    : 0;
+
+  const reviews = reviewsResponse.status
+    ? (reviewsResponse.payload?.data ?? [])
+    : [];
+  const isError = !reviewsResponse.status;
 
   return (
     <div className={`flex flex-col gap-6 w-full ${className}`}>
@@ -39,7 +62,9 @@ export function ProductReview({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Reviews List Section (takes 2 columns) */}
         <div className="lg:col-span-2">
-          <ReviewsList productId={productId} />
+          <Suspense fallback={<ReviewsListSkeleton />}>
+            <ReviewsList reviews={reviews} isError={isError} />
+          </Suspense>
         </div>
 
         {/* Placeholder for Add Review Form (takes 1 column - to be added later) */}
