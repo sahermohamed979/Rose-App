@@ -15,7 +15,6 @@ export async function subscribeToNewsletter(
   });
 
   const data: ApiResponse<unknown> = await res.json();
-  console.log(data);
 
   if (!data.status) {
     return {
