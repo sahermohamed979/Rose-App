@@ -26,8 +26,8 @@ type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
   scrollNext: () => void
-  canScrollPrev: boolean
-  canScrollNext: boolean
+  canScrollPrev?: boolean
+  canScrollNext?: boolean
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -58,8 +58,8 @@ function Carousel({
     },
     plugins
   )
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-  const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const [canScrollPrev, setCanScrollPrev] = React.useState<boolean>()
+  const [canScrollNext, setCanScrollNext] = React.useState<boolean>()
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
@@ -187,11 +187,11 @@ function CarouselPrevious({
       className={cn(
         "absolute touch-manipulation rounded-full",
         orientation === "horizontal"
-          ? "inset-y-0 -start-12 my-auto"
-          : "-top-12 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90",
+          ? "inset-y-0 -inset-s-12 my-auto"
+          : "-top-12 inset-s-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollPrev}
+      disabled={canScrollPrev === false}
       onClick={scrollPrev}
       {...props}
     >
@@ -217,11 +217,11 @@ function CarouselNext({
       className={cn(
         "absolute touch-manipulation rounded-full",
         orientation === "horizontal"
-          ? "inset-y-0 -end-12 my-auto"
-          : "-bottom-12 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90",
+          ? "inset-y-0 -inset-e-12 my-auto"
+          : "-bottom-12 inset-s-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollNext}
+      disabled={canScrollNext === false}
       onClick={scrollNext}
       {...props}
     >
