@@ -12,7 +12,7 @@ import { useRouter } from '@/i18n/navigation';
 
 function AboutSection() {
   // Translations
-  const t = useTranslations('header.home.about');
+  const t = useTranslations('home.about');
 
   // Hooks
   const router = useRouter();

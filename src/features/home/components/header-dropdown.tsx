@@ -21,7 +21,7 @@ import { useTranslations } from 'next-intl';
 export default function HeaderDropdown({ name }: { name: string }) {
   // Translation
 
-  const t = useTranslations('header');
+  const t = useTranslations('');
   // get user role
   const { data: session } = useSession();
   return (
