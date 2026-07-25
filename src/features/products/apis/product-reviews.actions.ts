@@ -1,14 +1,12 @@
-'use server';
 import type { ApiResponse } from '@/shared/lib/types/api';
 import type {
   ProductPayload,
   ReviewsPayload,
 } from '../types/product-types';
 
-const BASE_URL = process.env.NEXT_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// ─── Get Product by ID ────────────────────────────────────────────────────────
-
+// Get Product by ID
 export async function getProductById(
   id: string
 ): Promise<ApiResponse<ProductPayload>> {
@@ -36,7 +34,7 @@ export async function getProductById(
   }
 }
 
-// ─── Get Reviews (Paginated, filtered by productId or userId) ─────────────────
+// Get Product Reviews
 
 export interface GetProductReviewsParams {
   productId?: string;
@@ -58,12 +56,9 @@ export async function getProductReviews({
   if (userId) params.append('userId', userId);
 
   try {
-    const res = await fetch(
-      `${BASE_URL}/reviews?${params.toString()}`,
-      {
-        cache: 'no-store',
-      }
-    );
+    const url = `${BASE_URL}/reviews?${params.toString()}`;
+
+    const res = await fetch(url, { cache: 'no-store' });
 
     const data = await res.json();
 
