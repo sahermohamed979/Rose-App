@@ -10,10 +10,11 @@ import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+
 import HeaderSearch from './header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
+import { Link } from '@/i18n/navigation';
 
 export default function HeaderActions() {
   const { data: session, status } = useSession();
@@ -75,11 +76,12 @@ export default function HeaderActions() {
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && (
-            <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-              {favoriteCount}
-            </span>
-          )}
+          {status === 'authenticated' &&
+            Number(favoriteCount) > 0 && (
+              <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
+                {favoriteCount}
+              </span>
+            )}
         </Link>
 
         {/* Cart link */}
@@ -88,7 +90,7 @@ export default function HeaderActions() {
           className="relative"
         >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && (
+          {status === 'authenticated' && Number(cartCount) > 0 && (
             <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
               {cartCount}
             </span>

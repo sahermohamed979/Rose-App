@@ -11,9 +11,9 @@ import { Input } from '@/shared/components/ui/input';
 import { SearchIcon, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { SearchSkeleton } from '../skeletons/skeletons-search';
-import Link from 'next/link';
 import { Product } from '../types/search-types';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 export default function HeaderSearch() {
   //  search input state
@@ -25,29 +25,66 @@ export default function HeaderSearch() {
   // Translations
   const t = useTranslations('header');
 
-  // Fetch data using React Query
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['products', debouncedQuery],
-    queryFn: () =>
-      debouncedQuery.length >= 2
-        ? searchProducts(debouncedQuery)
-        : fetchSuggestedProducts(),
-    enabled: isFocused,
+  // Fetch suggested products
+  const { data: suggestedData } = useQuery({
+    queryKey: ['suggested-products'],
+    queryFn: fetchSuggestedProducts,
+    enabled: isFocused && debouncedQuery.length < 2,
   });
-  // search filter
-  const results = (data?.data || []).filter((product) =>
-    product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
-  );
+
+  // Fetch search results only when query has 2 or more characters
+  const {
+    data: searchData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['search-products', debouncedQuery],
+    queryFn: () => searchProducts(debouncedQuery),
+    enabled: isFocused && debouncedQuery.length >= 2,
+  });
+
+  // Get products based on query length
+  const rawProducts =
+    debouncedQuery.length >= 2
+      ? searchData?.data || []
+      : suggestedData?.data || [];
+
+  const results =
+    debouncedQuery.length >= 2
+      ? rawProducts.filter((product) =>
+          product.title
+            .toLowerCase()
+            .includes(debouncedQuery.toLowerCase())
+        )
+      : rawProducts;
+
+  // highlight match search result
+  const highlightMatch = (title: string, query: string) => {
+    if (!query) {
+      return title;
+    }
+
+    const parts = title.split(new RegExp(`(${query})`, 'gi'));
+    return parts.map((part, i) =>
+      part.toLowerCase() === query.toLowerCase() ? (
+        <span key={i} className="text-base text-text-secondary">
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  };
   return (
-    <div className="relative w-full grow">
+    <div className="relative w-full grow  ">
       {/* Search input area */}
-      <div className="relative min-w-50 flex items-center">
+      <div className="relative min-w-50 flex items-center ">
         <div className="absolute ps-3 flex items-center pointer-events-none">
           <SearchIcon className="w-5 h-5 text-text-muted" />
         </div>
 
         <Input
-          className="ps-10 pe-4 w-full h-10 border rounded-lg"
+          className="ps-10 pe-4 w-full h-10 border rounded-lg bg-bg-plain"
           type="search"
           placeholder={t('searchPlaceholder')}
           onChange={(e) => setQuery(e.target.value)}
@@ -67,7 +104,7 @@ export default function HeaderSearch() {
             <SearchSkeleton />
           ) : (
             <>
-              <div className="p-2 text-sm text-text-primary font-bold border-b">
+              <div className="p-2 text-sm text-text-primary font-bold ">
                 {debouncedQuery.length >= 2
                   ? t('searchResult')
                   : t('suggestedProduct')}
@@ -78,7 +115,7 @@ export default function HeaderSearch() {
                   <Link
                     href={`/products/${product.id}`}
                     key={product.id}
-                    className="flex items-center gap-4 p-4 hover:bg-bg-subtle transition-colors border-b"
+                    className="flex items-center gap-4 p-4 hover:bg-bg-subtle rounded-b-lg transition-colors border-t"
                     onClick={() => setIsFocused(false)}
                   >
                     <div className="w-16 h-16 shrink-0">
@@ -93,24 +130,11 @@ export default function HeaderSearch() {
 
                     {/* Product details */}
                     <div className="grow flex flex-col justify-center">
-                      <h3 className="font-semibold text-sm text-text-plain">
-                        {product.title
-                          .split(
-                            new RegExp(`(${debouncedQuery})`, 'gi')
-                          )
-                          .map((part, i) =>
-                            part.toLowerCase() ===
-                            debouncedQuery.toLowerCase() ? (
-                              <span
-                                key={i}
-                                className="text-text-secondary"
-                              >
-                                {part}
-                              </span>
-                            ) : (
-                              part
-                            )
-                          )}
+                      <h3 className="font-semibold text-sm text-text-plain line-clamp-1">
+                        {highlightMatch(
+                          product.title,
+                          debouncedQuery
+                        )}
                       </h3>
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-text-plain text-lg">
