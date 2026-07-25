@@ -23,17 +23,6 @@ function NotificationCardSkeleton() {
 export default function NotificationsSkeleton() {
   return (
     <div className="flex flex-col">
-      {/* Header skeleton */}
-      <div className="py-4 px-4 bg-bg-primary-saturated rounded-t-xl">
-        <div className="h-6 w-36 rounded bg-white/20 animate-pulse" />
-      </div>
-
-      {/* Toolbar skeleton */}
-      <div className="flex justify-between p-2.5">
-        <div className="h-4 w-24 rounded bg-bg-soft animate-pulse" />
-        <div className="h-4 w-28 rounded bg-bg-soft animate-pulse" />
-      </div>
-
       {/* Notification card skeletons */}
       {Array.from({ length: 5 }).map((_, i) => (
         <NotificationCardSkeleton key={i} />
