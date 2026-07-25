@@ -22,7 +22,7 @@ const extendedTestimonials = [
 
 function TestimonialsSection() {
   // Translation
-  const t = useTranslations('header.home');
+  const t = useTranslations('home');
   const locale = useLocale();
 
   // Plugins

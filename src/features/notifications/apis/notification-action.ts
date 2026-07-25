@@ -22,7 +22,7 @@ export async function getAllNotification(req: NextRequest) {
   const page = Number(req.nextUrl.searchParams.get('page')) || 1;
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/notifications?page=${page}`,
+    `${process.env.NEXT_API_URL}/notifications?page=${page}`,
     {
       method: 'GET',
       headers: {
@@ -46,7 +46,7 @@ export async function markAllAsReadServerAction() {
   }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/notifications/mark-all-read`,
+      `${process.env.NEXT_API_URL}/notifications/mark-all-read`,
       {
         method: 'PATCH',
         headers: {
@@ -71,7 +71,7 @@ export async function markOneAsReadServerAction(id: string) {
   }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
+      `${process.env.NEXT_API_URL}/notifications/${id}`,
       {
         method: 'PATCH',
         headers: {
@@ -100,7 +100,7 @@ export async function clearAllNotificationsServerAction() {
   }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/notifications/clear-all`,
+      `${process.env.NEXT_API_URL}/notifications/clear-all`,
       {
         method: 'DELETE',
         headers: {
@@ -125,7 +125,7 @@ export async function clearOneNotificationServerAction(id: string) {
   }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/notifications/${id}`,
+      `${process.env.NEXT_API_URL}/notifications/${id}`,
       {
         method: 'DELETE',
         headers: {

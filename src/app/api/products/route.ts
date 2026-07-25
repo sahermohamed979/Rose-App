@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const query = searchParams.get('query') || '';
 
   // Build external API URL
-  const baseUrl = `${process.env.API_URL}/products`;
+  const baseUrl = `${process.env.NEXT_API_URL}/products`;
   const url = query
     ? `${baseUrl}`
     : `${baseUrl}?limit=5&sortBy=bestSelling&sortOrder=desc`;
