@@ -7,8 +7,8 @@ import { FetchProductsResult } from '../types/search-types';
 // Search products by query
 export const searchProducts = async (query: string) => {
   // Validate query schema
-  const t = (key: string) => key;
-  const schema = searchSchema(t);
+
+  const schema = searchSchema();
   const result = schema.safeParse({ query });
 
   if (!result.success) {
