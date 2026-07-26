@@ -1,35 +1,30 @@
+import { cn } from '@/shared/lib/utils/utils';
 import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { LoaderCircle } from 'lucide-react';
-
-import { cn } from '@/shared/lib/utils/utils';
-import { useTranslations } from 'next-intl';
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-[16px_14px]  border border-transparent bg-clip-padding text-base leading-none font-semibold whitespace-nowrap transition-all outline-none select-none  active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:bg-bg-soft disabled:text-text-muted aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20 dark:aria-invalid:border-danger/50 dark:aria-invalid:ring-danger/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default:
-          'bg-bg-primary text-text-inverse enabled:hover:bg-bg-primary-saturated data-[hover=true]:bg-bg-primary-saturated dark:disabled:bg-bg-muted',
+          'bg-primary text-primary-foreground hover:bg-primary/80',
         outline:
-          'border-border border-border-primary bg-bg-plain text-text-primary enabled:hover:bg-bg-primary-fade data-[hover=true]:bg-bg-primary-fade disabled:border-none dark:disabled:bg-bg-muted dark:border-border-primary  dark:text-text-primary-dark dark:enabled:hover:bg-bg-primary-fade dark:data-[hover=true]:bg-bg-primary-fade',
+          'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
         secondary:
-          'bg-bg-primary-fade text-text-primary enabled:hover:bg-bg-primary-faint data-[hover=true]:bg-bg-primary-faint dark:disabled:bg-bg-muted dark:enabled:text-text-plain ',
-        subtle:
-          'bg-bg-muted text-text-plain enabled:border-border-soft enabled:hover:bg-bg-soft data-[hover=true]:bg-bg-soft dark:disabled:bg-bg-muted dark:enabled:text-text-plain  dark:enabled:hover:border-border-primary dark:data-[hover=true]:border-border-primary',
+          'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
         ghost:
-          'bg-transparent text-text-plain  enabled:hover:bg-bg-soft data-[hover=true]:bg-bg-soft dark:disabled:bg-bg-muted dark:enabled:text-text-plain  dark:enabled:bg-transparent dark:enabled:hover:bg-bg-soft dark:data-[hover=true]:bg-bg-soft',
+          'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
         destructive:
-          'bg-bg-danger text-text-inverse enabled:hover:bg-bg-danger-saturated data-[hover=true]:bg-bg-danger-saturated dark:disabled:bg-bg-muted',
-        link: 'text-primary underline-offset-4 hover:underline ',
+          'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
+        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         default:
-          ' gap-1.5 p-[14px_66px] has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: 'h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+          'h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2',
+        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: 'h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2',
         icon: 'size-8',
         'icon-xs':
           "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
@@ -49,32 +44,14 @@ function Button({
   className,
   variant = 'default',
   size = 'default',
-  loading,
-  forceHover = false,
-  children,
   ...props
-}: ButtonPrimitive.Props &
-  VariantProps<typeof buttonVariants> & { loading?: boolean } & {
-    forceHover?: boolean;
-  }) {
-  const t = useTranslations();
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      data-hover={forceHover ? 'true' : undefined}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-      disabled={loading || props.disabled}
-    >
-      {loading ? (
-        <>
-          {t('button.loading')}{' '}
-          <LoaderCircle className="animate-spin" />
-        </>
-      ) : (
-        <>{children}</>
-      )}
-    </ButtonPrimitive>
+    />
   );
 }
 
