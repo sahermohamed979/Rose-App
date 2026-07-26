@@ -30,7 +30,6 @@ export default function HomeScreen({
           <MostPopularSection searchParams={searchParams} />
         </Suspense>
       </div>
-      <Footer />
     </div>
   );
 }
