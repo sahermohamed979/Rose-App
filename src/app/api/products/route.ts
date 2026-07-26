@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   const baseUrl = `${process.env.NEXT_API_URL}/products`;
   const url = query
     ? `${baseUrl}`
-    : `${baseUrl}?sortBy=bestSelling&sortOrder=desc`;
+    : `${baseUrl}?limit=5&sortBy=bestSelling&sortOrder=desc`;
 
   // Fetch from external API
   const response = await fetch(url, {
