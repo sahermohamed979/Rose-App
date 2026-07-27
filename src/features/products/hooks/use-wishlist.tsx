@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { AddToWishlistResponse } from '../types/products-types';
 
 export function useWishlist(
   productId: string | number,
@@ -7,13 +10,54 @@ export function useWishlist(
   initialWishlisted: boolean
 ) {
   const queryClient = useQueryClient();
+
   const [isWishlist, setIsWishlist] = useState<boolean>(initialWishlisted);
   const [wishlistItemId, setWishlistItemId] = useState<string | null | undefined>(
     initialWishlistItemId
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const toggleWishlist = async () => {
+  // Tracks the last props seen, so we can sync state when a prop changes
+  // without using an effect (see: react.dev - adjusting state when a prop changes)
+  const [prevInitialWishlisted, setPrevInitialWishlisted] = useState(initialWishlisted);
+  const [prevWishlistItemId, setPrevWishlistItemId] = useState(initialWishlistItemId);
+
+  if (
+    initialWishlisted !== prevInitialWishlisted ||
+    initialWishlistItemId !== prevWishlistItemId
+  ) {
+    setPrevInitialWishlisted(initialWishlisted);
+    setPrevWishlistItemId(initialWishlistItemId);
+    setIsWishlist(initialWishlisted);
+    setWishlistItemId(initialWishlistItemId);
+  }
+
+  async function addToWishlist(): Promise<string | undefined> {
+    const response = await fetch('/api/wishlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ productId }),
+    });
+
+    if (!response.ok && response.status !== 409) {
+      throw new Error('Failed to add to wishlist');
+    }
+
+    const data: AddToWishlistResponse = await response.json();
+    return data.payload?.wishlistItem?.id;
+  }
+
+  async function removeFromWishlist(itemId: string): Promise<void> {
+    const response = await fetch(`/api/wishlist/${itemId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to remove from wishlist');
+    }
+  }
+
+  async function toggleWishlist() {
     if (isLoading) {return};
 
     const previousState = isWishlist;
@@ -25,45 +69,26 @@ export function useWishlist(
 
     try {
       if (newState) {
-        const response = await fetch('/api/wishlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ productId }),
-        });
-
-        if (!response.ok && response.status !== 409) {
-          throw new Error('Failed to add to wishlist');
-        }
-
-        const data = await response.json();
-        setWishlistItemId(data.payload?.wishlistItem?.id);
+        const newWishlistItemId = await addToWishlist();
+        setWishlistItemId(newWishlistItemId);
       } else {
         if (!wishlistItemId) {
-          console.error('No wishlistItemId available to delete');
           setIsWishlist(true);
           return;
         }
-
-        const response = await fetch(`/api/wishlist/${wishlistItemId}`, {
-          method: 'DELETE',
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to remove from wishlist');
-        }
-
+        await removeFromWishlist(wishlistItemId);
         setWishlistItemId(null);
       }
 
       queryClient.invalidateQueries({ queryKey: ['user-wishlist'] });
     } catch (error) {
+      console.error('Wishlist toggle failed:', error);
       setIsWishlist(previousState);
       setWishlistItemId(previousWishlistItemId);
-      console.error('Wishlist error:', error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   return { isWishlist, isLoading, toggleWishlist };
 }

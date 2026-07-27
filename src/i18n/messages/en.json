@@ -209,6 +209,7 @@
     "searchError": "Search failed. Try again",
     "searchRating": "Rating:",
     "productRating": "rating",
+    "loadingMore": "Loading more",
     "subHeader": {
       "subHeaderHome": "home",
       "subHeaderProducts": "products",
