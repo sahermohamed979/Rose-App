@@ -180,7 +180,8 @@
     "outOfStock": "نفدت الكمية",
     "hot": "رائج",
     "addToWishList": "اضافه الي المفضله",
-    "removeFromWishList": "ازاله من المفضله"
+    "removeFromWishList": "ازاله من المفضله",
+    "loadingProducts": "جاري تحميل المنتجات..."
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -208,6 +209,7 @@
     "searchError": "فشل البحث. حاول مجدداً.",
     "searchRating": "التقييم:",
     "productRating": "تقيم",
+    "loadingMore": "جاري تحميل المزيد",
     "subHeader": {
       "subHeaderHome": "الرئيسة",
       "subHeaderProducts": "المنتجات",
