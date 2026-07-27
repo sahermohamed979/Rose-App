@@ -75,3 +75,18 @@ export interface ReviewsPayload {
   data: Review[];
   metadata: ReviewsMetadata;
 }
+
+export interface PaginationMeta {
+  totalPages: number;
+  totalItems?: number;
+  currentPage?: number;
+}
+
+export interface ProductsResponse {
+  status: boolean;
+  code: number;
+  payload: {
+    data: Product[];
+    metadata: PaginationMeta;
+  };
+}

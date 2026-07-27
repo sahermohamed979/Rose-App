@@ -10,34 +10,39 @@ import { useHeaderSearch } from '../hooks/use-header-search';
 
 const SCROLL_BOTTOM_THRESHOLD_PX = 50;
 const MAX_SEARCH_LENGTH = 200;
+const BLUR_CLOSE_DELAY_MS = 200;
 
 export default function HeaderSearch() {
-  // Translation
   const t = useTranslations('header');
-
-  // Ref
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Custom hooks
   const {
     query,
     setQuery,
     results,
     isSearching,
+    isDropdownOpen,
     isLoading,
     isError,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     debouncedQuery,
+    handleFocus,
+    handleBlur,
+    closeDropdown,
   } = useHeaderSearch();
 
-  // Functions
   function handleScroll() {
-    if (!dropdownRef.current || !isSearching) {return};
+    if (!dropdownRef.current || !isSearching) {
+      return;
+    }
 
-    const { scrollTop, scrollHeight, clientHeight } = dropdownRef.current;
-    const isNearBottom = scrollHeight - scrollTop - clientHeight < SCROLL_BOTTOM_THRESHOLD_PX;
+    const { scrollTop, scrollHeight, clientHeight } =
+      dropdownRef.current;
+    const isNearBottom =
+      scrollHeight - scrollTop - clientHeight <
+      SCROLL_BOTTOM_THRESHOLD_PX;
 
     if (isNearBottom && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -59,10 +64,12 @@ export default function HeaderSearch() {
           placeholder={t('searchPlaceholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={() => setTimeout(handleBlur, BLUR_CLOSE_DELAY_MS)}
         />
       </div>
 
-      {query.length > 0 && (
+      {isDropdownOpen && (
         <div
           ref={dropdownRef}
           onScroll={handleScroll}
@@ -79,7 +86,9 @@ export default function HeaderSearch() {
           ) : (
             <>
               <div className="p-2 text-sm text-text-primary font-bold">
-                {isSearching ? t('searchResult') : t('suggestedProduct')}
+                {isSearching
+                  ? t('searchResult')
+                  : t('suggestedProduct')}
               </div>
 
               {results.length > 0 ? (
@@ -89,7 +98,7 @@ export default function HeaderSearch() {
                       key={product.id}
                       product={product}
                       query={debouncedQuery}
-                      onClick={() => setQuery('')}
+                      onClick={closeDropdown}
                     />
                   ))}
                   {isFetchingNextPage && (
