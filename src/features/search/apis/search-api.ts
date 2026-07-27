@@ -43,8 +43,7 @@ async function fetchProductsPage(
       data: validation.data,
       hasMore: page < totalPages,
     };
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
+  } catch {
     return EMPTY_RESULT;
   }
 }

@@ -7,7 +7,6 @@ import {
   Heart,
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { useQuery } from '@tanstack/react-query';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { useTranslations } from 'next-intl';
@@ -16,8 +15,6 @@ import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
-import { fetchWishlist } from '@/features/products/apis/wishlist-api';
-import { fetchCart } from '@/features/products/apis/cart-api';
 import { CountBadge } from './count-bages';
 
 export default function HeaderActions() {
@@ -28,23 +25,8 @@ export default function HeaderActions() {
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  // Query
-  const { data: wishlistData } = useQuery({
-    queryKey: ['user-wishlist'],
-    queryFn: fetchWishlist,
-    enabled: isAuthenticated,
-  });
-
-  const { data: cartData } = useQuery({
-    queryKey: ['user-cart'],
-    queryFn: fetchCart,
-    enabled: isAuthenticated,
-  });
-
-  // Variables (derived)
-  const wishlistCount =
-    wishlistData?.payload?.wishlistItems?.length || 0;
-  const cartCount = cartData?.payload?.cartItems?.length || 0;
+  const wishlistCount = 8;
+  const cartCount = 8;
 
   return (
     <div className="flex items-center w-full">
