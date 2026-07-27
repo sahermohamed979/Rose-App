@@ -40,9 +40,19 @@ interface SuccessResponse<T> {
 
   payload: T;
 }
+interface IPaginationResponse<T> {
+  data: T[];
+  metadata: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
 
 interface SuccessResponseNoPayload {
   status: true;
+  code?: number;
   message?: string;
 }
 
