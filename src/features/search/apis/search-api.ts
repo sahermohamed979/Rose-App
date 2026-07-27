@@ -1,4 +1,7 @@
-import { ProductsResponseSchema, searchSchema } from '../schema/search-schema';
+import {
+  ProductsResponseSchema,
+  searchSchema,
+} from '../schema/search-schema';
 import { SearchProduct } from '../schema/search-schema';
 
 interface SearchProductsResult {
@@ -7,10 +10,17 @@ interface SearchProductsResult {
   hasMore: boolean;
 }
 
-const EMPTY_RESULT: SearchProductsResult = { success: false, data: [], hasMore: false };
+const EMPTY_RESULT: SearchProductsResult = {
+  success: false,
+  data: [],
+  hasMore: false,
+};
 
 // Fetches a products page and validates the response shape
-async function fetchProductsPage(url: string, page: number): Promise<SearchProductsResult> {
+async function fetchProductsPage(
+  url: string,
+  page: number
+): Promise<SearchProductsResult> {
   try {
     const response = await fetch(url);
     const res = await response.json();
@@ -19,7 +29,9 @@ async function fetchProductsPage(url: string, page: number): Promise<SearchProdu
       return EMPTY_RESULT;
     }
 
-    const validation = ProductsResponseSchema.safeParse(res.payload?.data);
+    const validation = ProductsResponseSchema.safeParse(
+      res.payload?.data
+    );
     if (!validation.success) {
       return EMPTY_RESULT;
     }
@@ -31,13 +43,15 @@ async function fetchProductsPage(url: string, page: number): Promise<SearchProdu
       data: validation.data,
       hasMore: page < totalPages,
     };
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
+  } catch {
     return EMPTY_RESULT;
   }
 }
 
-export async function searchProducts(query: string, page: number = 1): Promise<SearchProductsResult> {
+export async function searchProducts(
+  query: string,
+  page: number = 1
+): Promise<SearchProductsResult> {
   const schema = searchSchema();
   const result = schema.safeParse({ query });
 
@@ -50,6 +64,7 @@ export async function searchProducts(query: string, page: number = 1): Promise<S
 }
 
 export async function fetchSuggestedProducts(): Promise<SearchProductsResult> {
-  const url = '/api/products?limit=5&sortBy=bestSelling&sortOrder=desc';
+  const url =
+    '/api/products?limit=5&sortBy=bestSelling&sortOrder=desc';
   return fetchProductsPage(url, 1);
 }
