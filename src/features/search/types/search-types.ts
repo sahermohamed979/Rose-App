@@ -1,3 +1,5 @@
+import { SearchProduct } from "../schema/search-schema";
+
 // Product data model
 export interface Product {
   id: string;
@@ -12,7 +14,7 @@ export interface Product {
 // Wrapper for fetching product results
 export interface FetchProductsResult {
   success: boolean;
-  data: Product[];
+  data: SearchProduct[];
 }
 
 // API success response structure

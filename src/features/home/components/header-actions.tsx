@@ -1,38 +1,51 @@
 'use client';
 
-import {
-  LocationEdit,
-  User,
-  ShoppingCart,
-  Heart,
-} from 'lucide-react';
+import { LocationEdit, User, ShoppingCart, Heart } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import { useQuery } from '@tanstack/react-query';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { useTranslations } from 'next-intl';
 
-import HeaderSearch from './header-search';
+import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
+import { fetchWishlist } from '@/features/products/apis/wishlist-api';
+import { fetchCart } from '@/features/products/apis/cart-api';
+import { CountBadge } from './count-bages';
 
 export default function HeaderActions() {
-  const { data: session, status } = useSession();
-  // translations
+  // Translation
   const t = useTranslations('header');
 
-  // static counts
-  const cartCount = '8';
-  const favoriteCount = '8';
+  // Session
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
+
+  // Query
+  const { data: wishlistData } = useQuery({
+    queryKey: ['user-wishlist'],
+    queryFn: fetchWishlist,
+    enabled: isAuthenticated,
+  });
+
+  const { data: cartData } = useQuery({
+    queryKey: ['user-cart'],
+    queryFn: fetchCart,
+    enabled: isAuthenticated,
+  });
+
+  // Variables (derived)
+  const wishlistCount = wishlistData?.payload?.wishlistItems?.length || 0;
+  const cartCount = cartData?.payload?.cartItems?.length || 0;
 
   return (
     <div className="flex items-center w-full">
       {/* Location display for authenticated users */}
-      {status === 'authenticated' && (
+      {isAuthenticated && (
         <div className="flex flex-col justify-center items-center px-2 shrink-0">
-          <h2 className="text-text-default text-[12px]">
-            {t('deliver')}
-          </h2>
+          <h2 className="text-text-default text-[12px]">{t('deliver')}</h2>
           <span className="text-text-primary text-[14px] flex items-center gap-1">
             <LocationEdit className="w-5 h-5" /> {t('country')}
           </span>
@@ -43,12 +56,10 @@ export default function HeaderActions() {
 
       {/* User authentication status */}
       <div className="flex items-center gap-1 shrink-0">
-        {status === 'authenticated' ? (
+        {isAuthenticated ? (
           <div className="flex items-center gap-2 px-2 cursor-pointer">
             <div className="flex flex-col leading-none">
-              <span className="text-[12px] text-text-default">
-                {t('hello')}
-              </span>
+              <span className="text-[12px] text-text-default">{t('hello')}</span>
               <span className="text-[14px] font-bold text-text-primary">
                 {session?.user?.firstName}
               </span>
@@ -58,49 +69,27 @@ export default function HeaderActions() {
         ) : (
           <div className="flex items-center gap-1 px-2">
             <User className="w-5 h-5" />
-            <Link
-              href="/login"
-              className="text-text-plain font-medium"
-            >
+            <Link href="/login" className="text-text-plain font-medium">
               {t('headerLogin')}
             </Link>
           </div>
         )}
       </div>
 
-      {/* Action icons  */}
+      {/* Action icons */}
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
-        {/* wish-list link */}
-        <Link
-          href={status === 'authenticated' ? '/wish-list' : '/login'}
-          className="relative"
-        >
+        <Link href={isAuthenticated ? '/wish-list' : '/login'} className="relative">
           <Heart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' &&
-            Number(favoriteCount) > 0 && (
-              <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-                {favoriteCount}
-              </span>
-            )}
+          {isAuthenticated && <CountBadge count={wishlistCount} />}
         </Link>
 
-        {/* Cart link */}
-        <Link
-          href={status === 'authenticated' ? '/cart' : '/login'}
-          className="relative"
-        >
+        <Link href={isAuthenticated ? '/cart' : '/login'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && Number(cartCount) > 0 && (
-            <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-              {cartCount}
-            </span>
-          )}
+          {isAuthenticated && <CountBadge count={cartCount} />}
         </Link>
 
-        {/* Notifications link */}
         <NotificationsContainer status={status} />
 
-        {/* Language and Theme toggles */}
         <div className="flex items-center gap-2 border-s ps-4 border-border-muted">
           <LangToggle />
           <ThemeToggle />
