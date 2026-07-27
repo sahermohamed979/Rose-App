@@ -1,5 +1,19 @@
-import React from 'react';
 import ProductScreen from '@/features/products/screens/product-screen';
-export default function page() {
-  return <ProductScreen />;
+import SidebarFilters from '@/features/products/components/sidebar-filters';
+import { getCategories } from '@/features/products/apis/filter-api';
+
+export default function Page() {
+  const categoriesPromise = getCategories();
+
+  return (
+    <div className="flex gap-5 my-8 px-4 py-8">
+      <aside className="w-1/4 border-r border-border-subtle ">
+        <SidebarFilters categoriesPromise={categoriesPromise} />
+      </aside>
+
+      <main className="w-3/4">
+        <ProductScreen />
+      </main>
+    </div>
+  );
 }

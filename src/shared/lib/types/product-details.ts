@@ -36,16 +36,17 @@ export interface Category {
   immutable: boolean;
   createdAt: string;
   updatedAt: string;
+  subCategories: SubCategory[];
 }
 
 export interface SubCategory {
   id: string;
   title: string;
-  description: string;
-  image: string;
-  immutable: boolean;
-  createdAt: string;
-  updatedAt: string;
+  description?: string;
+  image?: string;
+  immutable?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Occasion {
