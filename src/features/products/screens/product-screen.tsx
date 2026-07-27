@@ -15,18 +15,10 @@ export default function ProductScreen() {
 
   return (
     <>
-      <div className="flex gap-5 my-8">
-        <aside className="w-1/4">{/* Filters sidebar  */}</aside>
-
-        <div className="w-3/4">
-          <div className="container mx-auto px-4 py-8">
-            <ProductGrid products={products} isLoading={isLoading} />
-          </div>
-        </div>
-      </div>
+      <ProductGrid products={products} isLoading={isLoading} />
 
       {!isLoading && totalPages > 1 && (
-        <div className="my-6 w-full flex justify-center items-center">
+        <div className="my-6 flex justify-center items-center">
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

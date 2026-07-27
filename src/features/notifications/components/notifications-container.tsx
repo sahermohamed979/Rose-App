@@ -77,7 +77,7 @@ export default function NotificationsContainer({
       />
       {/*  Dropdown menu content */}
       <DropdownMenuContent
-        className={` min-h-[300px] max-h-[571px] w-[336px] p-0 `}
+        className={` min-h-75 max-h-142.75 w-84 p-0 `}
       >
         <div className=" flex flex-col ">
           {/* notification header  */}
