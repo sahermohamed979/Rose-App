@@ -14,22 +14,23 @@ const SEARCH_DEBOUNCE_MS = 300;
 export function useHeaderSearch() {
   // State
   const [query, setQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   // Custom hooks
   const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_MS);
 
   // Variables (derived)
   const isSearching = debouncedQuery.length >= MIN_SEARCH_LENGTH;
+  const isDropdownOpen = isFocused;
 
   // Query
   const { data: suggestedData, isLoading: isLoadingSuggestions } =
     useQuery({
       queryKey: ['suggested-products'],
       queryFn: fetchSuggestedProducts,
-      enabled: !isSearching,
+      enabled: isFocused && !isSearching,
     });
 
-  // Search results use infinite scroll since results can span multiple pages
   const {
     data: searchPages,
     fetchNextPage,
@@ -44,7 +45,7 @@ export function useHeaderSearch() {
     getNextPageParam: (lastPage, allPages) =>
       lastPage.hasMore ? allPages.length + 1 : undefined,
     initialPageParam: 1,
-    enabled: isSearching,
+    enabled: isFocused && isSearching,
   });
 
   const searchResults =
@@ -52,16 +53,33 @@ export function useHeaderSearch() {
   const suggestedResults = suggestedData?.data || [];
   const results = isSearching ? searchResults : suggestedResults;
 
+  // Functions
+  function handleFocus() {
+    setIsFocused(true);
+  }
+
+  function handleBlur() {
+    setIsFocused(false);
+  }
+
+  function closeDropdown() {
+    setIsFocused(false);
+  }
+
   return {
     query,
     setQuery,
     results,
     isSearching,
+    isDropdownOpen,
     isLoading: isSearching ? isLoadingSearch : isLoadingSuggestions,
     isError,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     debouncedQuery,
+    handleFocus,
+    handleBlur,
+    closeDropdown,
   };
 }

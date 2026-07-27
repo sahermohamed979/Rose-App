@@ -7,13 +7,12 @@ import {
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Product } from '../types/products-types';
-import { useWishlist } from '../hooks/use-wishlist';
-import { useCart } from '../hooks/use-cart';
+import { Product } from '../types/product-types';
+import { useState } from 'react';
 
 const NEW_PRODUCT_WINDOW_DAYS = 30;
 const TOP_RATED_THRESHOLD = 3.5;
-const MAX_RATING_STARS = 4;
+const MAX_RATING_STARS = 5;
 
 interface ProductCardProps {
   product: Product;
@@ -36,50 +35,28 @@ export default function ProductCard({ product }: ProductCardProps) {
   // Translation
   const t = useTranslations('products');
 
-  // Custom hooks
-  const {
-    isWishlist,
-    isLoading: isWishlistLoading,
-    toggleWishlist,
-  } = useWishlist(
-    product.id,
-    product.wishlistItemId,
-    product.isWishlisted || false
-  );
-  const {
-    isInCart,
-    isLoading: isCartLoading,
-    toggleCart,
-  } = useCart(
-    product.id,
-    product.cartItemId,
-    product.isInCart || false
-  );
-
   // Variables (derived)
   const isNew = isRecentProduct(product.createdAt);
   const isOutOfStock = product.stock === 0;
   const isTopRated = (product.rating ?? 0) >= TOP_RATED_THRESHOLD;
   const hasDiscount = Boolean(
-    product.discountValue && product.discountValue > 0
+    product.discountValue && Number(product.discountValue) > 0
   );
   const displayPrice = hasDiscount
     ? product.discountValue
     : product.price;
 
-  // Functions (handlers)
-  const handleWishlistClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleWishlist();
+  const [isInCart, setIsInCart] = useState(false);
+
+  const handleAddToCartClick = () => {
+    setIsInCart((prev) => !prev);
   };
 
-  const handleAddToCartClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleCart();
-  };
+  const [isWishlist, setIsWishlist] = useState(false);
 
+  const handleWishlistClick = () => {
+    setIsWishlist((prev) => !prev);
+  };
   return (
     <div className="bg-bg-plain w-full rounded-xl flex flex-col justify-between relative group">
       {/* Wishlist Button & Badges */}
@@ -87,15 +64,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <button
           type="button"
           onClick={handleWishlistClick}
-          disabled={isWishlistLoading}
-          aria-label={
-            isWishlist ? t('removeFromWishList') : t('addToWishList')
-          }
           className={`relative group/btn flex items-center gap-2 py-2 px-2.5 rounded-full transition-all duration-300 shadow-sm ${
             isWishlist
               ? 'bg-bg-inverse text-text-inverse'
               : 'bg-bg-plain text-text-primary'
-          } ${isWishlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          }`}
         >
           {isWishlist ? (
             <HeartMinus className="w-4 h-4" />
@@ -182,15 +155,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           <button
             type="button"
             onClick={handleAddToCartClick}
-            disabled={isCartLoading || isOutOfStock}
-            aria-label={
-              isInCart ? t('removeFromCart') : t('addToCart')
-            }
             className={`p-2.5 rounded-full transition-colors ${
               isInCart
                 ? 'bg-bg-inverse text-text-inverse'
-                : 'bg-bg-primary-saturated text-text-primary-fade hover:bg-text-primary'
-            } ${isCartLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                : 'bg-bg-primary-saturated text-text-primary-fade hover:bg-text-primary dark:text-maroon-800'
+            }`}
           >
             <ShoppingCart className="w-4 h-4" />
           </button>
