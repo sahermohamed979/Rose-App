@@ -3,7 +3,10 @@ import {
   ApiResponse,
   IPaginationResponse,
 } from '@/shared/lib/types/api';
-import { Category } from '@/shared/lib/types/product-details';
+import {
+  ICategory,
+  IOccasion,
+} from '@/shared/lib/types/product-details';
 
 export async function getCategories() {
   try {
@@ -17,15 +20,37 @@ export async function getCategories() {
       }
     );
 
-    const data: ApiResponse<IPaginationResponse<Category>> =
+    const data: ApiResponse<IPaginationResponse<ICategory>> =
       await response.json();
     if (!data.status) {
-      return [];
+      return null;
     }
 
     return data.payload.data;
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-    return [];
+  } catch {
+    return null;
+  }
+}
+export async function getOccasions() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_API_URL}/occasions`,
+      {
+        method: 'GET',
+        headers: {
+          ...HEADERS.jsonBody,
+        },
+      }
+    );
+
+    const data: ApiResponse<IPaginationResponse<IOccasion>> =
+      await response.json();
+    if (!data.status) {
+      return null;
+    }
+
+    return data.payload.data;
+  } catch {
+    return null;
   }
 }

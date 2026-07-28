@@ -210,7 +210,7 @@
     "starSingular": "{n} star",
     "starPlural": "{n} stars"
   },
-  "productReview.loadError": "Failed to load reviews. Please try again.",
+
   "header": {
     "searchPlaceholder": "What awesome gift are you looking for?",
     "headerLogin": "Login",
