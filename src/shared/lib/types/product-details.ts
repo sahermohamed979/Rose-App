@@ -21,14 +21,14 @@ export interface ProductDetails {
   createdAt: string;
   updatedAt: string;
 
-  category: Category;
+  category: ICategory;
   subCategory: SubCategory | null;
-  occasions: Occasion[];
+  occasions: IOccasion[];
   reviews: Review[];
   _count: ProductCount;
 }
 
-export interface Category {
+export interface ICategory {
   id: string;
   title: string;
   description: string;
@@ -49,10 +49,14 @@ export interface SubCategory {
   updatedAt?: string;
 }
 
-export interface Occasion {
+export interface IOccasion {
   id: string;
   title: string;
-  description: string;
+  description?: string;
+  image?: string;
+  immutable?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Review {
