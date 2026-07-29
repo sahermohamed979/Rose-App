@@ -10,63 +10,57 @@ export default async function PromoCards() {
   return (
     <div className="grid grid-cols-12 gap-6">
       <div className="col-span-4  relative">
-        <Link href="/products?occasion=wedding">
-          <Image
-            src={img1}
-            alt=""
-            className="object-cover size-full rounded-[16px]"
-          />
-          <div className="absolute bottom-6 left-6 rtl:right-6">
-            <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
-              <p className="text-maroon-600 text-xs py-0.5 px-2">
-                {t('categories.wedding')}
-              </p>
-            </div>
-            <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
-              {t('cards.weddingTitle')}
+        <Image
+          src={img1}
+          alt=""
+          className="object-cover size-full rounded-[16px]"
+        />
+        <div className="absolute bottom-6 left-6 rtl:right-6">
+          <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
+            <p className="text-maroon-600 text-xs py-0.5 px-2">
+              {t('categories.wedding')}
             </p>
           </div>
-        </Link>
+          <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
+            {t('cards.weddingTitle')}
+          </p>
+        </div>
       </div>
 
       <div className="col-span-4  relative">
-        <Link href="/products?occasion=engagement">
-          <Image
-            src={img2}
-            alt=""
-            className="object-cover size-full rounded-[16px]"
-          />
-          <div className="absolute bottom-6 left-6 rtl:right-6">
-            <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
-              <p className="text-maroon-600 text-xs py-0.5 px-2">
-                {t('categories.engagement')}
-              </p>
-            </div>
-            <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
-              {t('cards.engagementTitle')}
+        <Image
+          src={img2}
+          alt=""
+          className="object-cover size-full rounded-[16px]"
+        />
+        <div className="absolute bottom-6 left-6 rtl:right-6">
+          <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
+            <p className="text-maroon-600 text-xs py-0.5 px-2">
+              {t('categories.engagement')}
             </p>
           </div>
-        </Link>
+          <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
+            {t('cards.engagementTitle')}
+          </p>
+        </div>
       </div>
 
       <div className="col-span-4  relative">
-        <Link href="/products?occasion=anniversary">
-          <Image
-            src={img3}
-            alt=""
-            className="object-cover size-full rounded-[16px]"
-          />
-          <div className="absolute bottom-6 left-6 rtl:right-6">
-            <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
-              <p className="text-maroon-600 text-xs py-0.5 px-2">
-                {t('categories.anniversary')}
-              </p>
-            </div>
-            <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
-              {t('cards.anniversaryTitle')}
+        <Image
+          src={img3}
+          alt=""
+          className="object-cover size-full rounded-[16px]"
+        />
+        <div className="absolute bottom-6 left-6 rtl:right-6">
+          <div className="bg-bg-primary-fade flex justify-center items-center rounded-full w-fit ">
+            <p className="text-maroon-600 text-xs py-0.5 px-2">
+              {t('categories.anniversary')}
             </p>
           </div>
-        </Link>
+          <p className="text-2xl mt-2.5 font-semibold text-text-inverse">
+            {t('cards.anniversaryTitle')}
+          </p>
+        </div>
       </div>
     </div>
   );
