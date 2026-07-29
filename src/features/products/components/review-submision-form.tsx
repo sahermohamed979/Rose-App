@@ -31,7 +31,7 @@ import { useParams } from 'next/navigation';
 export function ReviewSubmissionForm() {
   const formSchema = SubmissionFormSchema();
   const params = useParams();
-  const productId = params.id as string;
+  const productId = 'ba64d196-4ac3-40bd-be26-b24fbceb6db0';
 
   const { mutate, isError, isPending } = CreateProductReviewHook();
   const form = useForm({
