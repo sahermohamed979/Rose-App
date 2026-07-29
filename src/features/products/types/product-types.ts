@@ -12,7 +12,7 @@ export interface ProductCategory {
 
 // ─── Product ──────────────────────────────────────────────────────────────────
 
-export interface Product {
+export interface IProduct {
   id: string;
   title: string;
   description: string;
@@ -38,7 +38,7 @@ export interface Product {
 // ─── Product API Response ─────────────────────────────────────────────────────
 
 export interface ProductPayload {
-  product: Product;
+  products: IProduct[];
 }
 
 // ─── Review ───────────────────────────────────────────────────────────────────
@@ -80,13 +80,4 @@ export interface PaginationMeta {
   totalPages: number;
   totalItems?: number;
   currentPage?: number;
-}
-
-export interface ProductsResponse {
-  status: boolean;
-  code: number;
-  payload: {
-    data: Product[];
-    metadata: PaginationMeta;
-  };
 }
