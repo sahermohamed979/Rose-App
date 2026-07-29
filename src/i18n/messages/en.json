@@ -282,5 +282,39 @@
     "outOfStock": "Out of Stock",
     "new": "New",
     "hot": "Hot"
+  },
+  "hero": {
+    "specialGifts": "Special Gifts For The People You Love",
+    "startingFrom": "Starting from 10.99 EGP",
+    "shopNow": "Shop Now",
+    "flowersTitle": "Say It with Flowers.",
+    "flowersSubtitle": "Elegant gifts for every special moment.",
+    "buyNow": "I'm buying!"
+  },
+
+  "categories": {
+    "wedding": "Wedding",
+    "engagement": "Engagement",
+    "anniversary": "Anniversary"
+  },
+
+  "cards": {
+    "weddingTitle": "Celebrate Her Forever with a Gift She'll Always Remember",
+    "engagementTitle": "Honor the Beginning of a Beautiful Journey Together",
+    "anniversaryTitle": "Mark Every Year of Love with a Meaningful Surprise"
+  },
+
+  "features": {
+    "freeDelivery": "Free Delivery",
+    "freeDeliveryDesc": "For orders above 120 EGP",
+
+    "refund": "Get Refund",
+    "refundDesc": "Refunds within 30 days",
+
+    "safePayment": "Safe Payment",
+    "safePaymentDesc": "100% Secure Payment",
+
+    "support": "24/7 Support",
+    "supportDesc": "Contact us at any time"
   }
 }
