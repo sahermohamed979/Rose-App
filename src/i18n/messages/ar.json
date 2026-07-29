@@ -282,5 +282,39 @@
     "outOfStock": "غير متاح",
     "new": "جديد",
     "hot": "عرض مميز"
+  },
+  "hero": {
+    "specialGifts": "هدايا مميزة لمن تحب",
+    "startingFrom": "ابتداءً من 10.99 جنيه",
+    "shopNow": "تسوق الآن",
+    "flowersTitle": "عبّر عن مشاعرك بالورود.",
+    "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
+    "buyNow": "سأشتريها!"
+  },
+
+  "categories": {
+    "wedding": "زفاف",
+    "engagement": "خطوبة",
+    "anniversary": "ذكرى زواج"
+  },
+
+  "cards": {
+    "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
+    "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
+    "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
+  },
+
+  "features": {
+    "freeDelivery": "توصيل مجاني",
+    "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
+
+    "refund": "استرجاع الأموال",
+    "refundDesc": "استرجاع خلال 30 يومًا",
+
+    "safePayment": "دفع آمن",
+    "safePaymentDesc": "دفع آمن بنسبة 100٪",
+
+    "support": "دعم 24/7",
+    "supportDesc": "تواصل معنا في أي وقت"
   }
 }
