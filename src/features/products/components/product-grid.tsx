@@ -1,16 +1,14 @@
-'use client';
-
 import { useTranslations } from 'next-intl';
 import ProductCard from './product-cards';
 import { ProductGridSkeleton } from '../skeletons/product-grid-skelton';
 import EmptyState from './empty-state';
-import { Product } from '../types/product-types';
+import { IProduct } from '../types/product-types';
 
 const GRID_COLUMNS_CLASS =
   'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-b pb-4';
 
 interface ProductGridProps {
-  products: Product[];
+  products: IProduct[];
   isLoading: boolean;
 }
 

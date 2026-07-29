@@ -29,7 +29,7 @@ export default function SidebarFilters({
       {/* categories */}
       <div className=" rounded-lg p-2">
         <div>
-          {/* headdign and clear btn */}
+          {/* heading and clear btn */}
           <div className="flex items-center justify-between  mb-2">
             <h3 className="text-lg font-semibold text-text-plain">
               Categories
@@ -108,13 +108,13 @@ export default function SidebarFilters({
             <X size={20} /> Reset
           </span>
         </div>
-        <div className="flex items-center gap-4 ">
-          <div className="space-y-2">
+        <div className="flex justify-between   gap-4 ">
+          <div className="space-y-2 w-full">
             <Label htmlFor="from">from</Label>
 
             <Input type="number" id="from" />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 w-full">
             <Label htmlFor="to">To</Label>
 
             <Input type="number" id="to" />

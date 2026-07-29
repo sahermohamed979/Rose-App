@@ -1,6 +1,11 @@
 'use server';
 
-import { ProductsResponse } from '../types/product-types';
+import { HEADERS } from '@/shared/lib/constants/api.constants';
+import { IProduct } from '../types/product-types';
+import {
+  ApiResponse,
+  IPaginationResponse,
+} from '@/shared/lib/types/api';
 
 const DEFAULT_PRODUCTS_LIMIT = '12';
 const DEFAULT_SORT_BY = 'bestSelling';
@@ -25,7 +30,7 @@ function buildProductsUrl(searchParams: string): string {
 
 export async function fetchProducts(
   searchParams: string
-): Promise<ProductsResponse> {
+): Promise<IProduct> {
   const url = buildProductsUrl(searchParams);
 
   try {
@@ -34,13 +39,38 @@ export async function fetchProducts(
       cache: 'no-store',
     });
 
-    const data: ProductsResponse = await response.json();
+    const data: IProduct = await response.json();
     return data;
   } catch {
-    return {
-      status: false,
-      code: 500,
-      payload: { data: [], metadata: { totalPages: 1 } },
-    };
+    return [] as unknown as IProduct;
+  }
+}
+
+export async function getProductAction(
+  searchParamsPromise: PageProps<'/[locale]/products'>['searchParams']
+) {
+  const searchParams = await searchParamsPromise;
+  const page = searchParams.page ?? '1';
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_API_URL}/products?page=${page}`,
+      {
+        method: 'GET',
+        headers: {
+          ...HEADERS.jsonBody,
+        },
+      }
+    );
+
+    const data: ApiResponse<IPaginationResponse<IProduct>> =
+      await response.json();
+    if (!data.status) {
+      return null;
+    }
+
+    return data.payload;
+  } catch {
+    return null;
   }
 }
