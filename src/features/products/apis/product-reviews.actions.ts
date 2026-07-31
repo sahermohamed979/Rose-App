@@ -2,7 +2,7 @@ import type { ApiResponse } from '@/shared/lib/types/api';
 import type {
   ProductPayload,
   ReviewsPayload,
-} from '../types/product-types';
+} from '../../../shared/lib/types/product-types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -50,10 +50,18 @@ export async function getProductReviews({
   limit = 20,
 }: GetProductReviewsParams): Promise<ApiResponse<ReviewsPayload>> {
   const params = new URLSearchParams();
-  if (page) params.append('page', String(page));
-  if (limit) params.append('limit', String(limit));
-  if (productId) params.append('productId', productId);
-  if (userId) params.append('userId', userId);
+  if (page) {
+    params.append('page', String(page));
+  }
+  if (limit) {
+    params.append('limit', String(limit));
+  }
+  if (productId) {
+    params.append('productId', productId);
+  }
+  if (userId) {
+    params.append('userId', userId);
+  }
 
   try {
     const url = `${BASE_URL}/reviews?${params.toString()}`;

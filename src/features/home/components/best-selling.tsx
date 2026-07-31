@@ -4,15 +4,15 @@ import BestSellingCarousel from './best-selling-carousel';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 import { getProductsByFilters } from '../apis/home-products-actions';
-import { ProductType } from '../types/product';
+import { IProduct } from '@/shared/lib/types/product-types';
 import ProductCardSkeletonGrid from '../skeletons/product-card-skeleton';
 
 async function BestSellingProducts({
   bestSellingProducts,
 }: {
-  bestSellingProducts: Promise<ProductType[]>;
+  bestSellingProducts: Promise<IProduct[]>;
 }) {
-  let products: ProductType[] = [];
+  let products: IProduct[] = [];
 
   try {
     products = await bestSellingProducts;

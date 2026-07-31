@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { MessageSquareOff } from 'lucide-react';
 import { ReviewCard } from './review-card';
 import { ReviewCardSkeleton } from './review-card-skeleton';
-import type { Review } from '../types/product-types';
+import type { ProductReview } from '../../../shared/lib/types/product-types';
 
 function EmptyReviews() {
   const t = useTranslations('productReview');
@@ -41,7 +41,7 @@ export function ReviewsListSkeleton() {
 }
 
 interface ReviewsListProps {
-  reviews?: Review[];
+  reviews?: ProductReview[];
   isError?: boolean;
 }
 

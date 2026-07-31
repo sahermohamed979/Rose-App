@@ -10,8 +10,10 @@ import {
 import ProductCard from './product-card';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { OccasionType } from '../types/occasions';
-import { ProductType } from '../types/product';
+import {
+  IProduct,
+  OccasionType,
+} from '@/shared/lib/types/product-types';
 import {
   Select,
   SelectContent,
@@ -30,7 +32,7 @@ export default function MostPopular({
   activeOccasionId,
 }: {
   occasions: OccasionType[];
-  ProductsByOccasion: ProductType[];
+  ProductsByOccasion: IProduct[];
   activeOccasionId?: string;
 }) {
   const t = useTranslations('home');
