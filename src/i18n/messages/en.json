@@ -173,7 +173,16 @@
     "warning": "Warning",
     "info": "Info"
   },
-
+  "products": {
+    "noProductMatch": " No products found matching your filters.",
+    "tryClear": "Try clearing or changing your filters to see more results.",
+    "new": "NEW",
+    "outOfStock": " OUT OF STOCK",
+    "hot": "HOT",
+    "addToWishList": "Add to wishlist",
+    "removeFromWishList": "Remove From wishlist",
+    "loadingProducts": "Loading products..."
+  },
   "ProductDetails": {
     "notFound": "Product not found",
     "unitsInStock": "{count} units in stock",
@@ -201,7 +210,7 @@
     "starSingular": "{n} star",
     "starPlural": "{n} stars"
   },
-  "productReview.loadError": "Failed to load reviews. Please try again."
+
   "header": {
     "searchPlaceholder": "What awesome gift are you looking for?",
     "headerLogin": "Login",
@@ -215,6 +224,7 @@
     "searchError": "Search failed. Try again",
     "searchRating": "Rating:",
     "productRating": "rating",
+    "loadingMore": "Loading more",
     "subHeader": {
       "subHeaderHome": "home",
       "subHeaderProducts": "products",
@@ -311,5 +321,18 @@
     "outOfStock": "Out of Stock",
     "new": "New",
     "hot": "Hot"
+  },
+  "ProductsFilters": {
+    "clearFilters": "Reset All",
+    "price": "Price ",
+    "priceFrom": " From",
+    "priceTo": " To",
+    "reset": "Reset",
+    "Rating": "Rating",
+    "categories": "Categories",
+    "occasions": "Occasions",
+    "error": "Unable to Load Filters",
+    "errorDescription": "We couldn't fetch filter data at the moment. Please try again.",
+    "retry": "Reload Filters"
   }
 }

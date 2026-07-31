@@ -173,6 +173,16 @@
     "warning": "تحذير",
     "info": "معلومة"
   },
+  "products": {
+    "noProductMatch": "لا توجد منتجات تطابق الفلاتر الخاصة بك.",
+    "tryClear": "جرب مسح أو تغيير فلاترك لرؤية المزيد من النتائج.",
+    "new": "جديد",
+    "outOfStock": "نفدت الكمية",
+    "hot": "رائج",
+    "addToWishList": "اضافه الي المفضله",
+    "removeFromWishList": "ازاله من المفضله",
+    "loadingProducts": "جاري تحميل المنتجات..."
+  },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
     "unitsInStock": "{count} وحدة في المخزن",
@@ -200,7 +210,7 @@
     "starSingular": "{n} نجمة",
     "starPlural": "{n} نجوم"
   },
-  "productReview.loadError": "فشل تحميل التقييمات. يرجى المحاولة مرة أخرى."
+
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
@@ -214,6 +224,7 @@
     "searchError": "فشل البحث. حاول مجدداً.",
     "searchRating": "التقييم:",
     "productRating": "تقيم",
+    "loadingMore": "جاري تحميل المزيد",
     "subHeader": {
       "subHeaderHome": "الرئيسة",
       "subHeaderProducts": "المنتجات",
@@ -310,5 +321,18 @@
     "outOfStock": "غير متاح",
     "new": "جديد",
     "hot": "عرض مميز"
+  },
+  "ProductsFilters": {
+    "clearFilters": "مسح الكل",
+    "price": "السعر",
+    "priceFrom": "من",
+    "priceTo": "الى",
+    "reset": "مسح",
+    "Rating": "التقييم",
+    "categories": "الفئات",
+    "occasions": "المناسبات",
+    "error": "فشل تحميل الفلاتر",
+    "errorDescription": "تعذر تحميل الفلاتر. يرجى المحاولة مرة أخرى لاحقًا.",
+    "retry": " إعادة تحميل الفلاتر "
   }
 }

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProductDetailsInfo } from '../apis/product-details-info.api';
-import { ProductDetailsResponse } from '@/shared/lib/types/product-details';
+import { ProductDetailsResponse } from '../../../shared/lib/types/product-types';
 
 export function useProductInfo(
   productId: string,

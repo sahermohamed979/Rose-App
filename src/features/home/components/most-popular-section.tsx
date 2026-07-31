@@ -2,8 +2,10 @@ import {
   getOccasions,
   getProductsByFilters,
 } from '../apis/home-products-actions';
-import { OccasionType } from '../types/occasions';
-import { ProductType } from '../types/product';
+import {
+  IProduct,
+  OccasionType,
+} from '@/shared/lib/types/product-types';
 import MostPopular from './most-popular';
 
 interface MostPopularSectionProps {
@@ -16,7 +18,7 @@ export default async function MostPopularSection({
   searchParams,
 }: MostPopularSectionProps) {
   let occasions: OccasionType[] = [];
-  let ProductsByOccasion: ProductType[] = [];
+  let ProductsByOccasion: IProduct[] = [];
 
   try {
     occasions = await getOccasions({ page: 1, limit: 4 });

@@ -8,13 +8,13 @@ import {
   CarouselPrevious,
 } from '@/shared/components/ui/carousel';
 import ProductCard from './product-card';
-import { ProductType } from '../types/product';
+import { IProduct } from '@/shared/lib/types/product-types';
 import { useLocale } from 'next-intl';
 
 export default function BestSellingCarousel({
   bestSellingProducts,
 }: {
-  bestSellingProducts: ProductType[];
+  bestSellingProducts: IProduct[];
 }) {
   const locale = useLocale();
   const direction = locale === 'ar' ? 'rtl' : 'ltr';
