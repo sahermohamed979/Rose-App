@@ -1,9 +1,7 @@
-'use server';
-
 import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { IProduct } from '../../../shared/lib/types/product-types';
 import { getLocale } from 'next-intl/server';
-
+import { DEFAULT_PRODUCTS_LIMIT } from '@/features/products/constants/products-constant';
 import {
   ApiResponse,
   IPaginationResponse,
@@ -30,7 +28,7 @@ export async function getProductAction(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_API_URL}/products?${params.toString()}`,
+      `${process.env.NEXT_API_URL}/products?limit=${DEFAULT_PRODUCTS_LIMIT}&${params.toString()}`,
       {
         method: 'GET',
         headers: {
