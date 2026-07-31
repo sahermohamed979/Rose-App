@@ -11,7 +11,7 @@ import {
 export async function getCategories() {
   try {
     const response = await fetch(
-      `${process.env.NEXT_API_URL}/categories?page=1&limit=1000`,
+      `${process.env.NEXT_API_URL}/categories?page=1&limit=100`,
       {
         method: 'GET',
         headers: {
@@ -34,7 +34,7 @@ export async function getCategories() {
 export async function getOccasions() {
   try {
     const response = await fetch(
-      `${process.env.NEXT_API_URL}/occasions?page=1&limit=1000`,
+      `${process.env.NEXT_API_URL}/occasions?page=1&limit=100`,
       {
         method: 'GET',
         headers: {
