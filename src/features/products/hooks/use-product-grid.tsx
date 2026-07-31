@@ -4,7 +4,10 @@ import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { fetchProducts } from '../apis/products-api';
-import { Product, ProductsResponse } from '../types/product-types';
+import {
+  Product,
+  ProductsResponse,
+} from '../../../shared/lib/types/product-types';
 import { usePagination } from './use-pagination';
 
 export function useProductsGrid() {

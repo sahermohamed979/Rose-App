@@ -321,5 +321,18 @@
     "outOfStock": "غير متاح",
     "new": "جديد",
     "hot": "عرض مميز"
+  },
+  "ProductsFilters": {
+    "clearFilters": "مسح الكل",
+    "price": "السعر",
+    "priceFrom": "من",
+    "priceTo": "الى",
+    "reset": "مسح",
+    "Rating": "التقييم",
+    "categories": "الفئات",
+    "occasions": "المناسبات",
+    "error": "فشل تحميل الفلاتر",
+    "errorDescription": "تعذر تحميل الفلاتر. يرجى المحاولة مرة أخرى لاحقًا.",
+    "retry": " إعادة تحميل الفلاتر "
   }
 }
