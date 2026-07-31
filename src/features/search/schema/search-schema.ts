@@ -1,21 +1,25 @@
 import { z } from 'zod';
 
 // Schema for search input validation
-export const searchSchema = (t: (key: string) => string) =>
+export const searchSchema = () =>
   z.object({
-    query: z.string().min(1, { message: t('searchSchema') }),
+    query: z
+      .string()
+      .min(1, { message: 'Search query is required' })
+      .max(200, { message: 'Search query is too long' }),
   });
-
 // Schema for an individual product
 export const ProductSchema = z.object({
   id: z.string(),
   title: z.string(),
   price: z.coerce.number(),
-  discountPrice: z.coerce.number().optional(),
+  discountValue: z.coerce.number().optional(),
   rating: z.coerce.number(),
+  ratings: z.coerce.number(),
   cover: z.string(),
-  reviewsCount: z.number().default(0),
 });
 
 // Schema for a list of products
 export const ProductsResponseSchema = z.array(ProductSchema);
+
+export type SearchProduct = z.infer<typeof ProductSchema>;

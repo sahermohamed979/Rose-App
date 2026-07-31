@@ -1,5 +1,5 @@
 import { ApiResponse } from '@/shared/lib/types/api';
-import { ProductDetailsResponse } from '@/shared/lib/types/product-details';
+import { ProductDetailsResponse } from '@/shared/lib/types/product-types';
 
 export const getProductDetailsInfo = async (
   productId: string
