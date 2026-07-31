@@ -10,7 +10,7 @@ export default function ProductGrid({
 }) {
   const t = useTranslations('products');
 
-  if (products.length === 0) {
+  if (products.length === 0 || null) {
     return (
       <EmptyState
         title={t('noProductMatch')}
