@@ -30,12 +30,12 @@ export async function ProductReview({
     getProductReviews({ productId }),
   ]);
 
-  const rating = productResponse.status
-    ? productResponse.payload.product.rating
-    : 0;
-  const ratingsCount = productResponse.status
-    ? productResponse.payload.product.ratings
-    : 0;
+  const product = productResponse.status
+    ? productResponse.payload.products[0]
+    : null;
+
+  const rating = product?.rating ?? 0;
+  const ratingsCount = product?.ratings ?? 0;
 
   const reviews = reviewsResponse.status
     ? (reviewsResponse.payload?.data ?? [])

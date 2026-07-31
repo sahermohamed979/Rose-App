@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { ICategory } from '@/shared/lib/types/product-details';
 import { buildFilterUrl } from '@/features/products/lib/build-filter-url';
-import { ProductsSearchParams } from '@/shared/lib/types/product-types';
+import {
+  ProductCategory,
+  ProductsSearchParams,
+} from '@/shared/lib/types/product-types';
 import Image from 'next/image';
 
 interface CategoriesFilterProps {
-  category: ICategory;
+  category: ProductCategory;
   searchParams: ProductsSearchParams;
 }
 

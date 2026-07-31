@@ -1,6 +1,6 @@
 import {
   ProductsQuery,
-  ProductPayload,
+  IProduct,
   OccasionType,
 } from '@/shared/lib/types/product-types';
 
@@ -15,7 +15,7 @@ export const getProductsByFilters = async ({
   maxPrice,
   sortBy,
   sortOrder,
-}: ProductsQuery): Promise<ProductPayload[]> => {
+}: ProductsQuery): Promise<IProduct[]> => {
   try {
     const params = new URLSearchParams();
 
@@ -51,7 +51,9 @@ export const getProductsByFilters = async ({
       throw new Error(data.message || 'Failed to fetch products');
     }
 
-    return data.payload.data as ProductPayload[];
+    return (data?.payload?.data ??
+      data?.products ??
+      []) as IProduct[];
   } catch (error) {
     console.error('Failed to fetch products:', error);
     throw error;

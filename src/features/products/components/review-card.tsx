@@ -1,7 +1,7 @@
 'use client';
 
 import { StarRating } from '@/shared/components/ui/star-rating';
-import type { Review } from '../../../shared/lib/types/product-types';
+import type { ProductReview } from '../../../shared/lib/types/product-types';
 import { useLocale } from 'next-intl';
 
 function getInitials(firstName: string, lastName: string): string {
@@ -9,7 +9,7 @@ function getInitials(firstName: string, lastName: string): string {
 }
 
 interface ReviewCardProps {
-  review: Review;
+  review: ProductReview;
 }
 
 export function ReviewCard({ review }: ReviewCardProps) {
