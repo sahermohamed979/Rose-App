@@ -1,5 +1,5 @@
 import { RotateCcw, Star, X } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import CategoriesFilter from './categories-filter';
 import PriceFilter from './price-filter';
@@ -27,25 +27,24 @@ export default async function SidebarFilters({
   occasionsPromise,
   searchParams,
 }: SidebarFiltersProps): Promise<React.JSX.Element> {
-  // translations
+  // Translations
   const t = await getTranslations('ProductsFilters');
-  // await get text of categories filter
+
+  // Data
   const categories: ProductCategory[] | null =
     await categoriesPromise;
-  // await get text of occasions filter
   const occasions: OccasionType[] | null = await occasionsPromise;
-  // if categories or occasions is null return error filters
+
   if (categories === null || occasions === null) {
     return <ErrorFilters />;
   }
-  // selected occasion id
+
+  // Variables
   const selectedOccasionId: string | string[] | undefined =
     searchParams.occasionId;
-  // selected min rating
   const selectedMinRating: number = Number(
     searchParams.minRating ?? 0
   );
-  // check if any filter is active
   const isAnyFilterActive: boolean = hasAnyFilter(searchParams);
   return (
     <div className="px-7 flex-col flex gap-3 justify-center">
