@@ -14,14 +14,19 @@ import Link from 'next/link';
 import HeaderSearch from './header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
+import { useCart } from '@/features/cart-wishlist/hooks/use-cart';
+import { CartItem } from '@/features/cart-wishlist/types/cart-wishlist.types';
 
 export default function HeaderActions() {
   const { data: session, status } = useSession();
   // translations
   const t = useTranslations('header');
+  const isAuthenticated = status === 'authenticated';
+  const { data: cartData } = useCart(isAuthenticated);
+  const cartCount = cartData?.payload?.cartItems.length || 0;
 
   // static counts
-  const cartCount = '8';
+  // const cartCount = '8';
   const favoriteCount = '8';
 
   return (
