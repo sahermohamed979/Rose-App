@@ -1,11 +1,7 @@
-// features/products/components/price-filter.tsx
 'use client';
 
-import {
-  useRouter,
-  usePathname,
-  useSearchParams,
-} from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -25,15 +21,28 @@ export default function PriceFilter(): React.JSX.Element {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Ref
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
-    null
-  );
-
   // Variables
   const minPrice: string = searchParams.get('minPrice') ?? '';
   const maxPrice: string = searchParams.get('maxPrice') ?? '';
   const hasActiveFilter: boolean = !!(minPrice || maxPrice);
+
+  // Refs
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+
+  const pendingRef = useRef<Record<PriceKey, string>>({
+    minPrice,
+    maxPrice,
+  });
+
+  // Keep pending values in sync with URL changes
+  useEffect(() => {
+    pendingRef.current = {
+      minPrice,
+      maxPrice,
+    };
+  }, [minPrice, maxPrice]);
 
   // Functions
   const pushParams = (params: URLSearchParams): void => {
@@ -44,17 +53,29 @@ export default function PriceFilter(): React.JSX.Element {
   };
 
   const handleChange = (key: PriceKey, value: string): void => {
+    pendingRef.current[key] = value;
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
     timeoutRef.current = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set(key, value);
+
+      const { minPrice, maxPrice } = pendingRef.current;
+
+      if (minPrice) {
+        params.set('minPrice', minPrice);
       } else {
-        params.delete(key);
+        params.delete('minPrice');
       }
+
+      if (maxPrice) {
+        params.set('maxPrice', maxPrice);
+      } else {
+        params.delete('maxPrice');
+      }
+
       pushParams(params);
     }, DEBOUNCE_MS);
   };
@@ -63,13 +84,20 @@ export default function PriceFilter(): React.JSX.Element {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+
+    pendingRef.current = {
+      minPrice: '',
+      maxPrice: '',
+    };
+
     const params = new URLSearchParams(searchParams.toString());
     params.delete('minPrice');
     params.delete('maxPrice');
+
     pushParams(params);
   };
 
-  // Effects
+  // Cleanup
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -84,6 +112,7 @@ export default function PriceFilter(): React.JSX.Element {
         <h3 className="text-lg font-semibold text-text-plain">
           {t('price')}
         </h3>
+
         {hasActiveFilter && (
           <button
             type="button"
@@ -94,6 +123,7 @@ export default function PriceFilter(): React.JSX.Element {
           </button>
         )}
       </div>
+
       <div className="flex justify-between gap-4">
         <div className="space-y-2 w-full">
           <Label htmlFor="minPrice">{t('priceFrom')}</Label>
@@ -105,6 +135,7 @@ export default function PriceFilter(): React.JSX.Element {
             onChange={(e) => handleChange('minPrice', e.target.value)}
           />
         </div>
+
         <div className="space-y-2 w-full">
           <Label htmlFor="maxPrice">{t('priceTo')}</Label>
           <Input
