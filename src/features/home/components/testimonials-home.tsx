@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import { Star } from 'lucide-react';
