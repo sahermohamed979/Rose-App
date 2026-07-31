@@ -72,7 +72,7 @@ export default function ProductDetailsInfo({
           </article>
         </div>
 
-        <ProductActions stock={product.stock} />
+        <ProductActions productId={productId} stock={product.stock} />
       </div>
     </section>
   );

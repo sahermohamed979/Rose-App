@@ -1,10 +1,10 @@
 'use client';
 import { ProductType } from '../types/product';
 import { useTranslations } from 'next-intl';
-import { ShoppingCartIcon, Star, StarIcon } from 'lucide-react';
-import { Button } from '@/shared/components/ui/button';
+import { StarIcon } from 'lucide-react';
 import { Badge } from '@/shared/components/ui/badge';
 import { Link } from '@/i18n/navigation';
+import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 
 export default function ProductCard({
   product,
@@ -49,8 +49,6 @@ export default function ProductCard({
           )}
         </div>
       </Link>
-      {/* <Image src={product.cover} alt={product.title} width={302} height={272}
-                className=' object-cover h-[272px] w-[302px] rounded-2xl mb-4' quality={100} /> */}
       <h2
         className="
             text-lg font-semibold
@@ -107,13 +105,13 @@ export default function ProductCard({
           </p>
         </div>
         {/*add to cart button*/}
-        <Button
+        <AddToCart
           className="w-[42px] 
-                h-[42px] rounded-full
-                 p-0 dark:bg-maroon-500"
-        >
-          <ShoppingCartIcon className="w-4 h-4 text-text-inverse dark:text-white" />
-        </Button>
+            h-[42px] rounded-full
+             p-0 dark:bg-maroon-500 overflow-hidden"
+          productId={product.id}
+          stock={product.stock}
+        />
       </div>
     </div>
   );
