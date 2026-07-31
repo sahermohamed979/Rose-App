@@ -7,11 +7,11 @@ import ProductDetailsPrice from './product-details-price';
 import ProductStockBadge from './product-details-stock';
 import ProductRating from './product-details-ratings';
 import ProductActions from './product-details-actions';
-import { ProductDetailsResponse } from '@/shared/lib/types/product-details';
+import { IProduct } from '@/shared/lib/types/product-types';
 
 interface Props {
   productId: string;
-  initialData?: ProductDetailsResponse['product'];
+  initialData?: IProduct;
 }
 
 export default function ProductDetailsInfo({
@@ -34,9 +34,7 @@ export default function ProductDetailsInfo({
     return null;
   }
 
-  const gallery = product.gallery ? JSON.parse(product.gallery) : [];
-
-  const images = [...new Set([product.cover, ...gallery])];
+  const images = [...new Set([product.cover, ...product.gallery])];
 
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 w-full">
@@ -51,7 +49,7 @@ export default function ProductDetailsInfo({
           <div className="flex items-center">
             <ProductDetailsPrice
               price={product.price}
-              discountValue={product.discountValue}
+              discountValue={product.discountValue ?? '0'}
               locale={locale}
             />
 

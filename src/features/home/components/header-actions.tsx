@@ -10,29 +10,31 @@ import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import HeaderSearch from './header-search';
+
+import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
 import { useCart } from '@/features/cart-wishlist/hooks/use-cart';
 import { CartItem } from '@/features/cart-wishlist/types/cart-wishlist.types';
+import { Link } from '@/i18n/navigation';
+import { CountBadge } from './count-bages';
 
 export default function HeaderActions() {
-  const { data: session, status } = useSession();
-  // translations
+  // Translation
   const t = useTranslations('header');
+
+  // Session
+  const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
   const { data: cartData } = useCart(isAuthenticated);
   const cartCount = cartData?.payload?.cartItems.length || 0;
 
-  // static counts
-  // const cartCount = '8';
-  const favoriteCount = '8';
+  const wishlistCount = 8;
 
   return (
     <div className="flex items-center w-full">
       {/* Location display for authenticated users */}
-      {status === 'authenticated' && (
+      {isAuthenticated && (
         <div className="flex flex-col justify-center items-center px-2 shrink-0">
           <h2 className="text-text-default text-[12px]">
             {t('deliver')}
@@ -47,7 +49,7 @@ export default function HeaderActions() {
 
       {/* User authentication status */}
       <div className="flex items-center gap-1 shrink-0">
-        {status === 'authenticated' ? (
+        {isAuthenticated ? (
           <div className="flex items-center gap-2 px-2 cursor-pointer">
             <div className="flex flex-col leading-none">
               <span className="text-[12px] text-text-default">
@@ -72,38 +74,26 @@ export default function HeaderActions() {
         )}
       </div>
 
-      {/* Action icons  */}
+      {/* Action icons */}
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
-        {/* wish-list link */}
         <Link
-          href={status === 'authenticated' ? '/wish-list' : '/login'}
+          href={isAuthenticated ? '/wish-list' : '/login'}
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && (
-            <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-              {favoriteCount}
-            </span>
-          )}
+          {isAuthenticated && <CountBadge count={wishlistCount} />}
         </Link>
 
-        {/* Cart link */}
         <Link
-          href={status === 'authenticated' ? '/cart' : '/login'}
+          href={isAuthenticated ? '/cart' : '/login'}
           className="relative"
         >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {status === 'authenticated' && (
-            <span className="absolute -top-2 -right-2 bg-bg-danger text-text-inverse text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-              {cartCount}
-            </span>
-          )}
+          {isAuthenticated && <CountBadge count={cartCount} />}
         </Link>
 
-        {/* Notifications link */}
         <NotificationsContainer status={status} />
 
-        {/* Language and Theme toggles */}
         <div className="flex items-center gap-2 border-s ps-4 border-border-muted">
           <LangToggle />
           <ThemeToggle />
