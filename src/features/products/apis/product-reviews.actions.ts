@@ -2,7 +2,7 @@ import type { ApiResponse } from '@/shared/lib/types/api';
 import type {
   ProductPayload,
   ReviewsPayload,
-} from '../types/product-types';
+} from '../../../shared/lib/types/product-types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 

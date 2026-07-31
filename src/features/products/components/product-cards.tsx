@@ -1,21 +1,15 @@
 import Image from 'next/image';
-import {
-  Star,
-  ShoppingCart,
-  HeartPlus,
-  HeartMinus,
-} from 'lucide-react';
+import { Star, ShoppingCart, HeartPlus } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Product } from '../types/product-types';
-import { useState } from 'react';
+import { IProduct } from '../types/product-types';
 
 const NEW_PRODUCT_WINDOW_DAYS = 30;
 const TOP_RATED_THRESHOLD = 3.5;
 const MAX_RATING_STARS = 5;
 
 interface ProductCardProps {
-  product: Product;
+  product: IProduct;
 }
 
 // Checks if a product was added within the "new" window
@@ -46,40 +40,19 @@ export default function ProductCard({ product }: ProductCardProps) {
     ? product.discountValue
     : product.price;
 
-  const [isInCart, setIsInCart] = useState(false);
-
-  const handleAddToCartClick = () => {
-    setIsInCart((prev) => !prev);
-  };
-
-  const [isWishlist, setIsWishlist] = useState(false);
-
-  const handleWishlistClick = () => {
-    setIsWishlist((prev) => !prev);
-  };
   return (
     <div className="bg-bg-plain w-full rounded-xl flex flex-col justify-between relative group">
       {/* Wishlist Button & Badges */}
       <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
         <button
           type="button"
-          onClick={handleWishlistClick}
-          className={`relative group/btn flex items-center gap-2 py-2 px-2.5 rounded-full transition-all duration-300 shadow-sm ${
-            isWishlist
-              ? 'bg-bg-inverse text-text-inverse'
-              : 'bg-bg-plain text-text-primary'
-          }`}
+          className={`relative group/btn flex items-center gap-2 py-2 px-2.5 rounded-full transition-all duration-300 shadow-sm 
+        `}
         >
-          {isWishlist ? (
-            <HeartMinus className="w-4 h-4" />
-          ) : (
-            <HeartPlus className="w-4 h-4" />
-          )}
+          <HeartPlus className="w-4 h-4" />
 
           <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium transition-all duration-300 ease-in-out group-hover/btn:max-w-32.5 group-hover/btn:opacity-100 opacity-0 text-inherit">
-            {isWishlist
-              ? t('removeFromWishList')
-              : t('addToWishList')}
+            {t('addToWishList')}
           </span>
         </button>
 
@@ -154,12 +127,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           <button
             type="button"
-            onClick={handleAddToCartClick}
-            className={`p-2.5 rounded-full transition-colors ${
-              isInCart
-                ? 'bg-bg-inverse text-text-inverse'
-                : 'bg-bg-primary-saturated text-text-primary-fade hover:bg-text-primary dark:text-maroon-800'
-            }`}
+            className={`p-2.5 rounded-full transition-colors 'bg-bg-primary-saturated text-text-primary-fade hover:bg-text-primary dark:text-maroon-800'`}
           >
             <ShoppingCart className="w-4 h-4" />
           </button>

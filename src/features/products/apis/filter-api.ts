@@ -4,9 +4,9 @@ import {
   IPaginationResponse,
 } from '@/shared/lib/types/api';
 import {
-  ICategory,
-  IOccasion,
-} from '@/shared/lib/types/product-details';
+  ProductCategory,
+  OccasionType,
+} from '@/shared/lib/types/product-types';
 
 export async function getCategories() {
   try {
@@ -20,7 +20,7 @@ export async function getCategories() {
       }
     );
 
-    const data: ApiResponse<IPaginationResponse<ICategory>> =
+    const data: ApiResponse<IPaginationResponse<ProductCategory>> =
       await response.json();
     if (!data.status) {
       return null;
@@ -43,7 +43,7 @@ export async function getOccasions() {
       }
     );
 
-    const data: ApiResponse<IPaginationResponse<IOccasion>> =
+    const data: ApiResponse<IPaginationResponse<OccasionType>> =
       await response.json();
     if (!data.status) {
       return null;

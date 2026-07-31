@@ -1,26 +1,14 @@
 import { useTranslations } from 'next-intl';
-import ProductCard from './product-cards';
-import { ProductGridSkeleton } from '../skeletons/product-grid-skelton';
+import ProductCard from '../../home/components/product-card';
 import EmptyState from './empty-state';
-import { IProduct } from '../types/product-types';
-
-const GRID_COLUMNS_CLASS =
-  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-b pb-4';
-
-interface ProductGridProps {
-  products: IProduct[];
-  isLoading: boolean;
-}
+import { IProduct } from '@/shared/lib/types/product-types';
 
 export default function ProductGrid({
   products,
-  isLoading,
-}: ProductGridProps) {
+}: {
+  products: IProduct[];
+}) {
   const t = useTranslations('products');
-
-  if (isLoading) {
-    return <ProductGridSkeleton />;
-  }
 
   if (products.length === 0) {
     return (
@@ -32,7 +20,7 @@ export default function ProductGrid({
   }
 
   return (
-    <div className={GRID_COLUMNS_CLASS}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-b pb-4">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

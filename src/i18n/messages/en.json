@@ -321,5 +321,18 @@
     "outOfStock": "Out of Stock",
     "new": "New",
     "hot": "Hot"
+  },
+  "ProductsFilters": {
+    "clearFilters": "Reset All",
+    "price": "Price ",
+    "priceFrom": " From",
+    "priceTo": " To",
+    "reset": "Reset",
+    "Rating": "Rating",
+    "categories": "Categories",
+    "occasions": "Occasions",
+    "error": "Unable to Load Filters",
+    "errorDescription": "We couldn't fetch filter data at the moment. Please try again.",
+    "retry": "Reload Filters"
   }
 }
