@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getProductDetailsInfo } from '@/features/products/apis/product-details-info.api';
 import ProductDetailsInfo from '@/features/products/components/product-details-info';
+import ProductReview from '@/features/products/components/product-review';
 
 interface PageProps {
   params: Promise<{
@@ -23,9 +24,12 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <ProductDetailsInfo
-      productId={productId}
-      initialData={response.payload.product}
-    />
+    <div className="flex flex-col gap-5 px-4">
+      <ProductDetailsInfo
+        productId={productId}
+        initialData={response.payload.product}
+      />
+      <ProductReview productId={productId} />
+    </div>
   );
 }

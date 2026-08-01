@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { MessageSquareOff } from 'lucide-react';
 import { ReviewCard } from './review-card';
-import { ReviewCardSkeleton } from './review-card-skeleton';
+import { ReviewCardSkeleton } from '../skeletons/review-card-skeleton';
 import type { ProductReview } from '../../../shared/lib/types/product-types';
 
 function EmptyReviews() {

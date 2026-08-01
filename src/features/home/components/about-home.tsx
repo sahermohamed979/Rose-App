@@ -26,7 +26,7 @@ function AboutSection() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-center gap-12 max-w-7xl mx-auto py-16 px-5">
+    <section className="flex flex-col md:flex-row items-center gap-12 max-w-7xl mx-auto py-8 px-5">
       {/* Photos */}
       <div className="flex flex-col sm:flex-row gap-6 w-75 md:w-1/2 items-center">
         {/* Main Photo */}
