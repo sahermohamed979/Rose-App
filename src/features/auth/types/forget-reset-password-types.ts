@@ -20,7 +20,8 @@ interface ForgetResponseError {
   errors?: ValidationError[];
 }
 export type ForgetResponse =
-  ForgetResponseSuccess | ForgetResponseError;
+  | ForgetResponseSuccess
+  | ForgetResponseError;
 export type EmailInput = z.infer<
   ReturnType<typeof forgotPasswordEmailSchema>
 >;

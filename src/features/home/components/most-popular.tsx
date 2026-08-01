@@ -10,8 +10,10 @@ import {
 import ProductCard from './product-card';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { OccasionType } from '../types/occasions';
-import { ProductType } from '../types/product';
+import {
+  IProduct,
+  OccasionType,
+} from '@/shared/lib/types/product-types';
 import {
   Select,
   SelectContent,
@@ -21,6 +23,7 @@ import {
 } from '@/shared/components/ui/select';
 import { Link } from '@/i18n/navigation';
 import { ArrowRightIcon } from 'lucide-react';
+
 const tabTriggerClassName =
   'text-base font-medium bg-transparent border-none py-0 leading-none enabled:data-active:bg-transparent text-zinc-700 dark:text-text-muted enabled:data-active:text-text-primary enabled:hover:bg-transparent enabled:hover:text-text-primary enabled:data-active:shadow-none enabled:active:shadow-none';
 
@@ -30,7 +33,7 @@ export default function MostPopular({
   activeOccasionId,
 }: {
   occasions: OccasionType[];
-  ProductsByOccasion: ProductType[];
+  ProductsByOccasion: IProduct[];
   activeOccasionId?: string;
 }) {
   const t = useTranslations('home');
@@ -42,7 +45,7 @@ export default function MostPopular({
     occasions[0];
 
   return (
-    <div className="mb-[138px]">
+    <div className="container mx-auto px-4 md:px-10 w-full ">
       {hasNoOccasions && (
         <>
           <HeaderTitle text={t('mostPopular')} />
@@ -53,9 +56,9 @@ export default function MostPopular({
       )}
       {!hasNoOccasions && (
         <Tabs value={activeOccasionId ?? occasions[0].id}>
-          <div className=" flex justify-between">
+          <div className=" flex justify-between items-center flex-wrap gap-4">
             <HeaderTitle text={t('mostPopular')} />
-            <TabsList className="hidden md:flex bg-transparent">
+            <TabsList className="hidden md:flex flex-wrap h-auto bg-transparent">
               {occasions.map((occasion) => (
                 <TabsTrigger
                   key={occasion.id}
