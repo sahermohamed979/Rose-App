@@ -40,8 +40,9 @@ export function useHeaderSearch() {
     isError,
   } = useInfiniteQuery({
     queryKey: ['search-products', debouncedQuery],
-    queryFn: ({ pageParam = 1 }) =>
-      searchProducts(debouncedQuery, pageParam),
+    queryFn: ({ pageParam = 1 }) => {
+      return searchProducts(debouncedQuery, pageParam);
+    },
     getNextPageParam: (lastPage, allPages) =>
       lastPage.hasMore ? allPages.length + 1 : undefined,
     initialPageParam: 1,
