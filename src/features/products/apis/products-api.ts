@@ -1,7 +1,7 @@
 import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { IProduct } from '../../../shared/lib/types/product-types';
 import { getLocale } from 'next-intl/server';
-
+import { DEFAULT_PRODUCTS_LIMIT } from '@/features/products/constants/products-constant';
 import {
   ApiResponse,
   IPaginationResponse,
