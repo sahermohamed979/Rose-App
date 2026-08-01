@@ -18,7 +18,7 @@ export const testimonialsData: Testimonial[] = [
     id: 1,
     name: 'Jake Miller',
     avatar: avatar1,
-    rating: 5, 
+    rating: 5,
     text: "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
     date: 'January 12, 2025',
   },

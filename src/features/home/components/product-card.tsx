@@ -1,15 +1,15 @@
 'use client';
-import { ProductType } from '../types/product';
 import { useTranslations } from 'next-intl';
-import { ShoppingCartIcon, Star, StarIcon } from 'lucide-react';
+import { ShoppingCartIcon, StarIcon } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
 import { Link } from '@/i18n/navigation';
+import { IProduct } from '@/shared/lib/types/product-types';
 
 export default function ProductCard({
   product,
 }: {
-  product: ProductType;
+  product: IProduct;
 }) {
   const t = useTranslations('');
   const discountPrice: number =

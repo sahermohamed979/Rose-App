@@ -173,6 +173,44 @@
     "warning": "تحذير",
     "info": "معلومة"
   },
+  "products": {
+    "noProductMatch": "لا توجد منتجات تطابق الفلاتر الخاصة بك.",
+    "tryClear": "جرب مسح أو تغيير فلاترك لرؤية المزيد من النتائج.",
+    "new": "جديد",
+    "outOfStock": "نفدت الكمية",
+    "hot": "رائج",
+    "addToWishList": "اضافه الي المفضله",
+    "removeFromWishList": "ازاله من المفضله",
+    "loadingProducts": "جاري تحميل المنتجات..."
+  },
+  "ProductDetails": {
+    "notFound": "المنتج غير موجود",
+    "unitsInStock": "{count} وحدة في المخزن",
+    "outOfStock": "نفد من المخزن",
+    "ratingLabel": "التقييم:",
+    "ratingsCount": "{count} تقييمات",
+    "addToFavorites": "أضف إلى المفضلة",
+    "addToCart": "أضف إلى السلة",
+    "errorTitle": "حدث خطأ ما",
+    "errorDescription": "تعذر تحميل المنتج، يرجى المحاولة مرة أخرى لاحقًا.",
+    "backToProducts": "العودة إلى المنتجات",
+    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود."
+  },
+  "productReview": {
+    "title": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingSingular": "تقييم",
+    "ratingPlural": "تقييمات",
+    "noReviewsYet": "لا توجد تقييمات حتى الآن.",
+    "noReviewsTitle": "لا توجد تقييمات حتى الآن",
+    "noReviewsDescription": "كن أول من يشارك رأيه في هذا المنتج.",
+    "loadError": "فشل تحميل التقييمات. يرجى المحاولة مرة أخرى.",
+    "customerReviews": "تقييمات العملاء",
+    "starLabel": "التقييم: {value} من {max} نجوم",
+    "starSingular": "{n} نجمة",
+    "starPlural": "{n} نجوم"
+  },
+
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
@@ -186,6 +224,8 @@
     "searchError": "فشل البحث. حاول مجدداً.",
     "searchRating": "التقييم:",
     "productRating": "تقيم",
+    "loadingMore": "جاري تحميل المزيد",
+    "currency": "جنيه مصري",
     "subHeader": {
       "subHeaderHome": "الرئيسة",
       "subHeaderProducts": "المنتجات",
@@ -282,6 +322,19 @@
     "outOfStock": "غير متاح",
     "new": "جديد",
     "hot": "عرض مميز"
+  },
+  "ProductsFilters": {
+    "clearFilters": "مسح الكل",
+    "price": "السعر",
+    "priceFrom": "من",
+    "priceTo": "الى",
+    "reset": "مسح",
+    "Rating": "التقييم",
+    "categories": "الفئات",
+    "occasions": "المناسبات",
+    "error": "فشل تحميل الفلاتر",
+    "errorDescription": "تعذر تحميل الفلاتر. يرجى المحاولة مرة أخرى لاحقًا.",
+    "retry": " إعادة تحميل الفلاتر "
   },
   "hero": {
     "specialGifts": "هدايا مميزة لمن تحب",
