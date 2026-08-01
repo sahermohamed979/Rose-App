@@ -34,7 +34,19 @@ export default function ProductDetailsInfo({
     return null;
   }
 
-  const images = [...new Set([product.cover, ...product.gallery])];
+  let parsedGallery: string[] = [];
+  if (Array.isArray(product.gallery)) {
+    parsedGallery = product.gallery;
+  } else if (typeof product.gallery === 'string') {
+    try {
+      parsedGallery = JSON.parse(product.gallery);
+    } catch {
+      parsedGallery = [];
+    }
+  }
+  const images = [
+    ...new Set([product.cover, ...parsedGallery]),
+  ].filter(Boolean);
 
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 w-full">

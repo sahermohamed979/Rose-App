@@ -31,7 +31,7 @@ export async function ProductReview({
   ]);
 
   const product = productResponse.status
-    ? productResponse.payload.products[0]
+    ? productResponse.payload.products?.[0]
     : null;
 
   const rating = product?.rating ?? 0;
