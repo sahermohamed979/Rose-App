@@ -21,17 +21,14 @@ export default function HomeScreen({
   return (
     <div className="flex flex-col gap-4">
       <HeroSection />
-
+      <Bestselling />
+      <Suspense fallback={<MostPopularSkeleton />}>
+        <MostPopularSection searchParams={searchParams} />
+      </Suspense>
       <AboutSection />
       <GallerySection />
       <TestimonialsSection />
       <BrandsSection />
-      <div className="container mx-auto">
-        <Bestselling />
-        <Suspense fallback={<MostPopularSkeleton />}>
-          <MostPopularSection searchParams={searchParams} />
-        </Suspense>
-      </div>
     </div>
   );
 }
