@@ -4,14 +4,12 @@ export async function GET(request: Request) {
   // Get locale from request headers
   const locale = request.headers.get('Accept-Language') || 'en';
 
-  // Extract search query if provided
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get('query') || '';
+  const hasSearchParams = searchParams.toString().length > 0;
 
-  // Build external API URL
   const baseUrl = `${process.env.NEXT_API_URL}/products`;
-  const url = query
-    ? `${baseUrl}`
+  const url = hasSearchParams
+    ? `${baseUrl}?${searchParams.toString()}`
     : `${baseUrl}?limit=5&sortBy=bestSelling&sortOrder=desc`;
 
   // Fetch from external API

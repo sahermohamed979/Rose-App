@@ -19,14 +19,8 @@ export function SearchResultItem({
   // Translation
   const t = useTranslations('header');
 
-  // Variables (derived)
-  const hasDiscount = Boolean(
-    product.discountValue && product.discountValue > 0
-  );
-  const displayPrice = hasDiscount
-    ? product.discountValue
-    : product.price;
-
+  const discountPrice: number =
+    Number(product.price) * (1 - Number(product.discountValue) / 100);
   return (
     <Link
       href={`/products/${product.id}`}
@@ -49,13 +43,23 @@ export function SearchResultItem({
         </h3>
         <div className="flex items-center gap-2">
           <span className="font-bold text-text-plain text-lg">
-            {displayPrice} EGP
+            {product.discountValue ? (
+              <>
+                <span className="text-text-primary me-1">
+                  {product.discountType === 'PERCENT'
+                    ? `${discountPrice} ${t('currency')}`
+                    : `${product.discountValue}% off`}
+                </span>
+                <span className="text-text-muted line-through text-sm">
+                  {`${product.price} ${t('currency')}`}
+                </span>
+              </>
+            ) : (
+              <span className="text-text-primary">
+                {`${product.price} ${t('currency')}`}
+              </span>
+            )}
           </span>
-          {hasDiscount && (
-            <span className="line-through text-text-subtle text-xs">
-              {product.price} EGP
-            </span>
-          )}
         </div>
       </div>
 
