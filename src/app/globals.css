@@ -5,8 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /*text-size*/
-  --text-xs: 12px;
   /* Maroon */
   --color-maroon-50: var(--maroon-50);
   --color-maroon-100: var(--maroon-100);
