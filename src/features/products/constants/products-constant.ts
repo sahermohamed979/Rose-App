@@ -1,1 +1,1 @@
-export const DEFAULT_PRODUCTS_LIMIT = '14';
+export const DEFAULT_PRODUCTS_LIMIT = '12';
