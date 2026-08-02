@@ -15,6 +15,7 @@ import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
 import { useCart } from '@/features/cart-wishlist/hooks/use-cart';
+import { useWishlist } from '@/features/cart-wishlist/hooks/use-wishlist';
 import { CartItem } from '@/features/cart-wishlist/types/cart-wishlist.types';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
@@ -28,8 +29,10 @@ export default function HeaderActions() {
   const isAuthenticated = status === 'authenticated';
   const { data: cartData } = useCart(isAuthenticated);
   const cartCount = cartData?.payload?.cartItems.length || 0;
-
-  const wishlistCount = 8;
+  const { data: wishlistData } = useWishlist(isAuthenticated);
+  // console.log(wishlistData?.payload.wishlistItems.length);
+  const wishlistCount =
+    wishlistData?.payload?.wishlistItems?.length || 0;
 
   return (
     <div className="flex items-center w-full">
