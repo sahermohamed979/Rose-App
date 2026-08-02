@@ -5,6 +5,7 @@ import { Badge } from '@/shared/components/ui/badge';
 import { Link } from '@/i18n/navigation';
 import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import { IProduct } from '@/shared/lib/types/product-types';
+import WishlistButton from '@/features/cart-wishlist/components/wishlist-button';
 export default function ProductCard({
   product,
 }: {
@@ -46,6 +47,9 @@ export default function ProductCard({
               {t('productBadges.hot')}
             </Badge>
           )}
+        </div>
+        <div className="absolute top-2 left-2 rtl:right-2 flex gap-x-1.5 focus-visible:outline-none">
+          <WishlistButton productId={product.id} />
         </div>
       </Link>
       <h2
