@@ -172,5 +172,202 @@
     "error": "خطأ",
     "warning": "تحذير",
     "info": "معلومة"
+  },
+  "products": {
+    "noProductMatch": "لا توجد منتجات تطابق الفلاتر الخاصة بك.",
+    "tryClear": "جرب مسح أو تغيير فلاترك لرؤية المزيد من النتائج.",
+    "new": "جديد",
+    "outOfStock": "نفدت الكمية",
+    "hot": "رائج",
+    "addToWishList": "اضافه الي المفضله",
+    "removeFromWishList": "ازاله من المفضله",
+    "loadingProducts": "جاري تحميل المنتجات..."
+  },
+  "ProductDetails": {
+    "notFound": "المنتج غير موجود",
+    "unitsInStock": "{count} وحدة في المخزن",
+    "outOfStock": "نفد من المخزن",
+    "ratingLabel": "التقييم:",
+    "ratingsCount": "{count} تقييمات",
+    "addToFavorites": "أضف إلى المفضلة",
+    "addToCart": "أضف إلى السلة",
+    "errorTitle": "حدث خطأ ما",
+    "errorDescription": "تعذر تحميل المنتج، يرجى المحاولة مرة أخرى لاحقًا.",
+    "backToProducts": "العودة إلى المنتجات",
+    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود."
+  },
+  "productReview": {
+    "title": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingSingular": "تقييم",
+    "ratingPlural": "تقييمات",
+    "noReviewsYet": "لا توجد تقييمات حتى الآن.",
+    "noReviewsTitle": "لا توجد تقييمات حتى الآن",
+    "noReviewsDescription": "كن أول من يشارك رأيه في هذا المنتج.",
+    "loadError": "فشل تحميل التقييمات. يرجى المحاولة مرة أخرى.",
+    "customerReviews": "تقييمات العملاء",
+    "starLabel": "التقييم: {value} من {max} نجوم",
+    "starSingular": "{n} نجمة",
+    "starPlural": "{n} نجوم"
+  },
+
+  "header": {
+    "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "headerLogin": "تسجيل الدخول",
+    "deliver": "توصيل الي :",
+    "country": "القاهره",
+    "hello": "مرحبا",
+    "searchResult": ":نتائج البحث",
+    "suggestedProduct": ":منتجات قد تعجبك",
+    "noProducts": "لم يتم العثور علي منتجات",
+    "searchSchema": "البحث مطلوب",
+    "searchError": "فشل البحث. حاول مجدداً.",
+    "searchRating": "التقييم:",
+    "productRating": "تقيم",
+    "loadingMore": "جاري تحميل المزيد",
+    "currency": "جنيه مصري",
+    "subHeader": {
+      "subHeaderHome": "الرئيسة",
+      "subHeaderProducts": "المنتجات",
+      "subHeaderOccasions": "المناسبات",
+      "subHeaderCategories": "الفئات",
+      "subHeaderContact": "تواصل معنا",
+      "subHeaderAbout": " حول الموقع"
+    }
+  },
+  "footer": {
+    "logo": {
+      "title": "تطبيق روز للتجارة الإلكترونية",
+      "copyright": "جميع الحقوق محفوظة | 2025"
+    },
+    "nav": {
+      "title": "اكتشف موقعنا",
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "contact": "اتصل بنا",
+      "about": "معلومات عنا",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية",
+      "faq": "الأسئلة الشائعة"
+    },
+    "newsletter": {
+      "title1": "احصل على",
+      "titleHighlight": "خصم 20%",
+      "title2": "كوبون خصم",
+      "subtitle": "من خلال الاشتراك في نشرتنا الإخبارية",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "subscribe": "اشتراك",
+      "successMessage": "تم الاشتراك بنجاح!"
+    }
+  },
+  "userMenu": {
+    "account": "حسابي",
+    "orders": "طلباتي",
+    "addresses": "عناويني",
+    "dashboard": "لوحة التحكم",
+    "logout": "تسجيل الخروج"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تعيين الكل كمقروء",
+    "clearAll": "حذف الكل",
+    "markRead": "تعيين كمقروء",
+    "delete": "حذف",
+    "empty": "لا توجد إشعارات حتى الآن"
+  },
+  "home": {
+    "about": {
+      "label": "عن الموقع",
+      "title": "نقدم <highlight>أفضل</highlight> صناديق الهدايا لمناسباتك <highlight>الخاصة</highlight>",
+      "description": "اجعل كل لحظة لا تُنسى مع صناديق الهدايا الفاخرة لدينا. كل صندوق يتم تنسيقه بعناية وتغليفه بشكل جميل، ومليء بعناصر مختارة خصيصاً لإبهار من تحب. سواء كان ذلك لعيد ميلاد أو مجرد كلمة 'شكراً'، صُممت هدايانا لتترك انطباعاً يدوم.",
+      "discover": "اكتشف",
+      "features": {
+        "price": "أسعار تنافسية وتسوق سهل",
+        "quality": "جودة فاخرة وتغليف أنيق",
+        "occasion": "مثالية لكل المناسبات",
+        "delivery": "توصيل سريع وموثوق"
+      }
+    },
+    "gallery": {
+      "label": "معرض صورنا",
+      "title": "تصفح معرض صورنا الرائع"
+    },
+    "testimonials": {
+      "label": "أراء عملائنا",
+      "title": "كلمات حقيقية من عملاء سعداء"
+    },
+    "partners": {
+      "title": "موثوق بنا من قِبل أكثر من <highlight>4500</highlight> شركة"
+    },
+    "bestSelling": "الأكثر مبيعاً",
+    "bestSellingSubtitle": "<secondary>اكتشف </secondary>ما يشتريه الجميع<secondary> الآن</secondary><br></br>في هذا الوقت",
+    "viewAll": "عرض الكل",
+    "mostPopular": "الأكثر شعبية",
+    "viewMore": "عرض المزيد",
+    "wedding": "زفاف",
+    "birthday": "عيد ميلاد",
+    "anniversary": "ذكرى سنوية",
+    "engagement": "خطوبة",
+    "addToCart": "أضف إلى السلة",
+    "addToWishlist": "أضف إلى المفضلة",
+    "exploreGifts": "اكتشف الهدايا",
+    "bestSellingDescription": "لست متأكداً ماذا تختار؟\nابدأ بالأكثر مبيعاً لدينا، فهذه هي الهدايا التي يعود عملاؤنا لاختيارها باستمرار.\nسواء كنت تحتفل بعيد ميلاد أو ذكرى سنوية أو زفاف، اختياراتنا الأفضل ستترك انطباعاً لا ينسى.",
+    "noProductsAvailable": "لا يوجد منتجات متاحة لهذه المناسبة في الوقت الحالي.",
+    "faliureToLoad": "فشل تحميل المنتجات. حاول مجدداً"
+  },
+  "currency": "جنيه مصري",
+  "productBadges": {
+    "outOfStock": "غير متاح",
+    "new": "جديد",
+    "hot": "عرض مميز"
+  },
+  "ProductsFilters": {
+    "clearFilters": "مسح الكل",
+    "price": "السعر",
+    "priceFrom": "من",
+    "priceTo": "الى",
+    "reset": "مسح",
+    "Rating": "التقييم",
+    "categories": "الفئات",
+    "occasions": "المناسبات",
+    "error": "فشل تحميل الفلاتر",
+    "errorDescription": "تعذر تحميل الفلاتر. يرجى المحاولة مرة أخرى لاحقًا.",
+    "retry": " إعادة تحميل الفلاتر "
+  },
+  "hero": {
+    "specialGifts": "هدايا مميزة لمن تحب",
+    "startingFrom": "ابتداءً من 10.99 جنيه",
+    "shopNow": "تسوق الآن",
+    "flowersTitle": "عبّر عن مشاعرك بالورود.",
+    "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
+    "buyNow": "سأشتريها!"
+  },
+
+  "categories": {
+    "wedding": "زفاف",
+    "engagement": "خطوبة",
+    "anniversary": "ذكرى زواج"
+  },
+
+  "cards": {
+    "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
+    "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
+    "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
+  },
+
+  "features": {
+    "freeDelivery": "توصيل مجاني",
+    "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
+
+    "refund": "استرجاع الأموال",
+    "refundDesc": "استرجاع خلال 30 يومًا",
+
+    "safePayment": "دفع آمن",
+    "safePaymentDesc": "دفع آمن بنسبة 100٪",
+
+    "support": "دعم 24/7",
+    "supportDesc": "تواصل معنا في أي وقت"
   }
 }

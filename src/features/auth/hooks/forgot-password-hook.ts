@@ -12,7 +12,7 @@ export function useForgetPassword() {
   // Translation
   const t = useTranslations('forgotPw');
   // State
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
 
   //schema

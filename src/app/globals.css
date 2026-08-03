@@ -60,6 +60,7 @@
   --color-bg-danger-saturated: var(--bg-danger-saturated);
   --color-bg-danger-faint: var(--bg-danger-faint);
   --color-bg-danger-fade: var(--bg-danger-fade);
+  --color-bg-carosel: var(--bg-carosel);
 
   /* Border Semantic */
   --color-border-plain: var(--border-plain);
@@ -289,9 +290,12 @@
   --bg-elevated: rgb(0 0 0 / 20%);
   --bg-overlay: rgb(0 0 0 / 50%);
 
+  /* Bg Carosel */
+  --bg-carosel: var(--maroon-50);
+
   /* Background - Primary */
-  --bg-primary: var(--maroon-800);
-  --bg-primary-saturated: var(--maroon-700);
+  --bg-primary: var(--maroon-700);
+  --bg-primary-saturated: var(--maroon-600);
   --bg-primary-faint: var(--maroon-100);
   --bg-primary-fade: var(--maroon-50);
 
@@ -333,6 +337,7 @@
 
   /* Border - Primary */
   --border-primary: var(--maroon-800);
+  --border-primary-saturated: var(--maroon-600);
   --border-primary-faint: var(--maroon-100);
   --border-primary-fade: var(--maroon-50);
 
@@ -372,7 +377,7 @@
   --text-inverse: white;
 
   /* Text - Primary */
-  --text-primary: var(--maroon-800);
+  --text-primary: var(--maroon-700);
   --text-primary-faint: var(--maroon-100);
   --text-primary-fade: var(--maroon-50);
 
@@ -480,6 +485,8 @@
     transparent
   );
 
+  --bg-carosel: var(--zinc-700);
+
   /* Background - Info */
   --bg-info: var(--blue-500);
   --bg-info-faint: var(--blue-900);
@@ -554,6 +561,7 @@
 
   /* Border - Primary */
   --border-primary: var(--soft-pink-300);
+  --border-primary-saturated: var(--soft-pink-400);
   --border-primary-faint: color-mix(
     in srgb,
     var(--soft-pink-300) 75%,
@@ -625,7 +633,7 @@
   --text-inverse: var(--zinc-800);
 
   /* Text - Primary */
-  --text-primary: var(--soft-pink-300);
+  --text-primary: var(--soft-pink-200);
   --text-primary-faint: color-mix(
     in srgb,
     var(--soft-pink-300) 75%,
@@ -754,4 +762,12 @@
   html {
     @apply font-sans;
   }
+}
+/* x sign in search input */
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%239CA3AF' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 6.586L12.293 2.293a1 1 0 111.414 1.414L9.414 8l4.293 4.293a1 1 0 01-1.414 1.414L8 9.414l-4.293 4.293a1 1 0 01-1.414-1.414L6.586 8 2.293 3.707a1 1 0 011.414-1.414L8 6.586z'/%3E%3C/svg%3E");
+  cursor: pointer;
 }
