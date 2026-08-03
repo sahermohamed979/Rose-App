@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import {
   ApiResponse,
