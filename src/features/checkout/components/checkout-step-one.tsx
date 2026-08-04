@@ -7,6 +7,7 @@ import { AddressesPayload } from '@/shared/lib/types/adresses.type';
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils/utils';
 import { useTranslations } from 'next-intl';
+import AddressSkeleton from '../skeletons/addresses.skeleton';
 
 interface CheckoutStepOneProps {
   initialData?: AddressesPayload;
@@ -43,9 +44,7 @@ export default function CheckoutStepOne({
 
   // Loading
   if (isLoading) {
-    return (
-      <div className="p-10 text-text-plain">Loading addresses...</div>
-    );
+    return <AddressSkeleton />;
   }
 
   // Error
@@ -113,7 +112,7 @@ export default function CheckoutStepOne({
                       : 'bg-bg-primary-saturated text-text-inverse'
                   )}
                 >
-                  <Phone size={16} fill="currentColor" />
+                  <Phone size={20} />
                 </div>
                 <span
                   className={cn(
