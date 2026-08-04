@@ -374,6 +374,7 @@
     "step1Title": "Shipping Address",
     "addAddress": "Add a new address",
     "next": "Next",
-    "noAddresses": "Add your first address to continue"
+    "noAddresses": "Add your first address to continue",
+    "or": "Or"
   }
 }
