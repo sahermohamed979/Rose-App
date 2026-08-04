@@ -369,5 +369,20 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+
+  "cart": {
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية"
   }
 }
