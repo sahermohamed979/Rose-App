@@ -133,7 +133,9 @@ export default function CheckoutStepOne({
       {/* Separator */}
       <div className="flex items-center gap-4 my-8">
         <div className="h-px bg-border-soft flex-1"></div>
-        <span className="text-text-soft font-medium text-sm">OR</span>
+        <span className="text-text-soft font-medium text-sm">
+          {t('or')}
+        </span>
         <div className="h-px bg-border-soft flex-1"></div>
       </div>
 
