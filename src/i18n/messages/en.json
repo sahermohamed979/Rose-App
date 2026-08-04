@@ -369,5 +369,11 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add your first address to continue"
   }
 }
