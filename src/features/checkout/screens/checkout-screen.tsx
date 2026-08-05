@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { AddressesPayload } from '@/shared/lib/types/adresses.type';
 import CheckoutStepOne from '../components/checkout-step-one';
-import CheckoutStepper from '../components/checkout-stepper'; // Import Stepper
+import CheckoutStepper from '../components/checkout-stepper';
 
 interface Props {
   initialData?: AddressesPayload;
@@ -16,7 +16,6 @@ interface CheckoutState {
 export default function CheckoutScreen({ initialData }: Props) {
   // State
   const [currentStep, setCurrentStep] = useState(1);
-
   const [checkoutData, setCheckoutData] = useState<CheckoutState>({
     addressId: '',
   });
