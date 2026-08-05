@@ -1,13 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { Phone, ArrowRight } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { useUserAddresses } from '../hooks/use-user-addresses';
-import { AddressesPayload } from '@/shared/lib/types/adresses.type';
+import {
+  AddressesPayload,
+  IAddress,
+} from '@/shared/lib/types/adresses.type';
 import { Button } from '@/shared/components/ui/button';
-import { cn } from '@/shared/lib/utils/utils';
 import { useTranslations } from 'next-intl';
 import AddressSkeleton from '../skeletons/addresses.skeleton';
+import EmptyAddresses from './empty-addresses';
+import AddressCard from './address-card';
 
 interface CheckoutStepOneProps {
   initialData?: AddressesPayload;
@@ -23,22 +27,32 @@ export default function CheckoutStepOne({
 
   // Custom hooks
   const { data, isLoading, isError } = useUserAddresses(initialData);
-  const addresses = data?.addresses || [];
 
-  // State
+  // Data
+  const addresses = data?.addresses ?? [];
+
+  // Default address from SSR data
+  const defaultAddressId = useMemo(() => {
+    const primaryAddress = addresses.find(
+      (address) => address.isPrimary
+    );
+
+    return primaryAddress?.id ?? addresses[0]?.id ?? null;
+  }, [addresses]);
+
+  // User selection only
   const [selectedAddressId, setSelectedAddressId] = useState<
     string | null
-  >(() => {
-    if (addresses.length > 0) {
-      const primaryAddress = addresses.find((addr) => addr.isPrimary);
-      return primaryAddress ? primaryAddress.id : addresses[0].id;
-    }
-    return null;
-  });
+  >(null);
 
+  // Final selected address
+  const currentSelectedAddressId =
+    selectedAddressId ?? defaultAddressId;
+
+  // Handlers
   const handleNextClick = () => {
-    if (selectedAddressId) {
-      onNext(selectedAddressId);
+    if (currentSelectedAddressId) {
+      onNext(currentSelectedAddressId);
     }
   };
 
@@ -51,10 +65,12 @@ export default function CheckoutStepOne({
   if (isError) {
     return (
       <div className="p-10 text-text-danger">
-        Failed to load addresses.
+        {t('failedLoading')}
       </div>
     );
   }
+
+  const isEmpty = addresses.length === 0;
 
   return (
     <div className="w-full flex flex-col">
@@ -62,97 +78,58 @@ export default function CheckoutStepOne({
         {t('step1Title')}
       </h1>
 
-      {/* Address List */}
-      <div className="flex flex-col gap-4 max-h-90 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none">
-        {addresses.map((address) => {
-          const isSelected = selectedAddressId === address.id;
+      {isEmpty ? (
+        <EmptyAddresses
+          title={t('noAddresses')}
+          buttonLabel={t('addAddress')}
+          onAddAddress={() => {
+            // TODO: Open Address Book modal (S5-03)
+          }}
+        />
+      ) : (
+        <>
+          {/* Address List */}
+          <div className="flex flex-col gap-4 max-h-90 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none">
+            {addresses.map((address) => (
+              <AddressCard
+                key={address.id}
+                address={address as IAddress}
+                isSelected={currentSelectedAddressId === address.id}
+                onSelect={setSelectedAddressId}
+              />
+            ))}
+          </div>
 
-          return (
-            <div
-              key={address.id}
-              onClick={() => setSelectedAddressId(address.id)}
-              className={cn(
-                'shrink-0 flex justify-between items-center p-4 border border-border-soft rounded-xl cursor-pointer transition-colors',
-                isSelected
-                  ? 'bg-bg-primary-saturated text-text-inverse'
-                  : 'bg-bg-muted'
-              )}
-            >
-              {/* Address Details */}
-              <div className="flex flex-col gap-2 items-start">
-                <span
-                  className={cn(
-                    'font-semibold text-2xl',
-                    isSelected
-                      ? 'text-text-inverse'
-                      : 'text-text-plain'
-                  )}
-                >
-                  {address.city}
-                </span>
-                <span
-                  className={cn(
-                    'px-3 rounded-full text-base font-medium',
-                    isSelected
-                      ? 'bg-bg-inverse text-text-inverse'
-                      : 'bg-bg-subtle text-text-plain'
-                  )}
-                >
-                  {address.street}
-                </span>
-              </div>
+          {/* Separator */}
+          <div className="flex items-center gap-4 my-8">
+            <div className="h-px bg-border-soft flex-1" />
 
-              {/* Phone Number */}
-              <div className="flex items-center gap-3">
-                <div
-                  className={cn(
-                    'p-2 rounded-full flex items-center justify-center',
-                    isSelected
-                      ? 'bg-bg-subtle text-text-primary'
-                      : 'bg-bg-primary-saturated text-text-inverse'
-                  )}
-                >
-                  <Phone size={20} />
-                </div>
-                <span
-                  className={cn(
-                    'font-medium tracking-wide text-sm',
-                    isSelected
-                      ? 'text-text-inverse'
-                      : 'text-text-soft'
-                  )}
-                >
-                  {address.phone}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            <span className="text-text-soft font-medium text-sm">
+              {t('or')}
+            </span>
 
-      {/* Separator */}
-      <div className="flex items-center gap-4 my-8">
-        <div className="h-px bg-border-soft flex-1"></div>
-        <span className="text-text-soft font-medium text-sm">
-          {t('or')}
-        </span>
-        <div className="h-px bg-border-soft flex-1"></div>
-      </div>
+            <div className="h-px bg-border-soft flex-1" />
+          </div>
 
-      {/* New Address */}
-      <Button variant="secondary">{t('addAddress')}</Button>
+          {/* New Address */}
+          <Button variant="secondary">{t('addAddress')}</Button>
+        </>
+      )}
 
       {/* Next */}
-      <div className="flex justify-end mt-8">
-        <Button
-          onClick={handleNextClick}
-          disabled={!selectedAddressId}
-          variant="default"
-        >
-          {t('next')}
-          <ArrowRight className="w-4 h-4 ml-2 rtl:rotate-180" />
-        </Button>
-      </div>
+      {!isEmpty && (
+        <div className="flex justify-end mt-8">
+          <Button
+            onClick={handleNextClick}
+            disabled={!currentSelectedAddressId}
+            variant="default"
+          >
+            {t('next')}
+
+            <ArrowRight className="w-4 h-4 ml-2 rtl:rotate-180" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
