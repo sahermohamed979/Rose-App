@@ -9,7 +9,7 @@ export async function confirmCardPayment(body: ConfirmCardBody) {
   const token = await getAuthToken();
 
   const response = await fetch(
-    `${process.env.NEXT_API_URL}/payments/confirm`,
+    `${process.env.NEXT_PUBLIC_API_URL}/payments/confirm`,
     {
       method: 'POST',
 
