@@ -376,6 +376,15 @@
     "next": "Next",
     "noAddresses": "Add your first address to continue",
     "or": "Or",
-    "failedLoading": "Failed to load addresses. Please try again"
+    "failedLoading": "Failed to load addresses. Please try again",
+    "back": "Back",
+    "step2Title": "Payment Method",
+    "cashOnDeleviry": "Cash on Delivery",
+    "cashP": "You’ll pay in cash when your order is delivered.",
+    "creditCard": "Credit Card",
+    "creditP": "You’ll be securely redirected to Stripe to complete your payment.",
+    "checkout": "Checkout",
+    "successToast": "Order placed successfully",
+    "errorToast": "Order failed. Please try again."
   }
 }
