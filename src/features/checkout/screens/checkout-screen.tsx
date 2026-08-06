@@ -126,32 +126,9 @@ export default function CheckoutScreen({ initialData }: Props) {
   };
 
   return (
-    <div className="w-full mx-auto flex flex-col gap-8 p-6">
-      {/* 1. Top Section: Steps & Summary */}
-      <div className="flex flex-col lg:flex-row gap-8 w-full">
-        {/* Left Column: Steps & Progress */}
-        <div className="w-full lg:w-2/3 flex flex-col gap-2">
-          {/* Stepper implementation */}
-          <CheckoutStepper currentStep={currentStep} />
-
-          {/* Current Step Component */}
-          {renderStep()}
-        </div>
-
-        {/* Right Column: Persistent Order Summary */}
-        <div className="w-full lg:w-1/3">
-          <div className="p-6 border border-border-soft rounded-xl text-text-plain bg-bg-muted h-full">
-            Summary To Be Mounted
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Bottom Section: Products (Under Both Steps & Summary) */}
-      <div className="w-full mt-8">
-        <div className="p-6 border border-border-soft rounded-xl text-text-plain bg-bg-muted">
-          Products To Be Mounted Here
-        </div>
-      </div>
+    <div className="w-full flex flex-col gap-8">
+      <CheckoutStepper currentStep={currentStep} />
+      {renderStep()}
     </div>
   );
 }

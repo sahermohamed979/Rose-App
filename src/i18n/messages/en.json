@@ -385,6 +385,7 @@
     "creditP": "You’ll be securely redirected to Stripe to complete your payment.",
     "checkout": "Checkout",
     "successToast": "Order placed successfully",
-    "errorToast": "Order failed. Please try again."
+    "errorToast": "Order failed. Please try again.",
+    "tryAgain": "Try again"
   }
 }

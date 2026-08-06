@@ -1,3 +1,4 @@
+'use server';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
 import { AddressesResponse } from '@/shared/lib/types/adresses.type';
 
