@@ -2,14 +2,12 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useUserAddresses } from '../hooks/use-user-addresses';
 import {
   AddressesPayload,
   IAddress,
 } from '@/shared/lib/types/adresses.type';
 import { Button } from '@/shared/components/ui/button';
 import { useTranslations } from 'next-intl';
-import AddressSkeleton from '../skeletons/addresses.skeleton';
 import EmptyAddresses from './empty-addresses';
 import AddressCard from './address-card';
 
@@ -25,11 +23,7 @@ export default function CheckoutStepOne({
   // Translations
   const t = useTranslations('checkout');
 
-  // Custom hooks
-  const { data, isLoading, isError } = useUserAddresses(initialData);
-
-  // Data
-  const addresses = data?.addresses ?? [];
+  const addresses = initialData?.addresses ?? [];
 
   // Default address from SSR data
   const defaultAddressId = useMemo(() => {
@@ -55,20 +49,6 @@ export default function CheckoutStepOne({
       onNext(currentSelectedAddressId);
     }
   };
-
-  // Loading
-  if (isLoading) {
-    return <AddressSkeleton />;
-  }
-
-  // Error
-  if (isError) {
-    return (
-      <div className="p-10 text-text-danger">
-        {t('failedLoading')}
-      </div>
-    );
-  }
 
   const isEmpty = addresses.length === 0;
 
