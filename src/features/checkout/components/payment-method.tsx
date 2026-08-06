@@ -9,15 +9,11 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils/utils';
 import { Label } from '@/shared/components/ui/label';
+import {
+  PaymentMethodProps,
+  PaymentMethodType,
+} from '../types/payment-types';
 
-export type PaymentMethodType = 'CASH' | 'CARD';
-interface PaymentMethodProps {
-  paymentMethod: PaymentMethodType | null;
-  onPaymentChange: (value: PaymentMethodType) => void;
-  onBack: () => void;
-  onCheckout: () => void;
-  isLoading: boolean;
-}
 export default function PaymentMethod({
   paymentMethod,
   onPaymentChange,
@@ -107,7 +103,7 @@ export default function PaymentMethod({
       {/* Checkout Button */}
       <div className="mt-3 border-t flex justify-end ">
         <Button
-          className="bg-bg-primary-saturated mt-3 px-4 py-2.5 gap-2.5 rounded-xl text-text-inverse  flex flex-row"
+          variant="default"
           onClick={onCheckout}
           disabled={!paymentMethod || isLoading}
         >
