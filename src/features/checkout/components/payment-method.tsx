@@ -101,7 +101,7 @@ export default function PaymentMethod({
       </RadioGroup>
 
       {/* Checkout Button */}
-      <div className="mt-3 border-t flex justify-end ">
+      <div className="mt-3 pt-5 border-t flex justify-end ">
         <Button
           variant="default"
           onClick={onCheckout}
