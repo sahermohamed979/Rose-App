@@ -376,6 +376,7 @@
     "next": "Next",
     "noAddresses": "Add your first address to continue",
     "or": "Or",
-    "failedLoading": "Failed to load addresses. Please try again"
+    "failedLoading": "Failed to load addresses. Please try again",
+    "tryAgain": "Try again"
   }
 }
