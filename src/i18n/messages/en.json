@@ -382,6 +382,7 @@
     "discount": "Discount",
     "total": "Total",
     "checkout": "Checkout",
-    "couponInvalid": "Invalid or expired coupon code"
+    "couponInvalid": "Invalid or expired coupon code",
+    "suggestedProducts": "Products You May Like"
   }
 }
