@@ -39,3 +39,9 @@ next-env.d.ts
 
 #cursorFiles
 .cursorignore
+.agents
+
+#antigravity
+.antigravity
+.agent
+.AGENTS.md

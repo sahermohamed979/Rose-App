@@ -369,5 +369,29 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
   }
 }

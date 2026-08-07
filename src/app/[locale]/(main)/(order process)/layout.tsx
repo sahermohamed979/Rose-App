@@ -3,7 +3,7 @@ interface MainLayoutProps {
 }
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <main className="py-15 px-20 ">
+    <main className="py-13 px-20 ">
       {/* screens */}
       <div className="grid grid-cols-12 gap-x-10">
         <div className="col-span-8 w-full ">{children}</div>

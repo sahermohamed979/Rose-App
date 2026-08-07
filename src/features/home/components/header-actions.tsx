@@ -17,7 +17,11 @@ import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 
-export default function HeaderActions() {
+export default function HeaderActions({
+  cartCount,
+}: {
+  cartCount: number;
+}) {
   // Translation
   const t = useTranslations('header');
 
@@ -26,7 +30,6 @@ export default function HeaderActions() {
   const isAuthenticated = status === 'authenticated';
 
   const wishlistCount = 8;
-  const cartCount = 8;
 
   return (
     <div className="flex items-center w-full">
