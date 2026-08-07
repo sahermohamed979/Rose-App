@@ -13,7 +13,7 @@ export function OrderTotals({
   total,
   currency,
 }: OrderTotalsProps) {
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
   const locale = useLocale();
 
   const formatNumber = (num: number) =>

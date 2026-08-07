@@ -13,8 +13,8 @@
  */
 import React from 'react';
 import { IProduct } from '@/shared/lib/types/product-types';
-import { getSuggestedProductsAction } from '@/features/cart/apis/suggested-products.action';
-import { SuggestedProductsSlider } from '@/features/cart/components/suggested-products-slider';
+import { getSuggestedProductsAction } from '@/features/checkout/apis/suggested-products.action';
+import { SuggestedProductsSlider } from '@/features/checkout/components/suggested-products-slider';
 
 interface ProductsYouMayLikeProps {
   products?: IProduct[];

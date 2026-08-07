@@ -10,11 +10,11 @@
 
 import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/utils/utils';
-import { useApplyCoupon } from '@/features/cart/hooks/use-apply-coupon';
-import { CouponForm } from '@/features/cart/components/coupon-form';
-import { CouponAppliedBadge } from '@/features/cart/components/coupon-applied-badge';
-import { OrderTotals } from '@/features/cart/components/order-totals';
-import { CheckoutButton } from '@/features/cart/components/checkout-button';
+import { useApplyCoupon } from '@/features/checkout/hooks/use-apply-coupon';
+import { CouponForm } from '@/features/checkout/components/coupon-form';
+import { CouponAppliedBadge } from '@/features/checkout/components/coupon-applied-badge';
+import { OrderTotals } from '@/features/checkout/components/order-totals';
+import { CheckoutButton } from '@/features/checkout/components/checkout-button';
 
 interface OrderSummaryProps {
   /** Cart subtotal before any discount (in minor units or decimal) */

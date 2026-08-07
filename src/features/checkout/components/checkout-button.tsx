@@ -11,14 +11,9 @@ interface CheckoutButtonProps {
   className?: string;
 }
 
-/**
- * Full-width Checkout CTA.
- * Persists the active coupon to sessionStorage so the addresses page
- * can include it in the final order payload (POST /orders).
- */
 export function CheckoutButton({ className }: CheckoutButtonProps) {
   const router = useRouter();
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
 
   const handleCheckout = () => {
     router.push('/checkout');

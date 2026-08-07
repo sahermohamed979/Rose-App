@@ -4,7 +4,8 @@ import { useState } from 'react';
 import type { CouponResult } from '../types/cart.types';
 
 export function useApplyCoupon(subtotal: number) {
-  const [couponResult, setCouponResult] = useState<CouponResult | null>(null);
+  const [couponResult, setCouponResult] =
+    useState<CouponResult | null>(null);
   const [couponError, setCouponError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -17,7 +18,9 @@ export function useApplyCoupon(subtotal: number) {
       const percent = parseFloat(cleanVal);
 
       if (isNaN(percent) || percent <= 0 || percent > 100) {
-        setCouponError('Please enter a valid percentage between 1 and 100');
+        setCouponError(
+          'Please enter a valid percentage between 1 and 100'
+        );
         return;
       }
 

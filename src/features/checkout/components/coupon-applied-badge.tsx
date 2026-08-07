@@ -20,7 +20,7 @@ export function CouponAppliedBadge({
   currency,
   onRemove,
 }: CouponAppliedBadgeProps) {
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
   const locale = useLocale();
 
   const formatNumber = (num: number) =>
