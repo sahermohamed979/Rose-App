@@ -370,8 +370,14 @@
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
   },
-
-  "cart": {
+  "checkout": {
+    "step1Title": "عنوان الشحن",
+    "addAddress": "إضافة عنوان جديد",
+    "next": "التالي",
+    "noAddresses": "أضف عنوانك الأول للمتابعة",
+    "or": "أو",
+    "failedLoading": "فشل تحميل العناوين. حاول مجدداً",
+    "tryAgain": "حاول مجدداً",
     "orderSummary": "الملخص",
     "couponCode": "كود الخصم",
     "couponPlaceholder": "كود الخصم",
