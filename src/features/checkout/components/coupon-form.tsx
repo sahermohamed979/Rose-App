@@ -28,7 +28,7 @@ export function CouponForm({
   disabled,
   className,
 }: CouponFormProps) {
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
 
   const {
     register,

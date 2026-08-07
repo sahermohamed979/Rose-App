@@ -7,7 +7,8 @@ import type {
 } from '@/shared/lib/types/product-types';
 import { getLocale } from 'next-intl/server';
 
-const BASE_URL = process.env.NEXT_API_URL || process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL =
+  process.env.NEXT_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 /**
  * Server Action to fetch suggested products for cart / checkout pages.
@@ -25,19 +26,23 @@ export async function getSuggestedProductsAction(
       sortOrder: 'desc',
     });
 
-    const res = await fetch(`${BASE_URL}/products?${params.toString()}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept-Language': locale,
-      },
-      next: { revalidate: 300 }, // Cache for 5 minutes
-    });
+    const res = await fetch(
+      `${BASE_URL}/products?${params.toString()}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Language': locale,
+        },
+        next: { revalidate: 300 }, // Cache for 5 minutes
+      }
+    );
 
     const data = await res.json();
 
     if (!res.ok || !data.status) {
-      console.error('[Suggested Products Error]:', data?.message);
+      throw new Error('Failed to fetch suggested products');
+      // console.error('[Suggested Products Error]:', data?.message);
       return [];
     }
 
@@ -52,7 +57,8 @@ export async function getSuggestedProductsAction(
 
     return [];
   } catch (error) {
-    console.error('[Suggested Products Action Exception]:', error);
+    throw new Error('Failed to fetch suggested products');
+    // console.error('[Suggested Products Action Exception]:', error);
     return [];
   }
 }

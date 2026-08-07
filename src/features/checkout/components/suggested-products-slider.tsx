@@ -23,7 +23,7 @@ export function SuggestedProductsSlider({
   initialProducts,
   className = '',
 }: SuggestedProductsSliderProps) {
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
   const locale = useLocale();
   const [products, setProducts] = useState<IProduct[]>(
     initialProducts ?? []
