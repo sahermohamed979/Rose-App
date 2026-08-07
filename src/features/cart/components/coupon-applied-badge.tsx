@@ -24,21 +24,16 @@ export function CouponAppliedBadge({
   const locale = useLocale();
 
   const formatNumber = (num: number) =>
-    new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : 'en-US').format(num);
+    new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : 'en-US').format(
+      num
+    );
 
   const formattedDiscount = formatNumber(coupon.discountAmount);
 
   // Format code for percentage display (e.g. ١٠٪ in Arabic vs 10% in English)
   const displayCode =
     coupon.discountType === 'PERCENT' && coupon.discountValue
-      ? new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : 'en-US', {
-          style: 'percent',
-          maximumFractionDigits: 2,
-        }).format(coupon.discountValue / 100)
-      : locale === 'ar'
-      ? coupon.code
-          .replace(/%/g, '٪')
-          .replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d, 10)])
+      ? `${formatNumber(coupon.discountValue)}${locale === 'ar' ? '٪' : '%'}`
       : coupon.code;
 
   return (
