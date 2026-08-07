@@ -187,7 +187,7 @@
     "notFound": "Product not found",
     "unitsInStock": "{count} units in stock",
     "outOfStock": "Out of stock",
-    "ratingLabel": "Rating:",
+    "ratingLabel": "Rating: ",
     "ratingsCount": "{count} ratings",
     "addToFavorites": "Add to favorites",
     "addToCart": "Add to cart",
@@ -369,5 +369,29 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "cart": {
+    "title": " Cart ",
+    "clearCart": " Clear Cart ",
+    "continueShopping": "Continue Shopping ",
+    "empty": " Your cart is empty, wanna try shopping?",
+    "startShopping": " Start Shopping ",
+    "remove": " Remove ",
+    "confirmClear": "Are you sure you want to clear the cart? ",
+    "noImage": "No image",
+    "product": "{count} Products",
+    "currency": "EGP"
+  },
+  "cartError": {
+    "title": "Unable to Load Your Cart",
+    "subtitle": "Something went wrong while fetching your shopping cart. Don't worry, your items are safe.",
+    "retry": "Try Again",
+    "continueShopping": "Continue Shopping",
+    "goHome": "Go to Home",
+    "showDetails": "Show technical details",
+    "hideDetails": "Hide technical details",
+    "errorDetails": "Error Details",
+    "message": "Message:",
+    "digest": "Digest code:"
   }
 }

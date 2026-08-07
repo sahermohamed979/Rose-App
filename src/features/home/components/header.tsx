@@ -3,8 +3,13 @@ import Image from 'next/image';
 import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import { Link } from '@/i18n/navigation';
+import { getCartAction } from '@/features/cart/apis/cart-actions';
 
-export default function Header() {
+export default async function Header() {
+  const cart = await getCartAction();
+
+  const cartCount =
+    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
   return (
     <>
       <div className=" sticky top-0 z-50 ">
@@ -19,7 +24,7 @@ export default function Header() {
             />
           </Link>
           {/* header actions */}
-          <HeaderActions />
+          <HeaderActions cartCount={cartCount} />
         </div>
         {/* subHeader */}
         <SubHeader />
