@@ -370,7 +370,14 @@
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
   },
-  "cart": {
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add your first address to continue",
+    "or": "Or",
+    "failedLoading": "Failed to load addresses. Please try again",
+    "tryAgain": "Try again",
     "orderSummary": "Summary",
     "couponCode": "Coupon Code",
     "couponPlaceholder": "Coupon code",
