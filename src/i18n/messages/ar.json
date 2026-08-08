@@ -183,7 +183,9 @@
     "removeFromWishList": "ازاله من المفضله",
     "loadingProducts": "جاري تحميل المنتجات...",
     "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
-    "addToCartError": "فشل إضافة المنتج إلى السلة"
+    "addToCartError": "فشل إضافة المنتج إلى السلة",
+    "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",

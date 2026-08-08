@@ -28,7 +28,7 @@ export default function ProductCard({
           'block aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
         }
       >
-        <div className="absolute top-2 right-2 rtl:left-2 flex gap-x-1.5 focus-visible:outline-none">
+        <div className="absolute w-fit top-2 right-2 rtl:left-2 rtl:right-auto flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
             <Badge variant="destructive" className="">
               {t('productBadges.outOfStock')}

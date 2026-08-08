@@ -14,16 +14,18 @@ import { useTranslations } from 'next-intl';
 import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
-import { useWishlist } from '@/features/cart-wishlist/hooks/use-wishlist';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 import { getLocalCartCount } from '@/features/cart-wishlist/lib/local-cart-client';
+import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
 import { useEffect, useState } from 'react';
 
 export default function HeaderActions({
   cartCount,
+  wishlistCount,
 }: {
   cartCount: number;
+  wishlistCount: number;
 }) {
   // Translation
   const t = useTranslations('header');
@@ -34,39 +36,46 @@ export default function HeaderActions({
 
   // State
   const [localCartCount, setLocalCartCount] = useState(0);
+  const [localWishlistCount, setLocalWishlistCount] = useState(0);
 
-  // Hooks
-  const { data: wishlistData } = useWishlist(isAuthenticated);
-  // console.log(wishlistData?.payload.wishlistItems.length);
-  const wishlistCount =
-    wishlistData?.payload?.wishlistItems?.length || 0;
+  // Variables
+  const displayedCartCount = isAuthenticated
+    ? cartCount
+    : localCartCount;
+  const displayedWishlistCount = isAuthenticated
+    ? wishlistCount
+    : localWishlistCount;
 
+  // Effects
   useEffect(() => {
     if (isAuthenticated) {
       return;
     }
 
-    const updateLocalCartCount = () => {
+    const updateLocalCounts = () => {
       setLocalCartCount(getLocalCartCount());
+      setLocalWishlistCount(getLocalWishlistCount());
     };
 
-    updateLocalCartCount();
+    updateLocalCounts();
 
+    window.addEventListener('local-cart-updated', updateLocalCounts);
     window.addEventListener(
-      'local-cart-updated',
-      updateLocalCartCount
+      'local-wishlist-updated',
+      updateLocalCounts
     );
 
     return () => {
       window.removeEventListener(
         'local-cart-updated',
-        updateLocalCartCount
+        updateLocalCounts
+      );
+      window.removeEventListener(
+        'local-wishlist-updated',
+        updateLocalCounts
       );
     };
   }, [isAuthenticated]);
-  const displayedCartCount = isAuthenticated
-    ? cartCount
-    : localCartCount;
 
   return (
     <div className="flex items-center w-full">
@@ -118,7 +127,7 @@ export default function HeaderActions({
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={wishlistCount} />}
+          <CountBadge count={displayedWishlistCount} />
         </Link>
 
         <Link
