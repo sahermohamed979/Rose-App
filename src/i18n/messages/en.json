@@ -183,7 +183,11 @@
     "removeFromWishList": "Remove From wishlist",
     "loadingProducts": "Loading products...",
     "addToCartSuccess": "Product added to cart successfully",
-    "addToCartError": "Failed to add product to cart"
+    "addToCartError": "Failed to add product to cart",
+    "addToWishlistSuccess": "Product added to wishlist successfully",
+    "addToWishlistError": "Failed to add product to wishlist",
+    "removeFromWishlistSuccess": "Product removed from wishlist successfully",
+    "removeFromWishlistError": "Failed to remove product from wishlist"
   },
   "ProductDetails": {
     "notFound": "Product not found",

@@ -1,36 +1,66 @@
 'use client';
+
 import { toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRequireAuth } from '../lib/require-auth-client';
+import { useSession } from 'next-auth/react';
+
+import {
+  addToWishlistAction,
+  removeFromWishlistAction,
+} from '../apis/wishlist-actions';
 import { CART_WISHLIST_KEYS } from '../constants/query-keys';
+import { toggleLocalWishlistItem } from '../lib/local-wishlist-client';
+import { useTranslations } from 'next-intl';
 
 export function useToggleWishlist() {
-  const queryClient = useQueryClient();
-  const { ensureAuth } = useRequireAuth();
+  // Context
+  const { status } = useSession();
 
+  // Hooks
+  const queryClient = useQueryClient();
+  const t = useTranslations('products');
+  // Mutation
   const { mutate, isPending } = useMutation({
-    mutationFn: toggleWishlistRequest,
+    mutationFn: async ({
+      productId,
+      isAddedToWishlist,
+    }: {
+      productId: string;
+      isAddedToWishlist: boolean;
+    }) => {
+      if (isAddedToWishlist) {
+        return removeFromWishlistAction(productId);
+      }
+
+      return addToWishlistAction(productId);
+    },
     mutationKey: CART_WISHLIST_KEYS.wishlist,
     retry: false,
-    onSuccess: (_, variables) => {
+    onSuccess: (data, variables) => {
+      if (!data.status) {
+        toast.error(data.message);
+        return;
+      }
+
       queryClient.invalidateQueries({
         queryKey: CART_WISHLIST_KEYS.wishlist,
       });
       toast.success(
         variables.isAddedToWishlist
-          ? 'Product removed from wishlist'
-          : 'Product added to wishlist'
+          ? t('removeFromWishlistSuccess')
+          : t('addToWishlistSuccess')
       );
-      console.log(variables);
     },
     onError: (_, variables) => {
       toast.error(
         variables.isAddedToWishlist
-          ? 'Failed to remove product from wishlist'
-          : 'Failed to add product to wishlist'
+          ? t('removeFromWishlistError')
+          : t('addToWishlistError')
       );
     },
   });
+
+  // Functions
   const handleToggleWishlist = ({
     productId,
     isAddedToWishlist,
@@ -38,33 +68,22 @@ export function useToggleWishlist() {
     productId: string;
     isAddedToWishlist: boolean;
   }) => {
-    if (!ensureAuth()) {
+    if (status === 'loading') {
+      return;
+    }
+
+    if (status === 'unauthenticated') {
+      const isAdded = toggleLocalWishlistItem(productId);
+      toast.success(
+        isAdded
+          ? t('addToWishlistSuccess')
+          : t('removeFromWishlistSuccess')
+      );
       return;
     }
 
     mutate({ productId, isAddedToWishlist });
   };
+
   return { handleToggleWishlist, isPending };
 }
-const toggleWishlistRequest = async ({
-  productId,
-  isAddedToWishlist,
-}: {
-  productId: string;
-  isAddedToWishlist: boolean;
-}) => {
-  const method = isAddedToWishlist ? 'DELETE' : 'POST';
-  const response = await fetch('/api/wishlist', {
-    method,
-    body: JSON.stringify({
-      productId,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  if (!response.ok) {
-    throw new Error('Failed to add product to wishlist');
-  }
-  return response.json();
-};
