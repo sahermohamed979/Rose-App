@@ -1,14 +1,20 @@
 import { ShoppingCart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
 import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import WishlistButton from '@/features/cart-wishlist/components/wishlist-button';
+import { ICart } from '@/features/cart/types/cart-types';
 
-interface Props {
-  productId: string;
+type Props = Pick<ICart, 'productId' | 'product'> & {
   stock: number;
-}
+};
 
-export default function ProductActions({ productId, stock }: Props) {
+export default function ProductActions({
+  productId,
+  product,
+  stock,
+}: Props) {
+  // Translation
   const t = useTranslations('ProductDetails');
 
   return (
@@ -22,6 +28,7 @@ export default function ProductActions({ productId, stock }: Props) {
       <AddToCart
         className="flex-1 h-11 flex items-center justify-center gap-2 text-text-inverse"
         productId={productId}
+        product={product}
         stock={stock}
       >
         <ShoppingCart size={22} />

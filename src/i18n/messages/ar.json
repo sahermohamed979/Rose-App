@@ -181,7 +181,9 @@
     "hot": "رائج",
     "addToWishList": "اضافه الي المفضله",
     "removeFromWishList": "ازاله من المفضله",
-    "loadingProducts": "جاري تحميل المنتجات..."
+    "loadingProducts": "جاري تحميل المنتجات...",
+    "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
+    "addToCartError": "فشل إضافة المنتج إلى السلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
