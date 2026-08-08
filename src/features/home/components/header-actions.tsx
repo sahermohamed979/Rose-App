@@ -20,15 +20,19 @@ import { CartItem } from '@/features/cart-wishlist/types/cart-wishlist.types';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 
-export default function HeaderActions() {
+export default function HeaderActions({
+  cartCount,
+}: {
+  cartCount: number;
+}) {
   // Translation
   const t = useTranslations('header');
 
   // Session
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
-  const { data: cartData } = useCart(isAuthenticated);
-  const cartCount = cartData?.payload?.cartItems.length || 0;
+  // const { data: cartData } = useCart(isAuthenticated);
+  // const cartCount = cartData?.payload?.cartItems.length || 0;
   const { data: wishlistData } = useWishlist(isAuthenticated);
   // console.log(wishlistData?.payload.wishlistItems.length);
   const wishlistCount =

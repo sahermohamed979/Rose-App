@@ -225,6 +225,7 @@
     "searchRating": "التقييم:",
     "productRating": "تقيم",
     "loadingMore": "جاري تحميل المزيد",
+    "currency": "جنيه مصري",
     "subHeader": {
       "subHeaderHome": "الرئيسة",
       "subHeaderProducts": "المنتجات",
@@ -334,5 +335,63 @@
     "error": "فشل تحميل الفلاتر",
     "errorDescription": "تعذر تحميل الفلاتر. يرجى المحاولة مرة أخرى لاحقًا.",
     "retry": " إعادة تحميل الفلاتر "
+  },
+  "hero": {
+    "specialGifts": "هدايا مميزة لمن تحب",
+    "startingFrom": "ابتداءً من 10.99 جنيه",
+    "shopNow": "تسوق الآن",
+    "flowersTitle": "عبّر عن مشاعرك بالورود.",
+    "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
+    "buyNow": "سأشتريها!"
+  },
+
+  "categories": {
+    "wedding": "زفاف",
+    "engagement": "خطوبة",
+    "anniversary": "ذكرى زواج"
+  },
+
+  "cards": {
+    "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
+    "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
+    "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
+  },
+
+  "features": {
+    "freeDelivery": "توصيل مجاني",
+    "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
+
+    "refund": "استرجاع الأموال",
+    "refundDesc": "استرجاع خلال 30 يومًا",
+
+    "safePayment": "دفع آمن",
+    "safePaymentDesc": "دفع آمن بنسبة 100٪",
+
+    "support": "دعم 24/7",
+    "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
   }
 }

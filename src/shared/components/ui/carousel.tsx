@@ -206,7 +206,7 @@ function CarouselPrevious({
           : '-top-12 inset-s-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90',
         className
       )}
-      disabled={canScrollPrev === false}
+      disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
@@ -236,7 +236,7 @@ function CarouselNext({
           : '-bottom-12 inset-s-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90',
         className
       )}
-      disabled={canScrollNext === false}
+      disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
