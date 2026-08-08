@@ -1,0 +1,86 @@
+'use client';
+import { Button } from '@/shared/components/ui/button';
+import { Minus, Plus } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ICart } from '../types/cart-types';
+import { Input } from '@/shared/components/ui/input';
+import { Field } from '@/shared/components/ui/field';
+import useUpdateCartQuantity from '../hooks/quantity-hook';
+
+export default function QuantityButton({
+  cartItem,
+}: {
+  cartItem: ICart;
+}) {
+  const stock = cartItem.product.stock;
+  const DEBOUNCE_MS = 400;
+
+  const [quantity, setQuantity] = useState(cartItem.quantity);
+
+  const isFirstRender = useRef(true);
+
+  const { mutate: updateQuantity, isPending } =
+    useUpdateCartQuantity();
+
+  const clamp = (val: number) => {
+    if (isNaN(val)) {
+      return 1;
+    }
+    return Math.min(Math.max(val, 1), stock);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(clamp(Number(e.target.value)));
+  };
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      updateQuantity({
+        id: cartItem.id,
+        quantity,
+      });
+    }, DEBOUNCE_MS);
+
+    return () => clearTimeout(timer);
+  }, [quantity]);
+
+  return (
+    <div className="flex items-center gap-1">
+      <Button
+        type="button"
+        size="icon"
+        className="h-12 w-12 rounded-xl bg-bg-carosel"
+        onClick={() => setQuantity((q) => clamp(q - 1))}
+        disabled={quantity <= 1 || isPending}
+      >
+        <Minus size={20} className="text-text-primary" />
+      </Button>
+
+      <Field className="h-12 w-28">
+        <Input
+          type="number"
+          min={1}
+          max={stock}
+          value={quantity}
+          onChange={handleChange}
+          onBlur={() => setQuantity((q) => clamp(q))}
+        />
+      </Field>
+
+      <Button
+        type="button"
+        size="icon"
+        className="h-12 w-12 rounded-xl bg-bg-carosel"
+        onClick={() => setQuantity((q) => clamp(q + 1))}
+        disabled={quantity >= stock || isPending}
+      >
+        <Plus size={20} className="text-text-primary" />
+      </Button>
+    </div>
+  );
+}
