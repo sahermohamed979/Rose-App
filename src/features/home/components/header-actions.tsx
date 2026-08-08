@@ -14,11 +14,11 @@ import { useTranslations } from 'next-intl';
 import HeaderSearch from '../../search/components/header-search';
 import NotificationsContainer from '../../notifications/components/notifications-container';
 import HeaderDropdown from './header-dropdown';
-import { useCart } from '@/features/cart-wishlist/hooks/use-cart';
 import { useWishlist } from '@/features/cart-wishlist/hooks/use-wishlist';
-import { CartItem } from '@/features/cart-wishlist/types/cart-wishlist.types';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
+import { getLocalCartCount } from '@/features/cart-wishlist/lib/local-cart-client';
+import { useEffect, useState } from 'react';
 
 export default function HeaderActions({
   cartCount,
@@ -31,12 +31,42 @@ export default function HeaderActions({
   // Session
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
-  // const { data: cartData } = useCart(isAuthenticated);
-  // const cartCount = cartData?.payload?.cartItems.length || 0;
+
+  // State
+  const [localCartCount, setLocalCartCount] = useState(0);
+
+  // Hooks
   const { data: wishlistData } = useWishlist(isAuthenticated);
   // console.log(wishlistData?.payload.wishlistItems.length);
   const wishlistCount =
     wishlistData?.payload?.wishlistItems?.length || 0;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      return;
+    }
+
+    const updateLocalCartCount = () => {
+      setLocalCartCount(getLocalCartCount());
+    };
+
+    updateLocalCartCount();
+
+    window.addEventListener(
+      'local-cart-updated',
+      updateLocalCartCount
+    );
+
+    return () => {
+      window.removeEventListener(
+        'local-cart-updated',
+        updateLocalCartCount
+      );
+    };
+  }, [isAuthenticated]);
+  const displayedCartCount = isAuthenticated
+    ? cartCount
+    : localCartCount;
 
   return (
     <div className="flex items-center w-full">
@@ -96,7 +126,7 @@ export default function HeaderActions({
           className="relative"
         >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={cartCount} />}
+          <CountBadge count={displayedCartCount} />
         </Link>
 
         <NotificationsContainer status={status} />

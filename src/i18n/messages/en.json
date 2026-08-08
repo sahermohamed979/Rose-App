@@ -181,7 +181,9 @@
     "hot": "HOT",
     "addToWishList": "Add to wishlist",
     "removeFromWishList": "Remove From wishlist",
-    "loadingProducts": "Loading products..."
+    "loadingProducts": "Loading products...",
+    "addToCartSuccess": "Product added to cart successfully",
+    "addToCartError": "Failed to add product to cart"
   },
   "ProductDetails": {
     "notFound": "Product not found",

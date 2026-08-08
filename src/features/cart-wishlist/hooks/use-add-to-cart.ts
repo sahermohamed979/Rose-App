@@ -1,59 +1,61 @@
 'use client';
+
 import { toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRequireAuth } from '../lib/require-auth-client';
+import { useSession } from 'next-auth/react';
+
+import { ICart } from '@/features/cart/types/cart-types';
+import addToCartAction from '../apis/add-to-cart-action';
 import { CART_WISHLIST_KEYS } from '../constants/query-keys';
+import saveCartItemToLocalStorage from '../lib/local-cart-client';
+import { useTranslations } from 'next-intl';
 
 export function useAddToCart() {
-  const queryClient = useQueryClient();
-  const { ensureAuth } = useRequireAuth();
+  // Context
+  const { status } = useSession();
 
+  // Hooks
+  const queryClient = useQueryClient();
+
+  // Mutation
+  const t = useTranslations('products');
   const { mutate, isPending } = useMutation({
-    mutationFn: addToCartRequest,
+    mutationFn: addToCartAction,
     mutationKey: CART_WISHLIST_KEYS.cart,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (!data.status) {
+        toast.error(data.message);
+        return;
+      }
+
       queryClient.invalidateQueries({
         queryKey: CART_WISHLIST_KEYS.cart,
       });
-      toast.success('Product added to cart');
+      toast.success(t('addToCartSuccess'));
     },
     onError: () => {
-      toast.error('Failed to add product to cart');
+      toast.error(t('addToCartError'));
     },
   });
+
+  // Functions
   const handleAddToCart = ({
     productId,
     quantity = 1,
-  }: {
-    productId: string;
-    quantity?: number;
-  }) => {
-    if (!ensureAuth()) {
+    product,
+  }: ICart) => {
+    if (status === 'loading') {
       return;
     }
+
+    if (status === 'unauthenticated') {
+      saveCartItemToLocalStorage({ productId, quantity, product });
+      toast.success(t('addToCartSuccess'));
+      return;
+    }
+
     mutate({ productId, quantity });
   };
+
   return { handleAddToCart, isPending };
 }
-const addToCartRequest = async ({
-  productId,
-  quantity,
-}: {
-  productId: string;
-  quantity: number;
-}) => {
-  const response = await fetch('/api/cart', {
-    method: 'POST',
-    body: JSON.stringify({
-      productId,
-      quantity: quantity || 1,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  if (!response.ok) {
-    throw new Error('Failed to add product to cart');
-  }
-  return response.json();
-};

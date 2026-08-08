@@ -113,6 +113,7 @@ export default function ProductCard({
             h-[42px] rounded-full
              p-0 dark:bg-maroon-500 overflow-hidden"
           productId={product.id}
+          product={product}
           stock={product.stock}
         />
       </div>
