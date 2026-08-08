@@ -13,7 +13,12 @@ export default async function Header() {
   ]);
 
   const cartCount =
-    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
+    cart.status && cart.payload
+      ? cart.payload.cartItems.reduce(
+          (total, item) => total + (item.quantity || 0),
+          0
+        )
+      : 0;
   const wishlistCount =
     wishlist.status && wishlist.payload
       ? wishlist.payload.wishlistItems.length
