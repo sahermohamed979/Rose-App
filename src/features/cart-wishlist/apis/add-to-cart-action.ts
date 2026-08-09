@@ -27,9 +27,6 @@ export default async function addToCartAction({
         productId,
         quantity: quantity || 1,
       }),
-      next: {
-        tags: ['cart'],
-      },
     });
     const data: ApiResponse<ICartResponse> = await response.json();
     if (!data.status) {

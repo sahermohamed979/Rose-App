@@ -130,10 +130,7 @@ export default function HeaderActions({
           <CountBadge count={displayedWishlistCount} />
         </Link>
 
-        <Link
-          href={isAuthenticated ? '/cart' : '/login'}
-          className="relative"
-        >
+        <Link href={'/cart'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
           <CountBadge count={displayedCartCount} />
         </Link>

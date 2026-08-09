@@ -12,10 +12,10 @@ export default function QuantityButton({
 }: {
   cartItem: ICart;
 }) {
-  const stock = cartItem.product.stock;
+  const stock = cartItem?.product?.stock;
   const DEBOUNCE_MS = 400;
 
-  const [quantity, setQuantity] = useState(cartItem.quantity);
+  const [quantity, setQuantity] = useState(cartItem.quantity || 0);
 
   const isFirstRender = useRef(true);
 
@@ -26,7 +26,7 @@ export default function QuantityButton({
     if (isNaN(val)) {
       return 1;
     }
-    return Math.min(Math.max(val, 1), stock);
+    return Math.min(Math.max(val, 1), stock || 0);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,7 @@ export default function QuantityButton({
 
     const timer = setTimeout(() => {
       updateQuantity({
-        id: cartItem.id,
+        id: cartItem?.id || '',
         quantity,
       });
     }, DEBOUNCE_MS);
@@ -77,7 +77,7 @@ export default function QuantityButton({
         size="icon"
         className="h-12 w-12 rounded-xl bg-bg-carosel"
         onClick={() => setQuantity((q) => clamp(q + 1))}
-        disabled={quantity >= stock || isPending}
+        disabled={quantity >= (stock || 0) || isPending}
       >
         <Plus size={20} className="text-text-primary" />
       </Button>

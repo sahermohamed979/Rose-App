@@ -33,10 +33,40 @@ export function getLocalCart(): ICart[] {
 
 export function getLocalCartCount(): number {
   const cart = getLocalCart();
-  return cart.reduce((acc, item) => acc + (item.quantity || 0), 0);
+  return cart.length;
 }
 
 export function clearLocalCart(): void {
   localStorage.removeItem(LOCAL_CART_KEY);
+  window.dispatchEvent(new Event('local-cart-updated'));
+}
+
+export function clearLocalIndex(productId: string): void {
+  const cart = getLocalCart();
+
+  const updatedCart = cart.filter(
+    (item) => item.productId !== productId
+  );
+
+  localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
+
+  window.dispatchEvent(new Event('local-cart-updated'));
+}
+
+export function updateLocalQuantity({
+  productId,
+  quantity,
+}: {
+  productId: string;
+  quantity: number;
+}) {
+  const cart = getLocalCart();
+
+  const updatedCart = cart.map((item) =>
+    item.productId === productId ? { ...item, quantity } : item
+  );
+
+  localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
+
   window.dispatchEvent(new Event('local-cart-updated'));
 }
