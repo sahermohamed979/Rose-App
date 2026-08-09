@@ -369,5 +369,12 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+
+  "account-setting": {
+    "account-setting": "Account Setting",
+    "profile": "Profile",
+    "change-password": "Change Password",
+    "logout": "Logout"
   }
 }
