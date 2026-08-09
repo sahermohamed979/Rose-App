@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { ICart } from '../types/cart-types';
@@ -5,21 +6,25 @@ import ClearButtonId from './clear-button-id';
 import QuantityButton from './quantity-button';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { useSession } from 'next-auth/react';
+import ClearButtonLocalId from './clear-button-local-id';
+import QuantityButtonLocal from './quantity-button-local';
+import PriceLocal from './price-local';
 
 export default function CartCard({ cartItem }: { cartItem: ICart }) {
   const t = useTranslations();
-
+  const session = useSession();
   return (
     <div className=" relative  rounded-2xl   border-b border-muted  pb-4 mt-5">
       <div className="flex gap-4 ">
         <Link
           className="relative shrink-0 group"
-          href={`/products/${cartItem.product.id}`}
+          href={`/products/${cartItem?.product?.id}`}
         >
           <div className="w-32 h-35   rounded-xl   overflow-hidden">
-            {true ? (
+            {cartItem?.product?.cover ? (
               <Image
-                src={cartItem.product.cover}
+                src={cartItem?.product?.cover}
                 alt={'cart image'}
                 fill
                 className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform"
@@ -36,10 +41,10 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
             <div>
               <Link
                 className="group/title"
-                href={`/products/${cartItem.product.id}`}
+                href={`/products/${cartItem?.product?.id}`}
               >
                 <h2 className="font-semibold text-text-primary  text-base ">
-                  {cartItem.product.title}
+                  {cartItem?.product?.title}
                 </h2>
               </Link>
               <span className="inline-flex items-center text-base  ">
@@ -48,17 +53,21 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
                   className="text-yellow-500 fill-yellow-500  me-1"
                 />{' '}
                 {t('ProductDetails.ratingLabel')}
-                {cartItem.product.rating}
+                {cartItem?.product?.rating}
                 <span className="ms-1 text-base  text-text-info">
                   (
                   {t('ProductDetails.ratingsCount', {
-                    count: cartItem.product.ratings,
+                    count: cartItem?.product?.ratings || 0,
                   })}
                   )
                 </span>
               </span>
             </div>
-            <ClearButtonId id={cartItem.id} />
+            {session.status === 'authenticated' ? (
+              <ClearButtonId id={cartItem?.id || ''} />
+            ) : (
+              <ClearButtonLocalId id={cartItem?.product?.id || ''} />
+            )}
           </div>
 
           <div className=" flex    items-center justify-between gap-4">
@@ -66,11 +75,19 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
               <span className="text-sm text-text-primary">
                 (x{cartItem.quantity})
               </span>
-              <span className=" ms-1 text-primary-600 font-bold text-lg me-2">
-                {cartItem.product.price} {t('cart.currency')}
-              </span>
+              {session.status === 'authenticated' ? (
+                <span className=" ms-1 text-primary-600 font-bold text-lg me-2">
+                  {cartItem?.product?.price} {t('cart.currency')}
+                </span>
+              ) : (
+                <PriceLocal cartItem={cartItem} />
+              )}
             </div>
-            <QuantityButton cartItem={cartItem} />
+            {session.status === 'authenticated' ? (
+              <QuantityButton cartItem={cartItem} />
+            ) : (
+              <QuantityButtonLocal cartItem={cartItem} />
+            )}
           </div>
         </div>
       </div>
