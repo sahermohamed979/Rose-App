@@ -369,5 +369,12 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+
+  "account-setting": {
+    "account-setting": "اعدادات الحساب",
+    "profile": "الملف الشخصي",
+    "change-password": "تغيير كلمة المرور",
+    "logout": "تسجيل الخروج"
   }
 }
