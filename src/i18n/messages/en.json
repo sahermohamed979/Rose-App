@@ -399,5 +399,14 @@
     "errorDetails": "Error Details",
     "message": "Message:",
     "digest": "Digest code:"
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add your first address to continue",
+    "or": "Or",
+    "failedLoading": "Failed to load addresses. Please try again",
+    "tryAgain": "Try again"
   }
 }
