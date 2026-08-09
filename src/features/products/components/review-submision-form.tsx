@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -23,17 +22,24 @@ import {
   InputGroupAddon,
   InputGroupTextarea,
 } from '@/shared/components/ui/input-group';
-import { Star } from 'lucide-react';
+import { Loader, Star } from 'lucide-react';
 import SubmissionFormSchema from '../schemas/submission-form-schema';
 import CreateProductReviewHook from '../hooks/create-product-review-hook';
 import { useParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 export function ReviewSubmissionForm() {
   const formSchema = SubmissionFormSchema();
-  const params = useParams();
-  const productId = 'ba64d196-4ac3-40bd-be26-b24fbceb6db0';
+  const { productId } = useParams();
+  const { status } = useSession();
+  const isLoading = status === 'loading';
+  const isLoggedIn = status === 'authenticated';
+  const t = useTranslations('reviewForm');
 
-  const { mutate, isError, isPending } = CreateProductReviewHook();
+  const { mutate, isError, isPending, errorMsg, IsSuccess } =
+    CreateProductReviewHook();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,8 +57,15 @@ export function ReviewSubmissionForm() {
     mutate(formData);
   }
 
+  React.useEffect(() => {
+    if (IsSuccess) {
+      form.reset();
+      toast.success('Review submitted successfully! 🎉');
+    }
+  }, [IsSuccess, form]);
+
   return (
-    <Card className="w-full sm:max-w-md ring-0">
+    <Card className="w-full sm:max-w-md ring-0 relative">
       <CardContent>
         <form
           className="mt-6"
@@ -63,7 +76,7 @@ export function ReviewSubmissionForm() {
             <div className="flex">
               <p className="text-[16px] me-2.5 font-medium">
                 {' '}
-                Your rating :
+                {t('yourRating')}:
               </p>
               <Controller
                 name="rating"
@@ -93,13 +106,13 @@ export function ReviewSubmissionForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    Title
+                    {t('title')}
                   </FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Enter review title"
+                    placeholder={t('titlePlaceholder')}
                     autoComplete="off"
                     className="h-12.25"
                   />
@@ -115,13 +128,13 @@ export function ReviewSubmissionForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-description">
-                    Review
+                    {t('review')}
                   </FieldLabel>
                   <InputGroup>
                     <InputGroupTextarea
                       {...field}
                       id="form-rhf-demo-description"
-                      placeholder="What do you think of this product?"
+                      placeholder={t('reviewPlaceholder')}
                       rows={6}
                       className="min-h-37.5 resize-none"
                       aria-invalid={fieldState.invalid}
@@ -137,19 +150,34 @@ export function ReviewSubmissionForm() {
           </FieldGroup>
         </form>
       </CardContent>
+      {isError && (
+        <p className="text-center text-text-danger">{errorMsg}</p>
+      )}
       <CardFooter>
         <Field orientation="horizontal">
           <Button
+            disabled={isPending}
             type="submit"
             form="form-rhf-demo"
             className={
               'bg-maroon-600 w-full py-3.5 px-4 h-11 text-text-inverse'
             }
           >
-            Add Review
+            {isPending ? (
+              <Loader className="animate-spin" />
+            ) : (
+              `${t('submit')}`
+            )}
           </Button>
         </Field>
       </CardFooter>
+      {!isLoading && !isLoggedIn && (
+        <div className=" absolute top-0 bottom-0 right-0 left-0 bg-transparent backdrop-blur-[1px] flex justify-center items-center ">
+          <p className="text-text-plain font-semibold">
+            {t('loginRequired')}{' '}
+          </p>
+        </div>
+      )}
     </Card>
   );
 }

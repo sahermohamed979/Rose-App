@@ -1,3 +1,4 @@
+import { IProductReviewresponse } from '@/features/products/types/create-product-review';
 import { getDirectToken } from '@/shared/lib/actions/get-direct-token';
 import { NextResponse } from 'next/server';
 
@@ -6,7 +7,7 @@ export async function POST(request: Request) {
   const token = await getDirectToken();
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/reviews`,
+      `${process.env.NEXT_API_URL}/reviews`,
       {
         method: 'POST',
         headers: {
@@ -21,9 +22,7 @@ export async function POST(request: Request) {
         }),
       }
     );
-    console.log(response.status);
-    console.log(response.headers.get('content-type'));
-    const data = await response.json();
+    const data: IProductReviewresponse = await response.json();
 
     if (!response.ok) {
       return NextResponse.json(data, {

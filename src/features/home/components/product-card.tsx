@@ -19,7 +19,7 @@ export default function ProductCard({
   const isNew = nowDate - updatedAt < 1000 * 60 * 60 * 24 * 7;
 
   return (
-    <div className="w-full max-w-[302px] ">
+    <div className="w-full max-w-75.5 ">
       <Link
         href={`/products/${product.id}`}
         aria-label={product.title}
@@ -108,11 +108,15 @@ export default function ProductCard({
         </div>
         {/*add to cart button*/}
         <Button
-          className="w-[42px] 
-                h-[42px] rounded-full
+          className="w-10.5 
+                h-10.5 rounded-full
+                bg-maroon-600
                  p-0 dark:bg-maroon-500"
         >
-          <ShoppingCartIcon className="w-4 h-4 text-text-inverse dark:text-white" />
+          <ShoppingCartIcon
+            strokeWidth={1}
+            className="size-6  text-text-inverse dark:text-white"
+          />
         </Button>
       </div>
     </div>
