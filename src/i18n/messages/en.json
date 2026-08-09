@@ -369,5 +369,16 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "reviewForm": {
+    "yourRating": "Your rating",
+    "title": "Title",
+    "titlePlaceholder": "Enter review title",
+    "review": "Review",
+    "reviewPlaceholder": "What do you think of this product?",
+    "submit": "Add Review",
+    "submitting": "Submitting...",
+    "loginRequired": "Please login to be able to review the product",
+    "reviewFailed": "Failed to submit your review."
   }
 }

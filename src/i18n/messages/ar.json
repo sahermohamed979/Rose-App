@@ -369,5 +369,16 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "reviewForm": {
+    "yourRating": "تقييمك",
+    "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المراجعة",
+    "review": "المراجعة",
+    "reviewPlaceholder": "ما رأيك في هذا المنتج؟",
+    "submit": "إضافة مراجعة",
+    "submitting": "جارٍ الإرسال...",
+    "loginRequired": "يرجى تسجيل الدخول حتى تتمكن من إضافة مراجعة.",
+    "reviewFailed": "تعذر إرسال المراجعة."
   }
 }

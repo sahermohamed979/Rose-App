@@ -1,22 +1,26 @@
 'use client ';
 import { useMutation } from '@tanstack/react-query';
-import React from 'react';
+import { useState } from 'react';
 import CreateProductReviewAction from '../apis/create-product-review-action';
 
 export default function CreateProductReviewHook() {
+  const [errorMsg, seterrorMsg] = useState('');
+  const [IsSuccess, setIsSuccess] = useState(false);
   const { mutate, isError, isPending } = useMutation({
     mutationKey: ['product-review'],
     mutationFn: CreateProductReviewAction,
     onSuccess: (data) => {
-      console.log('Success', data);
+      setIsSuccess(true);
     },
     onError: (error) => {
-      console.log('Error', error);
+      seterrorMsg(error.message);
     },
   });
   return {
     mutate,
     isError,
     isPending,
+    errorMsg,
+    IsSuccess,
   };
 }
