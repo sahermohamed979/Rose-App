@@ -1,51 +1,38 @@
 'use server';
 
-// ============================================================================
-// Coupon API Endpoint is currently unavailable on the backend.
-// Commented out until backend endpoint is finalized.
-// ============================================================================
+import type { CouponApiItem } from '../types/cart.types';
 
-/*
-import type { ApiResponse } from '@/shared/lib/types/api';
-import { getAuthToken } from '@/shared/lib/actions/getToken';
-import type { CouponsPayload } from '../types/cart.types';
+const BASE_URL =
+  process.env.NEXT_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export async function applyCoupon(
+export async function validateCoupon(
   code: string
-): Promise<ApiResponse<CouponsPayload>> {
+): Promise<CouponApiItem | null> {
   try {
-    const jwt = await getAuthToken();
-    const token = jwt?.token;
+    const params = new URLSearchParams({
+      isActive: 'true',
+      search: code.trim(),
+    });
 
-    const params = new URLSearchParams({ code });
-
-    const res = await fetch(`${BASE_URL}/coupons?${params.toString()}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
+    const res = await fetch(`${BASE_URL}/coupons?${params}`, {
       cache: 'no-store',
     });
 
-    const data = await res.json();
-
-    if (!res.ok || !data.status) {
-      return {
-        status: false,
-        message: data?.message || `Request failed (${res.status})`,
-      };
+    if (!res.ok) {
+      return null;
     }
 
-    return data as ApiResponse<CouponsPayload>;
-  } catch (error) {
-    return {
-      status: false,
-      message:
-        error instanceof Error ? error.message : 'Server unreachable',
-    };
+    const data = await res.json();
+
+    const match: CouponApiItem | undefined = (
+      data?.payload?.data ?? []
+    ).find(
+      (c: CouponApiItem) =>
+        c.code.toUpperCase() === code.trim().toUpperCase()
+    );
+
+    return match ?? null;
+  } catch {
+    return null;
   }
 }
-*/

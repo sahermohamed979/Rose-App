@@ -1,5 +1,3 @@
-'use server';
-
 import type { ApiResponse } from '@/shared/lib/types/api';
 import type {
   IProduct,
@@ -10,10 +8,6 @@ import { getLocale } from 'next-intl/server';
 const BASE_URL =
   process.env.NEXT_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
-/**
- * Server Action to fetch suggested products for cart / checkout pages.
- * GET /products?limit=8&sortBy=mostPopular&sortOrder=desc
- */
 export async function getSuggestedProductsAction(
   limit = 8
 ): Promise<IProduct[]> {
@@ -41,8 +35,6 @@ export async function getSuggestedProductsAction(
     const data = await res.json();
 
     if (!res.ok || !data.status) {
-      throw new Error('Failed to fetch suggested products');
-      // console.error('[Suggested Products Error]:', data?.message);
       return [];
     }
 
@@ -56,9 +48,7 @@ export async function getSuggestedProductsAction(
     }
 
     return [];
-  } catch (error) {
-    throw new Error('Failed to fetch suggested products');
-    // console.error('[Suggested Products Action Exception]:', error);
+  } catch {
     return [];
   }
 }
