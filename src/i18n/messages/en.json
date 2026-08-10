@@ -376,5 +376,31 @@
     "profile": "Profile",
     "change-password": "Change Password",
     "logout": "Logout"
+  },
+  "ChangePasswordForm": {
+    "labels": {
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "buttons": {
+      "submit": "Change Password",
+      "submitting": "Saving..."
+    },
+    "errors": {
+      "oldPasswordRequired": "Current password is required",
+      "newPasswordMin": "Password must be at least 8 characters",
+      "newPasswordUppercase": "Password must contain at least one uppercase letter",
+      "newPasswordLowercase": "Password must contain at least one lowercase letter",
+      "newPasswordNumber": "Password must contain at least one number",
+      "newPasswordSpecial": "Password must contain at least one special character",
+      "confirmRequired": "Please confirm your password",
+      "mismatch": "Passwords do not match"
+    },
+    "messages": {
+      "changePasswordSuccess": "Password changed successfully",
+      "changePasswordError": "Something went wrong. Please try again",
+      "currentPasswordInvalid": "Current password is invalid"
+    }
   }
 }
