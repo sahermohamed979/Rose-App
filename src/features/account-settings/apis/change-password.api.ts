@@ -1,9 +1,8 @@
 'use server';
 
-import { ApiResponse, ErrorResponse } from "@/shared/lib/types/api";
-import { ChangePasswordValues } from "../schemas/change-password.schema";
-import { getAuthToken } from "@/shared/lib/actions/getToken";
-
+import { ApiResponse } from '@/shared/lib/types/api';
+import { getAuthToken } from '@/shared/lib/actions/getToken';
+import { ChangePasswordValues } from '../schemas/change-password.schema';
 
 export const changePassword = async (
   data: ChangePasswordValues
@@ -11,6 +10,14 @@ export const changePassword = async (
   try {
     const jwt = await getAuthToken();
     const token = jwt?.accessToken;
+
+    if (!token) {
+      return {
+        status: false,
+        code: 401,
+        message: 'Unauthorized',
+      };
+    }
 
     const response = await fetch(
       `${process.env.NEXT_API_URL}/users/change-password`,
@@ -25,11 +32,15 @@ export const changePassword = async (
     );
 
     const result: ApiResponse<string> = await response.json();
+
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       status: false,
-      message: error.message,
+      message:
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong',
     };
   }
 };
