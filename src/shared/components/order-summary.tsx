@@ -29,7 +29,7 @@ export default function OrderSummary({
   currency,
   className,
 }: OrderSummaryProps) {
-  const t = useTranslations('cart');
+  const t = useTranslations('checkout');
   const tRoot = useTranslations();
   const currencyLabel = currency ?? tRoot('currency');
   const {
@@ -64,7 +64,7 @@ export default function OrderSummary({
       <CouponForm
         onApply={apply}
         isPending={isPending}
-        error={couponError}
+        error={couponError ? t(couponError as Parameters<typeof t>[0]) : null}
         disabled={!!couponResult}
       />
 

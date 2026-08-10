@@ -1,43 +1,61 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { validateCoupon } from '../apis/cart.api';
 import type { CouponResult } from '../types/cart.types';
+
+function computeDiscount(
+  type: 'PERCENT' | 'FIXED',
+  rawValue: string,
+  rawMaxDiscount: string | undefined,
+  subtotal: number
+): number {
+  const value = parseFloat(rawValue) || 0;
+  const maxDiscount = rawMaxDiscount
+    ? parseFloat(rawMaxDiscount)
+    : Infinity;
+
+  if (type === 'PERCENT') {
+    const computed =
+      Math.round(((subtotal * value) / 100) * 100) / 100;
+    return Math.min(computed, maxDiscount, subtotal);
+  }
+
+  // FIXED
+  return Math.min(value, subtotal);
+}
 
 export function useApplyCoupon(subtotal: number) {
   const [couponResult, setCouponResult] =
     useState<CouponResult | null>(null);
   const [couponError, setCouponError] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
 
   const apply = (code: string) => {
     setCouponError(null);
-    setIsPending(true);
 
-    try {
-      const cleanVal = code.replace('%', '').trim();
-      const percent = parseFloat(cleanVal);
+    startTransition(async () => {
+      const coupon = await validateCoupon(code);
 
-      if (isNaN(percent) || percent <= 0 || percent > 100) {
-        setCouponError(
-          'Please enter a valid percentage between 1 and 100'
-        );
+      if (!coupon) {
+        setCouponError('couponInvalid'); // key looked up by the caller via t()
         return;
       }
 
-      const discountAmount =
-        Math.round(((subtotal * percent) / 100) * 100) / 100;
+      const discountAmount = computeDiscount(
+        coupon.type,
+        coupon.value,
+        coupon.maxDiscount,
+        subtotal
+      );
 
       setCouponResult({
-        code: `${percent}%`,
-        discountType: 'PERCENT',
-        discountValue: percent,
+        code: coupon.code,
+        discountType: coupon.type,
+        discountValue: parseFloat(coupon.value),
         discountAmount,
       });
-    } catch {
-      setCouponError('Invalid coupon value');
-    } finally {
-      setIsPending(false);
-    }
+    });
   };
 
   const removeCoupon = () => {

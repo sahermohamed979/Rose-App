@@ -1,12 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 
 interface CheckoutButtonProps {
-  /** Active coupon code to persist before navigating */
   couponCode?: string;
   className?: string;
 }

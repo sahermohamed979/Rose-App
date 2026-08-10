@@ -30,7 +30,7 @@ export default async function ProductsYouMayLike({
 
   return (
     <SuggestedProductsSlider
-      initialProducts={fetchedProducts}
+      products={fetchedProducts}
       className={className}
     />
   );
