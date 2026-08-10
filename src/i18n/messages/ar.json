@@ -376,5 +376,31 @@
     "profile": "الملف الشخصي",
     "change-password": "تغيير كلمة المرور",
     "logout": "تسجيل الخروج"
+  },
+  "ChangePasswordForm": {
+    "labels": {
+      "oldPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة"
+    },
+    "buttons": {
+      "submit": "تغيير كلمة المرور",
+      "submitting": "جاري الحفظ..."
+    },
+    "errors": {
+      "oldPasswordRequired": "كلمة المرور الحالية مطلوبة",
+      "newPasswordMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+      "newPasswordUppercase": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+      "newPasswordLowercase": "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+      "newPasswordNumber": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "newPasswordSpecial": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
+      "confirmRequired": "يرجى تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين"
+    },
+    "messages": {
+      "changePasswordSuccess": "تم تغيير كلمة المرور بنجاح",
+      "changePasswordError": "حدث خطأ ما. يرجى المحاولة مجدداً",
+      "currentPasswordInvalid": "كلمة المرور الحالية غير صحيحة"
+    }
   }
 }
