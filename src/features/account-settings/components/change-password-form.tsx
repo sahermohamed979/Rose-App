@@ -46,16 +46,19 @@ export default function ChangePasswordForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
       {/* Current Password */}
       <div className="space-y-2 border-b border-border-muted pb-4">
         <Label htmlFor="currentPassword">
           {t('labels.oldPassword')}
         </Label>
+
         <PasswordInput
           id="currentPassword"
-          placeholder={'**********'}
+          placeholder="**********"
           {...register('currentPassword')}
         />
+
         {errors.currentPassword && (
           <p className="text-sm text-red-500">
             {errors.currentPassword.message}
@@ -66,11 +69,13 @@ export default function ChangePasswordForm() {
       {/* New Password */}
       <div className="space-y-2">
         <Label htmlFor="newPassword">{t('labels.newPassword')}</Label>
+
         <PasswordInput
           id="newPassword"
-          placeholder={'**********'}
+          placeholder="**********"
           {...register('newPassword')}
         />
+
         {errors.newPassword && (
           <p className="text-sm text-red-500">
             {errors.newPassword.message}
@@ -83,11 +88,13 @@ export default function ChangePasswordForm() {
         <Label htmlFor="confirmPassword">
           {t('labels.confirmPassword')}
         </Label>
+
         <PasswordInput
           id="confirmPassword"
-          placeholder={'**********'}
+          placeholder="**********"
           {...register('confirmPassword')}
         />
+
         {errors.confirmPassword && (
           <p className="text-sm text-red-500">
             {errors.confirmPassword.message}
@@ -95,10 +102,12 @@ export default function ChangePasswordForm() {
         )}
       </div>
 
-      {/* Submit Button */}
-      <Button type="submit" disabled={isPending} className="w-1/4">
-        {isPending ? t('buttons.submitting') : t('buttons.submit')}
-      </Button>
+      {/* Submit */}
+      <div className="flex justify-end">
+        <Button type="submit" disabled={isPending} className="w-1/4">
+          {isPending ? t('buttons.submitting') : t('buttons.submit')}
+        </Button>
+      </div>
     </form>
   );
 }
