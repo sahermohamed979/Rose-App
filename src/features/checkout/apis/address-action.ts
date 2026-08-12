@@ -5,10 +5,10 @@ import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { RESPONSES } from '@/shared/lib/constants/response.constant';
 import { ApiResponse } from '@/shared/lib/types/api';
 import { IAddress } from '@/shared/lib/types/adresses.type';
-import { AddressFormFields } from '../schemas/address-form-schema';
+import { CreateAddressPayload } from '../schemas/address-form-schema';
 
 export const createAddress = async (
-  address: AddressFormFields
+  address: CreateAddressPayload
 ): Promise<ApiResponse<IAddress>> => {
   const token = await getAuthToken();
 

@@ -3,6 +3,9 @@ import { z } from 'zod';
 const HAS_SCRIPT_OR_HTML =
   /<|>|script|javascript:|on\w+\s*=|{\s*{|\${/i;
 
+// Title: Arabic/English letters, numbers, spaces, and hyphens
+const TITLE_REGEX = /^[\p{L}\p{N}\s'-]+$/u;
+
 // City: Arabic/English letters, spaces, and hyphens only
 const CITY_REGEX = /^[\p{L}\s'-]+$/u;
 
@@ -18,6 +21,18 @@ function isSafeText(value: string): boolean {
 
 export const addressFormSchema = (t: (key: string) => string) =>
   z.object({
+    title: z
+      .string()
+      .trim()
+      .min(1, { message: t('address.errors.titleRequired') })
+      .min(2, { message: t('address.errors.titleInvalid') })
+      .max(50, { message: t('address.errors.titleInvalid') })
+      .refine(isSafeText, {
+        message: t('address.errors.unsafeInput'),
+      })
+      .regex(TITLE_REGEX, {
+        message: t('address.errors.titleInvalid'),
+      }),
     city: z
       .string()
       .trim()
@@ -57,3 +72,9 @@ export const addressFormSchema = (t: (key: string) => string) =>
 export type AddressFormFields = z.infer<
   ReturnType<typeof addressFormSchema>
 >;
+
+export type CreateAddressPayload = AddressFormFields & {
+  isPrimary: boolean;
+  latitude: number;
+  longitude: number;
+};

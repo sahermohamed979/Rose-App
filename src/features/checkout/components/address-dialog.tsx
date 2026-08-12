@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import {
   Dialog,
@@ -13,8 +14,10 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { IAddress } from '@/shared/lib/types/adresses.type';
 import AddressForm, { ADDRESS_FORM_ID } from './address-form';
+import AddressMap from './address-map';
 import CheckoutStepper from './checkout-stepper';
 import { AddressFormFields } from '../schemas/address-form-schema';
+import { useAddress } from '../hooks/address-hook';
 
 interface AddressDialogProps {
   open: boolean;
@@ -40,6 +43,22 @@ export default function AddressDialog({
     longitude: '',
   });
 
+  // Hooks
+  const { mutate, isPending } = useAddress({
+    onSuccess: () => {
+      onOpenChange(false);
+      setCurrentStep(1);
+      setAddressData({
+        title: '',
+        city: '',
+        street: '',
+        phone: '',
+        latitude: '',
+        longitude: '',
+      });
+    },
+  });
+
   // Functions
   const handleNextStepOne = (data: AddressFormFields) => {
     setAddressData((prev) => ({ ...prev, ...data }));
@@ -48,6 +67,31 @@ export default function AddressDialog({
 
   const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
+  };
+
+  const handleAddAddress = () => {
+    const { title, city, street, phone, latitude, longitude } =
+      addressData;
+
+    if (!title || !city || !street || !phone) {
+      setCurrentStep(1);
+      return;
+    }
+
+    if (!latitude || !longitude) {
+      toast.error(tAddress('errors.locationRequired'));
+      return;
+    }
+
+    mutate({
+      title,
+      city,
+      street,
+      phone,
+      isPrimary: false,
+      latitude: Number(latitude),
+      longitude: Number(longitude),
+    });
   };
 
   // Render Step
@@ -62,20 +106,19 @@ export default function AddressDialog({
         );
       case 2:
         return (
-          <>
-            {/* Buttons */}
-            <div className="flex justify-between items-center mt-8 pt-4 border-t border-border-soft">
-              <button
-                onClick={handleBack}
-                className="px-6 py-2 bg-gray-100 hover:bg-gray-200 transition-colors rounded text-gray-700 font-medium"
-              >
-                Back
-              </button>
-              <button className="px-6 py-2 bg-[#a32a2d] hover:bg-red-900 transition-colors rounded text-white font-medium flex items-center gap-2">
-                Checkout
-              </button>
-            </div>
-          </>
+          <AddressMap
+            city={addressData.city ?? ''}
+            street={addressData.street ?? ''}
+            latitude={addressData.latitude}
+            longitude={addressData.longitude}
+            onLocationChange={({ latitude, longitude }) => {
+              setAddressData((prev) => ({
+                ...prev,
+                latitude,
+                longitude,
+              }));
+            }}
+          />
         );
       default:
         return null;
@@ -96,12 +139,12 @@ export default function AddressDialog({
 
         <CheckoutStepper currentStep={currentStep} />
 
-        <div className="flex items-center justify-between border-border-muted border-b pb-3 mb-0">
+        <div className="flex items-center border-border-muted border-b pb-3 mb-0">
           {currentStep === 2 && (
             <Button
               className="w-[35px] 
             h-[35px] rounded-full
-             p-0 dark:bg-maroon-500 overflow-hidden"
+             p-0 dark:bg-maroon-500 overflow-hidden me-4"
               onClick={handleBack}
             >
               <ArrowLeft className="w-5 h-5  rtl:rotate-180" />
@@ -117,12 +160,19 @@ export default function AddressDialog({
 
         {/* Actions */}
         {currentStep === 1 && (
+          <Button className="mt-7" type="submit" form={ADDRESS_FORM_ID}>
+            {t('next')}
+          </Button>
+        )}
+
+        {currentStep === 2 && (
           <Button
             className="mt-7"
-            type="submit"
-            form={ADDRESS_FORM_ID}
+            type="button"
+            onClick={handleAddAddress}
+            disabled={isPending}
           >
-            {t('next')}
+            {tAddress('add.address')}
           </Button>
         )}
       </DialogContent>
