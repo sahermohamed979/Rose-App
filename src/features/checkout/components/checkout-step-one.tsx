@@ -2,14 +2,16 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
 import {
   AddressesPayload,
   IAddress,
 } from '@/shared/lib/types/adresses.type';
 import { Button } from '@/shared/components/ui/button';
-import { useTranslations } from 'next-intl';
 import EmptyAddresses from './empty-addresses';
 import AddressCard from './address-card';
+import AddressDialog from './address-dialog';
 
 interface CheckoutStepOneProps {
   initialData?: AddressesPayload;
@@ -23,9 +25,15 @@ export default function CheckoutStepOne({
   // Translations
   const t = useTranslations('checkout');
 
-  const addresses = initialData?.addresses ?? [];
+  // State
+  const [selectedAddressId, setSelectedAddressId] = useState<
+    string | null
+  >(null);
+  const [isAddressDialogOpen, setIsAddressDialogOpen] =
+    useState(false);
 
-  // Default address from SSR data
+  // Variables
+  const addresses = initialData?.addresses ?? [];
   const defaultAddressId = useMemo(() => {
     const primaryAddress = addresses.find(
       (address) => address.isPrimary
@@ -34,23 +42,21 @@ export default function CheckoutStepOne({
     return primaryAddress?.id ?? addresses[0]?.id ?? null;
   }, [addresses]);
 
-  // User selection only
-  const [selectedAddressId, setSelectedAddressId] = useState<
-    string | null
-  >(null);
-
-  // Final selected address
+  //Final selected address
   const currentSelectedAddressId =
     selectedAddressId ?? defaultAddressId;
+  const isEmpty = addresses.length === 0;
 
-  // Handlers
+  // Functions
   const handleNextClick = () => {
     if (currentSelectedAddressId) {
       onNext(currentSelectedAddressId);
     }
   };
 
-  const isEmpty = addresses.length === 0;
+  const handleOpenAddressDialog = () => {
+    setIsAddressDialogOpen(true);
+  };
 
   return (
     <div className="w-full flex flex-col">
@@ -62,9 +68,7 @@ export default function CheckoutStepOne({
         <EmptyAddresses
           title={t('noAddresses')}
           buttonLabel={t('addAddress')}
-          onAddAddress={() => {
-            // TODO: Open Address Book modal (S5-03)
-          }}
+          onAddAddress={handleOpenAddressDialog}
         />
       ) : (
         <>
@@ -92,7 +96,12 @@ export default function CheckoutStepOne({
           </div>
 
           {/* New Address */}
-          <Button variant="secondary">{t('addAddress')}</Button>
+          <Button
+            variant="secondary"
+            onClick={handleOpenAddressDialog}
+          >
+            {t('addAddress')}
+          </Button>
         </>
       )}
 
@@ -110,6 +119,11 @@ export default function CheckoutStepOne({
           </Button>
         </div>
       )}
+
+      <AddressDialog
+        open={isAddressDialogOpen}
+        onOpenChange={setIsAddressDialogOpen}
+      />
     </div>
   );
 }
