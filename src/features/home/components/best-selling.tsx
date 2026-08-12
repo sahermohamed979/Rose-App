@@ -47,7 +47,7 @@ export default async function Bestselling() {
   });
 
   return (
-    <div className="container mx-auto px-4 md:px-10 w-full overflow-hidden">
+    <div className="w-full overflow-hidden">
       <div className="grid grid-cols-1 gap-9 lg:grid-cols-[minmax(260px,22.7%)_minmax(0,1fr)]">
         <div className="flex flex-col justify-center gap-6 mb-5 md:mb-0">
           <div className="flex flex-col gap-3">

@@ -19,14 +19,12 @@ export default function ProductCard({
   const isNew = nowDate - updatedAt < 1000 * 60 * 60 * 24 * 7;
 
   return (
-    <div className="w-full max-w-[302px] ">
+    <div className="w-full sm:max-w-[302px]">
       <Link
         href={`/products/${product.id}`}
         aria-label={product.title}
         style={{ backgroundImage: `url(${product.cover})` }}
-        className={
-          'block aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
-        }
+        className="block aspect-[302/272] w-full bg-cover bg-center rounded-2xl mb-4 relative"
       >
         <div className="absolute top-2 right-2 rtl:left-2 flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
@@ -49,8 +47,7 @@ export default function ProductCard({
           )}
         </div>
       </Link>
-      {/* <Image src={product.cover} alt={product.title} width={302} height={272}
-                className=' object-cover h-[272px] w-[302px] rounded-2xl mb-4' quality={100} /> */}
+
       <h2
         className="
             text-lg font-semibold
@@ -108,6 +105,7 @@ export default function ProductCard({
         </div>
         {/*add to cart button*/}
         <Button
+          aria-label={`${t('ProductDetails.addToCart')} - ${product.title}`}
           className="w-[42px] 
                 h-[42px] rounded-full
                  p-0 dark:bg-maroon-500"

@@ -26,18 +26,18 @@ function AboutSection() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-center gap-12 max-w-7xl mx-auto py-8 px-5">
+    <section className="flex flex-col md:flex-row items-center gap-8 md:gap-12 py-8 overflow-hidden">
       {/* Photos */}
-      <div className="flex flex-col sm:flex-row gap-6 w-75 md:w-1/2 items-center">
+      <div className="flex flex-col sm:flex-row gap-6 w-full md:w-1/2 items-center">
         {/* Main Photo */}
         <div className="relative w-full sm:w-3/5">
           {/* Back Line */}
-          <div className="absolute -bottom-0.5 rotate-3 -left-6 rtl:left-auto rtl:-right-6 w-full h-101 border-5 border-bg-primary-saturated rounded-[50px_120px_120px_120px] z-0"></div>
+          <div className="absolute -bottom-0.5 rotate-3 -left-2 sm:-left-4 rtl:left-auto rtl:-right-2 rtl:sm:-right-4 w-full h-full border-4 sm:border-5 border-bg-primary-saturated rounded-[50px_120px_120px_120px] z-0"></div>
           <Image
             src={img3}
             placeholder="blur"
             alt="Purple Gift Box"
-            className="relative w-full h-96 aspect-3/4 object-cover rounded-[50px_120px_120px_120px] z-10"
+            className="relative w-full h-72 sm:h-80 md:h-96 aspect-3/4 object-cover rounded-[50px_120px_120px_120px] z-10"
           />
         </div>
 
