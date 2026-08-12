@@ -1,14 +1,32 @@
-import { addressFormSchema } from '../schemas/address-form-schema';
+'use client';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { AddressFormFields } from '../schemas/address-form-schema';
-import { createAddress } from '../apis/address-action';
-import { toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { useRouter } from '@/i18n/navigation';
 
-export function useAddress(initialData?: Partial<AddressFormFields>) {
+import {
+  addressFormSchema,
+  type AddressFormFields,
+  type CreateAddressPayload,
+} from '../schemas/address-form-schema';
+import { createAddress } from '../apis/address-action';
+
+interface UseAddressOptions {
+  initialData?: Partial<AddressFormFields>;
+  onSuccess?: () => void;
+}
+
+export function useAddress(options?: UseAddressOptions) {
+  // Translations
   const t = useTranslations();
+
+  // Navigation
+  const router = useRouter();
+
+  // Form
   const schema = addressFormSchema(t);
   const {
     control,
@@ -21,13 +39,16 @@ export function useAddress(initialData?: Partial<AddressFormFields>) {
   } = useForm<AddressFormFields>({
     resolver: zodResolver(schema),
     defaultValues: {
-      city: initialData?.city ?? '',
-      street: initialData?.street ?? '',
-      phone: initialData?.phone ?? '',
+      title: options?.initialData?.title ?? '',
+      city: options?.initialData?.city ?? '',
+      street: options?.initialData?.street ?? '',
+      phone: options?.initialData?.phone ?? '',
     },
   });
+
+  // Mutation
   const { mutate, isPending } = useMutation({
-    mutationFn: async (address: AddressFormFields) => {
+    mutationFn: async (address: CreateAddressPayload) => {
       const response = await createAddress(address);
 
       if (!response.status) {
@@ -37,18 +58,18 @@ export function useAddress(initialData?: Partial<AddressFormFields>) {
       return response;
     },
     onSuccess: () => {
-      toast.success('Address created successfully');
+      toast.success(t('address.added'));
+      options?.onSuccess?.();
+      router.refresh();
     },
     onError: (error: Error) => {
       toast.error(error.message);
     },
   });
-  const onSubmit = (data: AddressFormFields) => {
-    mutate(data);
-  };
+
   return {
     control,
-    mutate: onSubmit,
+    mutate,
     isPending,
     handleSubmit,
     trigger,

@@ -421,21 +421,26 @@
     "updated": "Address updated",
     "add": {
       "step1Title": "Address Details",
-      "step2Title": "Pin Your Location"
+      "step2Title": "Pin Your Location",
+      "address": "Add Address"
     },
     "city": "City",
+    "title": "Address Label",
     "details": "Address",
     "phone": "Contact Number",
     "findMyLocation": "Find My Location",
     "locationDenied": "Location access denied. Please pin manually.",
     "added": "Address added",
     "errors": {
+      "titleRequired": "Address label is required",
+      "titleInvalid": "Enter a valid address label",
       "cityRequired": "City is required",
       "cityInvalid": "Enter a valid city name",
       "streetRequired": "Address is required",
       "streetInvalid": "Enter a valid street address",
       "phoneRequired": "Contact number is required",
       "phoneInvalid": "Enter a valid contact number",
+      "locationRequired": "Please pin your location on the map",
       "unsafeInput": "Invalid characters are not allowed"
     }
   }

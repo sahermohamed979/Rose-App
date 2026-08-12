@@ -30,7 +30,9 @@ export default function AddressForm({
   const t = useTranslations('address');
 
   // Hooks
-  const { control, handleSubmit } = useAddress(initialData);
+  const { control, handleSubmit } = useAddress({
+    initialData,
+  });
 
   // Functions
   const handleNext = (data: AddressFormFields) => {
@@ -45,6 +47,29 @@ export default function AddressForm({
     >
       <FieldGroup className="gap-4">
         <div className="flex flex-row gap-4 flex-wrap">
+          {/* Title */}
+          <Controller
+            name="title"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field
+                data-invalid={fieldState.invalid}
+                className="gap-1 w-full"
+              >
+                <FieldLabel htmlFor="title">{t('title')}</FieldLabel>
+                <Input
+                  id="title"
+                  aria-invalid={fieldState.invalid}
+                  placeholder={t('title')}
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+
           {/* City */}
           <Controller
             name="city"
