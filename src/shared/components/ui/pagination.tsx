@@ -101,14 +101,14 @@ export function Pagination({
   };
 
   // Base styling for all pagination buttons to make them square boxes
-  const btnClass = 'h-10 min-w-10 p-0 text-sm';
+  const btnClass = 'h-9 min-w-8 sm:min-w-10 sm:h-10 px-1 sm:px-0 text-xs sm:text-sm';
 
   // --- Render ---
   return (
     <nav
       role="navigation"
       aria-label="pagination"
-      className={cn('flex flex-wrap items-center gap-2', className)}
+      className={cn('flex flex-wrap items-center justify-center gap-1 sm:gap-2', className)}
     >
       {/* First Page Button */}
       <Button

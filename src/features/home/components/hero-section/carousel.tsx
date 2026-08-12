@@ -69,7 +69,7 @@ export default function HeroCarousel() {
         <CarouselContent>
           {slides.map((slide) => (
             <CarouselItem key={slide.id}>
-              <div className="relative h-110 w-full">
+              <div className="relative h-72 sm:h-96 md:h-110 w-full">
                 <Image
                   src={slide.image}
                   alt=""
@@ -85,16 +85,16 @@ export default function HeroCarousel() {
 
       <div className="absolute inset-0 bg-linear-to-r from-black/80 to-black/0 pointer-events-none z-10" />
 
-      <div className="absolute bottom-0 left-0 p-10 rtl:left-auto rtl:right-6 z-20">
-        <p className="text-text-inverse text-4xl font-semibold">
+      <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-10 rtl:left-auto rtl:right-4 sm:rtl:right-6 z-20 max-w-[85%] sm:max-w-none">
+        <p className="text-text-inverse text-2xl sm:text-3xl md:text-4xl font-semibold">
           {t('hero.flowersTitle')}
         </p>
-        <p className="text-text-inverse h-12">
+        <p className="text-text-inverse text-xs sm:text-base mb-2">
           {t('hero.flowersSubtitle')}
         </p>
         <Button
           onClick={() => route.push('products')}
-          className="bg-bg-primary-fade px-4 py-2.5 h-9 w-32 rounded-[10px] mt-1.5 flex justify-center items-center text-maroon-700"
+          className="bg-bg-primary-fade px-3 py-2 sm:px-4 sm:py-2.5 h-8 sm:h-9 w-28 sm:w-32 rounded-[10px] text-xs sm:text-sm flex justify-center items-center text-maroon-700 font-semibold"
         >
           {t('hero.buyNow')}
         </Button>
@@ -123,24 +123,24 @@ export default function HeroCarousel() {
 
       {/* Arrows — both in one pill, bottom right */}
       <div className="absolute bottom-6 right-6 flex h-9 w-18.5 items-center justify-between rounded-full bg-bg-primary-fade rtl:right-auto rtl:left-6 z-20">
-        <ChevronLeft
-          size={30}
+        <button
+          type="button"
           onClick={canScrollPrev ? scrollPrev : undefined}
-          className={`p-1 rtl:rotate-180 transition-colors ${
-            canScrollPrev
-              ? 'cursor-pointer text-black'
-              : 'cursor-not-allowed text-gray-400'
-          }`}
-        />
-        <ChevronRight
-          size={30}
+          disabled={!canScrollPrev}
+          aria-label={t('header.nav.prevSlide')}
+          className="flex items-center justify-center p-1 rounded-full text-black disabled:text-gray-400 disabled:cursor-not-allowed hover:bg-black/10 transition-colors"
+        >
+          <ChevronLeft size={24} className="rtl:rotate-180" />
+        </button>
+        <button
+          type="button"
           onClick={canScrollNext ? scrollNext : undefined}
-          className={`p-1 rtl:rotate-180 transition-colors ${
-            canScrollNext
-              ? 'cursor-pointer text-black'
-              : 'cursor-not-allowed text-gray-400'
-          }`}
-        />
+          disabled={!canScrollNext}
+          aria-label={t('header.nav.nextSlide')}
+          className="flex items-center justify-center p-1 rounded-full text-black disabled:text-gray-400 disabled:cursor-not-allowed hover:bg-black/10 transition-colors"
+        >
+          <ChevronRight size={24} className="rtl:rotate-180" />
+        </button>
       </div>
     </div>
   );

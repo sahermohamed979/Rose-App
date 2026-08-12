@@ -21,8 +21,8 @@ export default async function Page({
   const productsData = getProductAction(resolvedSearchParams);
 
   return (
-    <div className="flex gap-5 my-8 px-4 py-8">
-      <aside className="w-1/4 border-r border-border-subtle">
+    <div className="flex flex-col lg:flex-row gap-6 my-4 md:my-8 px-4 md:px-8 py-4 md:py-8 max-w-7xl mx-auto">
+      <aside className="w-full lg:w-1/4 lg:border-r border-border-subtle lg:pe-4">
         <Suspense fallback={<FilterSidebarSkeleton />}>
           <SidebarFilters
             categoriesPromise={categoriesPromise}
@@ -32,7 +32,7 @@ export default async function Page({
         </Suspense>
       </aside>
 
-      <main className="w-3/4">
+      <main className="w-full lg:w-3/4">
         <Suspense
           key={JSON.stringify(resolvedSearchParams)}
           fallback={<ProductGridSkeleton />}

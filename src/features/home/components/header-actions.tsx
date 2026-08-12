@@ -17,22 +17,56 @@ import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 
-export default function HeaderActions() {
-  // Translation
+interface HeaderActionsProps {
+  mobile?: boolean;
+}
+export default function HeaderActions({
+  mobile = false,
+}: HeaderActionsProps) {
   const t = useTranslations('header');
-
-  // Session
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
   const wishlistCount = 8;
   const cartCount = 8;
 
+  if (mobile) {
+    return (
+      <div className="flex items-center gap-2">
+        <Link
+          href={isAuthenticated ? '/wish-list' : '/login'}
+          aria-label={t('nav.wishlist')}
+          className="relative"
+        >
+          <Heart className="w-5 h-5" />
+          {isAuthenticated && <CountBadge count={wishlistCount} />}
+        </Link>
+
+        <Link
+          href={isAuthenticated ? '/cart' : '/login'}
+          aria-label={t('nav.cart')}
+          className="relative"
+        >
+          <ShoppingCart className="w-5 h-5" />
+          {isAuthenticated && <CountBadge count={cartCount} />}
+        </Link>
+
+        <NotificationsContainer status={status} />
+
+        <div className="flex items-center gap-1">
+          <LangToggle />
+          <ThemeToggle />
+        </div>
+      </div>
+    );
+  }
+
+  // ── Full desktop bar ──
   return (
-    <div className="flex items-center w-full">
-      {/* Location display for authenticated users */}
+    <div className="flex items-center w-full min-w-0">
+      {/* Location — desktop only */}
       {isAuthenticated && (
-        <div className="flex flex-col justify-center items-center px-2 shrink-0">
+        <div className="hidden lg:flex flex-col justify-center items-center px-2 shrink-0">
           <h2 className="text-text-default text-[12px]">
             {t('deliver')}
           </h2>
@@ -42,13 +76,16 @@ export default function HeaderActions() {
         </div>
       )}
 
-      <HeaderSearch />
+      {/* Search — fills remaining space */}
+      <div className="flex-1 min-w-0">
+        <HeaderSearch />
+      </div>
 
-      {/* User authentication status */}
+      {/* User auth */}
       <div className="flex items-center gap-1 shrink-0">
         {isAuthenticated ? (
           <div className="flex items-center gap-2 px-2 cursor-pointer">
-            <div className="flex flex-col leading-none">
+            <div className="hidden lg:flex flex-col leading-none">
               <span className="text-[12px] text-text-default">
                 {t('hello')}
               </span>
@@ -63,7 +100,7 @@ export default function HeaderActions() {
             <User className="w-5 h-5" />
             <Link
               href="/login"
-              className="text-text-plain font-medium"
+              className="text-text-plain font-medium whitespace-nowrap"
             >
               {t('headerLogin')}
             </Link>
@@ -75,6 +112,7 @@ export default function HeaderActions() {
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
         <Link
           href={isAuthenticated ? '/wish-list' : '/login'}
+          aria-label={t('nav.wishlist')}
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
@@ -83,6 +121,7 @@ export default function HeaderActions() {
 
         <Link
           href={isAuthenticated ? '/cart' : '/login'}
+          aria-label={t('nav.cart')}
           className="relative"
         >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />

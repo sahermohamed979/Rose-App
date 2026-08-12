@@ -233,6 +233,16 @@
       "subHeaderCategories": "categories",
       "subHeaderContact": "contact",
       "subHeaderAbout": "about"
+    },
+    "nav": {
+      "menu": "Menu",
+      "close": "Close menu",
+      "openMenu": "Open navigation menu",
+      "wishlist": "Wishlist",
+      "cart": "Shopping cart",
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "mainNav": "Main navigation"
     }
   },
   "footer": {

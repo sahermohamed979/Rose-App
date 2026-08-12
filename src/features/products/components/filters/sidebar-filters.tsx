@@ -47,7 +47,7 @@ export default async function SidebarFilters({
   );
   const isAnyFilterActive: boolean = hasAnyFilter(searchParams);
   return (
-    <div className="px-7 flex-col flex gap-3 justify-center">
+    <div className="px-2 sm:px-4 lg:px-7 flex-col flex gap-3 justify-center">
       {/* categories */}
       <div className="rounded-lg p-2">
         <div className="flex items-center justify-between mb-2">
@@ -93,7 +93,7 @@ export default async function SidebarFilters({
             </Link>
           )}
         </div>
-        <div className="grid grid-cols-2 max-h-62 overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden justify-center items-center gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 max-h-62 overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden justify-center items-center gap-2">
           {occasions?.map((occasion) => {
             const isSelected: boolean =
               selectedOccasionId === occasion.id;
@@ -103,7 +103,7 @@ export default async function SidebarFilters({
                 href={buildFilterUrl(searchParams, {
                   occasionId: isSelected ? null : occasion.id,
                 })}
-                className="group relative h-19 w-48 overflow-hidden rounded-lg block"
+                className="group relative h-19 w-full overflow-hidden rounded-lg block"
               >
                 <Image
                   src={occasion.image ?? ''}

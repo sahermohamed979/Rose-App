@@ -233,6 +233,16 @@
       "subHeaderCategories": "الفئات",
       "subHeaderContact": "تواصل معنا",
       "subHeaderAbout": " حول الموقع"
+    },
+    "nav": {
+      "menu": "القائمة",
+      "close": "إغلاق القائمة",
+      "openMenu": "فتح قائمة التنقل",
+      "wishlist": "المفضلة",
+      "cart": "سلة التسوق",
+      "prevSlide": "الشريحة السابقة",
+      "nextSlide": "الشريحة التالية",
+      "mainNav": "التنقل الرئيسي"
     }
   },
   "footer": {
