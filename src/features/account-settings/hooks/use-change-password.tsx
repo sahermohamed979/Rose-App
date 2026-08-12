@@ -6,25 +6,29 @@ import { ChangePasswordValues } from '../schemas/change-password.schema';
 import { useTranslations } from 'next-intl';
 
 export const useChangePassword = () => {
-
-  const t = useTranslations('ChangePasswordForm');
+  const t = useTranslations('changePassword');
 
   return useMutation({
     mutationFn: async (data: ChangePasswordValues) => {
       return await changePassword(data);
     },
     onSuccess: (response) => {
-      if (response.code === 401) {
-        toast.error(t('messages.currentPasswordInvalid'));
+      if (!response || response.status === false) {
+        toast.error(
+          response?.code === 401
+            ? t('incorrectCurrent')
+            : response?.message || t('error')
+        );
         return;
       }
-      toast.success(t('messages.changePasswordSuccess'));
+
+      toast.success(t('success'));
       setTimeout(() => {
         signOut({ redirect: true, callbackUrl: '/login' });
       }, 2000);
     },
-    onError: (error: Error) => {
-      toast.error(t('messages.changePasswordError'));
+    onError: () => {
+      toast.error(t('error'));
     },
   });
 };

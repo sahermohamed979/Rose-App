@@ -15,7 +15,7 @@ import { useChangePassword } from '../hooks/use-change-password';
 
 export default function ChangePasswordForm() {
   // Translations
-  const t = useTranslations('ChangePasswordForm');
+  const t = useTranslations('changePassword');
 
   // Change Password Schema
   const changePasswordSchema = useMemo(
@@ -46,12 +46,15 @@ export default function ChangePasswordForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="space-y-1">
+        <h2 className="text-2xl font-semibold text-text-plain">
+          {t('title')}
+        </h2>
+      </div>
 
       {/* Current Password */}
       <div className="space-y-2 border-b border-border-muted pb-4">
-        <Label htmlFor="currentPassword">
-          {t('labels.oldPassword')}
-        </Label>
+        <Label htmlFor="currentPassword">{t('current')}</Label>
 
         <PasswordInput
           id="currentPassword"
@@ -68,7 +71,7 @@ export default function ChangePasswordForm() {
 
       {/* New Password */}
       <div className="space-y-2">
-        <Label htmlFor="newPassword">{t('labels.newPassword')}</Label>
+        <Label htmlFor="newPassword">{t('new')}</Label>
 
         <PasswordInput
           id="newPassword"
@@ -85,9 +88,7 @@ export default function ChangePasswordForm() {
 
       {/* Confirm Password */}
       <div className="space-y-2">
-        <Label htmlFor="confirmPassword">
-          {t('labels.confirmPassword')}
-        </Label>
+        <Label htmlFor="confirmPassword">{t('confirm')}</Label>
 
         <PasswordInput
           id="confirmPassword"
@@ -104,8 +105,8 @@ export default function ChangePasswordForm() {
 
       {/* Submit */}
       <div className="flex justify-end">
-        <Button type="submit" disabled={isPending} className="w-1/4">
-          {isPending ? t('buttons.submitting') : t('buttons.submit')}
+        <Button type="submit" loading={isPending} className="w-1/4">
+          {t('button')}
         </Button>
       </div>
     </form>

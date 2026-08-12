@@ -377,16 +377,16 @@
     "change-password": "Change Password",
     "logout": "Logout"
   },
-  "ChangePasswordForm": {
-    "labels": {
-      "oldPassword": "Old Password",
-      "newPassword": "New Password",
-      "confirmPassword": "Confirm New Password"
-    },
-    "buttons": {
-      "submit": "Change Password",
-      "submitting": "Saving..."
-    },
+  "changePassword": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "button": "Change Password",
+    "incorrectCurrent": "Incorrect current password",
+    "samePw": "New password must differ from your current password",
+    "success": "Password changed successfully. Please log in again.",
+    "error": "Something went wrong. Please try again",
     "errors": {
       "oldPasswordRequired": "Current password is required",
       "newPasswordMin": "Password must be at least 8 characters",
@@ -396,11 +396,6 @@
       "newPasswordSpecial": "Password must contain at least one special character",
       "confirmRequired": "Please confirm your password",
       "mismatch": "Passwords do not match"
-    },
-    "messages": {
-      "changePasswordSuccess": "Password changed successfully",
-      "changePasswordError": "Something went wrong. Please try again",
-      "currentPasswordInvalid": "Current password is invalid"
     }
   }
 }
