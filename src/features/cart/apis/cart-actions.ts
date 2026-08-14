@@ -151,11 +151,12 @@ export async function getLocalCartProducts(clientCart: ICart[]) {
       const response = await getProductDetailsInfo(item.productId);
 
       if (!response.status) {
-        return item;
+        return { ...item, id: item.productId };
       }
 
       return {
         ...item,
+        id: item.productId,
         product: response.payload.product,
       };
     })

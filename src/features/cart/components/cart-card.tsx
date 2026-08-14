@@ -60,7 +60,7 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
                 </span>
               </span>
             </div>
-            <ClearButtonId id={cartItem?.productId || ''} />
+            <ClearButtonId id={cartItem.id || ''} />
           </div>
 
           <div className=" flex    items-center justify-between gap-4">

@@ -14,7 +14,6 @@ export const cartLocal = async () => {
     clientCart.map(async (item) => {
       const response: ApiResponse<ProductDetailsResponse> =
         await getProductDetailsInfo(item.productId);
-      console.log('clientCart', item.productId);
       if (!response.status) {
         return item;
       }
