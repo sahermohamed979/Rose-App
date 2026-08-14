@@ -7,32 +7,43 @@ import { Link } from '@/i18n/navigation';
 import { MoveLeft } from 'lucide-react';
 import CartHeader from '../components/cart-header';
 import { useSession } from 'next-auth/react';
-import useLocalCart from '../hooks/use-local-cart';
-
+import { useLocalCart } from '../hooks/cart-local-hook';
+import CartSkeleton from '../skeletons/cart-skeleton';
+import { ErrorCartView } from '../components/error-cart-view';
 export default function CartScreen({
-  cartData,
+  cartResponse,
 }: {
-  cartData: ICartResponse | null;
+  cartResponse: ICartResponse | null;
 }) {
   const t = useTranslations('cart');
   const { status } = useSession();
-  const LocalCartData = useLocalCart();
 
-  const Cart = status === 'authenticated' ? cartData : LocalCartData;
-  console.log('cartDataClient', cartData);
-  console.log('LocalCartData', 7778487);
+  const {
+    data: localCartData,
+    isLoading,
+    error,
+    refetch,
+  } = useLocalCart();
 
+  const cartData =
+    status === 'authenticated' ? cartResponse : localCartData;
+  if (isLoading) {
+    return <CartSkeleton />;
+  }
+  if (error) {
+    return <ErrorCartView error={error} reset={() => refetch()} />;
+  }
   return (
     <>
       {/* cart header */}
-      <CartHeader cartData={cartData} />
+      <CartHeader cartData={cartData as ICartResponse} />
       {/* order card */}
       <div className="border border-border-muted   px-4 rounded-2xl mt-4">
         {cartData?.cartItems?.length === 0 ? (
           <EmptyCart />
         ) : (
           cartData?.cartItems?.map((cartItem) => (
-            <CartCard key={cartItem.id} cartItem={cartItem} />
+            <CartCard key={cartItem.productId} cartItem={cartItem} />
           ))
         )}
       </div>

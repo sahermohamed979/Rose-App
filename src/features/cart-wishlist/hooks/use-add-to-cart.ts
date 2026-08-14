@@ -6,9 +6,9 @@ import { useSession } from 'next-auth/react';
 
 import { ICart } from '@/features/cart/types/cart-types';
 import addToCartAction from '../apis/add-to-cart-action';
-import { CART_WISHLIST_KEYS } from '../constants/query-keys';
 import saveCartItemToLocalStorage from '../lib/local-cart-client';
 import { useTranslations } from 'next-intl';
+import { CART_LOCAL_KEYS } from '@/features/cart/constants/query-key-cart';
 
 export function useAddToCart() {
   // Context
@@ -21,7 +21,6 @@ export function useAddToCart() {
   const t = useTranslations('products');
   const { mutate, isPending } = useMutation({
     mutationFn: addToCartAction,
-    mutationKey: CART_WISHLIST_KEYS.cart,
     onSuccess: (data) => {
       if (!data.status) {
         toast.error(data.message);
@@ -29,7 +28,7 @@ export function useAddToCart() {
       }
 
       queryClient.invalidateQueries({
-        queryKey: CART_WISHLIST_KEYS.cart,
+        queryKey: CART_LOCAL_KEYS.local_cart,
       });
       toast.success(t('addToCartSuccess'));
     },

@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl';
 export default function ClearButtonId({ id }: { id: string }) {
   const { RemoveCartById } = useCartMutations();
   const t = useTranslations('cart');
-
   return (
     <Button
       disabled={RemoveCartById.isPending}

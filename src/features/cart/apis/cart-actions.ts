@@ -5,6 +5,8 @@ import { RESPONSES } from '@/shared/lib/constants/response.constant';
 import { SuccessResponseNoPayload } from '@/shared/lib/types/api';
 import { updateTag } from 'next/cache';
 import { cartQuantitySchema } from '../schema/cart-quantity-schema';
+import { ICart } from '../types/cart-types';
+import { getProductDetailsInfo } from '@/features/products/apis/product-details-info.api';
 
 export async function clearCartAction() {
   const token = await getAuthToken();
@@ -142,4 +144,24 @@ export async function updateCartItemAction(
       code: 500,
     };
   }
+}
+export async function getLocalCartProducts(clientCart: ICart[]) {
+  const cartItems: ICart[] = await Promise.all(
+    clientCart.map(async (item) => {
+      const response = await getProductDetailsInfo(item.productId);
+
+      if (!response.status) {
+        return item;
+      }
+
+      return {
+        ...item,
+        product: response.payload.product,
+      };
+    })
+  );
+
+  return {
+    cartItems,
+  };
 }
