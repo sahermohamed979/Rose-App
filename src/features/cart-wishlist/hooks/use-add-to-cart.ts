@@ -39,17 +39,13 @@ export function useAddToCart() {
   });
 
   // Functions
-  const handleAddToCart = ({
-    productId,
-    quantity = 1,
-    product,
-  }: ICart) => {
+  const handleAddToCart = ({ productId, quantity = 1 }: ICart) => {
     if (status === 'loading') {
       return;
     }
 
     if (status === 'unauthenticated') {
-      saveCartItemToLocalStorage({ productId, quantity, product });
+      saveCartItemToLocalStorage({ productId, quantity });
       toast.success(t('addToCartSuccess'));
       return;
     }

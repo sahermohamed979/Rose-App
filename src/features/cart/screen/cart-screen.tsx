@@ -1,18 +1,26 @@
+'use client';
 import CartCard from '../components/cart-card';
 import { ICartResponse } from '../types/cart-types';
 import EmptyCart from '../components/empty-cart';
-import ClearButton from '../components/clear-button';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { MoveLeft } from 'lucide-react';
 import CartHeader from '../components/cart-header';
+import { useSession } from 'next-auth/react';
+import useLocalCart from '../hooks/use-local-cart';
 
 export default function CartScreen({
   cartData,
 }: {
-  cartData: ICartResponse;
+  cartData: ICartResponse | null;
 }) {
   const t = useTranslations('cart');
+  const { status } = useSession();
+  const LocalCartData = useLocalCart();
+
+  const Cart = status === 'authenticated' ? cartData : LocalCartData;
+  console.log('cartDataClient', cartData);
+  console.log('LocalCartData', 7778487);
 
   return (
     <>
@@ -29,7 +37,7 @@ export default function CartScreen({
         )}
       </div>
       <Link
-        href={'/'}
+        href={'/products'}
         className="w-55.75 h-12 bg-bg-primary-saturated py-2 mt-4 flex items-center justify-center rounded-xl text-text-inverse"
       >
         <MoveLeft size={20} className="me-3  rtl:rotate-y-180 " />

@@ -3,12 +3,12 @@ import Image from 'next/image';
 import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import { Link } from '@/i18n/navigation';
-import { getCartAction } from '@/features/cart/apis/cart-actions';
+import { getCart } from '@/features/cart/apis/cart-service';
 import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
 
 export default async function Header() {
   const [cart, wishlist] = await Promise.all([
-    getCartAction(),
+    getCart(),
     getWishlistAction(),
   ]);
 
