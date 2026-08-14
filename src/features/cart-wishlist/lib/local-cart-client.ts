@@ -29,17 +29,11 @@ export default function saveCartItemToLocalStorage({
   }
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(cart));
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
 export function getLocalCart(): LocalCartItem[] {
   const storedCart = localStorage.getItem(LOCAL_CART_KEY);
   return storedCart ? JSON.parse(storedCart) : [];
-}
-
-export function getLocalCartCount(): number {
-  const cart = getLocalCart();
-  return cart.length;
 }
 
 export function clearLocalCart(): void {
