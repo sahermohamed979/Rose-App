@@ -44,7 +44,6 @@ export function getLocalCartCount(): number {
 
 export function clearLocalCart(): void {
   localStorage.removeItem(LOCAL_CART_KEY);
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
 export function clearLocalIndex(productId: string): void {
@@ -55,8 +54,6 @@ export function clearLocalIndex(productId: string): void {
   );
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
-
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
 export function updateLocalQuantity({
@@ -70,6 +67,4 @@ export function updateLocalQuantity({
   );
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
-
-  window.dispatchEvent(new Event('local-cart-updated'));
 }

@@ -7,13 +7,16 @@ import { authOptions } from '@/auth';
 export default async function page() {
   const session = await getServerSession(authOptions);
   if (session?.user) {
-    const cartData = await getCart();
-    if (!cartData.status) {
-      throw new Error(cartData.message);
+    const cartResponse = await getCart();
+
+    if (!cartResponse.status) {
+      throw new Error(cartResponse.message);
     }
     return (
-      <CartScreen cartData={cartData.payload as ICartResponse} />
+      <CartScreen
+        cartResponse={cartResponse.payload as ICartResponse}
+      />
     );
   }
-  return <CartScreen cartData={{ cartItems: [] }} />;
+  return <CartScreen cartResponse={{ cartItems: [] }} />;
 }

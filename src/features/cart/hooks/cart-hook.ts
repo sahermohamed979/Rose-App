@@ -10,11 +10,13 @@ import {
   clearLocalIndex,
   updateLocalQuantity,
 } from '@/features/cart-wishlist/lib/local-cart-client';
+import { useQueryClient } from '@tanstack/react-query';
+import { CART_LOCAL_KEYS } from '../constants/query-key-cart';
 
 export function useCartMutations() {
   const { status } = useSession();
   const isAuthenticated = status === 'authenticated';
-
+  const queryClient = useQueryClient();
   // remove from  cart
   const clearCart = useMutation({
     mutationFn: async () => {
@@ -28,6 +30,11 @@ export function useCartMutations() {
 
       clearLocalCart();
     },
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: CART_LOCAL_KEYS.local_cart,
+      });
+    },
   });
   // remove from cart by id
   const RemoveCartById = useMutation({
@@ -39,7 +46,13 @@ export function useCartMutations() {
         }
         return res;
       }
+
       clearLocalIndex(id);
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: CART_LOCAL_KEYS.local_cart,
+      });
     },
   });
 
@@ -60,6 +73,11 @@ export function useCartMutations() {
         return res;
       }
       updateLocalQuantity({ productId: id, quantity });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: CART_LOCAL_KEYS.local_cart,
+      });
     },
   });
 

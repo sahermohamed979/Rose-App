@@ -12,12 +12,12 @@ export default async function Header() {
     getWishlistAction(),
   ]);
 
-  const cartCount =
-    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
   const wishlistCount =
     wishlist.status && wishlist.payload
       ? wishlist.payload.wishlistItems.length
       : 0;
+  const cartCount =
+    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
 
   return (
     <>
@@ -34,8 +34,8 @@ export default async function Header() {
           </Link>
           {/* header actions */}
           <HeaderActions
-            cartCount={cartCount}
             wishlistCount={wishlistCount}
+            cartCount={cartCount}
           />
         </div>
         {/* subHeader */}

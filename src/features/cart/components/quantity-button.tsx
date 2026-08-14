@@ -40,7 +40,7 @@ export default function QuantityButton({
 
     const timer = setTimeout(() => {
       UpdateCartQuantity.mutate({
-        id: cartItem?.id || '',
+        id: cartItem?.productId || '',
         quantity,
       });
     }, DEBOUNCE_MS);
