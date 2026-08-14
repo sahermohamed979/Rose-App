@@ -26,9 +26,9 @@ export function useCartMutations() {
           throw new Error(res.message);
         }
         return res;
+      } else {
+        clearLocalCart();
       }
-
-      clearLocalCart();
     },
     onSuccess() {
       queryClient.invalidateQueries({

@@ -18,7 +18,7 @@ import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
 import { useEffect, useState } from 'react';
-import { getLocalCart } from '@/features/cart-wishlist/lib/local-cart-client';
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
 export default function HeaderActions({
   wishlistCount,
   cartCount,
@@ -34,14 +34,12 @@ export default function HeaderActions({
   const isAuthenticated = status === 'authenticated';
 
   // State
-  const localCart = getLocalCart().length;
   const [localWishlistCount, setLocalWishlistCount] = useState(0);
-  const [localCartCount, setLocalCartCount] = useState(0);
-
+  const { data: localCartCount } = useLocalCart();
   // Variables
   const displayedCartCount = isAuthenticated
     ? cartCount
-    : localCartCount;
+    : localCartCount?.cartItems.length;
   const displayedWishlistCount = isAuthenticated
     ? wishlistCount
     : localWishlistCount;
@@ -52,7 +50,6 @@ export default function HeaderActions({
     }
 
     const updateLocalCounts = () => {
-      setLocalCartCount(localCart);
       setLocalWishlistCount(getLocalWishlistCount());
     };
 

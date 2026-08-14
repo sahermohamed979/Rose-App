@@ -45,6 +45,9 @@ export function useAddToCart() {
 
     if (status === 'unauthenticated') {
       saveCartItemToLocalStorage({ productId, quantity });
+      queryClient.invalidateQueries({
+        queryKey: CART_LOCAL_KEYS.local_cart,
+      });
       toast.success(t('addToCartSuccess'));
       return;
     }
