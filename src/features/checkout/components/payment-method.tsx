@@ -83,6 +83,7 @@ export default function PaymentMethod({
               alt={method.title}
               width={195}
               height={195}
+              className="dark:invert"
             />
             <h2
               className={cn(

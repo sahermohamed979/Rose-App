@@ -5,6 +5,7 @@ export interface CreateOrderBody {
   paymentMethod: 'CASH_ON_DELIVERY' | 'CREDIT_CARD';
   couponCode?: string;
   notes?: string;
+  successUrl?: string;
 }
 
 export async function createOrder(body: CreateOrderBody) {
