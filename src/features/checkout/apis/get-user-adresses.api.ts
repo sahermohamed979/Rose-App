@@ -1,17 +1,15 @@
 'use server';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
+import { HEADERS } from '@/shared/lib/constants/api.constants';
+import { RESPONSES } from '@/shared/lib/constants/response.constant';
 import { AddressesResponse } from '@/shared/lib/types/adresses.type';
 
 export async function getUserAddresses(): Promise<AddressesResponse> {
   try {
     const token = await getAuthToken();
 
-    if (!token) {
-      return {
-        status: false,
-        message: 'Unauthorized: No token found',
-        code: 401,
-      };
+    if (!token?.accessToken) {
+      return RESPONSES.Unauthorized;
     }
 
     const response = await fetch(
@@ -19,7 +17,7 @@ export async function getUserAddresses(): Promise<AddressesResponse> {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          ...HEADERS.authorization(token.accessToken),
         },
         cache: 'no-store',
       }
