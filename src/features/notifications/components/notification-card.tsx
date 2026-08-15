@@ -1,3 +1,5 @@
+'use client';
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -6,8 +8,9 @@ import {
 import { Button } from '@base-ui/react/button';
 import { EllipsisVertical } from 'lucide-react';
 import { NotificationType } from '../types/notification-types';
-import { Link } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/shared/lib/utils/utils';
+import useMarkOneAsRead from '../hooks/mark-read-id-hook';
 import NotificationButtons from './notification-buttons';
 
 export default function NotificationCard({
@@ -15,23 +18,41 @@ export default function NotificationCard({
 }: {
   notificationData: NotificationType;
 }) {
+  // Navigation
+  const router = useRouter();
+
+  // Mark one as read hook
+  const { mutate: markOneAsRead } = useMarkOneAsRead();
+
+  // Functions
+  function handleCardClick() {
+    if (!notificationData.isRead) {
+      markOneAsRead(notificationData.id);
+    }
+
+    if (notificationData.link) {
+      if (notificationData.link.startsWith('http')) {
+        window.location.assign(notificationData.link);
+      } else {
+        router.push(notificationData.link);
+      }
+    }
+  }
+
   return (
     <div
+      onClick={handleCardClick}
       className={cn(
-        `w-full flex flex-col px-3 py-2 border-t border-border-soft max-h-[100px] h-auto`,
+        `w-full flex flex-col px-3 py-2 border-t border-border-soft max-h-[100px] h-auto cursor-pointer`,
         notificationData.isRead && 'bg-bg-soft'
       )}
     >
       <div className="max-w-[304px]">
         <div className=" flex items-center justify-between">
-          <Link href={notificationData.link}>
-            <h3 className="text-text-plain font-semibold">
-              {notificationData.title}
-            </h3>
-          </Link>
-          <span>
-            {/* <EllipsisVertical size={18} className="text-text-soft" /> */}
-
+          <h3 className="text-text-plain font-semibold">
+            {notificationData.title}
+          </h3>
+          <span onClick={(event) => event.stopPropagation()}>
             <DropdownMenu>
               <DropdownMenuTrigger
                 render={
@@ -43,7 +64,7 @@ export default function NotificationCard({
                   </Button>
                 }
               />
-              <DropdownMenuContent className="w-full p-2.5">
+              <DropdownMenuContent className="w-full p-2.5 bg-popover! before:hidden">
                 <NotificationButtons
                   notificationData={notificationData}
                 />

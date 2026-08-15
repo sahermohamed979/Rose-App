@@ -18,8 +18,11 @@ import {
 import { cn } from '@/shared/lib/utils/utils';
 import useMarkAllAsRead from '../hooks/mark-all-read-hook';
 import useClearAllNotifications from '../hooks/clear-notification-all-hook';
+import useUnreadCount from '../hooks/use-unread-count';
+import usePushStatus from '../hooks/use-push-status';
 import { useTranslations } from 'next-intl';
 import NotificationsSkeleton from '../skeletons/notifications-skeleton';
+import PushNotificationBanner from './push-notification-banner';
 export default function NotificationsContainer({
   status,
 }: {
@@ -40,12 +43,15 @@ export default function NotificationsContainer({
     [notificationData]
   );
   // count unread notifications
-  const readCount = useMemo(
-    () =>
-      memoNotifications.filter((item) => item.isRead === false)
-        .length,
-    [memoNotifications]
-  );
+  const { data: unreadCountData } = useUnreadCount({
+    enabled: status === 'authenticated',
+  });
+  const unreadCount = unreadCountData?.unreadCount ?? 0;
+  // push status (gates the opt-in banner)
+  const { data: pushStatusData } = usePushStatus({
+    enabled: status === 'authenticated',
+  });
+  const isPushConfigured = pushStatusData?.pushConfigured === true;
   // Mark all as read hook
   const { mutate: markAllAsRead } = useMarkAllAsRead();
   // Clear all notifications hook
@@ -66,26 +72,24 @@ export default function NotificationsContainer({
               <span
                 className={cn(
                   `absolute -top-2 -right-2 bg-bg-danger text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm`,
-                  readCount === 0 && 'hidden'
+                  unreadCount === 0 && 'hidden'
                 )}
               >
-                {readCount}
+                {unreadCount}
               </span>
             )}
           </button>
         }
       />
       {/*  Dropdown menu content */}
-      <DropdownMenuContent
-        className={` min-h-75 max-h-142.75 w-84 p-0 `}
-      >
-        <div className=" flex flex-col ">
+      <DropdownMenuContent className="relative w-84 overflow-hidden p-0 !bg-popover before:hidden">
+        <div className=" flex flex-col   ">
           {/* notification header  */}
-          <div className="py-4 px-4 bg-bg-primary-saturated  rounded-t-xl text-text-inverse font-bold text-xl ">
-            {t('notifications.title')} ({readCount})
+          <div className="py-4 px-4 bg-bg-primary-saturated   rounded-t-xl text-text-inverse font-bold text-xl ">
+            {t('notifications.title')} ({unreadCount})
           </div>
           {/* filter and sort buttons */}
-          <div className="flex  justify-between p-2.5">
+          <div className="flex  justify-between   w-full  bg-bg-plain  p-2.5">
             <button
               onClick={() => clearAllNotifications()}
               disabled={
@@ -103,10 +107,10 @@ export default function NotificationsContainer({
             </button>
             <button
               onClick={() => markAllAsRead()}
-              disabled={readCount === 0}
+              disabled={unreadCount === 0}
               className={cn(
                 `cursor-pointer flex items-center gap-2 text-text-plain font-semibold text-xs`,
-                readCount === 0 &&
+                unreadCount === 0 &&
                   'text-text-muted cursor-not-allowed'
               )}
             >
@@ -114,6 +118,9 @@ export default function NotificationsContainer({
               {t('notifications.markAllRead')}
             </button>
           </div>
+
+          {/* push notification banner */}
+          {isPushConfigured && <PushNotificationBanner />}
           {/* notification card  */}
           {isPending ? (
             <NotificationsSkeleton />
@@ -129,7 +136,7 @@ export default function NotificationsContainer({
           ) : (
             <div className="flex-1">
               <InfiniteScroll
-                className="flex flex-col justify-items-center [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                className="flex flex-col justify-items-center"
                 dataLength={memoNotifications?.length || 0}
                 next={fetchNextNotification}
                 hasMore={!!hasNextNotification}

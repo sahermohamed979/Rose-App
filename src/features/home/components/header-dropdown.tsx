@@ -17,6 +17,11 @@ import {
 } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import { HEADERS } from '@/shared/lib/constants/api.constants';
+import {
+  getPushSubscription,
+  isPushSupported,
+} from '../../notifications/utils/push.util';
 
 export default function HeaderDropdown({ name }: { name: string }) {
   // Translation
@@ -24,6 +29,29 @@ export default function HeaderDropdown({ name }: { name: string }) {
   const t = useTranslations('');
   // get user role
   const { data: session } = useSession();
+
+  // Functions
+  async function handleLogout() {
+    try {
+      if (isPushSupported()) {
+        const subscription = await getPushSubscription();
+
+        if (subscription) {
+          await fetch('/api/notifications/subscriptions', {
+            method: 'DELETE',
+            headers: { ...HEADERS.jsonBody },
+            body: JSON.stringify({ endpoint: subscription.endpoint }),
+          });
+          await subscription.unsubscribe();
+        }
+      }
+    } catch {
+      // Best-effort cleanup — never block logout
+    } finally {
+      signOut({ callbackUrl: '/' });
+    }
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -69,7 +97,7 @@ export default function HeaderDropdown({ name }: { name: string }) {
         {/* Log out — separated at bottom */}
         <DropdownMenuItem
           className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer"
-          onClick={() => signOut({ callbackUrl: '/' })}
+          onClick={() => handleLogout()}
         >
           <LogOut size={16} />
           {t('userMenu.logout')}
