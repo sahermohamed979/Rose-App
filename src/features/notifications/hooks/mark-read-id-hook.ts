@@ -11,6 +11,9 @@ export default function useMarkOneAsRead() {
       queryClient.invalidateQueries({
         queryKey: NOTIFICATION_OPTIONS.list(1),
       });
+      queryClient.invalidateQueries({
+        queryKey: NOTIFICATION_OPTIONS.unreadCount,
+      });
     },
   });
   return { mutate };

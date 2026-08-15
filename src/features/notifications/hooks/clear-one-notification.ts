@@ -11,6 +11,9 @@ export default function useClearOneNotification() {
       queryClient.invalidateQueries({
         queryKey: NOTIFICATION_OPTIONS.list(1),
       });
+      queryClient.invalidateQueries({
+        queryKey: NOTIFICATION_OPTIONS.unreadCount,
+      });
     },
   });
   return { mutate };

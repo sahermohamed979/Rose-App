@@ -24,6 +24,7 @@ export default function UseNotificationList() {
       }
       return data.payload;
     },
+
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage.metadata.page === lastPage.metadata.totalPages) {
