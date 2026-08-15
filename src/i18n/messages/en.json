@@ -377,6 +377,59 @@
     "change-password": "Change Password",
     "logout": "Logout"
   },
+  "profileForm": {
+    "changeEmail": "Change Email",
+    "enterEmail": "Enter your new email",
+    "email": "Email",
+    "emailPlaceholder": "user@example.com",
+    "next": " Next",
+    "verifyOtp": "Verify OTP",
+    "otpP": "Please enter the 6-digits code we have sent to:",
+    "edit": "Edit",
+    "resendCode": "Resend Code",
+    "resendTimer": "You can request a new code in: {s}s",
+    "deleteAccount?": "Are you sure you want to delete your account?",
+    "actionPermanent": "This action is permanent and cannot be undone.",
+    "nope": "Nope, not doing it",
+    "delete": "Yes, delete",
+    "deleting": "Deleting...",
+    "fields": {
+      "change": "Change",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "genderPlaceholder": "Select gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "deleteAccount": "Delete my account",
+    "loading": "Loading profile...",
+    "loadError": "Failed to load profile. Please try again.",
+    "saving": "Saving...",
+    "saveChanges": "Save changes",
+    "uploadPhoto": "Upload Photo",
+    "uploadPhotoType": "You can upload a jpg, png, or gif photo with max size of 5MB.",
+    "uploadingPhoto": "Uploading photo...",
+    "toast": {
+      "profileUpdatedSuccess": "Profile updated successfully",
+      "profileUpdatedError": "Something went wrong",
+      "validImage": "Please upload a valid image",
+      "imageSize": "Image size must be less than 5MB",
+      "photoUpdatedSuccess": "Photo uploaded successfully",
+      "photoUpdatedError": "Failed to upload photo",
+      "enterNewEmail": "Please enter your new email",
+      "verificationCodeSent": "Verification code sent",
+      "enterSixDigits": "Please enter 6 digits",
+      "emailUpdated": "Email updated successfully",
+      "accountDeleted": "Account deleted successfully"
+    },
+    "errors": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required"
+    }
+  },
   "ChangePasswordForm": {
     "labels": {
       "oldPassword": "Old Password",
