@@ -3,8 +3,22 @@ import Image from 'next/image';
 import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import { Link } from '@/i18n/navigation';
+import { getCart } from '@/features/cart/apis/cart-service';
+import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
 
-export default function Header() {
+export default async function Header() {
+  const [cart, wishlist] = await Promise.all([
+    getCart(),
+    getWishlistAction(),
+  ]);
+
+  const wishlistCount =
+    wishlist.status && wishlist.payload
+      ? wishlist.payload.wishlistItems.length
+      : 0;
+  const cartCount =
+    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
+
   return (
     <>
       <div className=" sticky top-0 z-50 ">
@@ -19,7 +33,10 @@ export default function Header() {
             />
           </Link>
           {/* header actions */}
-          <HeaderActions />
+          <HeaderActions
+            wishlistCount={wishlistCount}
+            cartCount={cartCount}
+          />
         </div>
         {/* subHeader */}
         <SubHeader />
