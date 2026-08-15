@@ -14,8 +14,8 @@ export const changePassword = async (
     if (!token) {
       return {
         status: false,
-        code: 401,
-        message: 'Unauthorized',
+        code: 419,
+        message: 'SESSION_EXPIRED',
       };
     }
 

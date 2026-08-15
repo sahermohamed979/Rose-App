@@ -27,6 +27,7 @@ export default function ChangePasswordForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<ChangePasswordValues>({
     resolver: zodResolver(changePasswordSchema),
@@ -38,7 +39,7 @@ export default function ChangePasswordForm() {
   });
 
   // Custom Hook
-  const { mutate, isPending } = useChangePassword();
+  const { mutate, isPending } = useChangePassword(setError);
 
   const onSubmit = (data: ChangePasswordValues) => {
     mutate(data);
