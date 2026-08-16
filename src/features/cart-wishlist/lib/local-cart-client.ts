@@ -1,44 +1,43 @@
-import { ICart } from '@/features/cart/types/cart-types';
+export type LocalCartItem = {
+  productId: string;
+  quantity: number;
+};
 
 const LOCAL_CART_KEY = 'client-cart';
 
 export default function saveCartItemToLocalStorage({
   productId,
   quantity = 1,
-  product,
-}: ICart) {
+}: {
+  productId: string;
+  quantity?: number;
+}) {
   const storedCart = localStorage.getItem(LOCAL_CART_KEY);
 
-  const cart: ICart[] = storedCart ? JSON.parse(storedCart) : [];
+  const cart: LocalCartItem[] = storedCart
+    ? JSON.parse(storedCart)
+    : [];
 
   const existingItem = cart.find(
     (item) => item.productId === productId
   );
 
   if (existingItem) {
-    existingItem.quantity = (existingItem.quantity || 0) + quantity;
-    existingItem.product = product ?? existingItem.product;
+    existingItem.quantity += quantity;
   } else {
-    cart.push({ productId, quantity, product });
+    cart.push({ productId, quantity });
   }
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(cart));
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
-export function getLocalCart(): ICart[] {
+export function getLocalCart(): LocalCartItem[] {
   const storedCart = localStorage.getItem(LOCAL_CART_KEY);
   return storedCart ? JSON.parse(storedCart) : [];
 }
 
-export function getLocalCartCount(): number {
-  const cart = getLocalCart();
-  return cart.length;
-}
-
 export function clearLocalCart(): void {
   localStorage.removeItem(LOCAL_CART_KEY);
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
 export function clearLocalIndex(productId: string): void {
@@ -49,17 +48,12 @@ export function clearLocalIndex(productId: string): void {
   );
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
-
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
 
 export function updateLocalQuantity({
   productId,
   quantity,
-}: {
-  productId: string;
-  quantity: number;
-}) {
+}: LocalCartItem) {
   const cart = getLocalCart();
 
   const updatedCart = cart.map((item) =>
@@ -67,6 +61,4 @@ export function updateLocalQuantity({
   );
 
   localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updatedCart));
-
-  window.dispatchEvent(new Event('local-cart-updated'));
 }
