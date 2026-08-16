@@ -386,7 +386,10 @@
     "confirmClear": "Are you sure you want to clear the cart? ",
     "noImage": "No image",
     "product": "{count} Products",
-    "currency": "EGP"
+    "currency": "EGP",
+    "cancel": "Cancel",
+    "confirmClear ": "Are you sure you want to clear your cart? ",
+    "confirm": "Confirm"
   },
   "cartError": {
     "title": "Unable to Load Your Cart",

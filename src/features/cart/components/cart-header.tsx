@@ -5,7 +5,7 @@ import { ICartResponse } from '../types/cart-types';
 export default function CartHeader({
   cartData,
 }: {
-  cartData: ICartResponse;
+  cartData: ICartResponse | null;
 }) {
   const t = useTranslations('cart');
   return (

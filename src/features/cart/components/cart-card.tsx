@@ -6,14 +6,11 @@ import ClearButtonId from './clear-button-id';
 import QuantityButton from './quantity-button';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { useSession } from 'next-auth/react';
-import ClearButtonLocalId from './clear-button-local-id';
-import QuantityButtonLocal from './quantity-button-local';
-import PriceLocal from './price-local';
 
 export default function CartCard({ cartItem }: { cartItem: ICart }) {
   const t = useTranslations();
-  const session = useSession();
+  const totalPrice =
+    Number(cartItem?.product?.price || 0) * (cartItem.quantity || 0);
   return (
     <div className=" relative  rounded-2xl   border-b border-muted  pb-4 mt-5">
       <div className="flex gap-4 ">
@@ -63,11 +60,7 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
                 </span>
               </span>
             </div>
-            {session.status === 'authenticated' ? (
-              <ClearButtonId id={cartItem?.id || ''} />
-            ) : (
-              <ClearButtonLocalId id={cartItem?.product?.id || ''} />
-            )}
+            <ClearButtonId id={cartItem.id || ''} />
           </div>
 
           <div className=" flex    items-center justify-between gap-4">
@@ -75,19 +68,11 @@ export default function CartCard({ cartItem }: { cartItem: ICart }) {
               <span className="text-sm text-text-primary">
                 (x{cartItem.quantity})
               </span>
-              {session.status === 'authenticated' ? (
-                <span className=" ms-1 text-primary-600 font-bold text-lg me-2">
-                  {cartItem?.product?.price} {t('cart.currency')}
-                </span>
-              ) : (
-                <PriceLocal cartItem={cartItem} />
-              )}
+              <span className=" ms-1 text-primary-600 font-bold text-lg me-2">
+                {totalPrice} {t('cart.currency')}
+              </span>
             </div>
-            {session.status === 'authenticated' ? (
-              <QuantityButton cartItem={cartItem} />
-            ) : (
-              <QuantityButtonLocal cartItem={cartItem} />
-            )}
+            <QuantityButton cartItem={cartItem} />
           </div>
         </div>
       </div>

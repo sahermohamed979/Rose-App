@@ -16,16 +16,15 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
-import { getLocalCartCount } from '@/features/cart-wishlist/lib/local-cart-client';
 import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
 import { useEffect, useState } from 'react';
-
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
 export default function HeaderActions({
-  cartCount,
   wishlistCount,
+  cartCount,
 }: {
-  cartCount: number;
   wishlistCount: number;
+  cartCount: number;
 }) {
   // Translation
   const t = useTranslations('header');
@@ -35,17 +34,15 @@ export default function HeaderActions({
   const isAuthenticated = status === 'authenticated';
 
   // State
-  const [localCartCount, setLocalCartCount] = useState(0);
   const [localWishlistCount, setLocalWishlistCount] = useState(0);
-
+  const { data: localCartCount } = useLocalCart();
   // Variables
   const displayedCartCount = isAuthenticated
     ? cartCount
-    : localCartCount;
+    : localCartCount?.cartItems.length;
   const displayedWishlistCount = isAuthenticated
     ? wishlistCount
     : localWishlistCount;
-
   // Effects
   useEffect(() => {
     if (isAuthenticated) {
@@ -53,7 +50,6 @@ export default function HeaderActions({
     }
 
     const updateLocalCounts = () => {
-      setLocalCartCount(getLocalCartCount());
       setLocalWishlistCount(getLocalWishlistCount());
     };
 
@@ -132,7 +128,7 @@ export default function HeaderActions({
 
         <Link href={'/cart'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          <CountBadge count={displayedCartCount} />
+          <CountBadge count={displayedCartCount || 0} />
         </Link>
 
         <NotificationsContainer status={status} />
