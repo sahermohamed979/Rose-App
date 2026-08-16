@@ -379,6 +379,13 @@
     "submit": "Add Review",
     "submitting": "Submitting...",
     "loginRequired": "Please login to be able to review the product",
-    "reviewFailed": "Failed to submit your review."
+    "reviewFailed": "Failed to submit your review.",
+    "validation": {
+      "titleMin": "Title must be at least 5 characters",
+      "titleMax": "Title must be at most 32 characters",
+      "contentMin": "Review must be at least 20 characters",
+      "contentMax": "Review must be at most 100 characters",
+      "ratingRequired": "Please select a star rating"
+    }
   }
 }

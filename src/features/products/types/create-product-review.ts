@@ -4,7 +4,7 @@ interface IProductReviewSuccess {
   payload: payload;
 }
 
-interface IProductReviewError {
+export interface IProductReviewError {
   status: boolean;
   code: number;
   message: string;

@@ -81,21 +81,25 @@ export function ReviewSubmissionForm() {
               <Controller
                 name="rating"
                 control={form.control}
-                render={({ field }) => (
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        strokeWidth={1.5}
-                        key={star}
-                        onClick={() => field.onChange(star)}
-                        fill={
-                          star <= field.value ? '#F2A93D' : 'none'
-                        }
-                        color="#F2A93D"
-                        size={25}
-                        className="cursor-pointer"
-                      />
-                    ))}
+                render={({ field, fieldState }) => (
+                  <div>
+                    <div className="flex gap-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          onClick={() => field.onChange(star)}
+                          fill={
+                            star <= field.value ? '#F2A93D' : 'none'
+                          }
+                          color="#F2A93D"
+                          size={25}
+                          className="cursor-pointer"
+                        />
+                      ))}
+                    </div>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
                   </div>
                 )}
               />
