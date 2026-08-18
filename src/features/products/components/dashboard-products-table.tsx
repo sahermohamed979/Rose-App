@@ -32,8 +32,7 @@ export default function DashboardProductsTable({
   // Hooks
   const locale = useLocale();
   const router = useRouter();
-  const { mutate: deleteProduct, isPending: isDeleting } =
-    useDeleteProduct();
+  const { mutate: deleteProduct } = useDeleteProduct();
 
   // No Products
   if (!products || products.length === 0) {
