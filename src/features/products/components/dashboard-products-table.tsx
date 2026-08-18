@@ -38,7 +38,7 @@ export default function DashboardProductsTable({
   // No Products
   if (!products || products.length === 0) {
     return (
-      <div className="w-full bg-white rounded-md border p-8 text-center text-text-plain opacity-70">
+      <div className="w-full bg-white rounded-md border p-8 text-center text-text-danger opacity-70">
         {t('noProductsFound')}
       </div>
     );
