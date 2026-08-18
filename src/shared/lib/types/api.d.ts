@@ -6,9 +6,13 @@ interface IUser {
   firstName: string;
   lastName: string;
   gender: string;
+  photo?: string;
   emailVerified: boolean;
   phoneVerified: boolean;
   role: string;
+}
+interface UserProfilePayload {
+  user: IUser;
 }
 
 interface LoginResponse {
