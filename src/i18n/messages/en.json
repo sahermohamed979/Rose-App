@@ -18,7 +18,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "edit": "Edit"
   },
   "pagination": {
     "previous": "Previous",
@@ -181,7 +182,18 @@
     "hot": "HOT",
     "addToWishList": "Add to wishlist",
     "removeFromWishList": "Remove From wishlist",
-    "loadingProducts": "Loading products..."
+    "loadingProducts": "Loading products...",
+    "allProducts": "All Products",
+    "addNewProduct": "Add New Product",
+    "name": "Name",
+    "price": "Price",
+    "stock": "Stock",
+    "sales": "Sales",
+    "ratings": "Ratings",
+    "deleteSuccess": "Product deleted successfully.",
+    "deleteError": "Failed to delete the product.",
+    "unexpectedError": "An unexpected error occurred.",
+    "noProductsFound":"No Products Found."
   },
   "ProductDetails": {
     "notFound": "Product not found",
