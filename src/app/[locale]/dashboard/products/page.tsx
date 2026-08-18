@@ -2,7 +2,7 @@ import { getProductAction } from '@/features/products/apis/products-api';
 import DashboardProductsTable from '@/features/products/components/dashboard-products-table';
 import PaginationProducts from '@/features/products/components/pagination-products';
 import DashboardProductsTableSkeleton from '@/features/products/skeletons/dashboard-products.skeleton';
-import GlobalSearch from '@/shared/components/dashboard-global-seach';
+import GlobalSearch from '@/shared/components/dashboard-global-search';
 import PageHeader from '@/shared/components/dashboard-page-header';
 import { ProductsSearchParams } from '@/shared/lib/types/product-types';
 import { getTranslations } from 'next-intl/server';

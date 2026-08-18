@@ -13,9 +13,9 @@ export const getAuthToken = async () => {
       token: token,
       secret: process.env.NEXTAUTH_SECRET!,
     });
-    return jwt?.accessToken || null;
-  } catch (error) {
-    console.error('Error decoding token:', error);
+    return jwt;
+  } catch {
+    return null;
   }
 
   return null;

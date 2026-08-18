@@ -6,7 +6,10 @@ import { revalidatePath } from 'next/cache';
 export async function deleteProductAction(productId: string) {
   try {
     const token = await getAuthToken();
-    console.log('token', token);
+
+    if (!token?.accessToken) {
+      return { success: false, message: 'Unauthorized' };
+    }
 
     const response = await fetch(
       `${process.env.NEXT_API_URL}/products/${productId}`,
@@ -14,22 +17,19 @@ export async function deleteProductAction(productId: string) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.accessToken}`,
         },
       }
     );
-
-    console.log(response);
 
     if (!response.ok) {
       return { success: false, message: 'Failed to delete product' };
     }
 
-    revalidatePath('/dashboard/products');
+    revalidatePath('/[locale]/dashboard/products', 'page');
 
     return { success: true, message: 'Product deleted successfully' };
-  } catch (error) {
-    console.error('Error deleting product:', error);
+  } catch {
     return { success: false, message: 'Something went wrong!' };
   }
 }
