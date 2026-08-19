@@ -381,6 +381,11 @@
       "title": " You are not authorized to access this page. ",
       "subtitle": "If you think this is wrong, please contact the support.",
       "home": "Go to Homepage"
+    },
+    "error": {
+      "title": "Oops, something went wrong!",
+      "subtitle": "Something unexpected happened, please refresh the page or try again shortly.",
+      "retry": "Try Again"
     }
   }
 }
