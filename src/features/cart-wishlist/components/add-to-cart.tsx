@@ -31,7 +31,6 @@ export default function AddToCart({
         handleAddToCart({ productId, quantity, product });
       }}
       disabled={isPending || stock === 0}
-      roundedCartLoading={isPending}
       {...props}
     >
       {children ?? (

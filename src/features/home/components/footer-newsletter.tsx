@@ -75,7 +75,6 @@ export default function FooterNewsletter() {
           />
           <Button
             type="submit"
-            loading={isPending}
             className="h-11 rounded-full bg-bg-primary-fade text-text-primary hover:text-text-primary-faint hover:bg-bg-primary-faint dark:hover:text-white dark:hover:bg-maroon-700 px-6 font-medium gap-2"
           >
             {t('subscribe')}{' '}
