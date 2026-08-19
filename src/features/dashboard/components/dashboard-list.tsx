@@ -8,8 +8,10 @@ import {
   Package,
 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils/utils';
+import { useTranslations } from 'next-intl';
 export default function DashboardList() {
   const pathname = usePathname();
+  const t = useTranslations();
   return (
     <ul className=" flex  md:flex-col  gap-1 md:items-center  items-start w-full text-lg mt-4 space-y-2">
       <Link
@@ -23,7 +25,7 @@ export default function DashboardList() {
         )}
       >
         <LayoutDashboard size={25} />
-        Overview
+        {t('dashboard.overview')}
       </Link>
       <Link
         href="/dashboard/categories"
@@ -37,7 +39,7 @@ export default function DashboardList() {
       >
         {' '}
         <ClipboardList size={25} />
-        Categories
+        {t('footer.nav.categories')}
       </Link>
       <Link
         href="/dashboard/occasions"
@@ -51,7 +53,7 @@ export default function DashboardList() {
       >
         {' '}
         <CalendarHeart size={25} />
-        Occasions
+        {t('footer.nav.occasions')}
       </Link>
       <Link
         href="/dashboard/products"
@@ -65,7 +67,7 @@ export default function DashboardList() {
       >
         {' '}
         <Package size={25} />
-        Products
+        {t('footer.nav.products')}
       </Link>
     </ul>
   );
