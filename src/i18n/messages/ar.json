@@ -18,7 +18,8 @@
     "cancel": "إلغاء",
     "save": "حفظ",
     "delete": "حذف",
-    "confirm": "تأكيد"
+    "confirm": "تأكيد",
+    "edit": "تعديل"
   },
   "pagination": {
     "previous": "السابق",
@@ -369,5 +370,13 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "categoryDashboard": {
+    "categories": "الفئات",
+    "addNew": "اضف فئه جديده",
+    "noMatch": "لم يتم العثور على فئات",
+    "trySearch": "حاول تعديل البحث أو أضف فئة جديدة.",
+    "name": "الاسم",
+    "products": "المنتجات"
   }
 }
