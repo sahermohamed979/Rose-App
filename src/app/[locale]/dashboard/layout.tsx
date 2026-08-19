@@ -20,7 +20,7 @@ export default async function RootLayout({
     <main className="relative flex h-screen md:grid md:grid-cols-12 md:px-3 lg:px-4 xl:px-6.5 xl:pb-6 md:pb-3 lg:pb-5">
       <SideBarDashboard />
 
-      <div className="md:col-span-9 xl:col-span-10 w-full h-full min-h-0 overflow-y-auto">
+      <div className="md:col-span-9 xl:col-span-10 w-full h-full min-h-0 ">
         <TopNavbar />
 
         {children}
