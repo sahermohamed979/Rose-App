@@ -12,16 +12,14 @@ export default async function UserInfo() {
 
   return (
     <div className="flex items-center md:justify-between md:gap-2  gap-1 ">
-      <div
-        className={`relative shrink-0 w-12 h-12   overflow-hidden shadow-sm`}
-      >
+      <div className={`relative shrink-0 w-12 h-12  `}>
         {UserInfo.payload?.user?.photo ? (
           <Image
             src={UserInfo.payload?.user?.photo}
             alt="User Avatar"
             width={55}
             height={55}
-            className="object-cover"
+            className={`object-cover h-full w-full rounded-full`}
           />
         ) : (
           <div
