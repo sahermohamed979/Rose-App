@@ -4,6 +4,7 @@ import { getUserProfile } from '../api/user-service';
 import LogoutDashboard from './logout-dashboard';
 import { Badge } from '@/shared/components/ui/badge';
 import { AlertTriangle } from 'lucide-react';
+import AvatarFallback from './avatar-fallback';
 
 export default async function UserInfo() {
   const UserInfo = await getUserProfile();
@@ -38,9 +39,11 @@ export default async function UserInfo() {
             className={`object-cover h-full w-full rounded-full`}
           />
         ) : (
-          <div
-            className={`flex bg-red-500 rounded-[40.5px] items-center justify-center w-full bg-linear-to-r  h-full`}
-          ></div>
+          <AvatarFallback
+            letter={(UserInfo.payload?.user?.firstName ??
+              '?')[0].toUpperCase()}
+            userId={UserInfo.payload?.user?.id ?? ''}
+          />
         )}
       </div>
       <div className="md:flex-1 md:min-w-0">
