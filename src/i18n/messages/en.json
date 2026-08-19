@@ -18,7 +18,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "edit": "Edit"
   },
   "pagination": {
     "previous": "Previous",
@@ -369,5 +370,13 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "categoryDashboard": {
+    "categories": "Categories",
+    "addNew": "Add a new category",
+    "noMatch": "No categories found",
+    "trySearch": "Try adjusting your search or add a new category.",
+    "name": "Name",
+    "products": "Products"
   }
 }
