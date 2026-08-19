@@ -26,9 +26,9 @@ export default async function RootLayout({
         <div className="flex-1 py-4 md:px-3 lg:px-4 xl:px-6.5 overflow-y-auto bg-bg-subtle scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {children}
         </div>
-      </div>
 
-      <MobileNavDashboard />
+        <MobileNavDashboard />
+      </div>
     </main>
   );
 }
