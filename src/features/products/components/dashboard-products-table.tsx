@@ -37,14 +37,14 @@ export default function DashboardProductsTable({
   // No Products
   if (!products || products.length === 0) {
     return (
-      <div className="w-full bg-white rounded-md border p-8 text-center text-text-danger opacity-70">
+      <div className="w-full bg-white rounded-md text-lg font-bold p-8 text-center text-text-danger">
         {t('noProductsFound')}
       </div>
     );
   }
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full p-2">
       <Table>
         <TableHeader className="bg-bg-subtle border-b">
           <TableRow>
