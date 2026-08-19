@@ -378,5 +378,23 @@
     "trySearch": "Try adjusting your search or add a new category.",
     "name": "Name",
     "products": "Products"
+  },
+  "dashboard": {
+    "Preview": "Preview website",
+    "overview": "Overview",
+    "notfound": {
+      "title": "This page does not exist.",
+      "subtitle": " We couldn’t find the page you are looking for, please make sure you are on the right path."
+    },
+    "unauthorized": {
+      "title": " You are not authorized to access this page. ",
+      "subtitle": "If you think this is wrong, please contact the support.",
+      "home": "Go to Homepage"
+    },
+    "error": {
+      "title": "Oops, something went wrong!",
+      "subtitle": "Something unexpected happened, please refresh the page or try again shortly.",
+      "retry": "Try Again"
+    }
   }
 }
