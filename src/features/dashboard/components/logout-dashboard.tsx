@@ -13,12 +13,14 @@ import LangToggle from '@/shared/components/ui/langToggle';
 import { IUser } from '@/shared/lib/types/api';
 import { EllipsisVertical, LogOut, User } from 'lucide-react';
 import { signOut } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 export default function LogoutDashboard({
   UserData,
 }: {
   UserData: IUser;
 }) {
+  const t = useTranslations();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -52,7 +54,7 @@ export default function LogoutDashboard({
               href="/account"
               className="text-sm  text-text-plain"
             >
-              Profile
+              {t('userMenu.account')}
             </Link>
           </DropdownMenuItem>
 
@@ -60,7 +62,10 @@ export default function LogoutDashboard({
             onClick={() => signOut({ callbackUrl: '/login' })}
           >
             <LogOut size={16} />
-            <span className="text-sm  text-text-plain">Logout</span>
+            <span className="text-sm  text-text-plain">
+              {' '}
+              {t('userMenu.logout')}
+            </span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

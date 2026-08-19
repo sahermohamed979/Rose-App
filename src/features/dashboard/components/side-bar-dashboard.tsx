@@ -6,7 +6,10 @@ import DashboardList from './dashboard-list';
 import UserInfo from './user-info';
 import { Suspense } from 'react';
 import UserInfoSkeleton from '../skeletons/user-info-skeleton';
+import { useTranslations } from 'next-intl';
 export default function SideBarDashboard() {
+  const t = useTranslations('dashboard');
+
   return (
     <aside className="md:col-span-3 xl:col-span-2 hidden md:flex flex-col h-full w-full border-r">
       <div className="flex-1 min-h-0 flex flex-col gap-2 items-center md:px-2 lg:px-3 xl:px-5">
@@ -18,7 +21,7 @@ export default function SideBarDashboard() {
             className="bg-bg-primary-saturated rounded-[8px] mt-6 flex items-center justify-center gap-1 p-2.5 w-full text-text-inverse"
           >
             <Flower size={25} />
-            Preview website
+            {t('Preview')}
           </Link>
         </div>
 
