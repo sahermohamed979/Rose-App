@@ -5,20 +5,19 @@ import { usePathname } from 'next/navigation';
 
 export default function NavbarBreadcrumb() {
   const pathname = usePathname();
-  const { labels } = useBreadcrumbLabels();
   const segments = pathname
     .split('/')
     .filter(Boolean)
     .filter((segment) => segment !== 'en' && segment !== 'ar');
   const items = segments.map((segment, index) => {
     const href = '/' + segments.slice(0, index + 1).join('/');
-
+    const displaySegment = segment.includes('--')
+      ? segment.split('--')[0]
+      : segment;
     return {
-      label:
-        labels[segment] ??
-        segment
-          .replace(/-/g, ' ')
-          .replace(/\b\w/g, (char) => char.toUpperCase()),
+      label: displaySegment
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (char) => char.toUpperCase()),
       href,
     };
   });
