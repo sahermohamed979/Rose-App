@@ -23,5 +23,5 @@ export default function NavbarBreadcrumb() {
   if (items.length > 0) {
     items[items.length - 1].href = '';
   }
-  return <Breadcrumb className="ms-3" items={items} maxVisible={3} />;
+  return <Breadcrumb className="ms-3" items={items} maxVisible={4} />;
 }
