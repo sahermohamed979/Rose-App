@@ -5,6 +5,7 @@ export default async function EditCategoryPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
+  const { id:combined } = await params;
+  const id = combined.split('--').pop() as string;
   return <EditCategoryFormWrapper id={id} />;
 }
