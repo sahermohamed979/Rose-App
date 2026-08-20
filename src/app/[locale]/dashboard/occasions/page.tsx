@@ -1,5 +1,9 @@
-import React from 'react';
+import OccasionsDashboardScreen from '@/features/occasions/screens/occasions-dashboard-screen';
 
-export default function page() {
-  return <div>occasions</div>;
+export default function Page() {
+  return (
+    <div>
+      <OccasionsDashboardScreen />
+    </div>
+  );
 }
