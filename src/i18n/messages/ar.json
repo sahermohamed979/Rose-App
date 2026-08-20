@@ -372,12 +372,31 @@
     "supportDesc": "تواصل معنا في أي وقت"
   },
   "categoryDashboard": {
-    "categories": "الفئات",
+    "categories": "كل الفئات ",
     "addNew": "اضف فئه جديده",
     "noMatch": "لم يتم العثور على فئات",
     "trySearch": "حاول تعديل البحث أو أضف فئة جديدة.",
     "name": "الاسم",
-    "products": "المنتجات"
+    "products": "المنتجات",
+    "namePlaceholder": "أدخل اسم الفئة",
+    "image": "صورة الفئة",
+    "uploadFile": "رفع ملف",
+    "noFileChosen": "",
+    "uploading": "جاري الرفع...",
+    "adding": "جاري الإضافة...",
+    "titleError": "اسم الفئه مطلوب",
+    "imageError": "صوره الفئه مطلوبه",
+    "updateCategory": "تعديل الفئة",
+    "updating": "جارٍ التحديث...",
+    "viewImage": "عرض صوره الفئه",
+    "updateSuccess": "تم تحديث الفئة بنجاح",
+    "updateError": "فشل تحديث الفئة",
+    "deleteCategory": "هل انت متاكد من حذف ",
+    "confirm": "تاكيد",
+    "confirming": "جاري التاكيد",
+    "cancel": "الغاء",
+    "deleteSuccess": "تم حذف الفئة بنجاح",
+    "deleteError": "فشل حذف الفئة"
   },
   "dashboard": {
     "Preview": "عرض المتجر",

@@ -15,7 +15,7 @@ export default function CategoriesDashboardScreen() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-
+  const router = useRouter();
   const page = Number(searchParams.get('page')) || 1;
   const search = searchParams.get('search') || '';
 
@@ -36,10 +36,13 @@ export default function CategoriesDashboardScreen() {
   }
 
   return (
-    <div className="p-6 m-4 flex flex-col">
+    <div className="p-5 flex flex-col bg-bg-plain rounded-lg">
       <DashboardPageHeader
         title={t('categories')}
         buttonText={t('addNew')}
+        onButtonClick={() =>
+          router.push('/dashboard/categories/add-category')
+        }
       />
       <GlobalSearch />
 

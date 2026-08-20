@@ -1,5 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { SearchX } from 'lucide-react';
 import {
   Table,
   TableHeader,
@@ -10,8 +14,8 @@ import {
 } from '@/shared/components/ui/table';
 import DashboardButtons from '@/shared/components/dashboard-buttons';
 import { CategoryWithCount } from '../types/categories-type';
-import { SearchX } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useDeleteCategory } from '../hooks/use-delete-category';
+import DeleteCategoryModal from './delete-category-modal';
 
 export function CategoriesTable({
   categories,
@@ -19,17 +23,39 @@ export function CategoriesTable({
   categories: CategoryWithCount[];
 }) {
   const t = useTranslations('categoryDashboard');
+  const router = useRouter();
 
+  // Delete modal state
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(
+    null
+  );
+  const { mutate: deleteCategory, isPending: isDeleting } =
+    useDeleteCategory();
+
+  // Navigate to the edit page for a given category
   const handleEdit = (id: string) => {
-    // navigate to edit page or open edit modal
-    console.log('edit', id);
+    router.push(`/dashboard/categories/${id}`);
   };
 
+  // Open the delete confirmation modal for a given category
   const handleDelete = (id: string) => {
-    // open delete confirmation dialog
-    console.log('delete', id);
+    setDeleteTargetId(id);
   };
 
+  // Confirm deletion, close the modal on success
+  const handleConfirmDelete = () => {
+    if (!deleteTargetId) {
+      return;
+    }
+    deleteCategory(deleteTargetId, {
+      onSuccess: () => setDeleteTargetId(null),
+    });
+  };
+
+  // Close the modal without deleting
+  const handleCancelDelete = () => setDeleteTargetId(null);
+
+  // Empty state — no categories match the current filter/search
   if (categories.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center rounded-t-xl mt-4 border border-border-subtle">
@@ -78,6 +104,19 @@ export function CategoriesTable({
           ))}
         </TableBody>
       </Table>
+
+      {/* Delete confirmation modal  */}
+      {deleteTargetId && (
+        <DeleteCategoryModal
+          isOpen={!!deleteTargetId}
+          onClose={handleCancelDelete}
+          onConfirm={handleConfirmDelete}
+          isDeleting={isDeleting}
+          categoryName={
+            categories.find((c) => c.id === deleteTargetId)?.title
+          }
+        />
+      )}
     </div>
   );
 }

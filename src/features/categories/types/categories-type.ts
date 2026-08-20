@@ -11,3 +11,12 @@ export interface GetCategoriesParams {
   limit?: number;
   search?: string;
 }
+export interface CreateCategoryPayload {
+  title: string;
+  description?: string;
+  image: string;
+}
+export interface UpdateCategoryPayload {
+  title: string;
+  description?: string;
+}
