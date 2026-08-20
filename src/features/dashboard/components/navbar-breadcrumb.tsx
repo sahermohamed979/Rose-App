@@ -1,7 +1,6 @@
 'use client';
 
 import { Breadcrumb } from '@/shared/components/ui/breadcrumb';
-import { useBreadcrumbLabels } from '@/shared/context/bradcrumb-label-context';
 import { usePathname } from 'next/navigation';
 
 export default function NavbarBreadcrumb() {
@@ -27,5 +26,5 @@ export default function NavbarBreadcrumb() {
   if (items.length > 0) {
     items[items.length - 1].href = '';
   }
-  return <Breadcrumb className="ms-3" items={items} maxVisible={3} />;
+  return <Breadcrumb className="ms-3" items={items} maxVisible={4} />;
 }

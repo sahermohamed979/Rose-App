@@ -4,7 +4,6 @@ import SideBarDashboard from '@/features/dashboard/components/side-bar-dashboard
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/auth';
 import UnauthorizedScreen from '@/features/dashboard/screens/unauthorized-screen';
-import { BreadcrumbLabelsProvider } from '@/shared/context/bradcrumb-label-context';
 
 export default async function RootLayout({
   children,
@@ -18,7 +17,6 @@ export default async function RootLayout({
   }
 
   return (
-    <BreadcrumbLabelsProvider>
       <main className="relative flex h-screen min-h-0 overflow-hidden md:grid md:grid-cols-12">
         <SideBarDashboard />
 
@@ -32,6 +30,5 @@ export default async function RootLayout({
           <MobileNavDashboard />
         </div>
       </main>
-    </BreadcrumbLabelsProvider>
   );
 }

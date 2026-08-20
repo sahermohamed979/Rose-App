@@ -33,9 +33,11 @@ export function CategoriesTable({
     useDeleteCategory();
 
   // Navigate to the edit page for a given category
-  const handleEdit = (id: string) => {
-    router.push(`/dashboard/categories/${id}`);
+  const handleEdit = (id: string, title: string) => {
+    const slug =title.toLowerCase().trim().replace(/\s+/g,'-')
+    router.push(`/dashboard/categories/${slug}--${id}`);
   };
+
 
   // Open the delete confirmation modal for a given category
   const handleDelete = (id: string) => {
@@ -95,7 +97,7 @@ export function CategoriesTable({
               <TableCell>
                 <div className="flex justify-end">
                   <DashboardButtons
-                    onEdit={() => handleEdit(category.id)}
+                    onEdit={() => handleEdit(category.id,category.title)}
                     onDelete={() => handleDelete(category.id)}
                   />
                 </div>
