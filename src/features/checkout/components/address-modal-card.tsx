@@ -1,23 +1,26 @@
 'use client';
 
-import { Phone } from 'lucide-react';
+import { Pencil, Phone } from 'lucide-react';
 import { RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Label } from '@/shared/components/ui/label';
 import { cn } from '@/shared/lib/utils/utils';
 import { IAddress } from '@/shared/lib/types/adresses.type';
 import location from '@/shared/assets/images/Location.svg';
 import Image from 'next/image';
+import { Button } from '@/shared/components/ui/button';
 
 interface AddressCardProps {
   address: IAddress;
   isSelected: boolean;
   onSelect: (id: string) => void;
+  onEdit: (id: string) => void;
 }
 
 export default function AddressModalCard({
   address,
   isSelected,
   onSelect,
+  onEdit,
 }: AddressCardProps) {
   return (
     <Label
@@ -73,14 +76,28 @@ export default function AddressModalCard({
 
       {/* Right - Phone */}
       <div className="flex items-center gap-3 shrink-0">
-        <Phone size={20} className="text-text-default" />
-        <span
-          className={cn(
-            'text-base font-medium tracking-wide bg-bg-plain text-text-default'
-          )}
+        <div className="flex items-center gap-3 shrink-0">
+          <Phone size={20} className="text-text-default" />
+          <span
+            className={cn(
+              'text-base font-medium tracking-wide bg-bg-plain text-text-default'
+            )}
+          >
+            {address.phone}
+          </span>
+        </div>
+        <Button
+          type="button"
+          variant="secondary"
+          size="icon"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onEdit(address.id);
+          }}
         >
-          {address.phone}
-        </span>
+          <Pencil size={20} className="text-text-default" />
+        </Button>
       </div>
     </Label>
   );

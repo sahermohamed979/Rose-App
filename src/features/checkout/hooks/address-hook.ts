@@ -11,8 +11,9 @@ import {
   addressFormSchema,
   type AddressFormFields,
   type CreateAddressPayload,
+  type UpdateAddressPayload,
 } from '../schemas/address-form-schema';
-import { createAddress } from '../apis/address-action';
+import { createAddress, updateAddress } from '../apis/address-action';
 
 interface UseAddressOptions {
   initialData?: Partial<AddressFormFields>;
@@ -46,8 +47,15 @@ export function useAddress(options?: UseAddressOptions) {
     },
   });
 
-  // Mutation
-  const { mutate, isPending } = useMutation({
+  // Functions
+  const handleMutationSuccess = (message: string) => {
+    toast.success(message);
+    options?.onSuccess?.();
+    router.refresh();
+  };
+
+  // Mutations
+  const createMutation = useMutation({
     mutationFn: async (address: CreateAddressPayload) => {
       const response = await createAddress(address);
 
@@ -58,9 +66,25 @@ export function useAddress(options?: UseAddressOptions) {
       return response;
     },
     onSuccess: () => {
-      toast.success(t('address.added'));
-      options?.onSuccess?.();
-      router.refresh();
+      handleMutationSuccess(t('address.added'));
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: async (address: UpdateAddressPayload) => {
+      const response = await updateAddress(address);
+
+      if (!response.status) {
+        throw new Error(response.message);
+      }
+
+      return response;
+    },
+    onSuccess: () => {
+      handleMutationSuccess(t('address.updated'));
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -69,8 +93,9 @@ export function useAddress(options?: UseAddressOptions) {
 
   return {
     control,
-    mutate,
-    isPending,
+    mutate: createMutation.mutate,
+    update: updateMutation.mutate,
+    isPending: createMutation.isPending || updateMutation.isPending,
     handleSubmit,
     trigger,
     formState,

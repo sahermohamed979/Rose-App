@@ -123,6 +123,7 @@ export default function CheckoutStepOne({
       <AddressDialog
         open={isAddressDialogOpen}
         onOpenChange={setIsAddressDialogOpen}
+        initialData={initialData}
       />
     </div>
   );
