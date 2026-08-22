@@ -58,7 +58,12 @@ export default function AddressDialog({
   });
 
   // Hooks
-  const { mutate, update, isPending } = useAddress({
+  const {
+    mutate,
+    update,
+    delete: deleteAddress,
+    isPending,
+  } = useAddress({
     onSuccess: () => {
       onOpenChange(false);
       setCurrentStep(0);
@@ -122,6 +127,13 @@ export default function AddressDialog({
       isPrimary: address.isPrimary,
     });
     setCurrentStep(1);
+  };
+
+  const handleDeleteAddress = (addressId: string) => {
+    deleteAddress(addressId);
+    onOpenChange(false);
+    setCurrentStep(0);
+    setEditingAddressId(null);
   };
 
   const handleSubmitAddress = () => {
@@ -202,10 +214,10 @@ export default function AddressDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[57.2vw] max-w-[70vw] sm:max-w-[70vw] py-6"
+        className="scrollbar-none max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto p-4 md:w-[57.2vw] md:max-w-[70vw] md:py-6"
       >
         <DialogHeader>
-          <DialogTitle className="text-3xl font-bold text-text-primary leading-none mb-4">
+          <DialogTitle className="mb-2 text-2xl font-bold leading-tight text-text-primary md:mb-4 md:text-3xl md:leading-none">
             {isEditing ? tAddress('edit') : t('addAddress')}
           </DialogTitle>
         </DialogHeader>
@@ -215,6 +227,7 @@ export default function AddressDialog({
             initialData={initialData}
             onAddAddress={handleStartAddAddress}
             onEditAddress={handleEditAddress}
+            onDeleteAddress={handleDeleteAddress}
           />
         ) : (
           <>
@@ -223,13 +236,13 @@ export default function AddressDialog({
             <div className="flex items-center border-border-muted border-b pb-3 mb-0">
               {currentStep >= 1 && (
                 <Button
-                  className="w-[35px] h-[35px] rounded-full p-0 dark:bg-maroon-500 overflow-hidden me-4"
+                  className="me-3 size-8 shrink-0 overflow-hidden rounded-full p-0 dark:bg-maroon-500 md:me-4 md:size-8.75"
                   onClick={handleBack}
                 >
-                  <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
+                  <ArrowLeft className="size-4 rtl:rotate-180 md:size-5" />
                 </Button>
               )}
-              <h2 className="text-2xl font-medium text-text-primary leading-none">
+              <h2 className="text-lg font-medium leading-tight text-text-primary md:text-2xl md:leading-none">
                 {currentStep === 1 && tAddress('add.step1Title')}
                 {currentStep === 2 && tAddress('add.step2Title')}
               </h2>
@@ -239,7 +252,7 @@ export default function AddressDialog({
 
             {currentStep === 1 && (
               <Button
-                className="mt-7"
+                className="mt-5 w-full md:mt-7 md:w-auto"
                 type="submit"
                 form={ADDRESS_FORM_ID}
               >
@@ -249,7 +262,7 @@ export default function AddressDialog({
 
             {currentStep === 2 && (
               <Button
-                className="mt-7"
+                className="mt-5 w-full md:mt-7 md:w-auto"
                 type="button"
                 onClick={handleSubmitAddress}
                 disabled={isPending}

@@ -416,6 +416,8 @@
     },
     "edit": "Edit",
     "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
     "confirmDelete": "Are you sure you want to delete this address?",
     "deleted": "Address deleted",
     "updated": "Address updated",
