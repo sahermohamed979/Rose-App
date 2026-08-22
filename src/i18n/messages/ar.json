@@ -373,6 +373,48 @@
   "dashboard": {
     "Preview": "عرض المتجر",
     "overview": "نظره عامه",
+    "overviewPage": {
+      "totalProducts": "إجمالي المنتجات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalCategories": "إجمالي الفئات",
+      "totalRevenue": "إجمالي الإيرادات",
+      "allCategories": "جميع الفئات",
+      "productSingular": "منتج واحد",
+      "productPlural": "{count} منتجات",
+      "noCategories": "لا توجد فئات",
+      "orderStatus": "حالة الطلبات",
+      "completed": "مكتملة",
+      "inProgress": "قيد التنفيذ",
+      "cancelled": "ملغاة",
+      "revenue": "الإيرادات",
+      "monthly": "شهري",
+      "lastWeek": "الأسبوع الماضي",
+      "currency": "ج.م",
+      "loadError": "فشل تحميل بيانات لوحة التحكم",
+      "months": {
+        "Jan": "يناير",
+        "Feb": "فبراير",
+        "Mar": "مارس",
+        "Apr": "أبريل",
+        "May": "مايو",
+        "Jun": "يونيو",
+        "Jul": "يوليو",
+        "Aug": "أغسطس",
+        "Sep": "سبتمبر",
+        "Oct": "أكتوبر",
+        "Nov": "نوفمبر",
+        "Dec": "ديسمبر"
+      },
+      "days": {
+        "Sat": "السبت",
+        "Sun": "الأحد",
+        "Mon": "الإثنين",
+        "Tue": "الثلاثاء",
+        "Wed": "الأربعاء",
+        "Thu": "الخميس",
+        "Fri": "الجمعة"
+      }
+    },
     "notfound": {
       "title": "هذه الصفحة غير موجودة",
       "subtitle": "لم نتمكن من العثور على الصفحة التي تبحث عنها، يرجى التأكد من أنك على الطريق الصحيح."
