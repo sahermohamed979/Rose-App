@@ -13,7 +13,12 @@ import {
   type CreateAddressPayload,
   type UpdateAddressPayload,
 } from '../schemas/address-form-schema';
-import { createAddress, updateAddress } from '../apis/address-action';
+import {
+  createAddress,
+  updateAddress,
+  deleteAddress,
+} from '../apis/address-action';
+import { IAddress } from '@/shared/lib/types/adresses.type';
 
 interface UseAddressOptions {
   initialData?: Partial<AddressFormFields>;
@@ -90,12 +95,30 @@ export function useAddress(options?: UseAddressOptions) {
       toast.error(error.message);
     },
   });
-
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await deleteAddress(id);
+      if (!response.status) {
+        throw new Error(response.message);
+      }
+      return response;
+    },
+    onSuccess: () => {
+      handleMutationSuccess(t('address.deleted'));
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
   return {
     control,
     mutate: createMutation.mutate,
     update: updateMutation.mutate,
-    isPending: createMutation.isPending || updateMutation.isPending,
+    delete: deleteMutation.mutate,
+    isPending:
+      createMutation.isPending ||
+      updateMutation.isPending ||
+      deleteMutation.isPending,
     handleSubmit,
     trigger,
     formState,

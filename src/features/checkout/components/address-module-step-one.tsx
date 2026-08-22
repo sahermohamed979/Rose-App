@@ -15,12 +15,14 @@ interface AddressModuleStepOneProps {
   initialData?: AddressesPayload;
   onAddAddress: () => void;
   onEditAddress: (id: string) => void;
+  onDeleteAddress: (id: string) => void;
 }
 
 export default function AddressModuleStepOne({
   initialData,
   onAddAddress,
   onEditAddress,
+  onDeleteAddress,
 }: AddressModuleStepOneProps) {
   // Translations
   const t = useTranslations('checkout');
@@ -54,7 +56,7 @@ export default function AddressModuleStepOne({
         />
       ) : (
         <>
-          <div className="flex flex-col gap-9 pt-2.5 max-h-90 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none">
+          <div className="scrollbar-none flex max-h-90 flex-col gap-4 overflow-x-hidden overflow-y-auto pt-2.5 md:gap-9 md:pe-5">
             {addresses.map((address) => (
               <AddressModalCard
                 key={address.id}
@@ -62,12 +64,13 @@ export default function AddressModuleStepOne({
                 isSelected={currentSelectedAddressId === address.id}
                 onSelect={setSelectedAddressId}
                 onEdit={onEditAddress}
+                onDelete={onDeleteAddress}
               />
             ))}
           </div>
 
           <Button
-            className="mt-7"
+            className="mt-5 w-full md:mt-7 md:w-auto"
             variant="secondary"
             onClick={onAddAddress}
           >

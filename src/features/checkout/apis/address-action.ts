@@ -110,3 +110,49 @@ export const updateAddress = async ({
     };
   }
 };
+
+export const deleteAddress = async (
+  id: string
+): Promise<ApiResponse<IAddress>> => {
+  const token = await getAuthToken();
+
+  if (!token?.accessToken) {
+    return RESPONSES.Unauthorized;
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_API_URL}/addresses/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          ...HEADERS.jsonBody,
+          ...HEADERS.authorization(token.accessToken),
+        },
+      }
+    );
+    const data: ApiResponse<IAddress> = await response.json();
+    if (!response.ok || !data.status) {
+      return {
+        status: false,
+        message: data.message ?? 'Failed to delete address',
+        code: response.status,
+      };
+    }
+
+    return {
+      status: true,
+      message: data.message,
+      code: data.code,
+      payload: data.payload,
+    };
+  } catch (error: unknown) {
+    return {
+      status: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred',
+      code: 500,
+    };
+  }
+};
