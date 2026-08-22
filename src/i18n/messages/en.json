@@ -431,6 +431,8 @@
     "details": "Address",
     "phone": "Contact Number",
     "findMyLocation": "Find My Location",
+    "mapLoading": "Loading map...",
+    "mapUnavailable": "The map is unavailable. Check your connection and try again.",
     "locationDenied": "Location access denied. Please pin manually.",
     "added": "Address added",
     "errors": {
