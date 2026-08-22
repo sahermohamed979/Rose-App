@@ -373,9 +373,51 @@
   "dashboard": {
     "Preview": "Preview website",
     "overview": "Overview",
+    "overviewPage": {
+      "totalProducts": "Total products",
+      "totalOrders": "Total orders",
+      "totalCategories": "Total categories",
+      "totalRevenue": "Total revenue",
+      "allCategories": "All Categories",
+      "productSingular": "{count} Product",
+      "productPlural": "{count} Products",
+      "noCategories": "No categories found",
+      "orderStatus": "Orders Status",
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "cancelled": "Cancelled",
+      "revenue": "Revenue",
+      "monthly": "Monthly",
+      "lastWeek": "Last Week",
+      "currency": "EGP",
+      "loadError": "Failed to load dashboard data",
+      "months": {
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Aug",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dec"
+      },
+      "days": {
+        "Sat": "Sat",
+        "Sun": "Sun",
+        "Mon": "Mon",
+        "Tue": "Tue",
+        "Wed": "Wed",
+        "Thu": "Thu",
+        "Fri": "Fri"
+      }
+    },
     "notfound": {
       "title": "This page does not exist.",
-      "subtitle": " We couldn’t find the page you are looking for, please make sure you are on the right path."
+      "subtitle": " We couldn't find the page you are looking for, please make sure you are on the right path."
     },
     "unauthorized": {
       "title": " You are not authorized to access this page. ",
