@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -22,9 +22,11 @@ import CheckoutStepper from './checkout-stepper';
 import { AddressFormFields } from '../schemas/address-form-schema';
 import { useAddress } from '../hooks/address-hook';
 import AddressModuleStepOne from './address-module-step-one';
+import { AddressMapLoading } from './address-map-loading';
 
 const AddressMap = dynamic(() => import('./address-map'), {
   ssr: false,
+  loading: () => <AddressMapLoading />,
 });
 
 interface AddressDialogProps {
@@ -92,6 +94,29 @@ export default function AddressDialog({
   const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
   };
+  const handleCancel = () => {
+    onOpenChange(false);
+    setAddressData({
+      title: '',
+      city: '',
+      street: '',
+      phone: '',
+      latitude: '',
+      longitude: '',
+      isPrimary: false,
+    });
+    setCurrentStep(0);
+    setEditingAddressId(null);
+  };
+
+  const handleDialogOpenChange = (isOpen: boolean) => {
+    if (isOpen) {
+      onOpenChange(true);
+      return;
+    }
+
+    handleCancel();
+  };
 
   const handleStartAddAddress = () => {
     setEditingAddressId(null);
@@ -131,9 +156,6 @@ export default function AddressDialog({
 
   const handleDeleteAddress = (addressId: string) => {
     deleteAddress(addressId);
-    onOpenChange(false);
-    setCurrentStep(0);
-    setEditingAddressId(null);
   };
 
   const handleSubmitAddress = () => {
@@ -176,6 +198,7 @@ export default function AddressDialog({
     }
 
     mutate(payload);
+    setCurrentStep(0);
   };
 
   // Render Step
@@ -211,15 +234,40 @@ export default function AddressDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleDialogOpenChange}>
       <DialogContent
         showCloseButton={false}
         className="scrollbar-none max-h-[calc(100dvh-2rem)] w-4/5 max-w-4/5 overflow-y-auto p-4 sm:max-w-4/5 md:w-[57.2vw] md:max-w-[70vw] md:py-6"
       >
-        <DialogHeader>
+        {currentStep !== 0 && (
+          <button
+            type="button"
+            aria-label={tAddress('cancel')}
+            className="absolute inset-e-0 top-0 z-10 mt-4 me-4 border-0 bg-transparent p-0 text-text-default outline-none hover:bg-transparent focus-visible:outline-none disabled:opacity-50"
+            onClick={handleCancel}
+            disabled={isPending}
+          >
+            <X className="size-6.25 text-text-default" />
+          </button>
+        )}
+
+        <DialogHeader className="flex-row items-center justify-between">
           <DialogTitle className="mb-2 text-2xl font-bold leading-tight text-text-primary md:mb-4 md:text-3xl md:leading-none">
-            {isEditing ? tAddress('edit') : t('addAddress')}
+            {currentStep === 0
+              ? tAddress('modal.title')
+              : isEditing
+                ? tAddress('edit')
+                : t('addAddress')}
           </DialogTitle>
+          {currentStep === 0 && (
+            <Button
+              className="shrink-0 px-2 text-xs md:px-4 md:text-sm"
+              variant="secondary"
+              onClick={handleStartAddAddress}
+            >
+              {t('addAddress')}
+            </Button>
+          )}
         </DialogHeader>
 
         {currentStep === 0 ? (

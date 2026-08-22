@@ -68,14 +68,6 @@ export default function AddressModuleStepOne({
               />
             ))}
           </div>
-
-          <Button
-            className="mt-5 w-full md:mt-7 md:w-auto"
-            variant="secondary"
-            onClick={onAddAddress}
-          >
-            {t('addAddress')}
-          </Button>
         </>
       )}
     </div>

@@ -9,10 +9,10 @@ import {
   useMap,
 } from 'react-leaflet';
 import L from 'leaflet';
+import { LoaderCircle, MapPinIcon, WifiOff } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 import { Button } from '@/shared/components/ui/button';
-import { MapPinIcon } from 'lucide-react';
 
 const DEFAULT_CENTER: [number, number] = [30.0444, 31.2357]; // Cairo [lat, lng]
 const DEFAULT_ZOOM = 12;
@@ -34,7 +34,8 @@ interface AddressMapProps {
 }
 
 const markerIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconUrl:
+    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
   iconRetinaUrl:
     'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
   shadowUrl:
@@ -55,30 +56,34 @@ async function geocodeAddress(
     return null;
   }
 
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`,
-    {
-      headers: {
-        Accept: 'application/json',
-      },
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    if (!response.ok) {
+      return null;
     }
-  );
 
-  if (!response.ok) {
+    const results: Array<{ lat: string; lon: string }> =
+      await response.json();
+
+    if (!results[0]) {
+      return null;
+    }
+
+    return {
+      latitude: Number(results[0].lat),
+      longitude: Number(results[0].lon),
+    };
+  } catch {
     return null;
   }
-
-  const results: Array<{ lat: string; lon: string }> =
-    await response.json();
-
-  if (!results[0]) {
-    return null;
-  }
-
-  return {
-    latitude: Number(results[0].lat),
-    longitude: Number(results[0].lon),
-  };
 }
 
 function getInitialCoordinates(
@@ -88,7 +93,12 @@ function getInitialCoordinates(
   const lat = Number(latitude);
   const lng = Number(longitude);
 
-  if (!Number.isNaN(lat) && !Number.isNaN(lng) && latitude && longitude) {
+  if (
+    !Number.isNaN(lat) &&
+    !Number.isNaN(lng) &&
+    latitude &&
+    longitude
+  ) {
     return { latitude: lat, longitude: lng };
   }
 
@@ -98,11 +108,7 @@ function getInitialCoordinates(
   };
 }
 
-function MapCenter({
-  coordinates,
-}: {
-  coordinates: Coordinates;
-}) {
+function MapCenter({ coordinates }: { coordinates: Coordinates }) {
   const map = useMap();
 
   useEffect(() => {
@@ -168,6 +174,8 @@ export default function AddressMap({
   const [locationError, setLocationError] = useState<string | null>(
     null
   );
+  const [isMapLoading, setIsMapLoading] = useState(true);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   // Functions
   const updateCoordinates = (next: Coordinates) => {
@@ -176,6 +184,19 @@ export default function AddressMap({
       latitude: String(next.latitude),
       longitude: String(next.longitude),
     });
+  };
+
+  const handleMapLoading = () => {
+    setIsMapLoading(true);
+  };
+
+  const handleMapLoad = () => {
+    setIsMapLoading(false);
+  };
+
+  const handleMapError = () => {
+    setIsMapLoading(false);
+    setMapError(t('mapUnavailable'));
   };
 
   // Sync initial pin to parent so submit always has lat/lng
@@ -218,11 +239,31 @@ export default function AddressMap({
 
   // Effects
   useEffect(() => {
-    const lat = Number(latitude);
-    const lng = Number(longitude);
+    const handleOffline = () => {
+      setIsMapLoading(false);
+      setMapError(t('mapUnavailable'));
+    };
 
-    if (!Number.isNaN(lat) && !Number.isNaN(lng) && latitude && longitude) {
-      setCoordinates({ latitude: lat, longitude: lng });
+    const handleOnline = () => {
+      setMapError(null);
+      setIsMapLoading(true);
+    };
+
+    if (!navigator.onLine) {
+      handleOffline();
+    }
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
+  }, [t]);
+
+  useEffect(() => {
+    if (latitude && longitude) {
       return;
     }
 
@@ -258,6 +299,11 @@ export default function AddressMap({
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            eventHandlers={{
+              loading: handleMapLoading,
+              load: handleMapLoad,
+              tileerror: handleMapError,
+            }}
           />
           <MapCenter coordinates={coordinates} />
           <DraggableMarker
@@ -266,14 +312,36 @@ export default function AddressMap({
           />
         </MapContainer>
 
+        {isMapLoading && !mapError && (
+          <div
+            className="absolute inset-0 z-1000 flex flex-col items-center justify-center gap-3 bg-bg-plain/90 text-text-default"
+            role="status"
+          >
+            <LoaderCircle className="size-8 animate-spin text-text-primary" />
+            <span className="text-sm font-medium">
+              {t('mapLoading')}
+            </span>
+          </div>
+        )}
+
+        {mapError && (
+          <div
+            className="absolute inset-0 z-1000 flex flex-col items-center justify-center gap-3 bg-bg-plain/90 px-6 text-center text-text-default"
+            role="alert"
+          >
+            <WifiOff className="size-8 text-destructive" />
+            <span className="text-sm font-medium">{mapError}</span>
+          </div>
+        )}
+
         <Button
           type="button"
           variant="secondary"
           onClick={handleFindMyLocation}
           disabled={isLocating}
-          className="absolute top-4 gap-0 start-4 z-[1000] bg-bg-plain text-text-primary font-semibold text-sm leading-5 border-border-primary border rounded-xl py-4 px-2"
+          className="absolute inset-s-4 top-4 z-1000 gap-0 rounded-xl border border-border-primary bg-bg-plain px-2 py-4 text-sm font-semibold leading-5 text-text-primary"
         >
-            <MapPinIcon className="w-5 h-5 me-2" />
+          <MapPinIcon className="me-2 size-5" />
           {t('findMyLocation')}
         </Button>
       </div>
