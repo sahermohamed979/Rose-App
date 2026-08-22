@@ -44,7 +44,7 @@ export default function DeleteAddressDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="scrollbar-none max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] gap-0 overflow-y-auto p-0 md:w-[36.5%] md:max-w-[37.5%]"
+        className="scrollbar-none max-h-[calc(100dvh-2rem)] w-4/5 max-w-4/5 gap-0 overflow-y-auto p-0 sm:max-w-4/5 md:w-[36.5%] md:max-w-[37.5%]"
         showCloseButton={false}
         onClick={(event) => event.stopPropagation()}
       >
