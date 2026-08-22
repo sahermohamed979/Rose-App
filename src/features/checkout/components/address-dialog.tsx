@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
@@ -12,28 +13,40 @@ import {
   DialogTitle,
 } from '@/shared/components/ui/dialog';
 import { Button } from '@/shared/components/ui/button';
-import { IAddress } from '@/shared/lib/types/adresses.type';
+import {
+  AddressesPayload,
+  IAddress,
+} from '@/shared/lib/types/adresses.type';
 import AddressForm, { ADDRESS_FORM_ID } from './address-form';
-import AddressMap from './address-map';
 import CheckoutStepper from './checkout-stepper';
 import { AddressFormFields } from '../schemas/address-form-schema';
 import { useAddress } from '../hooks/address-hook';
+import AddressModuleStepOne from './address-module-step-one';
+
+const AddressMap = dynamic(() => import('./address-map'), {
+  ssr: false,
+});
 
 interface AddressDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  initialData?: AddressesPayload;
 }
 
 export default function AddressDialog({
   open,
   onOpenChange,
+  initialData,
 }: AddressDialogProps) {
   // Translations
   const t = useTranslations('checkout');
   const tAddress = useTranslations('address');
 
   // State
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [editingAddressId, setEditingAddressId] = useState<
+    string | null
+  >(null);
   const [addressData, setAddressData] = useState<Partial<IAddress>>({
     title: '',
     city: '',
@@ -41,13 +54,15 @@ export default function AddressDialog({
     phone: '',
     latitude: '',
     longitude: '',
+    isPrimary: false,
   });
 
   // Hooks
-  const { mutate, isPending } = useAddress({
+  const { mutate, update, isPending } = useAddress({
     onSuccess: () => {
       onOpenChange(false);
-      setCurrentStep(1);
+      setCurrentStep(0);
+      setEditingAddressId(null);
       setAddressData({
         title: '',
         city: '',
@@ -55,9 +70,13 @@ export default function AddressDialog({
         phone: '',
         latitude: '',
         longitude: '',
+        isPrimary: false,
       });
     },
   });
+
+  // Variables
+  const isEditing = editingAddressId !== null;
 
   // Functions
   const handleNextStepOne = (data: AddressFormFields) => {
@@ -69,9 +88,52 @@ export default function AddressDialog({
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleAddAddress = () => {
-    const { title, city, street, phone, latitude, longitude } =
-      addressData;
+  const handleStartAddAddress = () => {
+    setEditingAddressId(null);
+    setAddressData({
+      title: '',
+      city: '',
+      street: '',
+      phone: '',
+      latitude: '',
+      longitude: '',
+      isPrimary: false,
+    });
+    setCurrentStep(1);
+  };
+
+  const handleEditAddress = (addressId: string) => {
+    const address = initialData?.addresses?.find(
+      (item) => item.id === addressId
+    );
+
+    if (!address) {
+      return;
+    }
+
+    setEditingAddressId(address.id);
+    setAddressData({
+      title: address.title,
+      city: address.city,
+      street: address.street,
+      phone: address.phone,
+      latitude: address.latitude,
+      longitude: address.longitude,
+      isPrimary: address.isPrimary,
+    });
+    setCurrentStep(1);
+  };
+
+  const handleSubmitAddress = () => {
+    const {
+      title,
+      city,
+      street,
+      phone,
+      latitude,
+      longitude,
+      isPrimary,
+    } = addressData;
 
     if (!title || !city || !street || !phone) {
       setCurrentStep(1);
@@ -83,15 +145,25 @@ export default function AddressDialog({
       return;
     }
 
-    mutate({
+    const payload = {
       title,
       city,
       street,
       phone,
-      isPrimary: false,
+      isPrimary: isPrimary ?? false,
       latitude: Number(latitude),
       longitude: Number(longitude),
-    });
+    };
+
+    if (editingAddressId) {
+      update({
+        id: editingAddressId,
+        ...payload,
+      });
+      return;
+    }
+
+    mutate(payload);
   };
 
   // Render Step
@@ -100,6 +172,7 @@ export default function AddressDialog({
       case 1:
         return (
           <AddressForm
+            key={editingAddressId ?? 'new-address'}
             initialData={addressData}
             onNext={handleNextStepOne}
           />
@@ -133,47 +206,60 @@ export default function AddressDialog({
       >
         <DialogHeader>
           <DialogTitle className="text-3xl font-bold text-text-primary leading-none mb-4">
-            {t('addAddress')}
+            {isEditing ? tAddress('edit') : t('addAddress')}
           </DialogTitle>
         </DialogHeader>
 
-        <CheckoutStepper currentStep={currentStep} />
+        {currentStep === 0 ? (
+          <AddressModuleStepOne
+            initialData={initialData}
+            onAddAddress={handleStartAddAddress}
+            onEditAddress={handleEditAddress}
+          />
+        ) : (
+          <>
+            <CheckoutStepper currentStep={currentStep} />
 
-        <div className="flex items-center border-border-muted border-b pb-3 mb-0">
-          {currentStep === 2 && (
-            <Button
-              className="w-[35px] 
-            h-[35px] rounded-full
-             p-0 dark:bg-maroon-500 overflow-hidden me-4"
-              onClick={handleBack}
-            >
-              <ArrowLeft className="w-5 h-5  rtl:rotate-180" />
-            </Button>
-          )}
-          <h2 className="text-2xl font-medium text-text-primary leading-none">
-            {currentStep === 1 && tAddress('add.step1Title')}
-            {currentStep === 2 && tAddress('add.step2Title')}
-          </h2>
-        </div>
+            <div className="flex items-center border-border-muted border-b pb-3 mb-0">
+              {currentStep >= 1 && (
+                <Button
+                  className="w-[35px] h-[35px] rounded-full p-0 dark:bg-maroon-500 overflow-hidden me-4"
+                  onClick={handleBack}
+                >
+                  <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
+                </Button>
+              )}
+              <h2 className="text-2xl font-medium text-text-primary leading-none">
+                {currentStep === 1 && tAddress('add.step1Title')}
+                {currentStep === 2 && tAddress('add.step2Title')}
+              </h2>
+            </div>
 
-        {renderStep()}
+            {renderStep()}
 
-        {/* Actions */}
-        {currentStep === 1 && (
-          <Button className="mt-7" type="submit" form={ADDRESS_FORM_ID}>
-            {t('next')}
-          </Button>
-        )}
+            {currentStep === 1 && (
+              <Button
+                className="mt-7"
+                type="submit"
+                form={ADDRESS_FORM_ID}
+              >
+                {t('next')}
+              </Button>
+            )}
 
-        {currentStep === 2 && (
-          <Button
-            className="mt-7"
-            type="button"
-            onClick={handleAddAddress}
-            disabled={isPending}
-          >
-            {tAddress('add.address')}
-          </Button>
+            {currentStep === 2 && (
+              <Button
+                className="mt-7"
+                type="button"
+                onClick={handleSubmitAddress}
+                disabled={isPending}
+              >
+                {isEditing
+                  ? tAddress('edit')
+                  : tAddress('add.address')}
+              </Button>
+            )}
+          </>
         )}
       </DialogContent>
     </Dialog>

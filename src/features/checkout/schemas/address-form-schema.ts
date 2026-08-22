@@ -78,3 +78,7 @@ export type CreateAddressPayload = AddressFormFields & {
   latitude: number;
   longitude: number;
 };
+
+export type UpdateAddressPayload = CreateAddressPayload & {
+  id: string;
+};
