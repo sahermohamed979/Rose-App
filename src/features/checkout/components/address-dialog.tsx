@@ -214,7 +214,7 @@ export default function AddressDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="scrollbar-none max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto p-4 md:w-[57.2vw] md:max-w-[70vw] md:py-6"
+        className="scrollbar-none max-h-[calc(100dvh-2rem)] w-4/5 max-w-4/5 overflow-y-auto p-4 sm:max-w-4/5 md:w-[57.2vw] md:max-w-[70vw] md:py-6"
       >
         <DialogHeader>
           <DialogTitle className="mb-2 text-2xl font-bold leading-tight text-text-primary md:mb-4 md:text-3xl md:leading-none">
