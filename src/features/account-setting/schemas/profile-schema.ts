@@ -1,3 +1,4 @@
+import { parsePhoneNumber } from 'react-phone-number-input';
 import { z } from 'zod';
 
 export const profileFormSchema = (t: (key: string) => string) =>
@@ -8,7 +9,12 @@ export const profileFormSchema = (t: (key: string) => string) =>
     lastName: z
       .string()
       .min(1, { message: t('errors.lastNameRequired') }),
-    phone: z.string().optional(),
+    phone: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\+20(10|11|12|15)\d{8}$/.test(val), {
+        message: t('errors.phoneInvalid'),
+      }),
     email: z.string(),
     gender: z.string(),
     photo: z.string().optional(),

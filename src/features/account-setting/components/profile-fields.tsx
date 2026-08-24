@@ -49,6 +49,11 @@ export default function ProfileFields({
                 aria-invalid={fieldState.invalid}
                 {...field}
               />
+              {fieldState.error && (
+                <p className="text-sm text-red-500">
+                  {fieldState.error.message}
+                </p>
+              )}
             </Field>
           )}
         />
@@ -70,6 +75,11 @@ export default function ProfileFields({
                 aria-invalid={fieldState.invalid}
                 {...field}
               />
+              {fieldState.error && (
+                <p className="text-sm text-red-500">
+                  {fieldState.error.message}
+                </p>
+              )}
             </Field>
           )}
         />
@@ -101,7 +111,6 @@ export default function ProfileFields({
               disabled
               id="email"
               className="bg-bg-muted"
-              aria-invalid={fieldState.invalid}
               {...field}
             />
           </Field>
@@ -125,6 +134,11 @@ export default function ProfileFields({
               onBlur={field.onBlur}
               name={field.name}
             />
+            {fieldState.error && (
+              <p className="text-sm text-red-500">
+                {fieldState.error.message}
+              </p>
+            )}
           </Field>
         )}
       />
@@ -145,10 +159,7 @@ export default function ProfileFields({
               value={field.value ?? ''}
               onValueChange={field.onChange}
             >
-              <SelectTrigger
-                id="gender"
-                aria-invalid={fieldState.invalid}
-              >
+              <SelectTrigger id="gender">
                 <SelectValue placeholder={t('genderPlaceholder')} />
               </SelectTrigger>
 

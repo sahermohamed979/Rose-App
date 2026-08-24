@@ -427,7 +427,8 @@
     },
     "errors": {
       "firstNameRequired": "First name is required",
-      "lastNameRequired": "Last name is required"
+      "lastNameRequired": "Last name is required",
+      "phoneInvalid": "Please enter a valid phone number"
     }
   },
   "ChangePasswordForm": {

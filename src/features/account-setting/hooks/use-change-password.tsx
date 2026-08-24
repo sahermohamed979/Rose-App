@@ -6,7 +6,6 @@ import { ChangePasswordValues } from '../schemas/change-password.schema';
 import { useTranslations } from 'next-intl';
 
 export const useChangePassword = () => {
-
   const t = useTranslations('ChangePasswordForm');
 
   return useMutation({
