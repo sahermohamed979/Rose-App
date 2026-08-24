@@ -6,6 +6,7 @@ import { ShoppingCartIcon, Star, Trash2 } from 'lucide-react';
 import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import Link from 'next/link';
 import RemoveProduct from './remove-product';
+import { useTranslations } from 'next-intl';
 
 interface WishlistProductsType {
   data: wishListProductsResponse;
@@ -14,6 +15,7 @@ interface WishlistProductsType {
 export default function WishlistProducts({
   data,
 }: WishlistProductsType) {
+  const t = useTranslations('wishlist');
   if (!data.status) {
     return <p>Something went wrong</p>;
   }
@@ -46,11 +48,11 @@ export default function WishlistProducts({
               <div>
                 {item.product.stock ? (
                   <p className="text-[14px] text-text-success font-semibold">
-                    In Stock
+                    {t('inStock')}
                   </p>
                 ) : (
                   <p className="text-[14px] text-text-danger font-semibold">
-                    Out of Stock
+                    {t('outOfStock')}
                   </p>
                 )}
 
@@ -67,7 +69,7 @@ export default function WishlistProducts({
                   </div>
 
                   <p className="text-text-info">
-                    ({item.product.ratings} rating)
+                    ({t('ratings', { count: item.product.ratings })})
                   </p>
                 </div>
 
@@ -108,15 +110,15 @@ export default function WishlistProducts({
                     className="bg-bg-primary text-text-inverse py-5 px-6"
                     productId={item.productId}
                   >
-                    <ShoppingCartIcon className="w-4 h-4 text-text-inverse dark:text-white" />
-                    Add to Cart
+                    <ShoppingCartIcon className="w-4 h-4 text-text-inverse rtl:order-2 dark:text-white" />
+                    {t('addToCart')}
                   </AddToCart>
                 ) : (
                   <Link
                     className="bg-bg-primary-fade py-3.5 px-6 text-text-primary rounded-md font-medium"
                     href={`/products?categoryId=${item.product.categoryId}`}
                   >
-                    Explore Similar Products
+                    {t('exploreSimilarProducts')}
                   </Link>
                 )}
               </div>

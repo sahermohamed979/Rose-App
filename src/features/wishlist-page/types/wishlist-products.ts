@@ -29,6 +29,7 @@ interface WishlistItem {
 interface Product {
   id: number;
   title: string;
+  titleAr: string;
   description: string;
   rating: number;
   ratings: number;
