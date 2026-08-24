@@ -427,7 +427,8 @@
     },
     "errors": {
       "firstNameRequired": "الاسم الأول مطلوب",
-      "lastNameRequired": "اسم العائلة مطلوب"
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "phoneInvalid": "من فضلك أدخل رقم هاتف صحيح"
     }
   },
   "ChangePasswordForm": {

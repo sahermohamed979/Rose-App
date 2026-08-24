@@ -8,7 +8,6 @@ import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
 import { FieldGroup } from '@/shared/components/ui/field';
-import { useProfile } from '../hooks/use-profile';
 import { useUpdateProfile } from '../hooks/use-update-profile';
 // import ChangeEmailModel from './change-email-model';
 import ProfilePhoto from './profile-photo';
@@ -21,10 +20,13 @@ import {
   UserProfileFormValues,
 } from '../schemas/profile-schema';
 import ChangeEmailModal from './change-email-modal';
-import ProfileFormSkeleton from '../skeleons/profile-form-skelton';
 import { useSession } from 'next-auth/react';
+import { UserProfile } from '../types/profile-types';
 
-export default function UserProfileForm() {
+interface Props {
+  initialUser?: UserProfile;
+}
+export default function UserProfileForm({ initialUser }: Props) {
   const t = useTranslations('profileForm');
   const tToast = useTranslations('profileForm.toast');
   const changeEmail = useChangeEmailFlow();
@@ -35,7 +37,7 @@ export default function UserProfileForm() {
     isPending: isUpdatingProfile,
   } = useUpdateProfile();
 
-  const { data: user, isLoading, isError } = useProfile();
+  const user = initialUser;
 
   const schema = profileFormSchema((key) => t(key));
 
@@ -92,16 +94,6 @@ export default function UserProfileForm() {
       },
     });
   };
-
-  if (isLoading) {
-    return <ProfileFormSkeleton />;
-  }
-
-  if (isError) {
-    return (
-      <p className="p-4 text-sm text-text-danger">{t('loadError')}</p>
-    );
-  }
 
   return (
     <form>

@@ -1,4 +1,3 @@
-
 import * as z from 'zod';
 
 export const getChangePasswordSchema = (t: (key: any) => string) => {
@@ -37,4 +36,3 @@ export const getChangePasswordSchema = (t: (key: any) => string) => {
 export type ChangePasswordValues = z.infer<
   ReturnType<typeof getChangePasswordSchema>
 >;
-

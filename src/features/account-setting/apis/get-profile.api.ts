@@ -1,5 +1,3 @@
-'use server';
-
 import { ApiResponse } from '@/shared/lib/types/api';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
 import { GetProfileResponse } from '../types/profile-types';

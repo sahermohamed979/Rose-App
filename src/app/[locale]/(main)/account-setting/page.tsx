@@ -1,7 +1,10 @@
-'use client';
+import UserProfileForm from '@/features/account-setting/components/user-profile-form';
+import { getProfileInfo } from '@/features/account-setting/apis/get-profile.api';
 
-import UserProfileForm from '@/features/account-settings/components/user-profile-form';
+export default async function Profile() {
+  const result = await getProfileInfo();
 
-export default function Profile() {
-  return <UserProfileForm />;
+  const user = result.status ? result.payload.user : undefined;
+
+  return <UserProfileForm initialUser={user} />;
 }

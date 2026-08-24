@@ -46,7 +46,6 @@ export default function ChangePasswordForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
       {/* Current Password */}
       <div className="space-y-2 border-b border-border-muted pb-4">
         <Label htmlFor="currentPassword">
