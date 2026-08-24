@@ -180,11 +180,11 @@
     "new": "جديد",
     "outOfStock": "نفدت الكمية",
     "hot": "رائج",
-    "addToWishList": "اضافه الي المفضله",
-    "removeFromWishList": "ازاله من المفضله",
+    "addToWishList": "إضافة إلى المفضلة",
+    "removeFromWishList": "إزالة من المفضلة",
     "loadingProducts": "جاري تحميل المنتجات...",
     "allProducts": "كل المنتجات",
-    "addNewProduct": "اضافه منتج جديد",
+    "addNewProduct": "إضافة منتج جديد",
     "name": "الاسم",
     "price": "السعر",
     "stock": "المخزون",
@@ -193,7 +193,10 @@
     "deleteSuccess": "تم حذف المنتج بنجاح.",
     "deleteError": "فشل في حذف المنتج.",
     "unexpectedError": "حدث خطأ غير متوقع.",
-    "noProductsFound": "لم يتم العثور علي منتجات."
+    "noProductsFound": "لم يتم العثور على منتجات.",
+    "errorTitle": "فشل في تحميل المنتجات.",
+    "errorMessage": "حدث خطأ أثناء تحميل المنتجات. يرجى المحاولة مرة أخرى.",
+    "tryAgain": "حاول مرة أخرى"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
