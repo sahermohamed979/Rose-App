@@ -411,5 +411,20 @@
     "or": "Or",
     "failedLoading": "Failed to load addresses. Please try again",
     "tryAgain": "Try again"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "items": "{count} items",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "{count} ratings",
+    "addToCart": "Add to Cart",
+    "clearWishlist": "Clear Wishlist",
+    "clearWishlistConfirmation": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "exploreSimilarProducts": "Explore Similar Products",
+    "continueShopping": "Continue Shopping",
+    "empty": "Your wishlist is empty"
   }
 }

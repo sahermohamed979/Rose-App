@@ -14,14 +14,15 @@ import {
 } from '@/shared/components/ui/alert-dialog';
 import { Button } from '@/shared/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
-import clearWishList from '../../actions/clear-wishlist-action';
 import clearWishListAction from '../../actions/clear-wishlist-action';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 export function ClearWishlist() {
   const [open, setOpen] = useState(false);
+  const t = useTranslations('wishlist');
 
   const router = useRouter();
 
@@ -44,12 +45,13 @@ export function ClearWishlist() {
         <AlertDialogTrigger
           render={
             <Button
-              className={
-                'w-45.25 h-11 bg-bg-danger text-text-inverse'
-              }
+              className="w-45.25 h-11 flex items-center gap-2 bg-bg-danger text-text-inverse"
               variant="destructive"
             >
-              <BrushCleaning /> Clear Wishlist
+              <BrushCleaning className="rtl:order-2" />
+              <span className="rtl:order-1">
+                {t('clearWishlist')}
+              </span>
             </Button>
           }
         />
@@ -68,7 +70,7 @@ export function ClearWishlist() {
             </div>
             <AlertDialogDescription>
               <p className="text-[20px] mt-4 font-semibold">
-                Are you sure you want to clear your Wishlist?
+                {t('clearWishlistConfirmation')}
               </p>
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -77,7 +79,7 @@ export function ClearWishlist() {
               className={'w-full bg-bg-muted  h-10 rounded'}
               variant="outline"
             >
-              Cancel
+              {t('cancel')}
             </AlertDialogCancel>
             <Button
               onClick={() => {
@@ -88,7 +90,7 @@ export function ClearWishlist() {
               }
               variant="destructive"
             >
-              Confirm
+              {t('confirm')}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
