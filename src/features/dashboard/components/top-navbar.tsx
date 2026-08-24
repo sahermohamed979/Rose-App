@@ -1,13 +1,18 @@
-import { Suspense } from 'react';
-import UserInfoSkeleton from '../skeletons/user-info-skeleton';
 import UserInfo from './user-info';
 import Image from 'next/image';
 import logo from '@/shared/assets/images/footer-logo-image.png';
 import NavbarBreadcrumb from './navbar-breadcrumb';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import type { getUserProfile } from '../api/user-service';
 
-export default function TopNavbar() {
+type UserProfile = Awaited<ReturnType<typeof getUserProfile>>;
+
+export default function TopNavbar({
+  userProfile,
+}: {
+  userProfile: UserProfile;
+}) {
   return (
     <div className=" md:py-5  w-full border-b border-border-muted  flex justify-between items-center p-1.5 relative ">
       <Image
@@ -23,9 +28,7 @@ export default function TopNavbar() {
         <LangToggle />
       </div>
       <div className="flex items-center gap-1 md:hidden">
-        <Suspense fallback={<UserInfoSkeleton />}>
-          <UserInfo />
-        </Suspense>
+        <UserInfo userProfile={userProfile} />
       </div>
     </div>
   );

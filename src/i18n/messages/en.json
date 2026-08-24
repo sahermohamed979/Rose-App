@@ -386,6 +386,10 @@
       "title": "Oops, something went wrong!",
       "subtitle": "Something unexpected happened, please refresh the page or try again shortly.",
       "retry": "Try Again"
+    },
+    "userInfo": {
+      "profileUnavailable": "Profile unavailable",
+      "error": "Error"
     }
   }
 }
