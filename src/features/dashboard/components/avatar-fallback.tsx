@@ -1,7 +1,3 @@
-'use client';
-
-import { startTransition, useEffect, useState } from 'react';
-
 const AVATAR_COLORS = [
   'bg-rose-500',
   'bg-teal-500',
@@ -15,12 +11,14 @@ const AVATAR_COLORS = [
   'bg-lime-600',
   'bg-fuchsia-500',
   'bg-orange-500',
-];
+] as const;
 
-function pickRandomColor(): string {
-  return AVATAR_COLORS[
-    Math.floor(Math.random() * AVATAR_COLORS.length)
-  ];
+function pickColorForUser(userId: string): string {
+  let hash = 0;
+  for (let i = 0; i < userId.length; i++) {
+    hash = (hash * 31 + userId.charCodeAt(i)) >>> 0;
+  }
+  return AVATAR_COLORS[hash % AVATAR_COLORS.length];
 }
 
 export default function AvatarFallback({
@@ -30,19 +28,7 @@ export default function AvatarFallback({
   letter: string;
   userId: string;
 }) {
-  const [colorClass, setColorClass] = useState<string>('bg-gray-400');
-
-  useEffect(() => {
-    const key = `avatar-color-${userId}`;
-    const stored = localStorage.getItem(key);
-    if (stored && AVATAR_COLORS.includes(stored)) {
-      startTransition(() => setColorClass(stored));
-    } else {
-      const picked = pickRandomColor();
-      localStorage.setItem(key, picked);
-      startTransition(() => setColorClass(picked));
-    }
-  }, [userId]);
+  const colorClass = pickColorForUser(userId);
 
   return (
     <div
