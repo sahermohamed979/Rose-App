@@ -23,7 +23,7 @@ export default function DashboardPageHeader({
           href={Href}
           className="inline-flex items-center bg-bg-primary-saturated py-2 px-4 font-medium rounded-lg text-text-inverse"
         >
-          <Plus size={18} className="mr-2" />
+          <Plus size={18} className="me-2" />
           {Text}
         </Link>
       )}
