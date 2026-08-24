@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
 import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { RESPONSES } from '@/shared/lib/constants/response.constant';
@@ -6,7 +7,7 @@ import {
   UserProfilePayload,
 } from '@/shared/lib/types/api';
 
-export async function getUserProfile() {
+export const getUserProfile = cache(async () => {
   const token = await getAuthToken();
   if (!token?.accessToken) {
     return RESPONSES.Unauthorized;
@@ -45,4 +46,4 @@ export async function getUserProfile() {
       code: 500,
     };
   }
-}
+});

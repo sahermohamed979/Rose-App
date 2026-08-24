@@ -16,9 +16,9 @@ import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 export default function LogoutDashboard({
-  UserData,
+  userData,
 }: {
-  UserData: IUser;
+  userData: IUser;
 }) {
   const t = useTranslations();
   return (
@@ -33,7 +33,7 @@ export default function LogoutDashboard({
       <DropdownMenuContent className="w-56 p-2 ">
         <DropdownMenuGroup>
           <h2 className="hidden md:inline-block pb-2 w-full text-text-primary text-sm font-semibold ms-3">
-            {UserData.firstName} {UserData.lastName}
+            {userData.firstName} {userData.lastName}
           </h2>
           <DropdownMenuItem
             className={'md:hidden'}
@@ -47,11 +47,10 @@ export default function LogoutDashboard({
               <LangToggle className="w-full flex  justify-start" />
             }
           ></DropdownMenuItem>
-
           <DropdownMenuItem>
             <User size={16} />
             <Link
-              href="/account"
+              href="/account-setting"
               className="text-sm  text-text-plain"
             >
               {t('userMenu.account')}
