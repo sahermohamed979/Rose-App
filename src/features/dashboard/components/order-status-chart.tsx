@@ -68,16 +68,32 @@ const createCustomBadgeLabel = (locale: string) => {
   };
 };
 
+function getStatusCount(
+  val: number | { count?: number } | undefined
+): number {
+  if (typeof val === 'number') return val;
+  if (val && typeof val === 'object' && 'count' in val) {
+    return Number(val.count) || 0;
+  }
+  return 0;
+}
+
 export default function OrderStatusChart({
   orderStatus,
 }: OrderStatusChartProps) {
   const locale = useLocale();
   const t = useTranslations('dashboard.overviewPage');
 
+  const completed = getStatusCount(orderStatus.completed);
+  const inProgress = getStatusCount(orderStatus.inProgress);
+  const cancelled = getStatusCount(
+    orderStatus.canceled ?? orderStatus.cancelled
+  );
+
   const total =
-    orderStatus.completed +
-    orderStatus.inProgress +
-    orderStatus.cancelled;
+    typeof orderStatus.totalOrders === 'number' && orderStatus.totalOrders > 0
+      ? orderStatus.totalOrders
+      : completed + inProgress + cancelled;
 
   const pct = (n: number) =>
     total > 0 ? Math.round((n / total) * 100) : 0;
@@ -86,22 +102,22 @@ export default function OrderStatusChart({
     {
       key: 'completed',
       label: t('completed'),
-      value: orderStatus.completed,
-      percentage: pct(orderStatus.completed),
+      value: completed,
+      percentage: pct(completed),
       color: '#00bc7d',
     },
     {
       key: 'inProgress',
       label: t('inProgress'),
-      value: orderStatus.inProgress,
-      percentage: pct(orderStatus.inProgress),
+      value: inProgress,
+      percentage: pct(inProgress),
       color: '#2b7fff',
     },
     {
       key: 'cancelled',
       label: t('cancelled'),
-      value: orderStatus.cancelled,
-      percentage: pct(orderStatus.cancelled),
+      value: cancelled,
+      percentage: pct(cancelled),
       color: '#ef4444',
     },
   ];
