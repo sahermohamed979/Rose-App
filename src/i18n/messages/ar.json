@@ -377,6 +377,65 @@
     "change-password": "تغيير كلمة المرور",
     "logout": "تسجيل الخروج"
   },
+  "profileForm": {
+    "changeEmail": "تغيير البريد الالكتروني ",
+    "enterEmail": "ادخل بريدك الالكتروني",
+    "email": "البريد الالكتروني",
+    "emailPlaceholder": "user@example.com",
+    "next": "التالي",
+    "verifyOtp": "تأكيد رمز التحقق",
+    "otpP": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام الذي أرسلناه إلى:",
+    "edit": "تعديل",
+    "resendCode": "اعاده ارسال",
+    "resendTimer": "يمكنك طلب رمز جديد بعد {s} ثانية",
+    "deleteAccount?": "هل أنت متأكد أنك تريد حذف حسابك؟",
+    "actionPermanent": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+    "nope": "لا، لن أفعل ذلك",
+    "delete": "حذف",
+    "deleting": "...جاري الحذف",
+    "fields": {
+      "change": "تغيير",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الالكتروني",
+      "phone": "رقم الهاتف",
+      "gender": "الجنس",
+      "genderPlaceholder": "اختر الجنس",
+      "male": "ذكر",
+      "female": "أنثى"
+    },
+    "deleteAccount": "حذف حسابي",
+    "loading": "جاري تحميل الملف الشخصي...",
+    "loadError": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "saving": "جاري الحفظ",
+    "saveChanges": "حفظ التعديلات",
+    "uploadPhoto": "رفع الصوره",
+    "uploadPhotoType": "يمكنك رفع صور بصيغه jpg, png, git باقصي حجم 5 ميجا",
+    "uploadingPhoto": "جاري تحميل الصوره...",
+    "toast": {
+      "profileUpdatedSuccess": "تم تحديث الحساب بنجاح",
+      "profileUpdatedError": "حدث خطأ ما",
+      "validImage": "من فضلك ارفع صوره صحيحه",
+      "imageSize": "حجم الصوره يجب ان يكون اقل من 5 ميجا",
+      "photoUpdatedSuccess": "تم رفع الصوره بنجاح",
+      "photoUpdatedError": "خطأ في رفع الصوره",
+      "enterNewEmail": "يرجى إدخال بريدك الإلكتروني الجديد",
+      "verificationCodeSent": "تم إرسال رمز التحقق",
+      "enterSixDigits": "يرجى إدخال 6 أرقام",
+      "emailUpdated": "تم تحديث البريد الإلكتروني بنجاح",
+      "accountDeleted": "تم حذف الحساب بنجاح"
+    },
+    "errors": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "phoneInvalid": "من فضلك أدخل رقم هاتف صحيح"
+    },
+    "profileError": {
+      "title": "تعذر تحميل بيانات الحساب",
+      "description": "حصلت مشكلة أثناء جلب بيانات حسابك .",
+      "retry": "حاول مره اخري"
+    }
+  },
   "changePassword": {
     "title": "تغيير كلمة المرور",
     "current": "كلمة المرور الحالية",

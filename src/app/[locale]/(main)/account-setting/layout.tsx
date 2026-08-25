@@ -1,4 +1,4 @@
-import AccountSideBar from '@/features/account-settings/components/side-bar';
+import AccountSideBar from '@/features/account-setting/components/side-bar';
 import { useTranslations } from 'next-intl';
 import React, { ReactNode } from 'react';
 
