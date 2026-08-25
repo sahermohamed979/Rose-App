@@ -1,6 +1,8 @@
 import * as z from 'zod';
 
-export const getChangePasswordSchema = (t: (key: any) => string) => {
+export const getChangePasswordSchema = (
+  t: (key: string) => string
+) => {
   return z
     .object({
       currentPassword: z
@@ -26,6 +28,10 @@ export const getChangePasswordSchema = (t: (key: any) => string) => {
       confirmPassword: z
         .string()
         .min(1, { message: t('errors.confirmRequired') }),
+    })
+    .refine((data) => data.newPassword !== data.currentPassword, {
+      message: t('samePw'),
+      path: ['newPassword'],
     })
     .refine((data) => data.newPassword === data.confirmPassword, {
       message: t('errors.mismatch'),

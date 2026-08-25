@@ -128,6 +128,7 @@ export default function ProfileFields({
 
             <PhoneInput
               id="phone"
+              placeholder="01012345678"
               aria-invalid={fieldState.invalid}
               value={field.value ?? ''}
               onChange={field.onChange}

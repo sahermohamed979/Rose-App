@@ -15,7 +15,7 @@ export default function AccountSideBar() {
   const profilePath = '/account-setting';
   const passwordPath = '/account-setting/change-password';
 
-  // Variables
+  //   State
   const isProfileActive = pathname === profilePath;
   const isPasswordActive = pathname === passwordPath;
 
