@@ -389,6 +389,7 @@
       "revenue": "Revenue",
       "monthly": "Monthly",
       "lastWeek": "Last Week",
+      "noRevenueData": "No revenue data recorded for this period",
       "currency": "EGP",
       "loadError": "Failed to load dashboard data",
       "months": {

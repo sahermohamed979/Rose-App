@@ -12,21 +12,42 @@ export interface StatisticsCategory {
   productCount: number;
 }
 
+export interface OrderStatusMetric {
+  count: number;
+  percent: number;
+}
+
 export interface OrderStatusBreakdown {
-  completed: number;
-  inProgress: number;
-  cancelled: number;
+  completed: number | OrderStatusMetric;
+  inProgress: number | OrderStatusMetric;
+  cancelled?: number | OrderStatusMetric;
+  canceled?: number | OrderStatusMetric;
+  totalOrders?: number;
+}
+
+export interface RevenuePoint {
+  period?: string;
+  label: string;
+  revenue?: number;
+  value?: number;
+}
+
+export interface RevenuePayload {
+  period?: string;
+  points: RevenuePoint[];
 }
 
 export interface RevenueDataPoint {
   label: string;
   value: number;
+  period?: string;
 }
 
 export interface StatisticsPayload {
   summary: StatisticsSummary;
   categories: StatisticsCategory[];
   orderStatus?: OrderStatusBreakdown;
+  revenue?: RevenuePayload;
   revenueChart?: RevenueDataPoint[];
 }
 

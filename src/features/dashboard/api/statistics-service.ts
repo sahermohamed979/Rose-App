@@ -6,6 +6,7 @@ import { ApiResponse } from '@/shared/lib/types/api';
 import {
   StatisticsPayload,
   StatisticsQueryParams,
+  RevenueDataPoint,
 } from '../types/statistics.types';
 
 export async function getStatistics(
@@ -54,7 +55,7 @@ export async function getStatistics(
 
     const data: ApiResponse<StatisticsPayload> =
       await response.json();
-    // console.log(data);
+
     if (!data.status) {
       return {
         status: false,
@@ -63,9 +64,39 @@ export async function getStatistics(
       };
     }
 
+    const rawPayload = data.payload;
+    const rawPoints =
+      rawPayload.revenue?.points ??
+      (rawPayload as { revenueChart?: unknown[] }).revenueChart ??
+      [];
+
+    const normalizedRevenueChart: RevenueDataPoint[] = rawPoints.map(
+      (pt: unknown) => {
+        const point = pt as {
+          label?: string;
+          period?: string;
+          revenue?: number;
+          value?: number;
+        };
+        return {
+          label: point.label ?? point.period ?? '',
+          value:
+            typeof point.revenue === 'number'
+              ? point.revenue
+              : typeof point.value === 'number'
+                ? point.value
+                : 0,
+          period: point.period,
+        };
+      }
+    );
+
     return {
       status: true,
-      payload: data.payload,
+      payload: {
+        ...rawPayload,
+        revenueChart: normalizedRevenueChart,
+      },
     };
   } catch (error) {
     return {
