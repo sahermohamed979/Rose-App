@@ -429,18 +429,23 @@
       "firstNameRequired": "الاسم الأول مطلوب",
       "lastNameRequired": "اسم العائلة مطلوب",
       "phoneInvalid": "من فضلك أدخل رقم هاتف صحيح"
+    },
+    "profileError": {
+      "title": "تعذر تحميل بيانات الحساب",
+      "description": "حصلت مشكلة أثناء جلب بيانات حسابك .",
+      "retry": "حاول مره اخري"
     }
   },
-  "ChangePasswordForm": {
-    "labels": {
-      "oldPassword": "كلمة المرور القديمة",
-      "newPassword": "كلمة المرور الجديدة",
-      "confirmPassword": "تأكيد كلمة المرور الجديدة"
-    },
-    "buttons": {
-      "submit": "تغيير كلمة المرور",
-      "submitting": "جاري الحفظ..."
-    },
+  "changePassword": {
+    "title": "تغيير كلمة المرور",
+    "current": "كلمة المرور الحالية",
+    "new": "كلمة المرور الجديدة",
+    "confirm": "تأكيد كلمة المرور الجديدة",
+    "button": "تغيير كلمة المرور",
+    "incorrectCurrent": "كلمة المرور الحالية غير صحيحة",
+    "samePw": "يجب أن تختلف كلمة المرور الجديدة عن الحالية",
+    "success": "تم تغيير كلمة المرور بنجاح. يرجى تسجيل الدخول مرة أخرى.",
+    "error": "حدث خطأ ما. يرجى المحاولة مجدداً",
     "errors": {
       "oldPasswordRequired": "كلمة المرور الحالية مطلوبة",
       "newPasswordMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
@@ -450,11 +455,6 @@
       "newPasswordSpecial": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
       "confirmRequired": "يرجى تأكيد كلمة المرور",
       "mismatch": "كلمتا المرور غير متطابقتين"
-    },
-    "messages": {
-      "changePasswordSuccess": "تم تغيير كلمة المرور بنجاح",
-      "changePasswordError": "حدث خطأ ما. يرجى المحاولة مجدداً",
-      "currentPasswordInvalid": "كلمة المرور الحالية غير صحيحة"
     }
   }
 }
