@@ -4,10 +4,16 @@ import { Link } from '@/i18n/navigation';
 import { Flower } from 'lucide-react';
 import DashboardList from './dashboard-list';
 import UserInfo from './user-info';
-import { Suspense } from 'react';
-import UserInfoSkeleton from '../skeletons/user-info-skeleton';
 import { useTranslations } from 'next-intl';
-export default function SideBarDashboard() {
+import type { getUserProfile } from '../api/user-service';
+
+type UserProfile = Awaited<ReturnType<typeof getUserProfile>>;
+
+export default function SideBarDashboard({
+  userProfile,
+}: {
+  userProfile: UserProfile;
+}) {
   const t = useTranslations('dashboard');
 
   return (
@@ -29,9 +35,7 @@ export default function SideBarDashboard() {
       </div>
 
       <div className="shrink-0 w-full md:px-1 lg:px-4 py-3">
-        <Suspense fallback={<UserInfoSkeleton />}>
-          <UserInfo />
-        </Suspense>
+        <UserInfo userProfile={userProfile} />
       </div>
     </aside>
   );
