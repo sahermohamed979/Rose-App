@@ -13,7 +13,7 @@
  */
 import React from 'react';
 import { IProduct } from '@/shared/lib/types/product-types';
-import { getSuggestedProductsAction } from '@/features/checkout/apis/suggested-products.action';
+import { getSuggestedProducts } from '@/features/checkout/apis/suggested-products.service';
 import { SuggestedProductsSlider } from '@/features/checkout/components/suggested-products-slider';
 
 interface ProductsYouMayLikeProps {
@@ -26,7 +26,7 @@ export default async function ProductsYouMayLike({
   className,
 }: ProductsYouMayLikeProps) {
   const fetchedProducts =
-    products ?? (await getSuggestedProductsAction(8));
+    products ?? (await getSuggestedProducts(8));
 
   return (
     <SuggestedProductsSlider

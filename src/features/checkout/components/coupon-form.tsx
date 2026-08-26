@@ -35,7 +35,7 @@ export function CouponForm({
     handleSubmit,
     formState: { errors },
   } = useForm<CouponFormValues>({
-    resolver: zodResolver(couponSchema),
+    resolver: zodResolver(couponSchema(t)),
     defaultValues: { code: '' },
     mode: 'onBlur',
   });
