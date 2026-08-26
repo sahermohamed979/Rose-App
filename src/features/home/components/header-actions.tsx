@@ -16,8 +16,16 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
-
-export default function HeaderActions() {
+import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
+import { useEffect, useState } from 'react';
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
+export default function HeaderActions({
+  wishlistCount,
+  cartCount,
+}: {
+  wishlistCount: number;
+  cartCount: number;
+}) {
   // Translation
   const t = useTranslations('header');
 
@@ -25,8 +33,45 @@ export default function HeaderActions() {
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  const wishlistCount = 8;
-  const cartCount = 8;
+  // State
+  const [localWishlistCount, setLocalWishlistCount] = useState(0);
+  const { data: localCartCount } = useLocalCart();
+  // Variables
+  const displayedCartCount = isAuthenticated
+    ? cartCount
+    : localCartCount?.cartItems.length;
+  const displayedWishlistCount = isAuthenticated
+    ? wishlistCount
+    : localWishlistCount;
+  // Effects
+  useEffect(() => {
+    if (isAuthenticated) {
+      return;
+    }
+
+    const updateLocalCounts = () => {
+      setLocalWishlistCount(getLocalWishlistCount());
+    };
+
+    updateLocalCounts();
+
+    window.addEventListener('local-cart-updated', updateLocalCounts);
+    window.addEventListener(
+      'local-wishlist-updated',
+      updateLocalCounts
+    );
+
+    return () => {
+      window.removeEventListener(
+        'local-cart-updated',
+        updateLocalCounts
+      );
+      window.removeEventListener(
+        'local-wishlist-updated',
+        updateLocalCounts
+      );
+    };
+  }, [isAuthenticated]);
 
   return (
     <div className="flex items-center w-full">
@@ -78,15 +123,12 @@ export default function HeaderActions() {
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={wishlistCount} />}
+          <CountBadge count={displayedWishlistCount} />
         </Link>
 
-        <Link
-          href={isAuthenticated ? '/cart' : '/login'}
-          className="relative"
-        >
+        <Link href={'/cart'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={cartCount} />}
+          <CountBadge count={displayedCartCount || 0} />
         </Link>
 
         <NotificationsContainer status={status} />

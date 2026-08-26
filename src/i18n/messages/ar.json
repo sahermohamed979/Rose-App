@@ -181,7 +181,11 @@
     "hot": "رائج",
     "addToWishList": "اضافه الي المفضله",
     "removeFromWishList": "ازاله من المفضله",
-    "loadingProducts": "جاري تحميل المنتجات..."
+    "loadingProducts": "جاري تحميل المنتجات...",
+    "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
+    "addToCartError": "فشل إضافة المنتج إلى السلة",
+    "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -369,6 +373,30 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
   },
   "checkout": {
     "step1Title": "عنوان الشحن",
