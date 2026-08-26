@@ -9,11 +9,11 @@ export default function CheckoutLayout({
   children,
 }: MainLayoutProps) {
   return (
-    <main className="py-10 px-4 md:px-10 lg:py-10 lg:px-15 max-w-screen-2xl mx-auto">
-      {/* Screens & Summary Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-x-10">
+    <main className="py-13 px-20 ">
+      {/* screens */}
+      <div className="grid grid-cols-12 gap-x-10">
+        <div className="col-span-8 w-full ">{children}</div>
         {/* Main Content (هنا هيتعرض الـ CheckoutScreen) */}
-        <div className="lg:col-span-8 w-full">{children}</div>
 
         {/* Order Summary */}
         <div className="lg:col-span-4 w-full">

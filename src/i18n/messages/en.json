@@ -181,13 +181,19 @@
     "hot": "HOT",
     "addToWishList": "Add to wishlist",
     "removeFromWishList": "Remove From wishlist",
-    "loadingProducts": "Loading products..."
+    "loadingProducts": "Loading products...",
+    "addToCartSuccess": "Product added to cart successfully",
+    "addToCartError": "Failed to add product to cart",
+    "addToWishlistSuccess": "Product added to wishlist successfully",
+    "addToWishlistError": "Failed to add product to wishlist",
+    "removeFromWishlistSuccess": "Product removed from wishlist successfully",
+    "removeFromWishlistError": "Failed to remove product from wishlist"
   },
   "ProductDetails": {
     "notFound": "Product not found",
     "unitsInStock": "{count} units in stock",
     "outOfStock": "Out of stock",
-    "ratingLabel": "Rating:",
+    "ratingLabel": "Rating: ",
     "ratingsCount": "{count} ratings",
     "addToFavorites": "Add to favorites",
     "addToCart": "Add to cart",
@@ -369,6 +375,33 @@
 
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "cart": {
+    "title": " Cart ",
+    "clearCart": " Clear Cart ",
+    "continueShopping": "Continue Shopping ",
+    "empty": " Your cart is empty, wanna try shopping?",
+    "startShopping": " Start Shopping ",
+    "remove": " Remove ",
+    "confirmClear": "Are you sure you want to clear the cart? ",
+    "noImage": "No image",
+    "product": "{count} Products",
+    "currency": "EGP",
+    "cancel": "Cancel",
+    "confirmClear ": "Are you sure you want to clear your cart? ",
+    "confirm": "Confirm"
+  },
+  "cartError": {
+    "title": "Unable to Load Your Cart",
+    "subtitle": "Something went wrong while fetching your shopping cart. Don't worry, your items are safe.",
+    "retry": "Try Again",
+    "continueShopping": "Continue Shopping",
+    "goHome": "Go to Home",
+    "showDetails": "Show technical details",
+    "hideDetails": "Hide technical details",
+    "errorDetails": "Error Details",
+    "message": "Message:",
+    "digest": "Digest code:"
   },
   "checkout": {
     "step1Title": "Shipping Address",
