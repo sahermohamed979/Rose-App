@@ -418,6 +418,10 @@
     "total": "الإجمالي",
     "checkout": "إتمام الشراء",
     "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
-    "suggestedProducts": "منتجات قد تعجبك"
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
   }
 }

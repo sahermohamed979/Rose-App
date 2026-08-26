@@ -423,6 +423,10 @@
     "total": "Total",
     "checkout": "Checkout",
     "couponInvalid": "Invalid or expired coupon code",
-    "suggestedProducts": "Products You May Like"
+    "suggestedProducts": "Products You May Like",
+    "errors": {
+      "couponCodeRequired": "Coupon code is required",
+      "couponCodeTooLong": "Coupon code is too long"
+    }
   }
 }

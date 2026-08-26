@@ -8,7 +8,7 @@ import { getLocale } from 'next-intl/server';
 const BASE_URL =
   process.env.NEXT_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
-export async function getSuggestedProductsAction(
+export async function getSuggestedProducts(
   limit = 8
 ): Promise<IProduct[]> {
   try {
@@ -28,7 +28,7 @@ export async function getSuggestedProductsAction(
           'Content-Type': 'application/json',
           'Accept-Language': locale,
         },
-        next: { revalidate: 300 }, // Cache for 5 minutes
+        next: { revalidate: 300 },
       }
     );
 
