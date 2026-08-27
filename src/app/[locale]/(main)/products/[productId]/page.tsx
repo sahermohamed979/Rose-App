@@ -3,6 +3,9 @@ import { getProductDetailsInfo } from '@/features/products/apis/product-details-
 import ProductDetailsInfo from '@/features/products/components/product-details-info';
 import ProductReview from '@/features/products/components/product-review';
 import RelatedProducts from '@/features/products/components/related-products';
+import { Suspense } from 'react';
+import RelatedProductsSkeleton from '@/features/products/skeletons/related-peoducts-skeleton';
+import { ErrorBoundary } from 'react-error-boundary';
 
 interface PageProps {
   params: Promise<{
@@ -40,10 +43,20 @@ export default async function Page({ params }: PageProps) {
         <ProductReview productId={productId} />
       </div>
       <div>
-        <RelatedProducts
-          currentProductId={productId}
-          categoryId={categoryId}
-        />
+        <ErrorBoundary
+          fallback={
+            <p className="text-text-danger">
+              Failed to load related products
+            </p>
+          }
+        >
+          <Suspense fallback={<RelatedProductsSkeleton />}>
+            <RelatedProducts
+              currentProductId={productId}
+              categoryId={categoryId}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );

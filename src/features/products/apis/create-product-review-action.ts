@@ -1,14 +1,28 @@
 'use server';
 
+import { z } from 'zod';
 import {
   IProductReviewError,
   IProductReviewresponse,
 } from '@/features/products/types/create-product-review';
 import { getDirectToken } from '@/shared/lib/actions/get-direct-token';
 
-export async function CreateProductReviewAction(
+const reviewSchema = z.object({
+  productId: z.string(),
+  headline: z.string().min(5).max(32),
+  content: z.string().min(20).max(100),
+  rating: z.number().min(1).max(5),
+});
+
+export async function createProductReviewAction(
   reviewData: ReviewData
 ) {
+  const parsed = reviewSchema.safeParse(reviewData);
+
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0].message);
+  }
+
   const token = await getDirectToken();
 
   const response = await fetch(
@@ -19,7 +33,7 @@ export async function CreateProductReviewAction(
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(reviewData),
+      body: JSON.stringify(parsed.data),
     }
   );
 
