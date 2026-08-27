@@ -1,5 +1,4 @@
 import { FolderHeart } from 'lucide-react';
-import React from 'react';
 import { ClearWishlist } from './clear-wishlist';
 import { wishListProductsResponse } from '../../types/wishlist-products';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -12,7 +11,6 @@ export default async function WishlistHeader({
   data,
 }: WishlistHeaderType) {
   const t = await getTranslations('wishlist');
-  const local = await getLocale();
   if (!data.status) {
     return 'Somthing went wrong';
   }
