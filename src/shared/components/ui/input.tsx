@@ -1,23 +1,79 @@
 import * as React from 'react';
 import { Input as InputPrimitive } from '@base-ui/react/input';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib/utils/utils';
 
-function Input({
-  className,
-  type,
-  ...props
-}: React.ComponentProps<'input'>) {
-  return (
-    <InputPrimitive
-      type={type}
-      data-slot="input"
-      className={cn(
-        'h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40',
-        className
-      )}
-      {...props}
-    />
-  );
+const inputVariants = cva(
+  cn(
+    // Layout & Sizing
+    'h-11 w-full min-w-0 flex items-center rounded-lg px-3 py-1 text-sm transition-all duration-200',
+
+    // Base State (Background, Border, Text)
+    'bg-bg-plain text-text-plain border border-border-soft outline-none',
+
+    // Placeholder
+    'placeholder:text-text-muted',
+
+    // Hover State
+    'hover:border-border-default hover:shadow-subtle-sm hover:ring-ring-default',
+
+    // Focus State
+    'focus-visible:border-border-primary focus-visible:ring-[length:var(--ring-default-size)] focus-visible:ring-[color:var(--ring-default)]',
+
+    // Disabled State
+    'disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-bg-subtle disabled:border-border-muted disabled:text-text-subtle disabled:opacity-60',
+
+    // Read Only State
+    'read-only:bg-bg-muted read-only:focus-visible:ring-0 read-only:focus-visible:border-border-soft',
+
+    // Validation States (Invalid / Error)
+    'aria-invalid:border-border-danger aria-invalid:text-text-danger aria-invalid:ring-[length:var(--ring-danger-size)] aria-invalid:ring-[color:var(--ring-danger)] dark:aria-invalid:border-border-danger-saturated'
+  )
+);
+
+export interface InputProps
+  extends
+    React.ComponentProps<typeof InputPrimitive>,
+    VariantProps<typeof inputVariants> {
+  valid?: boolean;
+  invalid?: boolean;
+
+  /** When true, hides the native up/down spinner on number inputs. */
+  hideNumberControls?: boolean;
 }
 
-export { Input };
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      valid,
+      invalid,
+      hideNumberControls = true,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <InputPrimitive
+        ref={ref}
+        data-slot="input"
+        data-valid={valid}
+        data-invalid={invalid}
+        aria-invalid={invalid || props['aria-invalid']}
+        className={cn(
+          inputVariants(),
+
+          // Number controls hiding logic
+          hideNumberControls &&
+            '[appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none',
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+Input.displayName = 'Input';
+
+export { Input, inputVariants };

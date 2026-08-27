@@ -24,11 +24,12 @@ import {
 } from '@/shared/components/ui/input-group';
 import { Loader, Star } from 'lucide-react';
 import SubmissionFormSchema from '../schemas/submission-form-schema';
-import CreateProductReviewHook from '../hooks/create-product-review-hook';
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import Link from 'next/link';
+import useCreateProductReviewHook from '../hooks/use-create-product-review';
 
 export function ReviewSubmissionForm() {
   const formSchema = SubmissionFormSchema();
@@ -39,7 +40,7 @@ export function ReviewSubmissionForm() {
   const t = useTranslations('reviewForm');
 
   const { mutate, isError, isPending, errorMsg, IsSuccess } =
-    CreateProductReviewHook();
+    useCreateProductReviewHook();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -113,6 +114,7 @@ export function ReviewSubmissionForm() {
                     {t('title')}
                   </FieldLabel>
                   <Input
+                    disabled={!isLoggedIn || isPending}
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
@@ -136,6 +138,7 @@ export function ReviewSubmissionForm() {
                   </FieldLabel>
                   <InputGroup>
                     <InputGroupTextarea
+                      disabled={!isLoggedIn || isPending}
                       {...field}
                       id="form-rhf-demo-description"
                       placeholder={t('reviewPlaceholder')}
@@ -160,7 +163,7 @@ export function ReviewSubmissionForm() {
       <CardFooter>
         <Field orientation="horizontal">
           <Button
-            disabled={isPending}
+            disabled={!isLoggedIn || isPending}
             type="submit"
             form="form-rhf-demo"
             className={
@@ -176,11 +179,13 @@ export function ReviewSubmissionForm() {
         </Field>
       </CardFooter>
       {!isLoading && !isLoggedIn && (
-        <div className=" absolute top-0 bottom-0 right-0 left-0 bg-transparent backdrop-blur-[1px] flex justify-center items-center ">
-          <p className="text-text-plain font-semibold">
-            {t('loginRequired')}{' '}
-          </p>
-        </div>
+        <Link href={'/login'}>
+          <div className=" absolute top-0 bottom-0 right-0 left-0 bg-transparent backdrop-blur-[1px] flex justify-center items-center ">
+            <p className="text-text-plain font-semibold">
+              {t('loginRequired')}{' '}
+            </p>
+          </div>
+        </Link>
       )}
     </Card>
   );
