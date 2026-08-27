@@ -425,6 +425,7 @@
     "confirm": "Confirm",
     "exploreSimilarProducts": "Explore Similar Products",
     "continueShopping": "Continue Shopping",
-    "empty": "Your wishlist is empty"
+    "empty": "Your wishlist is empty",
+    "currency": "EGP"
   }
 }

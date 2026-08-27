@@ -15,10 +15,11 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
 import clearWishListAction from '../../actions/clear-wishlist-action';
-import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 
 export function ClearWishlist() {
   const [open, setOpen] = useState(false);
@@ -29,14 +30,12 @@ export function ClearWishlist() {
   const { mutate } = useMutation({
     mutationKey: ['clear-wishlist'],
     mutationFn: clearWishListAction,
-    onSuccess: (data) => {
+    onSuccess: (_data) => {
       setOpen(false);
       router.refresh();
       toast.success('Your wishlist is empty');
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: (error) => {},
   });
 
   return (

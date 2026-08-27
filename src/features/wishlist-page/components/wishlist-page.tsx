@@ -9,9 +9,13 @@ import {
   wishListProductsError,
   wishListProductsResponse,
 } from '../types/wishlist-products';
+import { redirect } from 'next/navigation';
 
 export default async function WishlistPage() {
   const token = await getDirectToken();
+  if (!token) {
+    redirect('/login');
+  }
 
   const response = await fetch(
     `${process.env.NEXT_API_URL}/wishlist`,
@@ -29,8 +33,6 @@ export default async function WishlistPage() {
     const dataError = data as wishListProductsError;
     return <div>{dataError.message}</div>;
   }
-
-  console.log(data);
 
   return (
     <>

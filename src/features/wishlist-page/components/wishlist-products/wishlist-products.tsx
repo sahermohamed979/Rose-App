@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { wishListProductsResponse } from '../../types/wishlist-products';
-import { ShoppingCartIcon, Star, Trash2 } from 'lucide-react';
+import { ShoppingCartIcon, Star } from 'lucide-react';
 import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import Link from 'next/link';
 import RemoveProduct from './remove-product';
@@ -84,7 +84,7 @@ export default function WishlistProducts({
                       : item.product.price}
 
                     <span className="text-sm font-medium text-text-plain ms-1">
-                      EGP
+                      {t('currency')}
                     </span>
                   </p>
 

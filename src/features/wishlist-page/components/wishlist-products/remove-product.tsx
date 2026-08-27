@@ -2,8 +2,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { Loader, Trash2 } from 'lucide-react';
 import removeProductactions from '../../actions/remove-product-action';
-import { useRouter } from 'next/navigation';
+
 import { toast } from 'sonner';
+import { useRouter } from '@/i18n/navigation';
 
 export default function RemoveProduct({
   productId,
@@ -15,11 +16,11 @@ export default function RemoveProduct({
   const { mutate, isPending } = useMutation({
     mutationFn: removeProductactions,
     mutationKey: ['Remove-product'],
-    onSuccess: (data) => {
+    onSuccess: (_data) => {
       toast.success('Product removed from wishlist');
       router.refresh();
     },
-    onError: (error) => {},
+    onError: (_error) => {},
   });
   return (
     <div>

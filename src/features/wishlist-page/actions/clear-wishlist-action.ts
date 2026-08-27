@@ -1,7 +1,6 @@
 'use server';
 
 import { getDirectToken } from '@/shared/lib/utils/get-direct-token';
-import { RemoveProductResponse } from '../types/remove-product';
 import { ClearWishlistResponse } from '../types/clear-wishlist';
 
 export default async function clearWishListAction() {
