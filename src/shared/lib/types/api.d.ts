@@ -30,11 +30,15 @@ interface LoginCredentials {
   username: string;
   password: string;
 }
-
+interface ApiFieldError {
+  path: string;
+  message: string;
+}
 interface ErrorResponse {
   status: false;
   message: string;
   code?: number;
+  errors?: ApiFieldError[];
 }
 
 interface SuccessResponse<T> {

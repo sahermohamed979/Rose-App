@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { deleteOccasion } from '../apis/delete-occasion.api';
-import { OCCASIONS_QUERY_KEY } from './use-occasions';
+import { OCCASIONS_QUERY_KEY } from '../types/occasions-type';
 
 export const useDeleteOccasion = () => {
   const queryClient = useQueryClient();

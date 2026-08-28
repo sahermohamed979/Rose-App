@@ -8,7 +8,7 @@ import { Input } from '@/shared/components/ui/input';
 import DashboardPageHeader from '@/shared/components/dashboard-page-header';
 import { useUpdateCategory } from '../hooks/use-update-category';
 import { CategoryWithCount } from '../types/categories-type';
-import ViewCategoryImageModal from './view-category-image-model';
+import ViewImageModal from '@/shared/components/view-image-modal';
 
 export function EditCategoryForm({
   id,
@@ -91,7 +91,7 @@ export function EditCategoryForm({
               {t('viewImage')}
             </button>
 
-            <ViewCategoryImageModal
+            <ViewImageModal
               isOpen={isImageOpen}
               onClose={() => setIsImageOpen(false)}
               imageUrl={category.image}

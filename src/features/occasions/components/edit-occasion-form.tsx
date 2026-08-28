@@ -5,10 +5,10 @@ import { useTranslations } from 'next-intl';
 import { ImageIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
-import ViewOccasionImageModal from './view-occasion-image-modal';
 import { useUpdateOccasion } from '../hooks/use-update-occasion';
 import DashboardPageHeader from '@/shared/components/dashboard-page-header';
 import { OccasionType } from '@/shared/lib/types/product-types';
+import ViewImageModal from '@/shared/components/view-image-modal';
 
 export function EditOccasionForm({
   id,
@@ -91,7 +91,7 @@ export function EditOccasionForm({
               {t('viewImage')}
             </button>
 
-            <ViewOccasionImageModal
+            <ViewImageModal
               isOpen={isImageOpen}
               onClose={() => setIsImageOpen(false)}
               imageUrl={occasion.image}

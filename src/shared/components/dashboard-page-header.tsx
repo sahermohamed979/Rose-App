@@ -1,16 +1,16 @@
 import { Plus } from 'lucide-react';
-import { Button } from './ui/button';
+import { Link } from '@/i18n/navigation';
 
 interface PageHeaderProps {
   title: string;
-  buttonText?: string;
-  onButtonClick?: () => void;
+  Text?: string;
+  Href?: string;
 }
 
 export default function DashboardPageHeader({
   title,
-  buttonText,
-  onButtonClick,
+  Text,
+  Href,
 }: PageHeaderProps) {
   return (
     <div className="flex justify-between items-center mb-6">
@@ -18,15 +18,14 @@ export default function DashboardPageHeader({
         {title}
       </h2>
 
-      {buttonText && (
-        <Button
-          onClick={onButtonClick}
-          variant="default"
-          className=" p-2.5 rounded-lg"
+      {Text && Href && (
+        <Link
+          href={Href}
+          className="inline-flex items-center bg-bg-primary-saturated py-2 px-4 font-medium rounded-lg text-text-inverse"
         >
-          <Plus className=" h-4 w-4 text-text-inverse" />
-          <span className="hidden sm:inline">{buttonText}</span>
-        </Button>
+          <Plus size={18} className="me-2" />
+          {Text}
+        </Link>
       )}
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { SearchX } from 'lucide-react';
 import {
   Table,
@@ -15,7 +15,7 @@ import {
 import DashboardButtons from '@/shared/components/dashboard-buttons';
 import { CategoryWithCount } from '../types/categories-type';
 import { useDeleteCategory } from '../hooks/use-delete-category';
-import DeleteCategoryModal from './delete-category-modal';
+import ConfirmDeleteModal from '@/shared/components/confirm-delete-modal';
 
 export function CategoriesTable({
   categories,
@@ -34,10 +34,9 @@ export function CategoriesTable({
 
   // Navigate to the edit page for a given category
   const handleEdit = (id: string, title: string) => {
-    const slug =title.toLowerCase().trim().replace(/\s+/g,'-')
+    const slug = title.toLowerCase().trim().replace(/\s+/g, '-');
     router.push(`/dashboard/categories/${slug}--${id}`);
   };
-
 
   // Open the delete confirmation modal for a given category
   const handleDelete = (id: string) => {
@@ -97,7 +96,9 @@ export function CategoriesTable({
               <TableCell>
                 <div className="flex justify-end">
                   <DashboardButtons
-                    onEdit={() => handleEdit(category.id,category.title)}
+                    onEdit={() =>
+                      handleEdit(category.id, category.title)
+                    }
                     onDelete={() => handleDelete(category.id)}
                   />
                 </div>
@@ -109,14 +110,12 @@ export function CategoriesTable({
 
       {/* Delete confirmation modal  */}
       {deleteTargetId && (
-        <DeleteCategoryModal
+        <ConfirmDeleteModal
           isOpen={!!deleteTargetId}
           onClose={handleCancelDelete}
           onConfirm={handleConfirmDelete}
           isDeleting={isDeleting}
-          categoryName={
-            categories.find((c) => c.id === deleteTargetId)?.title
-          }
+          title={`${t('deleteCategory')} ${categories.find((c) => c.id === deleteTargetId)?.title ?? ''}`}
         />
       )}
     </div>

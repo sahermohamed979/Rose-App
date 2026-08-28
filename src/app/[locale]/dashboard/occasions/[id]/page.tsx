@@ -1,4 +1,4 @@
-import { EditOccasionFormWrapper } from '@/features/occasions/components/edit-category-form-wrapper';
+import { EditOccasionFormWrapper } from '@/features/occasions/components/edit-occasion-form-wrapper';
 
 export default async function EditOccasionPage({
   params,

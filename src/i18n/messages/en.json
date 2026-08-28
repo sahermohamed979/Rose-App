@@ -175,14 +175,28 @@
     "info": "Info"
   },
   "products": {
-    "noProductMatch": " No products found matching your filters.",
+    "noProductMatch": "No products match your filters.",
     "tryClear": "Try clearing or changing your filters to see more results.",
-    "new": "NEW",
-    "outOfStock": " OUT OF STOCK",
-    "hot": "HOT",
+    "new": "New",
+    "outOfStock": "Out of stock",
+    "hot": "Hot",
     "addToWishList": "Add to wishlist",
-    "removeFromWishList": "Remove From wishlist",
-    "loadingProducts": "Loading products..."
+    "removeFromWishList": "Remove from wishlist",
+    "loadingProducts": "Loading products...",
+    "allProducts": "All Products",
+    "addNewProduct": "Add New Product",
+    "name": "Name",
+    "price": "Price",
+    "stock": "Stock",
+    "sales": "Sales",
+    "ratings": "Ratings",
+    "deleteSuccess": "Product deleted successfully.",
+    "deleteError": "Failed to delete product.",
+    "unexpectedError": "An unexpected error occurred.",
+    "noProductsFound": "No products found.",
+    "errorTitle": "Failed to load products.",
+    "errorMessage": "Something went wrong while loading the products. Please try again.",
+    "tryAgain": "Try Again"
   },
   "ProductDetails": {
     "notFound": "Product not found",
@@ -381,7 +395,7 @@
     "namePlaceholder": "Enter category name",
     "image": "Category image",
     "uploadFile": "Upload file",
-    "noFileChosen": "",
+    "noFileChosen": "No file chosen",
     "uploading": "Uploading...",
     "adding": "Adding...",
     "titleError": "Category name is required",
@@ -389,14 +403,14 @@
     "updateCategory": "Update Category",
     "updating": "Updating...",
     "viewImage": "View Category Image",
+    "categoryNotFound": "Category not found",
+    "categoryNotFoundSubtitle": "This category may have been deleted or the link is incorrect.",
+    "backToCategories": "Back to Categories",
     "updateSuccess": "Category updated successfully",
     "updateError": "Failed to update category",
     "createSuccess": "Category created successfully",
     "createError": "Failed to create category",
     "deleteCategory": "Are you sure you want to delete ",
-    "confirm": "Confirm",
-    "confirming": "Confirming",
-    "cancel": "Cancel",
     "deleteSuccess": "Category deleted successfully",
     "deleteError": "Failed to delete category"
   },
@@ -411,7 +425,7 @@
     "descriptionPlaceholder": "Enter occasion description",
     "image": "Occasion image",
     "uploadFile": "Upload file",
-    "noFileChosen": "",
+    "noFileChosen": "No file chosen",
     "uploading": "Uploading...",
     "adding": "Adding...",
     "titleError": "Occasion name is required",
@@ -420,14 +434,14 @@
     "updateOccasion": "Update Occasion",
     "updating": "Updating...",
     "viewImage": "View Occasion Image",
+    "occasionNotFound": "Occasion not found",
+    "occasionNotFoundSubtitle": "This occasion may have been deleted or the link is incorrect.",
+    "backToOccasions": "Back to Occasions",
     "updateSuccess": "Occasion updated successfully",
     "updateError": "Failed to update occasion",
     "createSuccess": "Occasion created successfully",
     "createError": "Failed to create occasion",
     "deleteOccasion": "Are you sure you want to delete ",
-    "confirm": "Confirm",
-    "confirming": "Confirming",
-    "cancel": "Cancel",
     "deleteSuccess": "Occasion deleted successfully",
     "deleteError": "Failed to delete occasion"
   },
@@ -447,6 +461,15 @@
       "title": "Oops, something went wrong!",
       "subtitle": "Something unexpected happened, please refresh the page or try again shortly.",
       "retry": "Try Again"
+    },
+    "userInfo": {
+      "profileUnavailable": "Profile unavailable",
+      "error": "Error"
     }
+  },
+  "common": {
+    "confirm": "Confirm",
+    "confirming": "Confirming",
+    "cancel": "Cancel"
   }
 }
