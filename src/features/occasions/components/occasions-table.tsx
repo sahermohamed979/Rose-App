@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { SearchX } from 'lucide-react';
 import {
   Table,
@@ -14,8 +14,8 @@ import {
 } from '@/shared/components/ui/table';
 import DashboardButtons from '@/shared/components/dashboard-buttons';
 import { useDeleteOccasion } from '../hooks/use-delete-occasion';
-import DeleteOccasionModal from './delete-occasion-modal';
 import { OccasionType } from '@/shared/lib/types/product-types';
+import ConfirmDeleteModal from '@/shared/components/confirm-delete-modal';
 
 export function OccasionsTable({
   occasions,
@@ -110,14 +110,12 @@ export function OccasionsTable({
 
       {/* Delete confirmation modal  */}
       {deleteTargetId && (
-        <DeleteOccasionModal
+        <ConfirmDeleteModal
           isOpen={!!deleteTargetId}
           onClose={handleCancelDelete}
           onConfirm={handleConfirmDelete}
           isDeleting={isDeleting}
-          occasionName={
-            occasions.find((c) => c.id === deleteTargetId)?.title
-          }
+          title={`${t('deleteOccasion')} ${occasions.find((o) => o.id === deleteTargetId)?.title ?? ''}`}
         />
       )}
     </div>

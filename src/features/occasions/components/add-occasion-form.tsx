@@ -1,32 +1,36 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { Upload, Loader2 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
+import DashboardPageHeader from '@/shared/components/dashboard-page-header';
 import { useCreateOccasion } from '../hooks/use-create-occasion';
 import { useUploadPhoto } from '@/shared/lib/hooks/use-upload-photo';
-import DashboardPageHeader from '@/shared/components/dashboard-page-header';
+import {
+  occasionSchema,
+  OccasionFormValues,
+} from '../schemas/occasion-schema';
 
 export function AddOccasionForm() {
   const t = useTranslations('occasionDashboard');
-
-  // Ref for the hidden file input, triggered by the custom upload button
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Form field state
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageName, setImageName] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{
-    title?: string;
-    description?: string;
-    image?: string;
-  }>({});
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<OccasionFormValues>({
+    resolver: zodResolver(occasionSchema),
+    defaultValues: { title: '', description: '', image: '' },
+  });
 
-  // Mutations: image upload + occasion creation
   const { mutate: uploadPhoto, isPending: isUploading } =
     useUploadPhoto();
   const { mutate: createOccasion, isPending: isSubmitting } =
@@ -40,70 +44,53 @@ export function AddOccasionForm() {
     if (!file) {
       return;
     }
-
     setImageName(file.name);
-    setErrors((prev) => ({ ...prev, image: undefined }));
+    clearErrors('image');
 
     uploadPhoto(file, {
       onSuccess: (response) => {
         if (!response.status) {
-          setErrors((prev) => ({ ...prev, image: response.message }));
+          setError('image', { message: response.message });
           setImageName(null);
           return;
         }
-        setImageUrl(response.payload.url);
+        setValue('image', response.payload.url, {
+          shouldValidate: true,
+        });
       },
       onError: () => {
-        setErrors((prev) => ({
-          ...prev,
-          image: 'Upload failed. Try again.',
-        }));
+        setError('image', { message: 'Upload failed. Try again.' });
         setImageName(null);
       },
     });
   };
 
-  // Validates required fields before submit
-  const validate = () => {
-    const newErrors: {
-      title?: string;
-      image?: string;
-      description?: string;
-    } = {};
-    if (!title.trim()) {
-      newErrors.title = t('titleError');
-    }
-    if (!description.trim()) {
-      newErrors.description = t('descriptionError');
-    }
-    if (!imageUrl) {
-      newErrors.image = t('imageError');
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Submits the new occasion once validation passes
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) {
-      return;
-    }
-
-    createOccasion({
-      title: title.trim(),
-      description: description.trim(),
-      image: imageUrl as string,
+  // Submits the new occasion, maps any backend field errors back onto the form
+  const onSubmit = (values: OccasionFormValues) => {
+    createOccasion(values, {
+      onSuccess: (response) => {
+        if (!response.status && response.errors?.length) {
+          response.errors.forEach((err) => {
+            if (
+              err.path === 'title' ||
+              err.path === 'description' ||
+              err.path === 'image'
+            ) {
+              setError(err.path, { message: err.message });
+            }
+          });
+        }
+      },
     });
   };
 
   return (
-    <div className="p-4  sm:p-6">
+    <div className="p-4 sm:p-6">
       <DashboardPageHeader title={t('addNew')} />
 
       <form
-        onSubmit={handleSubmit}
-        className="bg-bg-plain  rounded-2xl p-6 sm:p-6 w-full "
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-bg-plain rounded-2xl p-6 sm:p-6 w-full"
       >
         {/* Name field */}
         <div className="mb-5 w-full sm:w-3/4">
@@ -111,44 +98,35 @@ export function AddOccasionForm() {
             {t('name')} <span className="text-red-600">*</span>
           </label>
           <Input
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-              if (errors.title) {
-                setErrors((prev) => ({ ...prev, title: undefined }));
-              }
-            }}
+            {...register('title')}
             placeholder={t('namePlaceholder')}
             className="rounded-lg"
           />
           {errors.title && (
             <p className="text-red-600 text-xs mt-1">
-              {errors.title}
+              {errors.title.message?.startsWith('titleError') ||
+              errors.title.message === 'titleError'
+                ? t('titleError')
+                : errors.title.message}
             </p>
           )}
         </div>
-        {/* description field */}
+
+        {/* Description field */}
         <div className="mb-5 w-full sm:w-3/4">
           <label className="block text-sm font-medium text-text-plain mb-2">
             {t('description')} <span className="text-red-600">*</span>
           </label>
           <Input
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-              if (errors.description) {
-                setErrors((prev) => ({
-                  ...prev,
-                  description: undefined,
-                }));
-              }
-            }}
+            {...register('description')}
             placeholder={t('descriptionPlaceholder')}
             className="rounded-lg"
           />
           {errors.description && (
             <p className="text-red-600 text-xs mt-1">
-              {errors.description}
+              {errors.description.message === 'descriptionError'
+                ? t('descriptionError')
+                : errors.description.message}
             </p>
           )}
         </div>
@@ -193,7 +171,9 @@ export function AddOccasionForm() {
 
           {errors.image && (
             <p className="text-red-600 text-xs mt-1">
-              {errors.image}
+              {errors.image.message === 'imageError'
+                ? t('imageError')
+                : errors.image.message}
             </p>
           )}
         </div>

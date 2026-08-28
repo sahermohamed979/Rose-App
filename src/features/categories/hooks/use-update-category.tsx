@@ -5,8 +5,10 @@ import { useRouter } from '@/i18n/navigation';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { updateCategory } from '../apis/update-category.api';
-import { CATEGORIES_QUERY_KEY } from './use-categories';
-import { UpdateCategoryPayload } from '../types/categories-type';
+import {
+  CATEGORIES_QUERY_KEY,
+  UpdateCategoryPayload,
+} from '../types/categories-type';
 
 export const useUpdateCategory = (id: string) => {
   const queryClient = useQueryClient();

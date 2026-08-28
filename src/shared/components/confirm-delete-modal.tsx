@@ -3,22 +3,22 @@
 import { Trash } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-interface DeleteOccasionModalProps {
+interface ConfirmDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   isDeleting?: boolean;
-  occasionName?: string;
+  title: string;
 }
 
-export default function DeleteOccasionModal({
+export default function ConfirmDeleteModal({
   isOpen,
   onClose,
   onConfirm,
   isDeleting = false,
-  occasionName,
-}: DeleteOccasionModalProps) {
-  const t = useTranslations('occasionDashboard');
+  title,
+}: ConfirmDeleteModalProps) {
+  const t = useTranslations('common');
 
   if (!isOpen) {
     return null;
@@ -36,7 +36,7 @@ export default function DeleteOccasionModal({
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="delete-occasion-title"
+        aria-labelledby="delete-title"
         className="relative z-10 flex w-full max-w-137 flex-col gap-3 rounded-xl bg-bg-plain p-8 shadow-lg"
       >
         <div className="flex justify-center">
@@ -53,14 +53,10 @@ export default function DeleteOccasionModal({
 
         <div className="mt-6 text-center">
           <h2
-            id="delete-occasion-title"
+            id="delete-title"
             className="text-xl font-bold text-text-plain"
           >
-            {t('deleteOccasion')}
-            <span className="text-text-primary">
-              {' '}
-              {occasionName ? ` ${occasionName} ` : ''}
-            </span>
+            {title}
           </h2>
         </div>
 

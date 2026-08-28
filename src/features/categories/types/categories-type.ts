@@ -20,3 +20,4 @@ export interface UpdateCategoryPayload {
   title: string;
   description?: string;
 }
+export const CATEGORIES_QUERY_KEY = ['categories'] as const;

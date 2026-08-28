@@ -1,20 +1,21 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
-interface ViewOccasionImageModalProps {
+interface ViewImageModalProps {
   isOpen: boolean;
   onClose: () => void;
   imageUrl: string;
   title: string;
 }
 
-export default function ViewOccasionImageModal({
+export default function ViewImageModal({
   isOpen,
   onClose,
   imageUrl,
   title,
-}: ViewOccasionImageModalProps) {
+}: ViewImageModalProps) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   if (!isOpen) {
@@ -51,11 +52,13 @@ export default function ViewOccasionImageModal({
             <div className="absolute inset-0 rounded-lg bg-bg-subtle animate-pulse" />
           )}
 
-          <img
+          <Image
             src={imageUrl}
             alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 448px"
             onLoad={() => setIsImageLoaded(true)}
-            className={`w-full h-full object-contain rounded-lg transition-opacity duration-300 ${
+            className={`object-contain rounded-lg transition-opacity duration-300 ${
               isImageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           />

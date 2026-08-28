@@ -1,28 +1,38 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { Upload, Loader2 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
+import DashboardPageHeader from '@/shared/components/dashboard-page-header';
 import { useCreateCategory } from '../hooks/use-create-category';
 import { useUploadPhoto } from '@/shared/lib/hooks/use-upload-photo';
-import DashboardPageHeader from '@/shared/components/dashboard-page-header';
+import {
+  CategoryFormValues,
+  categorySchema,
+} from '../schemas/categories-schema';
 
 export function AddCategoryForm() {
   const t = useTranslations('categoryDashboard');
 
   // Ref for the hidden file input, triggered by the custom upload button
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Form field state
-  const [title, setTitle] = useState('');
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageName, setImageName] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{
-    title?: string;
-    image?: string;
-  }>({});
+  // Form state managed by React Hook Form + Zod validation
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<CategoryFormValues>({
+    resolver: zodResolver(categorySchema),
+    defaultValues: { title: '', image: '' },
+  });
 
   // Mutations: image upload + category creation
   const { mutate: uploadPhoto, isPending: isUploading } =
@@ -38,53 +48,30 @@ export function AddCategoryForm() {
     if (!file) {
       return;
     }
-
     setImageName(file.name);
-    setErrors((prev) => ({ ...prev, image: undefined }));
+    clearErrors('image');
 
     uploadPhoto(file, {
       onSuccess: (response) => {
         if (!response.status) {
-          setErrors((prev) => ({ ...prev, image: response.message }));
+          setError('image', { message: response.message });
           setImageName(null);
           return;
         }
-        setImageUrl(response.payload.url);
+        setValue('image', response.payload.url, {
+          shouldValidate: true,
+        });
       },
       onError: () => {
-        setErrors((prev) => ({
-          ...prev,
-          image: 'Upload failed. Try again.',
-        }));
+        setError('image', { message: 'Upload failed. Try again.' });
         setImageName(null);
       },
     });
   };
 
-  // Validates required fields before submit
-  const validate = () => {
-    const newErrors: { title?: string; image?: string } = {};
-    if (!title.trim()) {
-      newErrors.title = t('titleError');
-    }
-    if (!imageUrl) {
-      newErrors.image = t('imageError');
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Submits the new category once validation passes
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) {
-      return;
-    }
-
-    createCategory({
-      title: title.trim(),
-      image: imageUrl as string,
-    });
+  // Submits the new category
+  const onSubmit = (values: CategoryFormValues) => {
+    createCategory(values);
   };
 
   return (
@@ -92,7 +79,7 @@ export function AddCategoryForm() {
       <DashboardPageHeader title={t('addNew')} />
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-bg-plain  rounded-2xl p-6 sm:p-6 w-full "
       >
         {/* Name field */}
@@ -101,19 +88,15 @@ export function AddCategoryForm() {
             {t('name')} <span className="text-red-600">*</span>
           </label>
           <Input
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-              if (errors.title) {
-                setErrors((prev) => ({ ...prev, title: undefined }));
-              }
-            }}
+            {...register('title')}
             placeholder={t('namePlaceholder')}
             className="rounded-lg"
           />
           {errors.title && (
             <p className="text-red-600 text-xs mt-1">
-              {errors.title}
+              {errors.title.message === 'titleError'
+                ? t('titleError')
+                : errors.title.message}
             </p>
           )}
         </div>
@@ -158,7 +141,9 @@ export function AddCategoryForm() {
 
           {errors.image && (
             <p className="text-red-600 text-xs mt-1">
-              {errors.image}
+              {errors.image.message === 'imageError'
+                ? t('imageError')
+                : errors.image.message}
             </p>
           )}
         </div>

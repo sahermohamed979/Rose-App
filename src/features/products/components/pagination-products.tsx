@@ -14,7 +14,7 @@ export default function PaginationProducts({
   );
 
   return (
-    <div className="my-6 flex justify-center items-center">
+    <div className="my-4 flex justify-center items-center">
       <Pagination
         currentPage={currentPage}
         totalPages={data?.metadata?.totalPages ?? 1}

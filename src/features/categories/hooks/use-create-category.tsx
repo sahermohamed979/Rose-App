@@ -5,8 +5,10 @@ import { useRouter } from '@/i18n/navigation';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { createCategory } from '../apis/create-category.api';
-import { CATEGORIES_QUERY_KEY } from './use-categories';
-import { CreateCategoryPayload } from '../types/categories-type';
+import {
+  CATEGORIES_QUERY_KEY,
+  CreateCategoryPayload,
+} from '../types/categories-type';
 
 export const useCreateCategory = () => {
   const queryClient = useQueryClient();

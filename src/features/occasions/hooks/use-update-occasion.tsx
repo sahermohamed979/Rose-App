@@ -5,8 +5,10 @@ import { useRouter } from '@/i18n/navigation';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { updateOccasion } from '../apis/update-occasion.api';
-import { OCCASIONS_QUERY_KEY } from './use-occasions';
-import { UpdateOccasionPayload } from '../types/occasions-type';
+import {
+  OCCASIONS_QUERY_KEY,
+  UpdateOccasionPayload,
+} from '../types/occasions-type';
 
 export const useUpdateOccasion = (id: string) => {
   const queryClient = useQueryClient();

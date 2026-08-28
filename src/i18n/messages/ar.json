@@ -180,9 +180,23 @@
     "new": "جديد",
     "outOfStock": "نفدت الكمية",
     "hot": "رائج",
-    "addToWishList": "اضافه الي المفضله",
-    "removeFromWishList": "ازاله من المفضله",
-    "loadingProducts": "جاري تحميل المنتجات..."
+    "addToWishList": "إضافة إلى المفضلة",
+    "removeFromWishList": "إزالة من المفضلة",
+    "loadingProducts": "جاري تحميل المنتجات...",
+    "allProducts": "كل المنتجات",
+    "addNewProduct": "إضافة منتج جديد",
+    "name": "الاسم",
+    "price": "السعر",
+    "stock": "المخزون",
+    "sales": "المبيعات",
+    "ratings": "التقييمات",
+    "deleteSuccess": "تم حذف المنتج بنجاح.",
+    "deleteError": "فشل في حذف المنتج.",
+    "unexpectedError": "حدث خطأ غير متوقع.",
+    "noProductsFound": "لم يتم العثور على منتجات.",
+    "errorTitle": "فشل في تحميل المنتجات.",
+    "errorMessage": "حدث خطأ أثناء تحميل المنتجات. يرجى المحاولة مرة أخرى.",
+    "tryAgain": "حاول مرة أخرى"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -381,7 +395,7 @@
     "namePlaceholder": "أدخل اسم الفئة",
     "image": "صورة الفئة",
     "uploadFile": "رفع ملف",
-    "noFileChosen": "",
+    "noFileChosen": "لم يتم اختيار ملف",
     "uploading": "جاري الرفع...",
     "adding": "جاري الإضافة...",
     "titleError": "اسم الفئه مطلوب",
@@ -389,12 +403,14 @@
     "updateCategory": "تعديل الفئة",
     "updating": "جارٍ التحديث...",
     "viewImage": "عرض صوره الفئه",
+    "categoryNotFound": "الفئة غير موجودة",
+    "categoryNotFoundSubtitle": "قد تكون هذه الفئة قد حُذفت أو الرابط غير صحيح.",
+    "backToCategories": "العودة إلى الفئات",
     "updateSuccess": "تم تحديث الفئة بنجاح",
     "updateError": "فشل تحديث الفئة",
-    "deleteOccasion": "هل انت متاكد من حذف ",
-    "confirm": "تاكيد",
-    "confirming": "جاري التاكيد",
-    "cancel": "الغاء",
+    "createSuccess": "الفئة تم إنشاؤها بنجاح",
+    "createError": "فشل إنشاء الفئة",
+    "deleteCategory": "هل انت متاكد من حذف ",
     "deleteSuccess": "تم حذف الفئة بنجاح",
     "deleteError": "فشل حذف الفئة"
   },
@@ -409,7 +425,7 @@
     "descriptionPlaceholder": "أدخل وصف المناسبه",
     "image": "صورة المناسبه",
     "uploadFile": "رفع ملف",
-    "noFileChosen": "",
+    "noFileChosen": "لم يتم اختيار ملف",
     "uploading": "جاري الرفع...",
     "adding": "جاري الإضافة...",
     "titleError": "اسم المناسبه مطلوب",
@@ -418,12 +434,14 @@
     "updateOccasion": "تعديل المناسبه",
     "updating": "جارٍ التحديث...",
     "viewImage": "عرض صوره المناسبه",
+    "occasionNotFound": "المناسبه غير موجودة",
+    "occasionNotFoundSubtitle": "قد تكون هذه المناسبه قد حُذفت أو الرابط غير صحيح.",
+    "backToOccasions": "العودة إلى المناسبات",
     "updateSuccess": "تم تحديث المناسبه بنجاح",
     "updateError": "فشل تحديث المناسبه",
+    "createSuccess": "المناسبه تم إنشاؤها بنجاح",
+    "createError": "فشل إنشاء المناسبه",
     "deleteOccasion": "هل انت متاكد من حذف ",
-    "confirm": "تاكيد",
-    "confirming": "جاري التاكيد",
-    "cancel": "الغاء",
     "deleteSuccess": "تم حذف المناسبه بنجاح",
     "deleteError": "فشل حذف المناسبه"
   },
@@ -443,6 +461,15 @@
       "title": "عفواً، حدث خطأ ما!",
       "subtitle": "حدث أمر غير متوقع، يرجى تحديث الصفحة أو المحاولة مرة أخرى بعد قليل.",
       "retry": "حاول مرة أخرى"
+    },
+    "userInfo": {
+      "profileUnavailable": "الملف الشخصي غير متاح",
+      "error": "خطأ"
     }
+  },
+  "common": {
+    "confirm": "تاكيد",
+    "confirming": "جاري التاكيد",
+    "cancel": "الغاء"
   }
 }

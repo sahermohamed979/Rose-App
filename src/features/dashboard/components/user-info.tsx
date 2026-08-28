@@ -1,15 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
-import { getUserProfile } from '../api/user-service';
 import LogoutDashboard from './logout-dashboard';
 import { Badge } from '@/shared/components/ui/badge';
 import { AlertTriangle } from 'lucide-react';
 import AvatarFallback from './avatar-fallback';
+import { getTranslations } from 'next-intl/server';
+import type { getUserProfile } from '../api/user-service';
 
-export default async function UserInfo() {
-  const UserInfo = await getUserProfile();
+type UserProfile = Awaited<ReturnType<typeof getUserProfile>>;
 
-  if (!UserInfo.status) {
+export default async function UserInfo({
+  userProfile,
+}: {
+  userProfile: UserProfile;
+}) {
+  const t = await getTranslations('dashboard.userInfo');
+
+  if (!userProfile.status) {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-border-danger bg-bg-danger-fade px-2 py-1.5">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border-danger text-text-danger">
@@ -17,10 +24,10 @@ export default async function UserInfo() {
         </div>
         <div className="min-w-0">
           <p className="text-xs font-semibold leading-tight text-text-danger">
-            Profile unavailable
+            {t('profileUnavailable')}
           </p>
           <Badge variant="destructive" className="mt-1">
-            Error
+            {t('error')}
           </Badge>
         </div>
       </div>
@@ -30,9 +37,9 @@ export default async function UserInfo() {
   return (
     <div className="flex items-center md:justify-between md:gap-2  gap-1 ">
       <div className={`relative shrink-0 w-12 h-12  `}>
-        {UserInfo.payload?.user?.photo ? (
+        {userProfile.payload?.user?.photo ? (
           <Image
-            src={UserInfo.payload?.user?.photo}
+            src={userProfile.payload?.user?.photo}
             alt="User Avatar"
             width={55}
             height={55}
@@ -40,9 +47,9 @@ export default async function UserInfo() {
           />
         ) : (
           <AvatarFallback
-            letter={(UserInfo.payload?.user?.firstName ??
+            letter={(userProfile.payload?.user?.firstName ??
               '?')[0].toUpperCase()}
-            userId={UserInfo.payload?.user?.id ?? ''}
+            userId={userProfile.payload?.user?.id ?? ''}
           />
         )}
       </div>
@@ -51,16 +58,16 @@ export default async function UserInfo() {
         <span
           className={`md:block text-sm font-bold text-text-plain hidden`}
         >
-          {UserInfo?.payload?.user?.firstName}{' '}
-          {UserInfo?.payload?.user?.lastName}
+          {userProfile?.payload?.user?.firstName}{' '}
+          {userProfile?.payload?.user?.lastName}
         </span>
         <p className="text-xs text-text-muted hidden md:block ">
-          {UserInfo?.payload?.user?.email}
+          {userProfile?.payload?.user?.email}
         </p>{' '}
       </div>
       <div className="md:shrink-0">
         {' '}
-        <LogoutDashboard UserData={UserInfo.payload!.user!} />
+        <LogoutDashboard userData={userProfile.payload!.user!} />
       </div>
     </div>
   );

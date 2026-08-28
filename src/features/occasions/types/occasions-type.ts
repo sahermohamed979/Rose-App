@@ -1,15 +1,3 @@
-// import { OccasionType } from "@/shared/lib/types/product-types";
-
-// export interface OccasionWithCount extends OccasionType {
-//  id:string;
-//  title:string;
-//  description:string;
-//  image:string;
-//  immutable:string;
-//  createdAt:string;
-//  updatedAt:string;
-// }
-
 export interface GetOccasionsParams {
   page?: number;
   limit?: number;
@@ -24,3 +12,4 @@ export interface UpdateOccasionPayload {
   title: string;
   description?: string;
 }
+export const OCCASIONS_QUERY_KEY = ['occasions'] as const;

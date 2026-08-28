@@ -4,9 +4,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@/i18n/navigation';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { CreateOccasionPayload } from '../types/occasions-type';
+import {
+  CreateOccasionPayload,
+  OCCASIONS_QUERY_KEY,
+} from '../types/occasions-type';
 import { createOccasion } from '../apis/create-occasion.api';
-import { OCCASIONS_QUERY_KEY } from './use-occasions';
 
 export const useCreateOccasion = () => {
   const queryClient = useQueryClient();
@@ -18,7 +20,10 @@ export const useCreateOccasion = () => {
       createOccasion(payload),
     onSuccess: (response) => {
       if (!response.status) {
-        toast.error(response.message || t('createError'));
+        const fieldError = response.errors?.[0]?.message;
+        toast.error(
+          fieldError || response.message || t('createError')
+        );
         return;
       }
 
