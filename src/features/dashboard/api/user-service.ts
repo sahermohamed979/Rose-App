@@ -47,8 +47,7 @@ export const getUserProfile = cache(async () => {
       code: 500,
     };
   }
-}
-
+});
 export async function updateUserProfile(
   payload: FormData | Record<string, unknown>
 ): Promise<
@@ -83,7 +82,10 @@ export async function updateUserProfile(
       let detailedMessage = data.message;
       if (Array.isArray(data.errors) && data.errors.length > 0) {
         detailedMessage = data.errors
-          .map((e: { message?: string; path?: string }) => e.message || e.path)
+          .map(
+            (e: { message?: string; path?: string }) =>
+              e.message || e.path
+          )
           .filter(Boolean)
           .join(', ');
       }
@@ -195,4 +197,4 @@ export async function deleteUserAccount(): Promise<
     };
   }
 }
-});
+// });
