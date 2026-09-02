@@ -404,6 +404,7 @@
     "step1Title": "عنوان الشحن",
     "addAddress": "إضافة عنوان جديد",
     "next": "التالي",
+    "back": "رجوع",
     "noAddresses": "أضف عنوانك الأول للمتابعة",
     "or": "أو",
     "failedLoading": "فشل تحميل العناوين. حاول مجدداً",
@@ -441,5 +442,43 @@
     "continueShopping": "متابعة التسوق",
     "empty": "قائمة المفضلة فارغة",
     "currency": "جنيه"
+  },
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة",
+      "address": "إضافة العنوان"
+    },
+    "city": "المدينة",
+    "title": "اسم العنوان",
+    "details": "العنوان",
+    "phone": "رقم التواصل",
+    "findMyLocation": "حدد موقعي",
+    "mapLoading": "جارٍ تحميل الخريطة...",
+    "mapUnavailable": "الخريطة غير متاحة. تحقق من اتصالك وحاول مرة أخرى.",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "errors": {
+      "titleRequired": "اسم العنوان مطلوب",
+      "titleInvalid": "أدخل اسم عنوان صحيح",
+      "cityRequired": "المدينة مطلوبة",
+      "cityInvalid": "أدخل اسم مدينة صحيح",
+      "streetRequired": "العنوان مطلوب",
+      "streetInvalid": "أدخل عنوان شارع صحيح",
+      "phoneRequired": "رقم التواصل مطلوب",
+      "phoneInvalid": "أدخل رقم تواصل صحيح",
+      "locationRequired": "يرجى تحديد موقعك على الخريطة",
+      "unsafeInput": "غير مسموح بإدخال رموز غير صالحة"
+    }
   }
 }
