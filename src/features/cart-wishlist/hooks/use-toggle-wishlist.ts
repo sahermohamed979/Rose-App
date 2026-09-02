@@ -3,6 +3,7 @@
 import { toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 import {
   addToWishlistAction,
@@ -10,7 +11,6 @@ import {
 } from '../apis/wishlist-actions';
 import { CART_WISHLIST_KEYS } from '../constants/query-keys';
 import { toggleLocalWishlistItem } from '../lib/local-wishlist-client';
-import { useTranslations } from 'next-intl';
 
 export function useToggleWishlist() {
   // Context
@@ -19,6 +19,7 @@ export function useToggleWishlist() {
   // Hooks
   const queryClient = useQueryClient();
   const t = useTranslations('products');
+
   // Mutation
   const { mutate, isPending } = useMutation({
     mutationFn: async ({
@@ -34,7 +35,6 @@ export function useToggleWishlist() {
 
       return addToWishlistAction(productId);
     },
-    mutationKey: CART_WISHLIST_KEYS.wishlist,
     retry: false,
     onSuccess: (data, variables) => {
       if (!data.status) {
@@ -74,6 +74,11 @@ export function useToggleWishlist() {
 
     if (status === 'unauthenticated') {
       const isAdded = toggleLocalWishlistItem(productId);
+
+      queryClient.invalidateQueries({
+        queryKey: CART_WISHLIST_KEYS.local_wishlist,
+      });
+
       toast.success(
         isAdded
           ? t('addToWishlistSuccess')

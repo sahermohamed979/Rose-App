@@ -16,9 +16,9 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
-import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
-import { useEffect, useState } from 'react';
 import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
+import { useLocalWishlist } from '@/features/cart-wishlist/hooks/use-local-wishlist';
+
 export default function HeaderActions({
   wishlistCount,
   cartCount,
@@ -33,45 +33,17 @@ export default function HeaderActions({
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  // State
-  const [localWishlistCount, setLocalWishlistCount] = useState(0);
+  // Hooks
   const { data: localCartCount } = useLocalCart();
+  const { data: localWishlist } = useLocalWishlist();
+
   // Variables
   const displayedCartCount = isAuthenticated
     ? cartCount
     : localCartCount?.cartItems.length;
   const displayedWishlistCount = isAuthenticated
     ? wishlistCount
-    : localWishlistCount;
-  // Effects
-  useEffect(() => {
-    if (isAuthenticated) {
-      return;
-    }
-
-    const updateLocalCounts = () => {
-      setLocalWishlistCount(getLocalWishlistCount());
-    };
-
-    updateLocalCounts();
-
-    window.addEventListener('local-cart-updated', updateLocalCounts);
-    window.addEventListener(
-      'local-wishlist-updated',
-      updateLocalCounts
-    );
-
-    return () => {
-      window.removeEventListener(
-        'local-cart-updated',
-        updateLocalCounts
-      );
-      window.removeEventListener(
-        'local-wishlist-updated',
-        updateLocalCounts
-      );
-    };
-  }, [isAuthenticated]);
+    : (localWishlist?.length ?? 0);
 
   return (
     <div className="flex items-center w-full">
