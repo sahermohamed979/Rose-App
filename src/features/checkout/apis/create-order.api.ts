@@ -1,5 +1,6 @@
 'use server';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
+import { updateTag } from 'next/cache';
 
 export interface CreateOrderBody {
   addressId: string;
@@ -28,6 +29,7 @@ export async function createOrder(body: CreateOrderBody) {
   if (!response.ok) {
     throw new Error(data.message);
   }
+  updateTag('cart');
 
   return data;
 }
