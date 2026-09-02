@@ -64,7 +64,11 @@ export default function OrderSummary({
       <CouponForm
         onApply={apply}
         isPending={isPending}
-        error={couponError ? t(couponError as Parameters<typeof t>[0]) : null}
+        error={
+          couponError
+            ? t(couponError as Parameters<typeof t>[0])
+            : null
+        }
         disabled={!!couponResult}
       />
 

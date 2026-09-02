@@ -25,8 +25,7 @@ export default async function ProductsYouMayLike({
   products,
   className,
 }: ProductsYouMayLikeProps) {
-  const fetchedProducts =
-    products ?? (await getSuggestedProducts(8));
+  const fetchedProducts = products ?? (await getSuggestedProducts(8));
 
   return (
     <SuggestedProductsSlider
