@@ -50,15 +50,11 @@ function Button({
   variant = 'default',
   size = 'default',
   loading,
-  roundedCartLoading,
   forceHover = false,
   children,
   ...props
 }: ButtonPrimitive.Props &
-  VariantProps<typeof buttonVariants> & {
-    loading?: boolean;
-    roundedCartLoading?: boolean;
-  } & {
+  VariantProps<typeof buttonVariants> & { loading?: boolean } & {
     forceHover?: boolean;
   }) {
   const t = useTranslations();
@@ -70,17 +66,10 @@ function Button({
       {...props}
       disabled={loading || props.disabled}
     >
-      {loading || roundedCartLoading ? (
+      {loading ? (
         <>
-          {!roundedCartLoading && (
-            <>
-              {t('button.loading')}{' '}
-              <LoaderCircle className="animate-spin" />
-            </>
-          )}
-          {roundedCartLoading && (
-            <LoaderCircle className="animate-spin" />
-          )}
+          {t('button.loading')}{' '}
+          <LoaderCircle className="animate-spin" />
         </>
       ) : (
         <>{children}</>

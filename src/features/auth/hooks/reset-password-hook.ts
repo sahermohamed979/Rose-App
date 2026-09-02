@@ -7,7 +7,8 @@ import { useMutation } from '@tanstack/react-query';
 import { resetPassword } from '../apis/forgot-reset-password-action';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export default function useResetPassword() {
   // TRANSLATIONS
