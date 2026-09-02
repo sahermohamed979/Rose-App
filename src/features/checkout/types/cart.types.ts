@@ -43,4 +43,3 @@ export interface CartSummaryTotals {
   discount: number;
   total: number;
 }
-

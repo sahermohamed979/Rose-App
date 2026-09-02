@@ -9,4 +9,6 @@ export const couponSchema = (t: (key: string) => string) =>
       .transform((v) => v.trim()),
   });
 
-export type CouponFormValues = z.input<ReturnType<typeof couponSchema>>;
+export type CouponFormValues = z.input<
+  ReturnType<typeof couponSchema>
+>;
