@@ -16,6 +16,7 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
+import LoginPopover from '../../auth/components/login-popover';
 
 export default function HeaderActions() {
   // Translation
@@ -61,12 +62,14 @@ export default function HeaderActions() {
         ) : (
           <div className="flex items-center gap-1 px-2">
             <User className="w-5 h-5" />
-            <Link
-              href="/login"
-              className="text-text-plain font-medium"
-            >
-              {t('headerLogin')}
-            </Link>
+            <LoginPopover>
+              <Link
+                href="/login"
+                className="text-text-plain font-medium"
+              >
+                {t('headerLogin')}
+              </Link>
+            </LoginPopover>
           </div>
         )}
       </div>
