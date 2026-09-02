@@ -68,9 +68,9 @@ export function ClearWishlist() {
               </AlertDialogMedia>
             </div>
             <AlertDialogDescription>
-              <p className="text-[20px] mt-4 font-semibold">
+              <span className="text-[20px] mt-4 font-semibold">
                 {t('clearWishlistConfirmation')}
-              </p>
+              </span>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

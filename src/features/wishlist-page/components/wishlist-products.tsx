@@ -7,12 +7,12 @@ import Link from 'next/link';
 import RemoveProduct from './remove-product';
 import { useTranslations } from 'next-intl';
 import { ApiResponse } from '@/shared/lib/types/api';
-import { WishlistPayload } from '../types/wishlist-products';
+import { WishlistResponse } from '@/features/cart-wishlist/types/cart-wishlist.types';
 
 export default function WishlistProducts({
   data,
 }: {
-  data: ApiResponse<WishlistPayload>;
+  data: ApiResponse<WishlistResponse>;
 }) {
   const t = useTranslations('wishlist');
   if (!data.status) {

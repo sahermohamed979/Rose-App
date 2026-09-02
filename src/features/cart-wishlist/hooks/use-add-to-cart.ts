@@ -1,6 +1,5 @@
 'use client';
 
-import { toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
@@ -9,6 +8,7 @@ import addToCartAction from '../apis/add-to-cart-action';
 import saveCartItemToLocalStorage from '../lib/local-cart-client';
 import { useTranslations } from 'next-intl';
 import { CART_LOCAL_KEYS } from '@/features/cart/constants/query-key-cart';
+import { toast } from 'sonner';
 
 export function useAddToCart() {
   // Context

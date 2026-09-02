@@ -2,10 +2,10 @@ import WishlistHeader from '../components/wishlist-header';
 import WishlistProducts from '../components/wishlist-products';
 import WishlistFooter from '../components/wishlist-footer';
 
-import { getWishlistData } from '../apis/wishlist-actions';
+import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
 
 export default async function WishlistScreen() {
-  const wishlistData = await getWishlistData();
+  const wishlistData = await getWishlistAction();
 
   return (
     <>

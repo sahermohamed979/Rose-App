@@ -1,13 +1,13 @@
 import { FolderHeart } from 'lucide-react';
 import { ClearWishlist } from './clear-wishlist';
 import { getTranslations } from 'next-intl/server';
-import { WishlistPayload } from '../types/wishlist-products';
+import { WishlistResponse } from '@/features/cart-wishlist/types/cart-wishlist.types';
 import { ApiResponse } from '@/shared/lib/types/api';
 
 export default async function WishlistHeader({
   data,
 }: {
-  data: ApiResponse<WishlistPayload>;
+  data: ApiResponse<WishlistResponse>;
 }) {
   const t = await getTranslations('wishlist');
   if (!data.status) {
