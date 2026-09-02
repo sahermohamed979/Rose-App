@@ -1,15 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { HeartMinusIcon, HeartPlusIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils/utils';
+import { useLocalWishlist } from '../hooks/use-local-wishlist';
 import { useToggleWishlist } from '../hooks/use-toggle-wishlist';
 import { useWishlist } from '../hooks/use-wishlist';
-import { isInLocalWishlist } from '../lib/local-wishlist-client';
-import { useTranslations } from 'next-intl';
 
 interface WishlistButtonProps {
   isAddedToWishlist?: boolean;
@@ -30,12 +29,13 @@ export default function WishlistButton({
   const { status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  // State
-  const [isLocalAdded, setIsLocalAdded] = useState(false);
+  // Translations
   const t = useTranslations('products');
+
   // Hooks
   const { handleToggleWishlist, isPending } = useToggleWishlist();
   const { data: wishlistData } = useWishlist(isAuthenticated);
+  const { data: localWishlist } = useLocalWishlist();
 
   // Variables
   const isProductInWishlist =
@@ -43,6 +43,7 @@ export default function WishlistButton({
     !!wishlistData.payload?.wishlistItems.some(
       (item) => item.productId === productId
     );
+  const isLocalAdded = !!localWishlist?.includes(productId);
   const isAdded = isAuthenticated
     ? (isAddedToWishlist ?? isProductInWishlist)
     : isLocalAdded;
@@ -55,30 +56,6 @@ export default function WishlistButton({
     event.stopPropagation();
     handleToggleWishlist({ productId, isAddedToWishlist: isAdded });
   };
-
-  // Effects
-  useEffect(() => {
-    if (isAuthenticated) {
-      return;
-    }
-
-    const syncLocalWishlist = () => {
-      setIsLocalAdded(isInLocalWishlist(productId));
-    };
-
-    syncLocalWishlist();
-    window.addEventListener(
-      'local-wishlist-updated',
-      syncLocalWishlist
-    );
-
-    return () => {
-      window.removeEventListener(
-        'local-wishlist-updated',
-        syncLocalWishlist
-      );
-    };
-  }, [isAuthenticated, productId]);
 
   return (
     <>

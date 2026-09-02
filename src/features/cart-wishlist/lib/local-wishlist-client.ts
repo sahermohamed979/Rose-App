@@ -5,10 +5,6 @@ export function getLocalWishlist(): string[] {
   return storedWishlist ? JSON.parse(storedWishlist) : [];
 }
 
-export function getLocalWishlistCount(): number {
-  return getLocalWishlist().length;
-}
-
 export function isInLocalWishlist(productId: string): boolean {
   return getLocalWishlist().includes(productId);
 }
@@ -25,12 +21,10 @@ export function toggleLocalWishlistItem(productId: string): boolean {
     LOCAL_WISHLIST_KEY,
     JSON.stringify(nextWishlist)
   );
-  window.dispatchEvent(new Event('local-wishlist-updated'));
 
   return !isAdded;
 }
 
 export function clearLocalWishlist(): void {
   localStorage.removeItem(LOCAL_WISHLIST_KEY);
-  window.dispatchEvent(new Event('local-wishlist-updated'));
 }
