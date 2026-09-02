@@ -91,7 +91,7 @@ export default function HeaderActions({
       {/* Action icons */}
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
         <Link
-          href={isAuthenticated ? '/wish-list' : '/login'}
+          href={isAuthenticated ? '/wishlist' : '/login'}
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />

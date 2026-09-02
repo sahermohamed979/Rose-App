@@ -27,7 +27,7 @@ export default function PaymentMethod({
     {
       value: 'CASH' as PaymentMethodType,
       id: 'cash',
-      title: t('cashOnDeleviry'),
+      title: t('cashOnDelivery'),
       description: t('cashP'),
       image: '/cash.svg',
     },
@@ -83,7 +83,7 @@ export default function PaymentMethod({
               alt={method.title}
               width={195}
               height={195}
-              className="dark:invert"
+              className="dark:brightness-0 dark:invert "
             />
             <h2
               className={cn(
