@@ -92,6 +92,14 @@ const CountrySelect = ({
     onChange(event.target.value as Country);
   };
 
+  const currentCountry = (value || 'EG') as Country;
+  let callingCode = '20';
+  try {
+    callingCode = getCountryCallingCode(currentCountry);
+  } catch {
+    callingCode = '20';
+  }
+
   return (
     <div
       data-slot="country-select"
@@ -120,7 +128,7 @@ const CountrySelect = ({
       >
         <select
           disabled={disabled}
-          value={value || ''}
+          value={currentCountry}
           onChange={handleSelect}
           aria-label="Select country"
           className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
@@ -138,12 +146,10 @@ const CountrySelect = ({
             ))}
         </select>
 
-        <FlagComponent country={value} countryName={value} />
+        <FlagComponent country={currentCountry} countryName={currentCountry} />
 
         <span className="mt-px w-14 text-sm font-medium text-text-plain">
-          {value
-            ? `${value}(+${getCountryCallingCode(value)})`
-            : '🌐'}
+          {`${currentCountry}(+${callingCode})`}
         </span>
 
         <ChevronsUpDown className="size-4 shrink-0 text-text-muted" />
@@ -153,20 +159,21 @@ const CountrySelect = ({
 };
 
 const FlagComponent = ({
-  country,
-  countryName,
+  country = 'EG',
+  countryName = 'EG',
 }: {
-  country: Country;
-  countryName: string;
+  country?: Country;
+  countryName?: string;
 }) => {
-  const Flag = flags[country];
+  const activeCountry = country || 'EG';
+  const Flag = flags[activeCountry];
 
   return (
     <span className="flex h-3.5 w-5 shrink-0 overflow-hidden rounded-sm shadow-sm [&_svg]:h-full [&_svg]:w-full">
       {Flag ? (
-        <Flag title={countryName} />
+        <Flag title={countryName || activeCountry} />
       ) : (
-        <span className="text-sm leading-none">🌍</span>
+        <span className="text-sm leading-none">🇪🇬</span>
       )}
     </span>
   );

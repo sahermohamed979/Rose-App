@@ -448,6 +448,87 @@
   "dashboard": {
     "Preview": "عرض المتجر",
     "overview": "نظره عامه",
+    "overviewPage": {
+      "totalProducts": "إجمالي المنتجات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalCategories": "إجمالي الفئات",
+      "totalRevenue": "إجمالي الإيرادات",
+      "allCategories": "جميع الفئات",
+      "productSingular": "منتج واحد",
+      "productPlural": "{count} منتجات",
+      "noCategories": "لا توجد فئات",
+      "orderStatus": "حالة الطلبات",
+      "completed": "مكتملة",
+      "inProgress": "قيد التنفيذ",
+      "cancelled": "ملغاة",
+      "revenue": "الإيرادات",
+      "monthly": "شهري",
+      "lastWeek": "الأسبوع الماضي",
+      "noRevenueData": "لا توجد بيانات إيرادات مسجلة لهذه الفترة",
+      "currency": "ج.م",
+      "loadError": "فشل تحميل بيانات لوحة التحكم",
+      "months": {
+        "Jan": "يناير",
+        "Feb": "فبراير",
+        "Mar": "مارس",
+        "Apr": "أبريل",
+        "May": "مايو",
+        "Jun": "يونيو",
+        "Jul": "يوليو",
+        "Aug": "أغسطس",
+        "Sep": "سبتمبر",
+        "Oct": "أكتوبر",
+        "Nov": "نوفمبر",
+        "Dec": "ديسمبر"
+      },
+      "days": {
+        "Sat": "السبت",
+        "Sun": "الأحد",
+        "Mon": "الإثنين",
+        "Tue": "الثلاثاء",
+        "Wed": "الأربعاء",
+        "Thu": "الخميس",
+        "Fri": "الجمعة"
+      }
+    },
+    "profilePage": {
+      "title": "إعدادات الحساب",
+      "uploadPhoto": "رفع صورة",
+      "removePhoto": "حذف الصورة",
+      "uploadPhotoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحجم أقصى 5 ميجابايت.",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "gender": "الجنس",
+      "genderMale": "ذكر",
+      "genderFemale": "أنثى",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "deleteAccount": "حذف حسابي",
+      "changePassword": "تغيير كلمة المرور",
+      "loadError": "فشل تحميل بيانات الملف الشخصي",
+      "deleteDialog": {
+        "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+        "subtitle": "هذا الإجراء دائم ولا يمكن التراجع عنه.",
+        "cancel": "لا، تراجع",
+        "confirm": "نعم، احذف",
+        "deleting": "جارٍ الحذف..."
+      },
+      "errors": {
+        "firstNameRequired": "الاسم الأول مطلوب",
+        "firstNameTooLong": "الاسم الأول طويل جداً",
+        "lastNameRequired": "اسم العائلة مطلوب",
+        "lastNameTooLong": "اسم العائلة طويل جداً",
+        "phoneInvalid": "رقم الهاتف يجب أن يكون من ١٠ إلى ١١ رقمًا",
+        "updateFailed": "فشل تحديث الملف الشخصي",
+        "deleteFailed": "فشل حذف الحساب"
+      },
+      "success": {
+        "updated": "تم تحديث الملف الشخصي بنجاح",
+        "deleted": "تم حذف الحساب بنجاح"
+      }
+    },
     "notfound": {
       "title": "هذه الصفحة غير موجودة",
       "subtitle": "لم نتمكن من العثور على الصفحة التي تبحث عنها، يرجى التأكد من أنك على الطريق الصحيح."
