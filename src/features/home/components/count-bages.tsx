@@ -1,8 +1,4 @@
-interface CountBadgeProps {
-  count: number;
-}
-
-export function CountBadge({ count }: CountBadgeProps) {
+export function CountBadge({ count }: { count: number }) {
   if (count <= 0) {
     return null;
   }

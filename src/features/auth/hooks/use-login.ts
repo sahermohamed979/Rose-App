@@ -1,6 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { LoginFormData } from '../schemas/login-schema';
 import { signIn } from 'next-auth/react';
+
+import { mergeLocalCartToServer } from '@/features/cart-wishlist/lib/merge-local-cart';
+import { mergeLocalWishlistToServer } from '@/features/cart-wishlist/lib/merge-local-wishlist';
+import { LoginFormData } from '../schemas/login-schema';
 
 export const useLoginMutation = () => {
   // Hooks
@@ -17,6 +20,11 @@ export const useLoginMutation = () => {
       if (result?.error) {
         throw new Error(result.error);
       }
+
+      await Promise.all([
+        mergeLocalCartToServer(),
+        mergeLocalWishlistToServer(),
+      ]);
 
       return result;
     },
