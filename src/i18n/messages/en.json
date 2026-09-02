@@ -407,6 +407,7 @@
     "step1Title": "Shipping Address",
     "addAddress": "Add a new address",
     "next": "Next",
+    "back": "Back",
     "noAddresses": "Add your first address to continue",
     "or": "Or",
     "failedLoading": "Failed to load addresses. Please try again",
@@ -435,6 +436,60 @@
     "errors": {
       "couponCodeRequired": "Coupon code is required",
       "couponCodeTooLong": "Coupon code is too long"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "items": "{count} items",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "{count} ratings",
+    "addToCart": "Add to Cart",
+    "clearWishlist": "Clear Wishlist",
+    "clearWishlistConfirmation": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "exploreSimilarProducts": "Explore Similar Products",
+    "continueShopping": "Continue Shopping",
+    "empty": "Your wishlist is empty",
+    "currency": "EGP"
+  },
+  "address": {
+    "modal": {
+      "title": "My Addresses"
+    },
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmDelete": "Are you sure you want to delete this address?",
+    "deleted": "Address deleted",
+    "updated": "Address updated",
+    "add": {
+      "step1Title": "Address Details",
+      "step2Title": "Pin Your Location",
+      "address": "Add Address"
+    },
+    "city": "City",
+    "title": "Address Label",
+    "details": "Address",
+    "phone": "Contact Number",
+    "findMyLocation": "Find My Location",
+    "mapLoading": "Loading map...",
+    "mapUnavailable": "The map is unavailable. Check your connection and try again.",
+    "locationDenied": "Location access denied. Please pin manually.",
+    "added": "Address added",
+    "errors": {
+      "titleRequired": "Address label is required",
+      "titleInvalid": "Enter a valid address label",
+      "cityRequired": "City is required",
+      "cityInvalid": "Enter a valid city name",
+      "streetRequired": "Address is required",
+      "streetInvalid": "Enter a valid street address",
+      "phoneRequired": "Contact number is required",
+      "phoneInvalid": "Enter a valid contact number",
+      "locationRequired": "Please pin your location on the map",
+      "unsafeInput": "Invalid characters are not allowed"
     }
   }
 }
