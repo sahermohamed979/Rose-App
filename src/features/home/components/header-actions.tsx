@@ -16,8 +16,16 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
+import { useLocalWishlist } from '@/features/cart-wishlist/hooks/use-local-wishlist';
 
-export default function HeaderActions() {
+export default function HeaderActions({
+  wishlistCount,
+  cartCount,
+}: {
+  wishlistCount: number;
+  cartCount: number;
+}) {
   // Translation
   const t = useTranslations('header');
 
@@ -25,8 +33,17 @@ export default function HeaderActions() {
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  const wishlistCount = 8;
-  const cartCount = 8;
+  // Hooks
+  const { data: localCartCount } = useLocalCart();
+  const { data: localWishlist } = useLocalWishlist();
+
+  // Variables
+  const displayedCartCount = isAuthenticated
+    ? cartCount
+    : localCartCount?.cartItems.length;
+  const displayedWishlistCount = isAuthenticated
+    ? wishlistCount
+    : (localWishlist?.length ?? 0);
 
   return (
     <div className="flex items-center w-full">
@@ -78,15 +95,12 @@ export default function HeaderActions() {
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={wishlistCount} />}
+          <CountBadge count={displayedWishlistCount} />
         </Link>
 
-        <Link
-          href={isAuthenticated ? '/cart' : '/login'}
-          className="relative"
-        >
+        <Link href={'/cart'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          {isAuthenticated && <CountBadge count={cartCount} />}
+          <CountBadge count={displayedCartCount || 0} />
         </Link>
 
         <NotificationsContainer status={status} />

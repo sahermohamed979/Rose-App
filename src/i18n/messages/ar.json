@@ -181,7 +181,13 @@
     "hot": "رائج",
     "addToWishList": "اضافه الي المفضله",
     "removeFromWishList": "ازاله من المفضله",
-    "loadingProducts": "جاري تحميل المنتجات..."
+    "loadingProducts": "جاري تحميل المنتجات...",
+    "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
+    "addToCartError": "فشل إضافة المنتج إلى السلة",
+    "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة",
+    "removeFromWishlistSuccess": "تم إزالة المنتج من المفضلة بنجاح",
+    "removeFromWishlistError": "فشل إزالة المنتج من المفضلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -370,6 +376,30 @@
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
   },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
+  },
   "checkout": {
     "step1Title": "عنوان الشحن",
     "addAddress": "إضافة عنوان جديد",
@@ -383,9 +413,25 @@
     "cashP": "ستدفع نقدًا عند استلام طلبك.",
     "creditCard": "بطاقة ائتمانية",
     "creditP": "سيتم توجيهك بشكل آمن إلى Stripe لإكمال عملية الدفع.",
-    "checkout": "الدفع",
     "successToast": "تم تقديم طلبك بنجاح!",
     "errorToast": "فشل تقديم الطلب. حاول مجددا",
-    "tryAgain": "حاول مجدداً"
+    "tryAgain": "حاول مجدداً",
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
   }
 }
