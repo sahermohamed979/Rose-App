@@ -427,6 +427,22 @@
       "couponCodeTooLong": "كود الخصم طويل جداً"
     }
   },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "items": "{count} عناصر",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "ratings": "{count} تقييمات",
+    "addToCart": "أضف إلى السلة",
+    "clearWishlist": "مسح قائمة المفضلة",
+    "clearWishlistConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "exploreSimilarProducts": "استكشف المنتجات المشابهة",
+    "continueShopping": "متابعة التسوق",
+    "empty": "قائمة المفضلة فارغة",
+    "currency": "جنيه"
+  },
   "address": {
     "modal": {
       "title": "عناويني"

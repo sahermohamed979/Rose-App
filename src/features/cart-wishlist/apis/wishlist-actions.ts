@@ -11,7 +11,9 @@ import {
 } from '@/shared/lib/types/api';
 import { WishlistResponse } from '../types/cart-wishlist.types';
 
-export async function getWishlistAction() {
+export async function getWishlistAction(): Promise<
+  ApiResponse<WishlistResponse>
+> {
   const token = await getAuthToken();
   if (!token?.accessToken) {
     return RESPONSES.Unauthorized;

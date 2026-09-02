@@ -4,9 +4,9 @@ import { RegisterSchemaType } from '../types/register-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { registerSchema } from '../schemas/register-schema';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import { useRouter } from '@/i18n/navigation';
 
 export function useRegister() {
   const router = useRouter();
