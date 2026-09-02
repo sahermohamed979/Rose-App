@@ -1,9 +1,5 @@
-import WishlistPage from '@/features/wishlist-page/components/wishlist-page';
+import WishlistPage from '@/features/wishlist-page/screen/wishlist-screen';
 
 export default function page() {
-  return (
-    <div>
-      <WishlistPage />
-    </div>
-  );
+  return <WishlistPage />;
 }

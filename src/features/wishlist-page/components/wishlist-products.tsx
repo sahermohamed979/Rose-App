@@ -1,20 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { wishListProductsResponse } from '../../types/wishlist-products';
 import { ShoppingCartIcon, Star } from 'lucide-react';
 import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import Link from 'next/link';
 import RemoveProduct from './remove-product';
 import { useTranslations } from 'next-intl';
-
-interface WishlistProductsType {
-  data: wishListProductsResponse;
-}
+import { ApiResponse } from '@/shared/lib/types/api';
+import { WishlistPayload } from '../types/wishlist-products';
 
 export default function WishlistProducts({
   data,
-}: WishlistProductsType) {
+}: {
+  data: ApiResponse<WishlistPayload>;
+}) {
   const t = useTranslations('wishlist');
   if (!data.status) {
     return <p>Something went wrong</p>;

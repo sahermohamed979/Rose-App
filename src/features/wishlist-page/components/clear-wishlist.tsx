@@ -14,7 +14,7 @@ import {
 } from '@/shared/components/ui/alert-dialog';
 import { Button } from '@/shared/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
-import clearWishListAction from '../../actions/clear-wishlist-action';
+import clearWishListAction from '../apis/clear-wishlist-action';
 
 import { useState } from 'react';
 import { toast } from 'sonner';

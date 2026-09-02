@@ -1,7 +1,7 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import { Loader, Trash2 } from 'lucide-react';
-import removeProductactions from '../../actions/remove-product-action';
+import removeProductactions from '../apis/remove-product-action';
 
 import { toast } from 'sonner';
 import { useRouter } from '@/i18n/navigation';
