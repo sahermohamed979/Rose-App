@@ -386,7 +386,10 @@
     "confirmClear": "Are you sure you want to clear the cart? ",
     "noImage": "No image",
     "product": "{count} Products",
-    "currency": "EGP"
+    "currency": "EGP",
+    "cancel": "Cancel",
+    "confirmClear ": "Are you sure you want to clear your cart? ",
+    "confirm": "Confirm"
   },
   "cartError": {
     "title": "Unable to Load Your Cart",
@@ -408,7 +411,24 @@
     "noAddresses": "Add your first address to continue",
     "or": "Or",
     "failedLoading": "Failed to load addresses. Please try again",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "orderSummary": "Summary",
+    "couponCode": "Coupon Code",
+    "couponPlaceholder": "Coupon code",
+    "applyCoupon": "Apply Coupon",
+    "noCoupons": "No coupons applied",
+    "couponApplied": "Coupon applied",
+    "removeCoupon": "Remove coupon",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Checkout",
+    "couponInvalid": "Invalid or expired coupon code",
+    "suggestedProducts": "Products You May Like",
+    "errors": {
+      "couponCodeRequired": "Coupon code is required",
+      "couponCodeTooLong": "Coupon code is too long"
+    }
   },
   "address": {
     "modal": {

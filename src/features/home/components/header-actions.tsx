@@ -16,16 +16,15 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
-import { getLocalCartCount } from '@/features/cart-wishlist/lib/local-cart-client';
-import { getLocalWishlistCount } from '@/features/cart-wishlist/lib/local-wishlist-client';
-import { useEffect, useState } from 'react';
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
+import { useLocalWishlist } from '@/features/cart-wishlist/hooks/use-local-wishlist';
 
 export default function HeaderActions({
-  cartCount,
   wishlistCount,
+  cartCount,
 }: {
-  cartCount: number;
   wishlistCount: number;
+  cartCount: number;
 }) {
   // Translation
   const t = useTranslations('header');
@@ -34,48 +33,17 @@ export default function HeaderActions({
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
-  // State
-  const [localCartCount, setLocalCartCount] = useState(0);
-  const [localWishlistCount, setLocalWishlistCount] = useState(0);
+  // Hooks
+  const { data: localCartCount } = useLocalCart();
+  const { data: localWishlist } = useLocalWishlist();
 
   // Variables
   const displayedCartCount = isAuthenticated
     ? cartCount
-    : localCartCount;
+    : localCartCount?.cartItems.length;
   const displayedWishlistCount = isAuthenticated
     ? wishlistCount
-    : localWishlistCount;
-
-  // Effects
-  useEffect(() => {
-    if (isAuthenticated) {
-      return;
-    }
-
-    const updateLocalCounts = () => {
-      setLocalCartCount(getLocalCartCount());
-      setLocalWishlistCount(getLocalWishlistCount());
-    };
-
-    updateLocalCounts();
-
-    window.addEventListener('local-cart-updated', updateLocalCounts);
-    window.addEventListener(
-      'local-wishlist-updated',
-      updateLocalCounts
-    );
-
-    return () => {
-      window.removeEventListener(
-        'local-cart-updated',
-        updateLocalCounts
-      );
-      window.removeEventListener(
-        'local-wishlist-updated',
-        updateLocalCounts
-      );
-    };
-  }, [isAuthenticated]);
+    : (localWishlist?.length ?? 0);
 
   return (
     <div className="flex items-center w-full">
@@ -132,7 +100,7 @@ export default function HeaderActions({
 
         <Link href={'/cart'} className="relative">
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          <CountBadge count={displayedCartCount} />
+          <CountBadge count={displayedCartCount || 0} />
         </Link>
 
         <NotificationsContainer status={status} />
