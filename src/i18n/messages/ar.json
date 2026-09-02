@@ -185,7 +185,9 @@
     "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
     "addToCartError": "فشل إضافة المنتج إلى السلة",
     "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
-    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة"
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة",
+    "removeFromWishlistSuccess": "تم إزالة المنتج من المفضلة بنجاح",
+    "removeFromWishlistError": "فشل إزالة المنتج من المفضلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -421,6 +423,24 @@
     "exploreSimilarProducts": "استكشف المنتجات المشابهة",
     "continueShopping": "متابعة التسوق",
     "empty": "قائمة المفضلة فارغة",
-    "currency": "جنيه"
+    "currency": "جنيه",
+    "tryAgain": "حاول مجدداً",
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
   }
 }
