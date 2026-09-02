@@ -408,7 +408,24 @@
     "noAddresses": "أضف عنوانك الأول للمتابعة",
     "or": "أو",
     "failedLoading": "فشل تحميل العناوين. حاول مجدداً",
-    "tryAgain": "حاول مجدداً"
+    "tryAgain": "حاول مجدداً",
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
   },
   "address": {
     "modal": {

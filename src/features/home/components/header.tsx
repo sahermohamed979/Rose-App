@@ -3,21 +3,21 @@ import Image from 'next/image';
 import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import { Link } from '@/i18n/navigation';
-import { getCartAction } from '@/features/cart/apis/cart-actions';
+import { getCart } from '@/features/cart/apis/cart-service';
 import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
 
 export default async function Header() {
   const [cart, wishlist] = await Promise.all([
-    getCartAction(),
+    getCart(),
     getWishlistAction(),
   ]);
 
-  const cartCount =
-    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
   const wishlistCount =
     wishlist.status && wishlist.payload
       ? wishlist.payload.wishlistItems.length
       : 0;
+  const cartCount =
+    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
 
   return (
     <>
@@ -34,8 +34,8 @@ export default async function Header() {
           </Link>
           {/* header actions */}
           <HeaderActions
-            cartCount={cartCount}
             wishlistCount={wishlistCount}
+            cartCount={cartCount}
           />
         </div>
         {/* subHeader */}

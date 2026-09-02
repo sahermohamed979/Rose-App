@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ICart } from '../types/cart-types';
 import { Input } from '@/shared/components/ui/input';
 import { Field } from '@/shared/components/ui/field';
-import useUpdateCartQuantity from '../hooks/quantity-hook';
+import { useCartMutations } from '../hooks/cart-hook';
 
 export default function QuantityButton({
   cartItem,
@@ -19,8 +19,7 @@ export default function QuantityButton({
 
   const isFirstRender = useRef(true);
 
-  const { mutate: updateQuantity, isPending } =
-    useUpdateCartQuantity();
+  const { UpdateCartQuantity } = useCartMutations();
 
   const clamp = (val: number) => {
     if (isNaN(val)) {
@@ -40,7 +39,7 @@ export default function QuantityButton({
     }
 
     const timer = setTimeout(() => {
-      updateQuantity({
+      UpdateCartQuantity.mutate({
         id: cartItem?.id || '',
         quantity,
       });
@@ -56,7 +55,7 @@ export default function QuantityButton({
         size="icon"
         className="h-12 w-12 rounded-xl bg-bg-carosel"
         onClick={() => setQuantity((q) => clamp(q - 1))}
-        disabled={quantity <= 1 || isPending}
+        disabled={quantity <= 1 || UpdateCartQuantity.isPending}
       >
         <Minus size={20} className="text-text-primary" />
       </Button>
@@ -77,7 +76,9 @@ export default function QuantityButton({
         size="icon"
         className="h-12 w-12 rounded-xl bg-bg-carosel"
         onClick={() => setQuantity((q) => clamp(q + 1))}
-        disabled={quantity >= (stock || 0) || isPending}
+        disabled={
+          quantity >= (stock || 0) || UpdateCartQuantity.isPending
+        }
       >
         <Plus size={20} className="text-text-primary" />
       </Button>
