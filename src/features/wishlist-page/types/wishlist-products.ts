@@ -1,20 +1,4 @@
-export interface wishListProductsError {
-  status: false;
-  code: number;
-  message: string;
-}
-
-interface wishListProductsSuccuss {
-  status: true;
-  code: number;
-  payload: WishlistPayload;
-}
-
-export type wishListProductsResponse =
-  | wishListProductsError
-  | wishListProductsSuccuss;
-
-interface WishlistPayload {
+export interface WishlistPayload {
   wishlistItems: WishlistItem[];
 }
 

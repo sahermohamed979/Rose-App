@@ -1,18 +1,17 @@
 import { FolderHeart } from 'lucide-react';
 import { ClearWishlist } from './clear-wishlist';
-import { wishListProductsResponse } from '../../types/wishlist-products';
-import { getLocale, getTranslations } from 'next-intl/server';
-
-interface WishlistHeaderType {
-  data: wishListProductsResponse;
-}
+import { getTranslations } from 'next-intl/server';
+import { WishlistPayload } from '../types/wishlist-products';
+import { ApiResponse } from '@/shared/lib/types/api';
 
 export default async function WishlistHeader({
   data,
-}: WishlistHeaderType) {
+}: {
+  data: ApiResponse<WishlistPayload>;
+}) {
   const t = await getTranslations('wishlist');
   if (!data.status) {
-    return 'Somthing went wrong';
+    return <p className="text-red-500">Something went wrong</p>;
   }
 
   return (
