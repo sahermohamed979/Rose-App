@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { useCreateOrder } from './use-user-order';
 import { useLocale, useTranslations } from 'next-intl';
-import { PaymentMethodType } from '../types/payment-types';
-import { CreateOrderBody } from '../apis/create-order.api';
+import {
+  CreateOrderBody,
+  PaymentMethodType,
+} from '../types/payment-types';
 import { useRouter } from '@/i18n/navigation';
 
 interface CheckoutState {
@@ -83,11 +85,11 @@ export default function useCheckoutLogic() {
 
       if (checkoutUrl) {
         // credit card flow
-        window.location.href = checkoutUrl;
+        window.location.replace(checkoutUrl);
       } else {
         // cash on delivery flow
         toast.success(t('orderSuccess'));
-        router.push('/orders');
+        router.replace('/orders');
       }
     } catch {
       // network/unexpected error

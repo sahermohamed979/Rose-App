@@ -7,3 +7,10 @@ export interface PaymentMethodProps {
   onCheckout: () => void;
   isLoading: boolean;
 }
+export interface CreateOrderBody {
+  addressId: string;
+  paymentMethod: 'CASH_ON_DELIVERY' | 'CREDIT_CARD';
+  couponCode?: string;
+  notes?: string;
+  successUrl?: string;
+}
