@@ -1,14 +1,7 @@
 'use server';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
 import { updateTag } from 'next/cache';
-
-export interface CreateOrderBody {
-  addressId: string;
-  paymentMethod: 'CASH_ON_DELIVERY' | 'CREDIT_CARD';
-  couponCode?: string;
-  notes?: string;
-  successUrl?: string;
-}
+import { CreateOrderBody } from '../types/payment-types';
 
 export async function createOrder(body: CreateOrderBody) {
   const jwt = await getAuthToken();
@@ -27,7 +20,7 @@ export async function createOrder(body: CreateOrderBody) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message);
+    return data;
   }
   updateTag('cart');
 
