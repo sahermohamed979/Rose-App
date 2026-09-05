@@ -18,12 +18,13 @@ import {
 import { Input } from '@/shared/components/ui/input';
 import { FileInput } from '@/shared/components/ui/input-upload-file';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/components/ui/select';
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from '@/shared/components/ui/combobox';
 import { Textarea } from '@/shared/components/ui/textarea';
 import {
   getAddProductSchema,
@@ -219,34 +220,40 @@ export default function AddNewProductForm({
                 >
                   {t('category')}
                 </FieldLabel>
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
+                <Combobox
+                  items={categories}
+                  value={
+                    categories.find(
+                      (category) => category.id === field.value
+                    ) ?? null
+                  }
+                  onValueChange={(category) =>
+                    field.onChange(category?.id ?? '')
+                  }
+                  itemToStringLabel={(category) => category.title}
+                  itemToStringValue={(category) => category.id}
                 >
-                  <SelectTrigger
+                  <ComboboxInput
                     id="category"
                     onBlur={field.onBlur}
                     aria-invalid={fieldState.invalid}
-                  >
-                    <SelectValue placeholder={t('selectOption')}>
-                      {
-                        categories.find(
-                          (category) => category.id === field.value
-                        )?.title
-                      }
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem
-                        key={category.id}
-                        value={category.id}
-                      >
-                        {category.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                    placeholder={t('selectOption')}
+                    className="w-full"
+                  />
+                  <ComboboxContent>
+                    <ComboboxEmpty>{t('noOptions')}</ComboboxEmpty>
+                    <ComboboxList>
+                      {(category) => (
+                        <ComboboxItem
+                          key={category.id}
+                          value={category}
+                        >
+                          {category.title}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
                 <FieldError errors={[fieldState.error]} />
               </Field>
             )}
@@ -264,34 +271,40 @@ export default function AddNewProductForm({
                 >
                   {t('occasion')}
                 </FieldLabel>
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
+                <Combobox
+                  items={occasions}
+                  value={
+                    occasions.find(
+                      (occasion) => occasion.id === field.value
+                    ) ?? null
+                  }
+                  onValueChange={(occasion) =>
+                    field.onChange(occasion?.id ?? '')
+                  }
+                  itemToStringLabel={(occasion) => occasion.title}
+                  itemToStringValue={(occasion) => occasion.id}
                 >
-                  <SelectTrigger
+                  <ComboboxInput
                     id="occasion"
                     onBlur={field.onBlur}
                     aria-invalid={fieldState.invalid}
-                  >
-                    <SelectValue placeholder={t('selectOption')}>
-                      {
-                        occasions.find(
-                          (occasion) => occasion.id === field.value
-                        )?.title
-                      }
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {occasions.map((occasion) => (
-                      <SelectItem
-                        key={occasion.id}
-                        value={occasion.id}
-                      >
-                        {occasion.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                    placeholder={t('selectOption')}
+                    className="w-full"
+                  />
+                  <ComboboxContent>
+                    <ComboboxEmpty>{t('noOptions')}</ComboboxEmpty>
+                    <ComboboxList>
+                      {(occasion) => (
+                        <ComboboxItem
+                          key={occasion.id}
+                          value={occasion}
+                        >
+                          {occasion.title}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
                 <FieldError errors={[fieldState.error]} />
               </Field>
             )}

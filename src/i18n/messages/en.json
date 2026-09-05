@@ -566,6 +566,7 @@
       "category": "category",
       "occasion": "occasion",
       "selectOption": "Select an option",
+      "noOptions": "No options found",
       "addProduct": "Add Product",
       "addingProduct": "Adding product...",
       "updateProduct": "Update Product",
