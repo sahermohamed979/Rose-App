@@ -486,6 +486,41 @@
     "userInfo": {
       "profileUnavailable": "الملف الشخصي غير متاح",
       "error": "خطأ"
+    },
+    "products": {
+      "addNewProduct": "إضافة منتج جديد",
+      "title": "العنوان",
+      "titlePlaceholder": "أدخل عنوان المنتج",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف المنتج",
+      "price": "السعر",
+      "pricePlaceholder": "أدخل سعر المنتج",
+      "discount": "الخصم",
+      "discountPlaceholder": "مثال 5",
+      "discountPrice": "السعر بعد الخصم",
+      "quantity": "الكمية",
+      "quantityPlaceholder": "أدخل الكمية",
+      "productCover": "صورة المنتج",
+      "productGallery": "معرض الصور",
+      "category": "الفئة",
+      "occasion": "المناسبة",
+      "selectOption": "اختر خياراً",
+      "addProduct": "إضافة المنتج",
+      "addingProduct": "جارٍ إضافة المنتج...",
+      "addSuccess": "تمت إضافة المنتج بنجاح",
+      "addError": "فشلت إضافة المنتج",
+      "uploadFile": "رفع ملف",
+      "optionsLoadError": "فشل تحميل الفئات والمناسبات",
+      "errors": {
+        "titleRequired": "عنوان المنتج مطلوب",
+        "descriptionRequired": "وصف المنتج مطلوب",
+        "pricePositive": "يجب أن يكون السعر أكبر من صفر",
+        "discountRange": "يجب أن يكون الخصم بين 0 و100",
+        "quantityNonNegative": "يجب أن تكون الكمية عدداً صحيحاً يساوي صفر أو أكثر",
+        "productCoverRequired": "صورة غلاف المنتج مطلوبة",
+        "categoryRequired": "يرجى اختيار الفئة",
+        "occasionRequired": "يرجى اختيار المناسبة"
+      }
     }
   }
 }
