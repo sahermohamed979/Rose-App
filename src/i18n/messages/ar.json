@@ -385,6 +385,66 @@
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
   },
+  "categoryDashboard": {
+    "categories": "كل الفئات ",
+    "addNew": "اضف فئه جديده",
+    "noMatch": "لم يتم العثور على فئات",
+    "trySearch": "حاول تعديل البحث أو أضف فئة جديدة.",
+    "name": "الاسم",
+    "products": "المنتجات",
+    "namePlaceholder": "أدخل اسم الفئة",
+    "image": "صورة الفئة",
+    "uploadFile": "رفع ملف",
+    "noFileChosen": "لم يتم اختيار ملف",
+    "uploading": "جاري الرفع...",
+    "adding": "جاري الإضافة...",
+    "titleError": "اسم الفئه مطلوب",
+    "imageError": "صوره الفئه مطلوبه",
+    "updateCategory": "تعديل الفئة",
+    "updating": "جارٍ التحديث...",
+    "viewImage": "عرض صوره الفئه",
+    "categoryNotFound": "الفئة غير موجودة",
+    "categoryNotFoundSubtitle": "قد تكون هذه الفئة قد حُذفت أو الرابط غير صحيح.",
+    "backToCategories": "العودة إلى الفئات",
+    "updateSuccess": "تم تحديث الفئة بنجاح",
+    "updateError": "فشل تحديث الفئة",
+    "createSuccess": "الفئة تم إنشاؤها بنجاح",
+    "createError": "فشل إنشاء الفئة",
+    "deleteCategory": "هل انت متاكد من حذف ",
+    "deleteSuccess": "تم حذف الفئة بنجاح",
+    "deleteError": "فشل حذف الفئة"
+  },
+  "occasionDashboard": {
+    "occasions": "كل المناسبات ",
+    "addNew": "اضف مناسبه جديده",
+    "noMatch": "لم يتم العثور على مناسبات",
+    "trySearch": "حاول تعديل البحث أو أضف مناسبه جديدة.",
+    "name": "الاسم",
+    "description": "الوصف",
+    "namePlaceholder": "أدخل اسم المناسبه",
+    "descriptionPlaceholder": "أدخل وصف المناسبه",
+    "image": "صورة المناسبه",
+    "uploadFile": "رفع ملف",
+    "noFileChosen": "لم يتم اختيار ملف",
+    "uploading": "جاري الرفع...",
+    "adding": "جاري الإضافة...",
+    "titleError": "اسم المناسبه مطلوب",
+    "descriptionError": "وصف المناسبه مطلوب",
+    "imageError": "صوره المناسبه مطلوبه",
+    "updateOccasion": "تعديل المناسبه",
+    "updating": "جارٍ التحديث...",
+    "viewImage": "عرض صوره المناسبه",
+    "occasionNotFound": "المناسبه غير موجودة",
+    "occasionNotFoundSubtitle": "قد تكون هذه المناسبه قد حُذفت أو الرابط غير صحيح.",
+    "backToOccasions": "العودة إلى المناسبات",
+    "updateSuccess": "تم تحديث المناسبه بنجاح",
+    "updateError": "فشل تحديث المناسبه",
+    "createSuccess": "المناسبه تم إنشاؤها بنجاح",
+    "createError": "فشل إنشاء المناسبه",
+    "deleteOccasion": "هل انت متاكد من حذف ",
+    "deleteSuccess": "تم حذف المناسبه بنجاح",
+    "deleteError": "فشل حذف المناسبه"
+  },
   "dashboard": {
     "Preview": "عرض المتجر",
     "overview": "نظره عامه",
@@ -522,5 +582,10 @@
         "occasionRequired": "يرجى اختيار المناسبة"
       }
     }
+  },
+  "common": {
+    "confirm": "تاكيد",
+    "confirming": "جاري التاكيد",
+    "cancel": "الغاء"
   }
 }
