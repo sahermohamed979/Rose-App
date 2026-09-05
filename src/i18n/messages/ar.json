@@ -549,6 +549,7 @@
     },
     "products": {
       "addNewProduct": "إضافة منتج جديد",
+      "editProductTitle": "تعديل المنتج",
       "title": "العنوان",
       "titlePlaceholder": "أدخل عنوان المنتج",
       "description": "الوصف",
@@ -567,8 +568,15 @@
       "selectOption": "اختر خياراً",
       "addProduct": "إضافة المنتج",
       "addingProduct": "جارٍ إضافة المنتج...",
+      "updateProduct": "تحديث المنتج",
+      "updatingProduct": "جارٍ تحديث المنتج...",
+      "viewImage": "عرض صورة الغلاف الحالية",
+      "viewGallery": "عرض معرض الصور الحالي",
+      "noGalleryImages": "لا توجد صور في معرض المنتج",
       "addSuccess": "تمت إضافة المنتج بنجاح",
       "addError": "فشلت إضافة المنتج",
+      "editSuccess": "تم تحديث المنتج بنجاح",
+      "editError": "فشل تحديث المنتج",
       "uploadFile": "رفع ملف",
       "optionsLoadError": "فشل تحميل الفئات والمناسبات",
       "errors": {
