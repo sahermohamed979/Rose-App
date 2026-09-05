@@ -549,6 +549,7 @@
     },
     "products": {
       "addNewProduct": "Add New Product",
+      "editProductTitle": "Edit Product",
       "title": "Title",
       "titlePlaceholder": "Enter product title",
       "description": "Description",
@@ -567,8 +568,15 @@
       "selectOption": "Select an option",
       "addProduct": "Add Product",
       "addingProduct": "Adding product...",
+      "updateProduct": "Update Product",
+      "updatingProduct": "Updating product...",
+      "viewImage": "View current cover",
+      "viewGallery": "View current gallery",
+      "noGalleryImages": "No gallery images available",
       "addSuccess": "Product added successfully",
       "addError": "Failed to add product",
+      "editSuccess": "Product updated successfully",
+      "editError": "Failed to update product",
       "uploadFile": "Upload File",
       "optionsLoadError": "Failed to load categories and occasions",
       "errors": {
