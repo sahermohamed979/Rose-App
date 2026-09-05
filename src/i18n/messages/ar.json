@@ -566,6 +566,7 @@
       "category": "الفئة",
       "occasion": "المناسبة",
       "selectOption": "اختر خياراً",
+      "noOptions": "لا توجد خيارات",
       "addProduct": "إضافة المنتج",
       "addingProduct": "جارٍ إضافة المنتج...",
       "updateProduct": "تحديث المنتج",
