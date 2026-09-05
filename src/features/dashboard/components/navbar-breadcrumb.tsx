@@ -32,9 +32,11 @@ export default function NavbarBreadcrumb() {
 
   const items = segments.map((segment, index) => {
     const href = '/' + segments.slice(0, index + 1).join('/');
-
+    const displaySegment = segment.includes('--')
+      ? segment.split('--')[0]
+      : segment;
     return {
-      label: getSegmentTranslation(segment),
+      label: getSegmentTranslation(displaySegment),
       href,
     };
   });
