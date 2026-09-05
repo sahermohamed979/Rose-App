@@ -9,6 +9,7 @@ import {
   IPaginationResponse,
 } from '@/shared/lib/types/api';
 import { DEFAULT_PRODUCTS_LIMIT } from '../constants/products-constant';
+import { PRODUCTS_CACHE_TAG } from '../constants/product-cache';
 
 export async function getProductAction(
   searchParams: ProductsSearchParams
@@ -38,9 +39,11 @@ export async function getProductAction(
           ...HEADERS.jsonBody,
           'Accept-Language': locale,
         },
+        next: {
+          tags: [PRODUCTS_CACHE_TAG],
+        },
       }
     );
-
     // HTTP errors: 400, 401, 404, 500...
     if (!response.ok) {
       return null;

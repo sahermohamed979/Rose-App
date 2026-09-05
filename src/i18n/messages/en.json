@@ -486,6 +486,41 @@
     "userInfo": {
       "profileUnavailable": "Profile unavailable",
       "error": "Error"
+    },
+    "products": {
+      "addNewProduct": "Add New Product",
+      "title": "Title",
+      "titlePlaceholder": "Enter product title",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter product description",
+      "price": "Price",
+      "pricePlaceholder": "Enter product price",
+      "discount": "Discount",
+      "discountPlaceholder": "Example 5",
+      "discountPrice": "Price after discount",
+      "quantity": "Quantity",
+      "quantityPlaceholder": "Enter quantity",
+      "productCover": "Product cover image",
+      "productGallery": "Product Gallery",
+      "category": "category",
+      "occasion": "occasion",
+      "selectOption": "Select an option",
+      "addProduct": "Add Product",
+      "addingProduct": "Adding product...",
+      "addSuccess": "Product added successfully",
+      "addError": "Failed to add product",
+      "uploadFile": "Upload File",
+      "optionsLoadError": "Failed to load categories and occasions",
+      "errors": {
+        "titleRequired": "Product title is required",
+        "descriptionRequired": "Product description is required",
+        "pricePositive": "Please enter a valid price",
+        "discountRange": "Discount must be between 0 and 100",
+        "quantityNonNegative": "Quantity must be a whole number of zero or more",
+        "productCoverRequired": "Product cover image is required",
+        "categoryRequired": "Please select a category",
+        "occasionRequired": "Please select an occasion"
+      }
     }
   }
 }
