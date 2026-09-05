@@ -20,24 +20,15 @@ import {
 } from '@/shared/components/ui/field';
 import { Input } from '@/shared/components/ui/input';
 import { FileInput } from '@/shared/components/ui/input-upload-file';
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from '@/shared/components/ui/combobox';
 import { Textarea } from '@/shared/components/ui/textarea';
 import {
   getEditProductSchema,
   type EditProductFormValues,
 } from '../schemas/edit-product-schema';
 import DiscountedPriceField from './discounted-price-field';
+import ProductOptionCombobox from './product-option-combobox';
 import { useEditProduct } from '../hooks/use-edit-product';
 import ViewImageModal from '@/shared/components/view-image-modal';
-
-export type { EditProductFormValues } from '../schemas/edit-product-schema';
 
 interface EditProductFormProps {
   categories: ProductCategory[];
@@ -77,7 +68,9 @@ export default function EditProductForm({
       quantity: product.stock ?? 0,
       category: product.categoryId ?? '',
       occasion:
-        product.occasion?.id ?? product.occasions?.[0]?.id ?? '',
+        product.occasion?.id ??
+        product.occasions?.[0]?.occasionId ??
+        '',
     },
   });
 
@@ -93,7 +86,7 @@ export default function EditProductForm({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="flex flex-col gap-6  md:p-0"
+      className="flex flex-col gap-6 md:p-0"
     >
       <FieldGroup>
         <Field data-invalid={!!errors.title}>
@@ -274,40 +267,16 @@ export default function EditProductForm({
                 >
                   {t('category')}
                 </FieldLabel>
-                <Combobox
+                <ProductOptionCombobox
+                  id="category"
                   items={categories}
-                  value={
-                    categories.find(
-                      (category) => category.id === field.value
-                    ) ?? null
-                  }
-                  onValueChange={(category) =>
-                    field.onChange(category?.id ?? '')
-                  }
-                  itemToStringLabel={(category) => category.title}
-                  itemToStringValue={(category) => category.id}
-                >
-                  <ComboboxInput
-                    id="category"
-                    onBlur={field.onBlur}
-                    aria-invalid={fieldState.invalid}
-                    placeholder={t('selectOption')}
-                    className="w-full"
-                  />
-                  <ComboboxContent>
-                    <ComboboxEmpty>{t('noOptions')}</ComboboxEmpty>
-                    <ComboboxList>
-                      {(category) => (
-                        <ComboboxItem
-                          key={category.id}
-                          value={category}
-                        >
-                          {category.title}
-                        </ComboboxItem>
-                      )}
-                    </ComboboxList>
-                  </ComboboxContent>
-                </Combobox>
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  onBlur={field.onBlur}
+                  invalid={fieldState.invalid}
+                  placeholder={t('selectOption')}
+                  emptyMessage={t('noOptions')}
+                />
                 <FieldError errors={[fieldState.error]} />
               </Field>
             )}
@@ -325,40 +294,16 @@ export default function EditProductForm({
                 >
                   {t('occasion')}
                 </FieldLabel>
-                <Combobox
+                <ProductOptionCombobox
+                  id="occasion"
                   items={occasions}
-                  value={
-                    occasions.find(
-                      (occasion) => occasion.id === field.value
-                    ) ?? null
-                  }
-                  onValueChange={(occasion) =>
-                    field.onChange(occasion?.id ?? '')
-                  }
-                  itemToStringLabel={(occasion) => occasion.title}
-                  itemToStringValue={(occasion) => occasion.id}
-                >
-                  <ComboboxInput
-                    id="occasion"
-                    onBlur={field.onBlur}
-                    aria-invalid={fieldState.invalid}
-                    placeholder={t('selectOption')}
-                    className="w-full"
-                  />
-                  <ComboboxContent>
-                    <ComboboxEmpty>{t('noOptions')}</ComboboxEmpty>
-                    <ComboboxList>
-                      {(occasion) => (
-                        <ComboboxItem
-                          key={occasion.id}
-                          value={occasion}
-                        >
-                          {occasion.title}
-                        </ComboboxItem>
-                      )}
-                    </ComboboxList>
-                  </ComboboxContent>
-                </Combobox>
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  onBlur={field.onBlur}
+                  invalid={fieldState.invalid}
+                  placeholder={t('selectOption')}
+                  emptyMessage={t('noOptions')}
+                />
                 <FieldError errors={[fieldState.error]} />
               </Field>
             )}
@@ -366,7 +311,7 @@ export default function EditProductForm({
         </div>
       </FieldGroup>
 
-      <Button type="submit" className="w-full " disabled={isPending}>
+      <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? t('updatingProduct') : t('updateProduct')}
       </Button>
     </form>

@@ -64,6 +64,14 @@ export interface OccasionType {
   updatedAt: string;
 }
 
+export interface ProductOccasion {
+  id: string;
+  productId: string;
+  occasionId: string;
+  createdAt: string;
+  occasion: OccasionType;
+}
+
 // ─────────────────────────────────────────────────────────────
 // Product
 // ─────────────────────────────────────────────────────────────
@@ -98,7 +106,7 @@ export interface IProduct {
   subCategory?: ProductSubCategory | null;
 
   occasion?: OccasionType;
-  occasions?: OccasionType[];
+  occasions?: ProductOccasion[];
 
   reviews?: ProductReview[];
 

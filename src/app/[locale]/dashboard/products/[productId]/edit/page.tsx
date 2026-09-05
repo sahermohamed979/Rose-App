@@ -4,8 +4,8 @@ import {
   getOccasions,
 } from '@/features/products/apis/filter-api';
 import {
-  ProductCategory,
-  OccasionType,
+  type ProductCategory,
+  type OccasionType,
 } from '@/shared/lib/types/product-types';
 import { Loader2 } from 'lucide-react';
 import EditProductForm from '@/features/products/components/edit-product-form';
@@ -16,7 +16,7 @@ import { getSingleProduct } from '@/features/products/apis/get-single-product-ap
 export default async function EditProduct({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }) {
   const t = await getTranslations('dashboard.products');
 
@@ -31,7 +31,7 @@ export default async function EditProduct({
   if (!productData) {
     notFound();
   }
-  console.log(productData?.product);
+
   return (
     <div className="p-4 md:p-0">
       <PageHeader title={t('editProductTitle')} />
@@ -44,7 +44,7 @@ export default async function EditProduct({
           <EditProductForm
             categories={categories}
             occasions={occasions}
-            product={productData?.product}
+            product={productData.product}
           />
         )}
       </div>
