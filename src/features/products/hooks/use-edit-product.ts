@@ -6,27 +6,11 @@ import { toast } from 'sonner';
 
 import { useRouter } from '@/i18n/navigation';
 import { editProductAction } from '../actions/edit-product.action';
+import { createProductFormData } from '../lib/create-product-form-data';
 import type { EditProductFormValues } from '../schemas/edit-product-schema';
 
 const SUGGESTED_PRODUCTS_QUERY_KEY = ['suggested-products'] as const;
 const SEARCH_PRODUCTS_QUERY_KEY = ['search-products'] as const;
-
-function createProductFormData(values: EditProductFormValues) {
-  const formData = new FormData();
-
-  Object.entries(values).forEach(([key, value]) => {
-    if (value instanceof FileList) {
-      Array.from(value).forEach((file) => {
-        formData.append(key, file);
-      });
-      return;
-    }
-
-    formData.append(key, String(value));
-  });
-
-  return formData;
-}
 
 export function useEditProduct(
   productId: string,
@@ -50,6 +34,9 @@ export function useEditProduct(
         }),
         queryClient.invalidateQueries({
           queryKey: SEARCH_PRODUCTS_QUERY_KEY,
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['product-info', productId],
         }),
       ]);
 
