@@ -210,7 +210,6 @@
     "starSingular": "{n} نجمة",
     "starPlural": "{n} نجوم"
   },
-
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
@@ -344,33 +343,26 @@
     "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
     "buyNow": "سأشتريها!"
   },
-
   "categories": {
     "wedding": "زفاف",
     "engagement": "خطوبة",
     "anniversary": "ذكرى زواج"
   },
-
   "cards": {
     "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
     "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
     "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
   },
-
   "features": {
     "freeDelivery": "توصيل مجاني",
     "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
-
     "refund": "استرجاع الأموال",
     "refundDesc": "استرجاع خلال 30 يومًا",
-
     "safePayment": "دفع آمن",
     "safePaymentDesc": "دفع آمن بنسبة 100٪",
-
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
   },
-
   "account-setting": {
     "account-setting": "اعدادات الحساب",
     "profile": "الملف الشخصي",
@@ -455,6 +447,31 @@
       "newPasswordSpecial": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
       "confirmRequired": "يرجى تأكيد كلمة المرور",
       "mismatch": "كلمتا المرور غير متطابقتين"
+    }
+  },
+  "orders": {
+    "order": "طلب",
+    "createdIn": "تم الإنشاء في",
+    "at": "الساعة",
+    "totalPrice": "السعر الإجمالي",
+    "paid": "تم الدفع",
+    "currency": "جنيه",
+    "status": "الحالة",
+    "paymentMethod": "طريقة الدفع",
+    "cash": "نقدًا",
+    "creditCard": "بطاقة ائتمان",
+    "deliveryStatus": "حالة التوصيل",
+    "orderItems": "منتجات الطلب",
+    "rating": "التقييم",
+    "ratings": "تقييمات",
+    "showAll": "عرض الكل",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل...",
+    "noMoreOrders": "لا توجد طلبات أخرى.",
+    "statuses": {
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغي",
+      "done": "تم"
     }
   }
 }
