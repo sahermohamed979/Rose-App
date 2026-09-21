@@ -97,20 +97,26 @@ export default async function SidebarFilters({
           {occasions?.map((occasion) => {
             const isSelected: boolean =
               selectedOccasionId === occasion.id;
+            const hasValidImage =
+              typeof occasion.image === 'string' &&
+              occasion.image.trim().length > 0;
             return (
               <Link
                 key={occasion.id}
                 href={buildFilterUrl(searchParams, {
                   occasionId: isSelected ? null : occasion.id,
                 })}
-                className="group relative h-19 w-full overflow-hidden rounded-lg block"
+                className="group relative h-19 w-full overflow-hidden rounded-lg block bg-bg-muted"
               >
-                <Image
-                  src={occasion.image ?? ''}
-                  alt={occasion.title}
-                  fill
-                  className="object-cover"
-                />
+                {hasValidImage && (
+                  <Image
+                    src={occasion.image}
+                    alt={occasion.title || 'occasion'}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                )}
                 <div
                   className={`absolute inset-0 bg-linear-to-b transition-all duration-300 group-hover:from-black/25 group-hover:to-black/50 ${
                     isSelected

@@ -47,9 +47,9 @@ export default async function Bestselling() {
   });
 
   return (
-    <div className="container mx-auto px-4 md:px-0 w-full overflow-hidden  mt-[107px]">
-      <div className="grid grid-cols-1 gap-9 px-5 md:px-0 lg:grid-cols-[minmax(260px,22.7%)_minmax(0,1fr)] mb-[138px]">
-        <div className=" flex flex-col justify-between mb-5 md:mb-0">
+    <div className="container mx-auto px-4 md:px-0 w-full mt-12 sm:mt-16 lg:mt-[107px]">
+      <div className="grid grid-cols-1 gap-8 md:gap-10 px-2 sm:px-4 md:px-0 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,22.7%)_minmax(0,1fr)] mb-16 sm:mb-24 lg:mb-[138px]">
+        <div className="flex flex-col justify-between mb-5 md:mb-0 gap-6">
           <div>
             <p
               className="text-base
@@ -61,10 +61,10 @@ export default async function Bestselling() {
               {t('bestSelling')}
             </p>
             <p
-              className="text-3xl
+              className="text-2xl sm:text-3xl
       font-bold
       text-text-primary
-      leading-none 
+      leading-tight sm:leading-none 
       mb-[10px]"
             >
               {t.rich('bestSellingSubtitle', {
@@ -73,20 +73,20 @@ export default async function Bestselling() {
                     {chunks}
                   </span>
                 ),
-                br: () => <br />,
+                br: () => <br className="hidden sm:inline" />,
               })}
             </p>
             <p
-              className="text-base
+              className="text-sm sm:text-base
         text-text-soft
-        leading-none 
+        leading-relaxed sm:leading-none 
         mb-[10px]
         whitespace-pre-line"
             >
               {t('bestSellingDescription')}
             </p>
           </div>
-          <Button className="w-[53%]">
+          <Button className="w-full sm:w-auto px-6">
             {t('exploreGifts')}
 
             {locale === 'ar' ? (

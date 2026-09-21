@@ -46,7 +46,11 @@ export default async function Header() {
 
         {/* Mobile: compact icons row + hamburger */}
         <div className="flex md:hidden items-center gap-2">
-          <HeaderActions mobile />
+          <HeaderActions
+            mobile
+            wishlistCount={wishlistCount}
+            cartCount={cartCount}
+          />
           <MobileNav />
         </div>
       </div>

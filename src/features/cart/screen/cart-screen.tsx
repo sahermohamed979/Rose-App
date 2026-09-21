@@ -17,20 +17,21 @@ export default function CartScreen({
 }) {
   const t = useTranslations('cart');
   const { status } = useSession();
+  const isGuest = status === 'unauthenticated';
 
   const {
     data: localCartData,
-    isLoading,
+    isLoading: isLocalLoading,
     error,
     refetch,
-  } = useLocalCart();
+  } = useLocalCart(isGuest);
 
-  const cartData =
-    status === 'authenticated' ? cartResponse : localCartData;
-  if (isLoading) {
+  const cartData = isGuest ? localCartData : cartResponse;
+
+  if (isGuest && isLocalLoading) {
     return <CartSkeleton />;
   }
-  if (error) {
+  if (isGuest && error) {
     return <ErrorCartView error={error} reset={() => refetch()} />;
   }
   return (
@@ -49,9 +50,9 @@ export default function CartScreen({
       </div>
       <Link
         href={'/products'}
-        className="w-55.75 h-12 bg-bg-primary-saturated py-2 mt-4 flex items-center justify-center rounded-xl text-text-inverse"
+        className="w-full sm:w-55.75 h-12 bg-bg-primary-saturated py-2 mt-4 flex items-center justify-center rounded-xl text-text-inverse text-sm sm:text-base"
       >
-        <MoveLeft size={20} className="me-3  rtl:rotate-y-180 " />
+        <MoveLeft size={20} className="me-3 rtl:rotate-180" />
         {t('continueShopping')}
       </Link>
     </>

@@ -55,7 +55,7 @@ export default function HeaderDropdown({ name }: { name: string }) {
 
           <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
             <ScrollText size={16} />
-            {t('userMenu.orders')}
+            <Link href="/orders">{t('userMenu.orders')}</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         {session?.user?.role === 'ADMIN' && (
