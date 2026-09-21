@@ -13,6 +13,7 @@ import {
   LogOut,
   Menu,
   PartyPopper,
+  ScrollText,
   User,
   X,
 } from 'lucide-react';
@@ -31,7 +32,11 @@ export default function MobileNav() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const navLinks = [
-    { href: '/', label: 'subHeaderHome', icon: <Home className="w-5 h-5" /> },
+    {
+      href: '/',
+      label: 'subHeaderHome',
+      icon: <Home className="w-5 h-5" />,
+    },
     {
       href: '/products',
       label: 'subHeaderProducts',
@@ -76,7 +81,8 @@ export default function MobileNav() {
       }
     };
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () =>
+      document.removeEventListener('keydown', handleKeyDown);
   }, [open, close]);
 
   // Prevent body scroll when drawer is open
@@ -93,13 +99,19 @@ export default function MobileNav() {
       <button
         ref={triggerRef}
         id="mobile-menu-trigger"
-        aria-label={open ? tHeader('nav.close') : tHeader('nav.openMenu')}
+        aria-label={
+          open ? tHeader('nav.close') : tHeader('nav.openMenu')
+        }
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((prev) => !prev)}
         className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-text-plain hover:bg-bg-subtle transition-colors shrink-0"
       >
-        {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {open ? (
+          <X className="w-6 h-6" />
+        ) : (
+          <Menu className="w-6 h-6" />
+        )}
       </button>
 
       {/* Backdrop */}
@@ -145,7 +157,10 @@ export default function MobileNav() {
         </div>
 
         {/* Nav links */}
-        <ul className="flex flex-col py-4 overflow-y-auto flex-1" role="list">
+        <ul
+          className="flex flex-col py-4 overflow-y-auto flex-1"
+          role="list"
+        >
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -196,6 +211,23 @@ export default function MobileNav() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/orders"
+                  onClick={close}
+                  className={`
+                    flex items-center gap-3 px-5 py-3.5 text-base capitalize transition-colors
+                    ${
+                      pathname === '/orders'
+                        ? 'text-bg-primary-saturated font-semibold bg-bg-subtle border-s-2 border-bg-primary-saturated'
+                        : 'text-text-plain hover:bg-bg-subtle hover:text-text-primary'
+                    }
+                  `}
+                >
+                  <ScrollText className="w-5 h-5 text-text-primary" />
+                  <span>{tUserMenu('orders')}</span>
+                </Link>
+              </li>
+              <li>
                 <button
                   type="button"
                   onClick={() => {
@@ -214,7 +246,9 @@ export default function MobileNav() {
               <Link
                 href="/login"
                 onClick={close}
-                aria-current={pathname === '/login' ? 'page' : undefined}
+                aria-current={
+                  pathname === '/login' ? 'page' : undefined
+                }
                 className={`
                   flex items-center gap-3 px-5 py-3.5 text-base capitalize transition-colors
                   ${

@@ -16,6 +16,8 @@ import NotificationsContainer from '../../notifications/components/notifications
 import HeaderDropdown from './header-dropdown';
 import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
+import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
+import { useLocalWishlist } from '@/features/cart-wishlist/hooks/use-local-wishlist';
 
 interface HeaderActionsProps {
   mobile?: boolean;
@@ -30,17 +32,28 @@ export default function HeaderActions({
   const t = useTranslations('header');
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
+  const isGuest = status === 'unauthenticated';
+  const { data: localCartData } = useLocalCart(isGuest);
+  const { data: localWishlistData } = useLocalWishlist(isGuest);
+
+  // Displayed counts: server counts for authenticated/loading, local storage only for confirmed guests
+  const displayedCartCount = isGuest
+    ? (localCartData?.length ?? 0)
+    : cartCount;
+  const displayedWishlistCount = isGuest
+    ? (localWishlistData?.length ?? 0)
+    : wishlistCount;
 
   if (mobile) {
     return (
       <div className="flex items-center gap-2">
         <Link
-          href={isAuthenticated ? '/wish-list' : '/login'}
+          href={isAuthenticated ? '/wishlist' : '/login'}
           aria-label={t('nav.wishlist')}
           className="relative"
         >
           <Heart className="w-5 h-5" />
-          {isAuthenticated && <CountBadge count={wishlistCount} />}
+          <CountBadge count={displayedWishlistCount} />
         </Link>
 
         <Link
@@ -49,7 +62,7 @@ export default function HeaderActions({
           className="relative"
         >
           <ShoppingCart className="w-5 h-5" />
-          {isAuthenticated && <CountBadge count={cartCount} />}
+          <CountBadge count={displayedCartCount} />
         </Link>
 
         <NotificationsContainer status={status} />
@@ -117,7 +130,7 @@ export default function HeaderActions({
           className="relative"
         >
           <Heart className="w-5 h-5 cursor-pointer" />
-          <CountBadge count={wishlistCount} />
+          <CountBadge count={displayedWishlistCount} />
         </Link>
 
         <Link
@@ -126,7 +139,7 @@ export default function HeaderActions({
           className="relative"
         >
           <ShoppingCart className="w-5 h-5 cursor-pointer" />
-          <CountBadge count={cartCount} />
+          <CountBadge count={displayedCartCount} />
         </Link>
 
         <NotificationsContainer status={status} />

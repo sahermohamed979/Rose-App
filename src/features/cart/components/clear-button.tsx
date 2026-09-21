@@ -34,16 +34,16 @@ export default function ClearButton({
       <Button
         disabled={cart?.cartItems.length === 0 || clearCart.isPending}
         onClick={() => setOpen(true)}
-        className="flex items-center justify-center gap-2 text-base font-semibold text-text-primary bg-bg-carosel h-10 w-34 rounded-xl"
+        className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-base font-semibold text-text-primary bg-bg-carosel h-9 sm:h-10 w-auto px-3 sm:px-4 sm:w-34 rounded-xl"
       >
         <span>
-          <BrushCleaning size={20} />
+          <BrushCleaning size={18} />
         </span>
         {t('clearCart')}
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-[474px] min-h-[347px] rounded-2xl flex flex-col items-center justify-around ">
+        <DialogContent className="w-[92vw] max-w-[474px] min-h-[300px] sm:min-h-[347px] rounded-2xl flex flex-col items-center justify-around p-4 sm:p-6">
           {/* Icon */}
           <div className="flex items-center justify-center rounded-full bg-bg-muted p-5 mt-5">
             <span className="flex items-center justify-center rounded-full bg-bg-soft p-4">

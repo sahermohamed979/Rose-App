@@ -1,15 +1,24 @@
 const LOCAL_WISHLIST_KEY = 'client-wishlist';
 
 export function getLocalWishlist(): string[] {
+  if (typeof window === 'undefined') {
+    return [];
+  }
   const storedWishlist = localStorage.getItem(LOCAL_WISHLIST_KEY);
   return storedWishlist ? JSON.parse(storedWishlist) : [];
 }
 
 export function isInLocalWishlist(productId: string): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
   return getLocalWishlist().includes(productId);
 }
 
 export function toggleLocalWishlistItem(productId: string): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
   const wishlist = getLocalWishlist();
   const isAdded = wishlist.includes(productId);
 
@@ -26,5 +35,8 @@ export function toggleLocalWishlistItem(productId: string): boolean {
 }
 
 export function clearLocalWishlist(): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
   localStorage.removeItem(LOCAL_WISHLIST_KEY);
 }
