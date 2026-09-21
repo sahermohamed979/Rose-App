@@ -9,7 +9,12 @@ const intlMiddleware = createMiddleware(routing);
 export const authPages = ['/login', '/register', '/forgot-password'];
 
 // Protected pages - guests can't visit these
-const protectedPages = ['/dashboard', '/profile', '/home'];
+const protectedPages = [
+  '/dashboard',
+  '/profile',
+  '/home',
+  '/checkout',
+];
 
 export default async function middleware(req: NextRequest) {
   const token = await getToken({

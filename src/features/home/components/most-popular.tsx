@@ -8,7 +8,6 @@ import {
   TabsTrigger,
 } from '@/shared/components/ui/tabs';
 import ProductCard from './product-card';
-import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   IProduct,
@@ -21,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { ArrowRightIcon } from 'lucide-react';
 
 const tabTriggerClassName =
@@ -45,7 +44,7 @@ export default function MostPopular({
     occasions[0];
 
   return (
-    <div className="w-full">
+    <div className="container mx-auto px-4 md:px-0 w-full ">
       {hasNoOccasions && (
         <>
           <HeaderTitle text={t('mostPopular')} />

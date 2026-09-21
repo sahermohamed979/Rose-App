@@ -47,28 +47,48 @@ export default async function Bestselling() {
   });
 
   return (
-    <div className="w-full overflow-hidden">
-      <div className="grid grid-cols-1 gap-9 lg:grid-cols-[minmax(260px,22.7%)_minmax(0,1fr)]">
-        <div className="flex flex-col justify-center gap-6 mb-5 md:mb-0">
-          <div className="flex flex-col gap-3">
-            <p className="text-sm font-bold text-text-secondary uppercase tracking-widest leading-none">
+    <div className="container mx-auto px-4 md:px-0 w-full overflow-hidden  mt-[107px]">
+      <div className="grid grid-cols-1 gap-9 px-5 md:px-0 lg:grid-cols-[minmax(260px,22.7%)_minmax(0,1fr)] mb-[138px]">
+        <div className=" flex flex-col justify-between mb-5 md:mb-0">
+          <div>
+            <p
+              className="text-base
+      font-bold
+      text-text-secondary
+      leading-none 
+      letter-spacing-[25%] mb-[10px]"
+            >
               {t('bestSelling')}
             </p>
-            <p className="text-3xl md:text-4xl font-bold text-text-primary leading-tight">
+            <p
+              className="text-3xl
+      font-bold
+      text-text-primary
+      leading-none 
+      mb-[10px]"
+            >
               {t.rich('bestSellingSubtitle', {
                 secondary: (chunks) => (
-                  <span className="text-primary">{chunks}</span>
+                  <span className="text-text-secondary">
+                    {chunks}
+                  </span>
                 ),
                 br: () => <br />,
               })}
             </p>
-            <p className="text-sm text-text-soft leading-relaxed whitespace-pre-line mt-2">
+            <p
+              className="text-base
+        text-text-soft
+        leading-none 
+        mb-[10px]
+        whitespace-pre-line"
+            >
               {t('bestSellingDescription')}
             </p>
           </div>
+          <Button className="w-[53%]">
+            {t('exploreGifts')}
 
-          <Button className="w-fit px-6 py-5 flex items-center gap-2 mt-2">
-            <span>{t('exploreGifts')}</span>
             {locale === 'ar' ? (
               <ArrowRightIcon className="w-4 h-4 rotate-180" />
             ) : (
@@ -76,8 +96,7 @@ export default async function Bestselling() {
             )}
           </Button>
         </div>
-
-        <div className="min-w-0 w-full relative">
+        <div className="min-w-0 w-full">
           <Suspense
             fallback={
               <ProductCardSkeletonGrid
