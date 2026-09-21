@@ -181,7 +181,13 @@
     "hot": "رائج",
     "addToWishList": "اضافه الي المفضله",
     "removeFromWishList": "ازاله من المفضله",
-    "loadingProducts": "جاري تحميل المنتجات..."
+    "loadingProducts": "جاري تحميل المنتجات...",
+    "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
+    "addToCartError": "فشل إضافة المنتج إلى السلة",
+    "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة",
+    "removeFromWishlistSuccess": "تم إزالة المنتج من المفضلة بنجاح",
+    "removeFromWishlistError": "فشل إزالة المنتج من المفضلة"
   },
   "ProductDetails": {
     "notFound": "المنتج غير موجود",
@@ -379,5 +385,118 @@
 
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
+  },
+  "checkout": {
+    "step1Title": "عنوان الشحن",
+    "addAddress": "إضافة عنوان جديد",
+    "next": "التالي",
+    "back": "رجوع",
+    "noAddresses": "أضف عنوانك الأول للمتابعة",
+    "or": "أو",
+    "failedLoading": "فشل تحميل العناوين. حاول مجدداً",
+    "back": "رجوع",
+    "step2Title": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "cashP": "ستدفع نقدًا عند استلام طلبك.",
+    "creditCard": "بطاقة ائتمانية",
+    "creditP": "سيتم توجيهك بشكل آمن إلى Stripe لإكمال عملية الدفع.",
+    "orderSuccess": "تم تقديم طلبك بنجاح!",
+    "orderFailed": "فشل تقديم الطلب. حاول مجددا",
+    "tryAgain": "حاول مجدداً",
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
+  },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "items": "{count} عناصر",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "ratings": "{count} تقييمات",
+    "addToCart": "أضف إلى السلة",
+    "clearWishlist": "مسح قائمة المفضلة",
+    "clearWishlistConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "exploreSimilarProducts": "استكشف المنتجات المشابهة",
+    "continueShopping": "متابعة التسوق",
+    "empty": "قائمة المفضلة فارغة",
+    "currency": "جنيه"
+  },
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة",
+      "address": "إضافة العنوان"
+    },
+    "city": "المدينة",
+    "title": "اسم العنوان",
+    "details": "العنوان",
+    "phone": "رقم التواصل",
+    "findMyLocation": "حدد موقعي",
+    "mapLoading": "جارٍ تحميل الخريطة...",
+    "mapUnavailable": "الخريطة غير متاحة. تحقق من اتصالك وحاول مرة أخرى.",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "errors": {
+      "titleRequired": "اسم العنوان مطلوب",
+      "titleInvalid": "أدخل اسم عنوان صحيح",
+      "cityRequired": "المدينة مطلوبة",
+      "cityInvalid": "أدخل اسم مدينة صحيح",
+      "streetRequired": "العنوان مطلوب",
+      "streetInvalid": "أدخل عنوان شارع صحيح",
+      "phoneRequired": "رقم التواصل مطلوب",
+      "phoneInvalid": "أدخل رقم تواصل صحيح",
+      "locationRequired": "يرجى تحديد موقعك على الخريطة",
+      "unsafeInput": "غير مسموح بإدخال رموز غير صالحة"
+    }
   }
 }

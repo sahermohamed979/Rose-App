@@ -4,9 +4,23 @@ import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import MobileNav from './mobile-nav';
 import { Link } from '@/i18n/navigation';
+import { getCart } from '@/features/cart/apis/cart-service';
+import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
 
 export default async function Header() {
   const t = await getTranslations('header');
+
+  const [cart, wishlist] = await Promise.all([
+    getCart(),
+    getWishlistAction(),
+  ]);
+
+  const wishlistCount =
+    wishlist.status && wishlist.payload
+      ? wishlist.payload.wishlistItems.length
+      : 0;
+  const cartCount =
+    cart.status && cart.payload ? cart.payload.cartItems.length : 0;
 
   return (
     <div className="sticky top-0 z-50 overflow-x-hidden">
@@ -24,7 +38,10 @@ export default async function Header() {
 
         {/* Desktop header actions */}
         <div className="hidden md:flex flex-1 min-w-0">
-          <HeaderActions />
+          <HeaderActions
+            wishlistCount={wishlistCount}
+            cartCount={cartCount}
+          />
         </div>
 
         {/* Mobile: compact icons row + hamburger */}

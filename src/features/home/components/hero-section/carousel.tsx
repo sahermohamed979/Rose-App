@@ -15,7 +15,8 @@ import img2 from '../../assets/images/e7f218b3bfaca1e7ad292827dc8a72cab87798a6.p
 import img3 from '../../assets/images/47cf4ce3cc028ed55f9510ba0b3b684365c1387a.png';
 import { Button } from '@/shared/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useParams } from 'next/navigation';
 
 const slides = [
   { id: 1, image: img1 },

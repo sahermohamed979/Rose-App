@@ -1,11 +1,11 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { ShoppingCartIcon, StarIcon } from 'lucide-react';
-import { Button } from '@/shared/components/ui/button';
+import { StarIcon } from 'lucide-react';
 import { Badge } from '@/shared/components/ui/badge';
 import { Link } from '@/i18n/navigation';
+import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import { IProduct } from '@/shared/lib/types/product-types';
-
+import WishlistButton from '@/features/cart-wishlist/components/wishlist-button';
 export default function ProductCard({
   product,
 }: {
@@ -26,7 +26,7 @@ export default function ProductCard({
         style={{ backgroundImage: `url(${product.cover})` }}
         className="block aspect-[302/272] w-full bg-cover bg-center rounded-2xl mb-4 relative"
       >
-        <div className="absolute top-2 right-2 rtl:left-2 flex gap-x-1.5 focus-visible:outline-none">
+        <div className="absolute w-fit top-2 right-2 rtl:left-2 rtl:right-auto flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
             <Badge variant="destructive" className="">
               {t('productBadges.outOfStock')}
@@ -45,6 +45,9 @@ export default function ProductCard({
               {t('productBadges.hot')}
             </Badge>
           )}
+        </div>
+        <div className="absolute top-2 left-2 rtl:right-2 flex gap-x-1.5 focus-visible:outline-none">
+          <WishlistButton productId={product.id} />
         </div>
       </Link>
 
@@ -104,14 +107,15 @@ export default function ProductCard({
           </p>
         </div>
         {/*add to cart button*/}
-        <Button
+        <AddToCart
           aria-label={`${t('ProductDetails.addToCart')} - ${product.title}`}
           className="w-[42px] 
-                h-[42px] rounded-full
-                 p-0 dark:bg-maroon-500"
-        >
-          <ShoppingCartIcon className="w-4 h-4 text-text-inverse dark:text-white" />
-        </Button>
+            h-[42px] rounded-full
+             p-0 dark:bg-maroon-500 overflow-hidden"
+          productId={product.id}
+          product={product}
+          stock={product.stock}
+        />
       </div>
     </div>
   );
