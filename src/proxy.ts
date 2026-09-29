@@ -12,7 +12,6 @@ export const authPages = ['/login', '/register', '/forgot-password'];
 const protectedPages = [
   '/dashboard',
   '/profile',
-  '/home',
   '/checkout',
   '/account-setting',
   '/orders',
