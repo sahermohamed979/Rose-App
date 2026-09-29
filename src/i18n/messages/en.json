@@ -216,7 +216,6 @@
     "starSingular": "{n} star",
     "starPlural": "{n} stars"
   },
-
   "header": {
     "searchPlaceholder": "What awesome gift are you looking for?",
     "headerLogin": "Login",
@@ -360,31 +359,43 @@
     "flowersSubtitle": "Elegant gifts for every special moment.",
     "buyNow": "I'm buying!"
   },
-
   "categories": {
     "wedding": "Wedding",
     "engagement": "Engagement",
     "anniversary": "Anniversary"
   },
-
   "cards": {
     "weddingTitle": "Celebrate Her Forever with a Gift She'll Always Remember",
     "engagementTitle": "Honor the Beginning of a Beautiful Journey Together",
     "anniversaryTitle": "Mark Every Year of Love with a Meaningful Surprise"
   },
-
   "features": {
     "freeDelivery": "Free Delivery",
     "freeDeliveryDesc": "For orders above 120 EGP",
-
     "refund": "Get Refund",
     "refundDesc": "Refunds within 30 days",
-
     "safePayment": "Safe Payment",
     "safePaymentDesc": "100% Secure Payment",
-
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "reviewForm": {
+    "yourRating": "Your rating",
+    "title": "Title",
+    "titlePlaceholder": "Enter review title",
+    "review": "Review",
+    "reviewPlaceholder": "What do you think of this product?",
+    "submit": "Add Review",
+    "submitting": "Submitting...",
+    "loginRequired": "Please login to be able to review the product",
+    "reviewFailed": "Failed to submit your review.",
+    "validation": {
+      "titleMin": "Title must be at least 5 characters",
+      "titleMax": "Title must be at most 32 characters",
+      "contentMin": "Review must be at least 20 characters",
+      "contentMax": "Review must be at most 100 characters",
+      "ratingRequired": "Please select a star rating"
+    }
   },
   "cart": {
     "title": " Cart ",
@@ -398,7 +409,6 @@
     "product": "{count} Products",
     "currency": "EGP",
     "cancel": "Cancel",
-    "confirmClear ": "Are you sure you want to clear your cart? ",
     "confirm": "Confirm"
   },
   "cartError": {
@@ -501,5 +511,123 @@
       "locationRequired": "Please pin your location on the map",
       "unsafeInput": "Invalid characters are not allowed"
     }
+  },
+  "account-setting": {
+    "account-setting": "Account Setting",
+    "profile": "Profile",
+    "change-password": "Change Password",
+    "logout": "Logout"
+  },
+  "profileForm": {
+    "changeEmail": "Change Email",
+    "enterEmail": "Enter your new email",
+    "email": "Email",
+    "emailPlaceholder": "user@example.com",
+    "next": " Next",
+    "verifyOtp": "Verify OTP",
+    "otpP": "Please enter the 6-digits code we have sent to:",
+    "edit": "Edit",
+    "resendCode": "Resend Code",
+    "resendTimer": "You can request a new code in: {s}s",
+    "deleteAccount?": "Are you sure you want to delete your account?",
+    "actionPermanent": "This action is permanent and cannot be undone.",
+    "nope": "Nope, not doing it",
+    "delete": "Yes, delete",
+    "deleting": "Deleting...",
+    "fields": {
+      "change": "Change",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "genderPlaceholder": "Select gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "deleteAccount": "Delete my account",
+    "loading": "Loading profile...",
+    "loadError": "Failed to load profile. Please try again.",
+    "saving": "Saving...",
+    "saveChanges": "Save changes",
+    "uploadPhoto": "Upload Photo",
+    "uploadPhotoType": "You can upload a jpg, png, or gif photo with max size of 5MB.",
+    "uploadingPhoto": "Uploading photo...",
+    "toast": {
+      "profileUpdatedSuccess": "Profile updated successfully",
+      "profileUpdatedError": "Something went wrong",
+      "validImage": "Please upload a valid image",
+      "imageSize": "Image size must be less than 5MB",
+      "photoUpdatedSuccess": "Photo uploaded successfully",
+      "photoUpdatedError": "Failed to upload photo",
+      "enterNewEmail": "Please enter your new email",
+      "verificationCodeSent": "Verification code sent",
+      "enterSixDigits": "Please enter 6 digits",
+      "emailUpdated": "Email updated successfully",
+      "accountDeleted": "Account deleted successfully"
+    },
+    "errors": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "phoneInvalid": "Please enter a valid phone number"
+    },
+    "profileError": {
+      "title": "Couldn't load your profile",
+      "description": "Something went wrong while fetching your account details. Try again in a moment.",
+      "retry": "Try again"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "button": "Change Password",
+    "incorrectCurrent": "Incorrect current password",
+    "samePw": "New password must differ from your current password",
+    "success": "Password changed successfully. Please log in again.",
+    "error": "Something went wrong. Please try again",
+    "errors": {
+      "oldPasswordRequired": "Current password is required",
+      "newPasswordMin": "Password must be at least 8 characters",
+      "newPasswordUppercase": "Password must contain at least one uppercase letter",
+      "newPasswordLowercase": "Password must contain at least one lowercase letter",
+      "newPasswordNumber": "Password must contain at least one number",
+      "newPasswordSpecial": "Password must contain at least one special character",
+      "confirmRequired": "Please confirm your password",
+      "mismatch": "Passwords do not match"
+    }
+  },
+  "orders": {
+    "order": "Order",
+    "createdIn": "Created in",
+    "at": "at",
+    "totalPrice": "Total Price",
+    "paid": "Paid",
+    "status": "Status",
+    "paymentMethod": "Payment Method",
+    "cash": "Cash",
+    "creditCard": "Credit Card",
+    "deliveryStatus": "Delivery Status",
+    "orderItems": "Order items",
+    "rating": "Rating",
+    "currency": "EGP",
+    "ratings": "ratings",
+    "showAll": "Show All",
+    "showLess": "Show Less",
+    "loadMore": "Load More",
+    "loading": "Loading...",
+    "noMoreOrders": "No more orders.",
+    "loadMoreError": "Could not load more orders.",
+    "tryAgain": "Try Again",
+    "statuses": {
+      "pending": "Pending",
+      "cancelled": "Cancelled",
+      "done": "Done"
+    }
+  },
+  "Forms": {
+    "textareaPlaceholder": "Write your notes or message here...",
+    "required": "This field is required"
   }
 }
