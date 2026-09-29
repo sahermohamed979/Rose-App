@@ -45,7 +45,7 @@ export default function HeaderDropdown({ name }: { name: string }) {
         <DropdownMenuGroup>
           <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
             <User size={16} />
-            <Link href="/profile">{t('userMenu.account')}</Link>
+            <Link href="/account">{t('userMenu.account')}</Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">

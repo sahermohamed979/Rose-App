@@ -26,7 +26,7 @@ export default async function Header() {
     <div className="sticky top-0 z-50 overflow-x-hidden">
       <div className="bg-bg-muted px-4 md:px-9 py-1 flex flex-row items-center justify-between gap-2">
         {/* Logo */}
-        <Link href="/" aria-label={t('nav.mainNav')}>
+        <Link href="/" aria-label="Rose App, home">
           <Image
             src="/Logo.svg"
             alt="Rose App"

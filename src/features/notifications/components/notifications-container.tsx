@@ -58,12 +58,17 @@ export default function NotificationsContainer({
       <DropdownMenuTrigger
         render={
           status === 'loading' ? (
-            <button className="relative" disabled>
+            <button
+              className="relative"
+              aria-label={t('notifications.title')}
+              disabled
+            >
               <Bell className="w-5 h-5 cursor-pointer" />
             </button>
           ) : (
             <button
               className="relative"
+              aria-label={t('notifications.title')}
               disabled={status !== 'authenticated'}
             >
               <Bell className="w-5 h-5 cursor-pointer" />
