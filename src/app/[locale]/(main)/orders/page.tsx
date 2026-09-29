@@ -1,27 +1,22 @@
-'use client';
-import { useEffect } from 'react';
+import OrdersPage from '@/features/orders/components/orders-page';
+import { getDirectToken } from '@/shared/lib/utils/get-direct-token';
+import { Suspense } from 'react';
 
-export default function Page() {
-  useEffect(() => {
-    window.history.pushState(null, '', window.location.href);
+export default async function page() {
+  const token = await getDirectToken();
 
-    const handleBackButton = () => {
-      window.history.pushState(null, '', window.location.href);
-    };
+  const dataPromise = fetch(`${process.env.NEXT_API_URL}/orders`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json());
 
-    window.addEventListener('popstate', handleBackButton);
-
-    const url = new URL(window.location.href);
-
-    if (url.searchParams.has('session_id')) {
-      url.searchParams.delete('session_id');
-      window.history.replaceState({}, '', url.toString());
-    }
-
-    return () => {
-      window.removeEventListener('popstate', handleBackButton);
-    };
-  }, []);
-
-  return <div>Orders</div>;
+  return (
+    <div>
+      <Suspense fallback={'loading..........'}>
+        <OrdersPage dataPromise={dataPromise} />
+      </Suspense>
+    </div>
+  );
 }
