@@ -1,11 +1,11 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { ShoppingCartIcon, StarIcon } from 'lucide-react';
-import { Button } from '@/shared/components/ui/button';
+import { StarIcon } from 'lucide-react';
 import { Badge } from '@/shared/components/ui/badge';
 import { Link } from '@/i18n/navigation';
+import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import { IProduct } from '@/shared/lib/types/product-types';
-
+import WishlistButton from '@/features/cart-wishlist/components/wishlist-button';
 export default function ProductCard({
   product,
 }: {
@@ -28,7 +28,7 @@ export default function ProductCard({
           'block aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
         }
       >
-        <div className="absolute top-2 right-2 rtl:left-2 flex gap-x-1.5 focus-visible:outline-none">
+        <div className="absolute w-fit top-2 right-2 rtl:left-2 rtl:right-auto flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
             <Badge variant="destructive" className="">
               {t('productBadges.outOfStock')}
@@ -48,9 +48,10 @@ export default function ProductCard({
             </Badge>
           )}
         </div>
+        <div className="absolute top-2 left-2 rtl:right-2 flex gap-x-1.5 focus-visible:outline-none">
+          <WishlistButton productId={product.id} />
+        </div>
       </Link>
-      {/* <Image src={product.cover} alt={product.title} width={302} height={272}
-                className=' object-cover h-[272px] w-[302px] rounded-2xl mb-4' quality={100} /> */}
       <h2
         className="
             text-lg font-semibold
@@ -107,17 +108,14 @@ export default function ProductCard({
           </p>
         </div>
         {/*add to cart button*/}
-        <Button
-          className="w-10.5 
-                h-10.5 rounded-full
-                bg-maroon-600
-                 p-0 dark:bg-maroon-500"
-        >
-          <ShoppingCartIcon
-            strokeWidth={1}
-            className="size-6  text-text-inverse dark:text-white"
-          />
-        </Button>
+        <AddToCart
+          className="w-[42px] 
+            h-[42px] rounded-full
+             p-0 dark:bg-maroon-500 overflow-hidden"
+          productId={product.id}
+          product={product}
+          stock={product.stock}
+        />
       </div>
     </div>
   );
