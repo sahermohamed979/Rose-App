@@ -2,8 +2,6 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { ordersApi } from '../apis/order.api';
-
 import {
   Banknote,
   Check,
@@ -13,44 +11,56 @@ import {
 } from 'lucide-react';
 
 import Image from 'next/image';
-
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import OrderSkeleton from '../skeltons/order-skeleton';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { Button } from '@/shared/components/ui/button';
+import { OrdersResponse } from '../types/order-types';
 
-export default function OrderPage() {
-  const { data: session } = useSession();
+interface orderPageType {
+  initialData: OrdersResponse;
+}
+
+export default function OrderPage({ initialData }: orderPageType) {
   const t = useTranslations('orders');
   const locale = useLocale();
 
-  // Keep track of which orders are expanded
   const [expandedOrders, setExpandedOrders] = useState<
     Record<string, boolean>
   >({});
 
   const {
-    isLoading,
     data,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
+    isFetchNextPageError,
   } = useInfiniteQuery({
     queryKey: ['orders-page'],
 
     queryFn: async ({ pageParam }) => {
-      const response = await ordersApi({
-        page: pageParam,
-        limit: 12,
-      });
+      const response = await fetch(
+        `/api/orders?page=${pageParam}&limit=12`
+      );
 
-      console.log('ORDERS DATA:', response);
+      const data: OrdersResponse = await response.json();
 
-      return response;
+      if (!response.ok) {
+        throw new Error(
+          data.status === false
+            ? data.message
+            : 'Something went wrong'
+        );
+      }
+
+      return data;
     },
 
     initialPageParam: 1,
+
+    initialData: {
+      pages: [initialData],
+      pageParams: [1],
+    },
 
     getNextPageParam: (lastPage) => {
       if (lastPage.status === false) {
@@ -67,7 +77,6 @@ export default function OrderPage() {
     },
   });
 
-  // Combine all orders from all pages
   const orders =
     data?.pages.flatMap((page) => {
       if (page.status === false) {
@@ -104,291 +113,289 @@ export default function OrderPage() {
 
   return (
     <>
-      {isLoading ? (
-        <OrderSkeleton />
-      ) : session ? (
-        <div
-          dir={locale === 'ar' ? 'rtl' : 'ltr'}
-          className="flex flex-col gap-10"
-        >
-          {orders.map((order, index) => {
-            const showAll = expandedOrders[order.id] ?? false;
+      <div
+        dir={locale === 'ar' ? 'rtl' : 'ltr'}
+        className="flex flex-col gap-10"
+      >
+        {orders.map((order) => {
+          const showAll = expandedOrders[order.id] ?? false;
 
-            return (
-              <div key={order.id}>
-                {/* ==================== ORDER HEADER ==================== */}
+          return (
+            <div key={order.id}>
+              {/* ==================== ORDER HEADER ==================== */}
 
-                <div className="flex justify-between text-text-inverse bg-maroon-600 p-4 rounded-t-2xl">
-                  <p className="text-2xl font-semibold">
-                    {t('order')} #{index}23{index}3{index}
-                  </p>
-
-                  <p className="text-[16px]">
-                    {t('createdIn')}:{' '}
-                    <span className="text-[16px] font-semibold">
-                      {formatDate(order.createdAt)}
-                    </span>
-                  </p>
+              <div className="flex justify-between text-text-inverse bg-maroon-600 p-4 rounded-t-2xl">
+                <div className="text-2xl font-semibold">
+                  <p>#{order.id.slice(0, 8)}</p>
                 </div>
 
-                {/* ==================== ORDER BODY ==================== */}
+                <p className="text-[16px]">
+                  {t('createdIn')}:{' '}
+                  <span className="text-[16px] font-semibold">
+                    {formatDate(order.createdAt)}
+                  </span>
+                </p>
+              </div>
 
-                <div className="bg-bg-muted p-4 rounded-b-2xl">
-                  {/* ==================== ORDER DETAILS ==================== */}
+              {/* ==================== ORDER BODY ==================== */}
 
-                  <div className="mt-4 flex justify-between items-center">
-                    {/* Total Price + Payment Status */}
+              <div className="bg-bg-muted p-4 rounded-b-2xl">
+                {/* ==================== ORDER DETAILS ==================== */}
 
-                    <div className="flex items-center">
-                      <p className="text-2xl font-medium text-text-plain">
-                        {t('totalPrice')}:{' '}
-                        <span className="text-2xl font-semibold text-text-plain">
-                          {order.total} {t('currency')}
-                        </span>
-                      </p>
+                <div className="mt-4 flex justify-between items-center">
+                  {/* Total Price + Payment Status */}
 
-                      {/* Paid */}
+                  <div className="flex items-center">
+                    <p className="text-2xl font-medium text-text-plain">
+                      {t('totalPrice')}:{' '}
+                      <span className="text-2xl font-semibold text-text-plain">
+                        {order.total} {t('currency')}
+                      </span>
+                    </p>
 
-                      {order.paymentStatus === 'PAID' && (
-                        <div className="bg-bg-success rounded-full ms-4 flex py-1 px-2.5 text-text-inverse justify-center items-center gap-2.5">
-                          <Check size={20} />
+                    {/* Paid */}
 
-                          <p>{t('paid')}</p>
-                        </div>
+                    {order.paymentStatus === 'PAID' && (
+                      <div className="bg-bg-success rounded-full ms-4 flex py-1 px-2.5 text-text-inverse justify-center items-center gap-2.5">
+                        <Check size={20} />
+
+                        <p>{t('paid')}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Order Status */}
+
+                  <div>
+                    <div className="flex gap-2.5 items-center">
+                      <p>{t('status')}:</p>
+
+                      {order.status === 'PENDING' ? (
+                        <p className="bg-blue-500 text-text-inverse rounded-full text-[13px] px-2.5 py-1">
+                          {t('statuses.pending')}
+                        </p>
+                      ) : order.status === 'CANCELLED' ? (
+                        <p className="bg-bg-danger text-text-inverse rounded-full text-[13px] px-2.5 py-1">
+                          {t('statuses.cancelled')}
+                        </p>
+                      ) : (
+                        <p className="bg-bg-success text-text-inverse rounded-full text-[13px] px-2.5 py-1">
+                          {t('statuses.done')}
+                        </p>
                       )}
                     </div>
+                  </div>
+                </div>
 
-                    {/* Order Status */}
+                <hr className="mt-2.5 mb-3.5" />
 
-                    <div>
-                      <div className="flex gap-2.5 items-center">
-                        <p>{t('status')}:</p>
+                {/* ==================== PAYMENT & DELIVERY ==================== */}
 
-                        {order.status === 'PENDING' ? (
-                          <p className="bg-blue-500 text-text-inverse rounded-full text-[13px] px-2.5 py-1">
-                            {t('statuses.pending')}
-                          </p>
-                        ) : order.status === 'CANCELLED' ? (
-                          <p className="bg-bg-danger text-text-inverse rounded-full text-[13px] px-2.5 py-1">
-                            {t('statuses.cancelled')}
-                          </p>
-                        ) : (
-                          <p className="bg-bg-success text-text-inverse rounded-full text-[13px] px-2.5 py-1">
-                            {t('statuses.done')}
-                          </p>
-                        )}
-                      </div>
+                <div className="p-4">
+                  <div className="gap-2">
+                    {/* Payment Method */}
+
+                    <div className="flex items-center gap-2">
+                      <p className="text-[16px] font-semibold">
+                        {t('paymentMethod')}:
+                      </p>
+
+                      {order.paymentMethod === 'CASH_ON_DELIVERY' ? (
+                        <Banknote
+                          size={18}
+                          className="text-text-muted"
+                        />
+                      ) : (
+                        <CreditCard
+                          size={18}
+                          className="text-text-muted"
+                        />
+                      )}
+
+                      <p className="text-text-muted text-sm">
+                        {order.paymentMethod === 'CASH_ON_DELIVERY'
+                          ? t('cash')
+                          : t('creditCard')}
+                      </p>
+                    </div>
+
+                    {/* Delivery Status */}
+
+                    <div className="flex items-center gap-2 mt-2.5">
+                      <p className="text-[16px] font-semibold">
+                        {t('deliveryStatus')}:
+                      </p>
+
+                      <Truck size={18} className="text-yellow-600" />
+
+                      <p
+                        className={`text-sm font-medium ${
+                          order.status === 'PENDING'
+                            ? 'text-yellow-600'
+                            : order.status === 'CANCELLED'
+                              ? 'text-text-danger'
+                              : 'text-text-success'
+                        }`}
+                      >
+                        {order.status === 'PENDING'
+                          ? t('statuses.pending')
+                          : order.status === 'CANCELLED'
+                            ? t('statuses.cancelled')
+                            : t('statuses.done')}
+                      </p>
                     </div>
                   </div>
 
-                  <hr className="mt-2.5 mb-3.5" />
+                  {/* ==================== ORDER ITEMS ==================== */}
 
-                  {/* ==================== PAYMENT & DELIVERY ==================== */}
+                  <p className="text-[16px] font-semibold my-2.5">
+                    {t('orderItems')}:
+                  </p>
 
-                  <div className="p-4">
-                    <div className="gap-2">
-                      {/* Payment Method */}
+                  <div className="relative bg-bg-plain p-4 rounded-lg overflow-hidden">
+                    {/* Products */}
 
-                      <div className="flex items-center gap-2">
-                        <p className="text-[16px] font-semibold">
-                          {t('paymentMethod')}:
-                        </p>
+                    <div className="grid grid-cols-4 gap-3.5">
+                      {order.orderItems.map((item, index) => {
+                        /**
+                         * Only products starting from the third
+                         * are blurred when Show All is false.
+                         */
 
-                        {order.paymentMethod ===
-                        'CASH_ON_DELIVERY' ? (
-                          <Banknote
-                            size={18}
-                            className="text-text-muted"
-                          />
-                        ) : (
-                          <CreditCard
-                            size={18}
-                            className="text-text-muted"
-                          />
-                        )}
+                        const isPreview = index >= 2 && !showAll;
 
-                        <p className="text-text-muted text-sm">
-                          {order.paymentMethod === 'CASH_ON_DELIVERY'
-                            ? t('cash')
-                            : t('creditCard')}
-                        </p>
-                      </div>
+                        return (
+                          <div
+                            key={item.id}
+                            className={`col-span-2 relative overflow-hidden rounded-lg ${
+                              isPreview ? 'blur-[2px]' : ''
+                            }`}
+                          >
+                            <div className="flex gap-3.5">
+                              {/* Product Image */}
 
-                      {/* Delivery Status */}
+                              <div>
+                                <Image
+                                  src={item.product.cover}
+                                  alt={item.product.title}
+                                  width={180}
+                                  height={180}
+                                  className="w-45 h-52.5 object-cover rounded-s-lg"
+                                />
+                              </div>
 
-                      <div className="flex items-center gap-2 mt-2.5">
-                        <p className="text-[16px] font-semibold">
-                          {t('deliveryStatus')}:
-                        </p>
+                              {/* Product Information */}
 
-                        <Truck
-                          size={18}
-                          className="text-yellow-600"
-                        />
-
-                        <p
-                          className={`text-sm font-medium ${
-                            order.status === 'PENDING'
-                              ? 'text-yellow-600'
-                              : order.status === 'CANCELLED'
-                                ? 'text-text-danger'
-                                : 'text-text-success'
-                          }`}
-                        >
-                          {order.status === 'PENDING'
-                            ? t('statuses.pending')
-                            : order.status === 'CANCELLED'
-                              ? t('statuses.cancelled')
-                              : t('statuses.done')}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* ==================== ORDER ITEMS ==================== */}
-
-                    <p className="text-[16px] font-semibold my-2.5">
-                      {t('orderItems')}:
-                    </p>
-
-                    <div className="relative bg-bg-plain p-4 rounded-lg overflow-hidden">
-                      {/* Products */}
-
-                      <div className="grid grid-cols-4 gap-3.5">
-                        {order.orderItems.map((item, index) => {
-                          /*
-                           * Only products starting from the third
-                           * are blurred when Show All is false.
-                           */
-                          const isPreview = index >= 2 && !showAll;
-
-                          return (
-                            <div
-                              key={item.id}
-                              className={`col-span-2 relative overflow-hidden rounded-lg ${
-                                isPreview ? 'blur-[2px]' : ''
-                              }`}
-                            >
-                              <div className="flex gap-3.5">
-                                {/* Product Image */}
-
+                              <div className="flex flex-col justify-between">
                                 <div>
-                                  <Image
-                                    src={item.product.cover}
-                                    alt={item.product.title}
-                                    width={180}
-                                    height={180}
-                                    className="w-45 h-52.5 object-cover rounded-s-lg"
-                                  />
+                                  <p className="font-semibold text-xl text-text-primary">
+                                    {item.product.title}
+                                  </p>
                                 </div>
 
-                                {/* Product Information */}
+                                {/* Quantity + Price */}
 
-                                <div className="flex flex-col justify-between">
-                                  <div>
-                                    <p className="font-semibold text-xl text-text-primary">
-                                      {item.product.title}
-                                    </p>
-                                  </div>
+                                <div className="flex items-center gap-1">
+                                  <p className="text-text-primary text-sm mt-1.5">
+                                    (x{item.quantity})
+                                  </p>
 
-                                  {/* Quantity + Price */}
+                                  <p className="text-2xl font-bold">
+                                    {item.price}
 
-                                  <div className="flex items-center gap-1">
-                                    <p className="text-text-primary text-sm mt-1.5">
-                                      (x{item.quantity})
-                                    </p>
-
-                                    <p className="text-2xl font-bold">
-                                      {item.price}
-
-                                      <span className="text-xl font-medium ms-1.5">
-                                        {t('currency')}
-                                      </span>
-                                    </p>
-                                  </div>
+                                    <span className="text-xl font-medium ms-1.5">
+                                      {t('currency')}
+                                    </span>
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* ==================== SHOW ALL OVERLAY ==================== */}
-
-                      {!showAll && order.orderItems.length > 2 && (
-                        <div className="absolute inset-x-0 bottom-0 h-32 flex items-center justify-center bg-gradient-to-t from-bg-plain via-bg-plain/100 to-transparent">
-                          <button
-                            type="button"
-                            onClick={() => toggleShowAll(order.id)}
-                            className="flex flex-col items-center text-maroon-600 hover:opacity-80 transition"
-                          >
-                            <span className="font-medium">
-                              {t('showAll')}
-                            </span>
-
-                            <ChevronDown size={24} />
-                          </button>
-                        </div>
-                      )}
-
-                      {/* ==================== SHOW LESS ==================== */}
-
-                      {showAll && order.orderItems.length > 2 && (
-                        <div className="flex justify-center mt-5">
-                          <button
-                            type="button"
-                            onClick={() => toggleShowAll(order.id)}
-                            className="flex flex-col items-center text-maroon-600 hover:opacity-80 transition"
-                          >
-                            <span className="font-medium">
-                              {t('showLess')}
-                            </span>
-
-                            <ChevronDown
-                              size={24}
-                              className="rotate-180"
-                            />
-                          </button>
-                        </div>
-                      )}
+                          </div>
+                        );
+                      })}
                     </div>
+
+                    {/* ==================== SHOW ALL OVERLAY ==================== */}
+
+                    {!showAll && order.orderItems.length > 2 && (
+                      <div className="absolute inset-x-0 bottom-0 h-32 flex items-center justify-center bg-lonear-to-t from-bg-plain via-bg-plain to-transparent">
+                        <button
+                          type="button"
+                          onClick={() => toggleShowAll(order.id)}
+                          className="flex flex-col items-center text-maroon-600 hover:opacity-80 transition"
+                        >
+                          <span className="font-medium">
+                            {t('showAll')}
+                          </span>
+
+                          <ChevronDown size={24} />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* ==================== SHOW LESS ==================== */}
+
+                    {showAll && order.orderItems.length > 2 && (
+                      <div className="flex justify-center mt-5">
+                        <button
+                          type="button"
+                          onClick={() => toggleShowAll(order.id)}
+                          className="flex flex-col items-center text-maroon-600 hover:opacity-80 transition"
+                        >
+                          <span className="font-medium">
+                            {t('showLess')}
+                          </span>
+
+                          <ChevronDown
+                            size={24}
+                            className="rotate-180"
+                          />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
 
-          {/* ==================== LOAD MORE ==================== */}
+        {/* ==================== PAGE 2+ ERROR ==================== */}
 
-          {hasNextPage && (
-            <button
+        {isFetchNextPageError && (
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-text-danger text-center">
+              {t('loadMoreError')}
+            </p>
+
+            <Button
               onClick={() => fetchNextPage()}
               disabled={isFetchingNextPage}
-              className="mx-auto px-5 py-2 rounded-lg bg-maroon-600 text-text-inverse disabled:opacity-50"
+              className="px-5 py-2 rounded-lg bg-maroon-600 text-text-inverse"
             >
-              {isFetchingNextPage ? t('loading') : t('loadMore')}
-            </button>
-          )}
+              {isFetchingNextPage ? t('loading') : t('tryAgain')}
+            </Button>
+          </div>
+        )}
 
-          {/* ==================== NO MORE ORDERS ==================== */}
+        {/* ==================== LOAD MORE ==================== */}
 
-          {!hasNextPage && orders.length > 0 && (
-            <p className="text-center">{t('noMoreOrders')}</p>
-          )}
-        </div>
-      ) : (
-        <div className="my-4">
-          <p className="text-2xl font-bold">
-            You need to{' '}
-            <Link
-              href="/login"
-              className="text-center font-semibold text-text-info hover:mx-4 duration-500 hover:text-3xl"
-            >
-              Login
-            </Link>{' '}
-            to continue.
-          </p>
-        </div>
-      )}
+        {hasNextPage && !isFetchNextPageError && (
+          <Button
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+            className="mx-auto px-5 py-2 rounded-lg bg-maroon-600 text-text-inverse disabled:opacity-50"
+          >
+            {isFetchingNextPage ? t('loading') : t('loadMore')}
+          </Button>
+        )}
+
+        {/* ==================== NO MORE ORDERS ==================== */}
+
+        {!hasNextPage && orders.length > 0 && (
+          <p className="text-center">{t('noMoreOrders')}</p>
+        )}
+      </div>
     </>
   );
 }

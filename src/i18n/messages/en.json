@@ -468,6 +468,8 @@
     "loadMore": "Load More",
     "loading": "Loading...",
     "noMoreOrders": "No more orders.",
+    "loadMoreError": "Could not load more orders.",
+    "tryAgain": "Try Again",
     "statuses": {
       "pending": "Pending",
       "cancelled": "Cancelled",

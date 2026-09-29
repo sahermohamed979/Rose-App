@@ -471,7 +471,9 @@
     "statuses": {
       "pending": "قيد الانتظار",
       "cancelled": "ملغي",
-      "done": "تم"
+      "done": "تم",
+      "loadMoreError": "تعذر تحميل المزيد من الطلبات.",
+      "tryAgain": "حاول مرة أخرى"
     }
   }
 }
