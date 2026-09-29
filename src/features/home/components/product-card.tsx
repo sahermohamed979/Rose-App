@@ -19,7 +19,7 @@ export default function ProductCard({
   const isNew = nowDate - updatedAt < 1000 * 60 * 60 * 24 * 7;
 
   return (
-    <div className="w-full sm:max-w-[302px]">
+    <div className="w-full max-w-75.5 ">
       <Link
         href={`/products/${product.id}`}
         aria-label={product.title}
