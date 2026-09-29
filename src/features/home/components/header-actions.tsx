@@ -49,7 +49,7 @@ export default function HeaderActions({
     return (
       <div className="flex items-center gap-2">
         <Link
-          href={isAuthenticated ? '/wishlist' : '/login'}
+          href={'/wishlist'}
           aria-label={t('nav.wishlist')}
           className="relative"
         >
@@ -58,7 +58,7 @@ export default function HeaderActions({
         </Link>
 
         <Link
-          href={isAuthenticated ? '/cart' : '/login'}
+          href={'/cart'}
           aria-label={t('nav.cart')}
           className="relative"
         >
@@ -128,7 +128,7 @@ export default function HeaderActions({
       {/* Action icons */}
       <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
         <Link
-          href={isAuthenticated ? '/wishlist' : '/login'}
+          href={'/wishlist'}
           aria-label={t('nav.wishlist')}
           className="relative"
         >
@@ -137,7 +137,7 @@ export default function HeaderActions({
         </Link>
 
         <Link
-          href={isAuthenticated ? '/cart' : '/login'}
+          href={'/cart'}
           aria-label={t('nav.cart')}
           className="relative"
         >
