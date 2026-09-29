@@ -9,7 +9,7 @@ export default async function WishlistScreen() {
 
   return (
     <>
-      <div className="px-20 mt-15.5 h-full">
+      <div className="px-4 sm:px-8 md:px-12 lg:px-20 mt-6 sm:mt-10 lg:mt-15.5 h-full">
         {/* Wishlist-header */}
 
         <div>

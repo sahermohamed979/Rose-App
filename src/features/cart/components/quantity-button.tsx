@@ -15,9 +15,8 @@ export default function QuantityButton({
   const stock = cartItem?.product?.stock;
   const DEBOUNCE_MS = 400;
 
-  const [quantity, setQuantity] = useState(cartItem.quantity || 0);
-
-  const isFirstRender = useRef(true);
+  const [quantity, setQuantity] = useState(cartItem.quantity || 1);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const { UpdateCartQuantity } = useCartMutations();
 
@@ -28,59 +27,63 @@ export default function QuantityButton({
     return Math.min(Math.max(val, 1), stock || 0);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuantity(clamp(Number(e.target.value)));
+  const handleUpdate = (newVal: number) => {
+    const nextQty = clamp(newVal);
+    setQuantity(nextQty);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      UpdateCartQuantity.mutate({
+        id: cartItem?.id || '',
+        quantity: nextQty,
+      });
+    }, DEBOUNCE_MS);
   };
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      UpdateCartQuantity.mutate({
-        id: cartItem?.id || '',
-        quantity,
-      });
-    }, DEBOUNCE_MS);
-
-    return () => clearTimeout(timer);
-  }, [quantity]);
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="flex items-center gap-1">
       <Button
         type="button"
         size="icon"
-        className="h-12 w-12 rounded-xl bg-bg-carosel"
-        onClick={() => setQuantity((q) => clamp(q - 1))}
+        className="h-8 w-8 sm:h-10 sm:w-11 rounded-lg sm:rounded-xl bg-bg-carosel shrink-0"
+        onClick={() => handleUpdate(quantity - 1)}
         disabled={quantity <= 1 || UpdateCartQuantity.isPending}
       >
-        <Minus size={20} className="text-text-primary" />
+        <Minus size={16} className="text-text-primary" />
       </Button>
 
-      <Field className="h-12 w-28">
+      <Field className="h-8 w-12 sm:h-10 sm:w-16">
         <Input
           type="number"
           min={1}
           max={stock}
           value={quantity}
-          onChange={handleChange}
-          onBlur={() => setQuantity((q) => clamp(q))}
+          onChange={(e) => handleUpdate(Number(e.target.value))}
+          className="text-center h-full px-1 text-xs sm:text-sm"
         />
       </Field>
 
       <Button
         type="button"
         size="icon"
-        className="h-12 w-12 rounded-xl bg-bg-carosel"
-        onClick={() => setQuantity((q) => clamp(q + 1))}
+        className="h-8 w-8 sm:h-10 sm:w-11 rounded-lg sm:rounded-xl bg-bg-carosel shrink-0"
+        onClick={() => handleUpdate(quantity + 1)}
         disabled={
           quantity >= (stock || 0) || UpdateCartQuantity.isPending
         }
       >
-        <Plus size={20} className="text-text-primary" />
+        <Plus size={16} className="text-text-primary" />
       </Button>
     </div>
   );

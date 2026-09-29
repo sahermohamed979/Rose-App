@@ -8,7 +8,7 @@ function BrandsSection() {
   const t = useTranslations('home');
 
   return (
-    <section className="py-10 px-5 max-w-7xl mx-auto ">
+    <section className="py-10">
       <div className="bg-bg-carosel rounded-2xl py-10 px-5">
         {/* Title */}
         <h3 className="text-center text-2xl md:text-4xl font-bold text-text-primary mb-5">
@@ -28,6 +28,7 @@ function BrandsSection() {
               alt={brand.alt}
               width={140}
               height={50}
+              loading="lazy"
               className="w-auto h-8 md:h-10 object-contain "
             />
           ))}

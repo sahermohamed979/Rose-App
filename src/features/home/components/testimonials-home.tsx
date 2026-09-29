@@ -36,7 +36,7 @@ function TestimonialsSection() {
   return (
     <section>
       {/* Title */}
-      <div className="max-w-7xl mx-auto px-5">
+      <div>
         <div className="text-center mb-12">
           <SectionSubtitle
             Text={t('testimonials.label')}
@@ -80,6 +80,7 @@ function TestimonialsSection() {
                       alt={testimonial.name}
                       width={96}
                       height={96}
+                      loading="lazy"
                       draggable={false}
                       className="w-24 h-24 rounded-full object-cover border-4 border-border-inverse"
                     />

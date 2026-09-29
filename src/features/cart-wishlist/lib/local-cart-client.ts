@@ -12,6 +12,9 @@ export default function saveCartItemToLocalStorage({
   productId: string;
   quantity?: number;
 }) {
+  if (typeof window === 'undefined') {
+    return;
+  }
   const storedCart = localStorage.getItem(LOCAL_CART_KEY);
 
   const cart: LocalCartItem[] = storedCart
@@ -32,15 +35,24 @@ export default function saveCartItemToLocalStorage({
 }
 
 export function getLocalCart(): LocalCartItem[] {
+  if (typeof window === 'undefined') {
+    return [];
+  }
   const storedCart = localStorage.getItem(LOCAL_CART_KEY);
   return storedCart ? JSON.parse(storedCart) : [];
 }
 
 export function clearLocalCart(): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
   localStorage.removeItem(LOCAL_CART_KEY);
 }
 
 export function clearLocalIndex(productId: string): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
   const cart = getLocalCart();
 
   const updatedCart = cart.filter(
@@ -54,6 +66,9 @@ export function updateLocalQuantity({
   productId,
   quantity,
 }: LocalCartItem) {
+  if (typeof window === 'undefined') {
+    return;
+  }
   const cart = getLocalCart();
 
   const updatedCart = cart.map((item) =>

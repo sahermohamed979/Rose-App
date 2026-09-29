@@ -16,7 +16,7 @@ export default async function CheckoutLayout({
     getSuggestedProducts(8),
     getCart(),
   ]);
-
+  // calculate subtotal from cart items
   const subtotal =
     cartResult.status && cartResult.payload?.cartItems
       ? cartResult.payload.cartItems.reduce((sum, item) => {
@@ -27,25 +27,24 @@ export default async function CheckoutLayout({
       : 0;
 
   return (
-    <main className="py-13 px-20">
+    <main className="py-6 sm:py-10 lg:py-13 px-4 sm:px-8 md:px-12 lg:px-20">
       {/* Main grid: checkout steps (left) + order summary (right) */}
-      <div className="grid grid-cols-12 gap-x-10">
-        <div className="col-span-8 w-full">{children}</div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-x-10">
+        <div className="col-span-1 lg:col-span-8 w-full">{children}</div>
+        {/* Main Content (here CheckoutScreen or CartScreen is rendered) */}
 
         {/* Order Summary */}
-        <div className="lg:col-span-4 w-full">
-          <div className="sticky top-24">
+        <div className="col-span-1 lg:col-span-4 w-full">
+          <div className="lg:sticky lg:top-24">
             <OrderSummary subtotal={subtotal} />
           </div>
         </div>
       </div>
 
-      {/* Suggested Products */}
-      {products.length > 0 && (
-        <div className="mt-12 w-full">
-          <SuggestedProductsSlider products={products} />
-        </div>
-      )}
+      {/* Order May Like (Products) */}
+      <div className="mt-12 w-full">
+        <SuggestedProductsSlider products={products} />
+      </div>
     </main>
   );
 }

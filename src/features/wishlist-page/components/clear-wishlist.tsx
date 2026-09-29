@@ -35,7 +35,7 @@ export function ClearWishlist() {
       router.refresh();
       toast.success('Your wishlist is empty');
     },
-    onError: (error) => {},
+    onError: (_error) => {},
   });
 
   return (
@@ -44,10 +44,10 @@ export function ClearWishlist() {
         <AlertDialogTrigger
           render={
             <Button
-              className="w-45.25 h-11 flex items-center gap-2 bg-bg-danger text-text-inverse"
+              className="w-auto px-3 sm:px-4 sm:w-45.25 h-9 sm:h-11 flex items-center gap-1.5 sm:gap-2 bg-bg-danger text-text-inverse text-xs sm:text-sm"
               variant="destructive"
             >
-              <BrushCleaning className="rtl:order-2" />
+              <BrushCleaning className="w-4 h-4 rtl:order-2" />
               <span className="rtl:order-1">
                 {t('clearWishlist')}
               </span>
@@ -56,7 +56,7 @@ export function ClearWishlist() {
         />
         <AlertDialogContent
           size="sm"
-          className="w-118.5 data-[size=sm]:max-w-118.5 data-[size=sm]:sm:max-w-118.5 h-86.75"
+          className="w-[92vw] max-w-[474px] sm:w-118.5 data-[size=sm]:max-w-[92vw] data-[size=sm]:sm:max-w-118.5 h-auto max-h-[90vh] p-4 sm:p-6"
         >
           <AlertDialogHeader className="mt-18.25">
             <AlertDialogCancel className="absolute top-6 right-6 border-none">
