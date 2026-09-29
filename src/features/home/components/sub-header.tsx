@@ -1,63 +1,43 @@
 'use client';
+
+import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 
-import {
-  ClipboardList,
-  Gift,
-  Headset,
-  Home,
-  Info,
-  PartyPopper,
-} from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
+import { NAV_LINKS } from '../consts/nav-links.constant';
 
 export default function SubHeader() {
-  const t = useTranslations('header.subHeader');
+  const t = useTranslations('header');
   const pathname = usePathname();
-  // sub header links
-  const navLinks = [
-    { href: '/', label: 'subHeaderHome', icon: <Home /> },
-    { href: '/products', label: 'subHeaderProducts', icon: <Gift /> },
-    {
-      href: '/categories',
-      label: 'subHeaderCategories',
-      icon: <ClipboardList />,
-    },
-    {
-      href: '/occasions',
-      label: 'subHeaderOccasions',
-      icon: <PartyPopper />,
-    },
-    {
-      href: '/contact',
-      label: 'subHeaderContact',
-      icon: <Headset />,
-    },
-    { href: '/about', label: 'subHeaderAbout', icon: <Info /> },
-  ];
-  return (
-    <div>
-      <div className="capitalize  bg-bg-primary-saturated flex flex-row justify-center  align-center  gap-4">
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href;
 
+  return (
+    <nav
+      aria-label={t('nav.mainNav')}
+      className="hidden md:block bg-bg-primary-saturated overflow-x-auto"
+    >
+      <ul
+        className="capitalize flex flex-row justify-center items-center gap-4 px-4"
+        role="list"
+      >
+        {NAV_LINKS.map(({ href, label, Icon }) => {
+          const isActive = pathname === href;
           return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`flex flex-row gap-2 py-2 px-3 text-[16px] transition-all ${
-                isActive
-                  ? ' border-soft-pink-200 border-b-2  text-soft-pink-200 dark:border-maroon-800 dark:text-maroon-800'
-                  : ' text-text-inverse'
-              }`}
-            >
-              {link.icon}
-              {t(`${link.label}`)}
-            </Link>
+            <li key={href}>
+              <Link
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                className={`flex flex-row items-center gap-2 py-2 px-3 text-[16px] transition-all whitespace-nowrap ${
+                  isActive
+                    ? 'border-soft-pink-200 border-b-2 text-soft-pink-200 dark:border-maroon-800 dark:text-maroon-800'
+                    : 'text-text-inverse'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {t(`subHeader.${label}`)}
+              </Link>
+            </li>
           );
         })}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 }
