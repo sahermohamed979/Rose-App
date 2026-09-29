@@ -65,10 +65,10 @@ export interface OrdersSuccess {
   };
 }
 
-export interface OrderError {
+export interface TOrderError {
   status: false;
   code: number;
   message: string;
 }
 
-export type OrdersResponse = OrdersSuccess | OrderError;
+export type OrdersResponse = OrdersSuccess | TOrderError;
