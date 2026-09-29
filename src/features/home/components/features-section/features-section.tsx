@@ -4,8 +4,8 @@ import { getTranslations } from 'next-intl/server';
 export default async function FeaturesStrip() {
   const t = await getTranslations();
   return (
-    <div className="bg-bg-primary-fade rounded-2xl p-10">
-      <div className="grid grid-cols-4 gap-6">
+    <div className="bg-bg-primary-fade rounded-2xl p-5 sm:p-8 md:p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Free Delivery */}
         <div className="flex items-center gap-4">
           <div className="bg-maroon-600 rounded-full pt-4 pb-4.5 px-[13.75px] items-center flex justify-center size-16.25">

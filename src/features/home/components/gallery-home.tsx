@@ -10,7 +10,7 @@ function GallerySection() {
   const t = useTranslations('home');
 
   return (
-    <section className="max-w-7xl mx-auto py-16 px-5 font-sans">
+    <section className="py-16 font-sans">
       {/* Title*/}
       <div className="text-center mb-10">
         <SectionSubtitle
@@ -30,6 +30,7 @@ function GallerySection() {
                 src={image.src}
                 alt={image.alt}
                 width={400}
+                loading="lazy"
                 className="w-full object-cover"
                 style={{ height: `${image.height}px` }}
               />

@@ -19,7 +19,7 @@ export default function HomeScreen({
   searchParams: HomeProps['searchParams'];
 }) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full overflow-x-hidden">
       <HeroSection />
       <Bestselling />
       <Suspense fallback={<MostPopularSkeleton />}>

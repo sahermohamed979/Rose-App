@@ -4,12 +4,12 @@ import img2 from '../../assets/images/650ebce97e11985e0c78fa1a2c8b1633ad6865ae.p
 import img3 from '../../assets/images/f1ae11b6a3272e3325efa8c7c66af85509d2b54c.png';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
+
 export default async function PromoCards() {
   const t = await getTranslations();
   return (
     <div className="grid grid-cols-12 gap-6">
-      <div className="col-span-4  relative">
+      <div className="col-span-12 sm:col-span-6 md:col-span-4 relative h-64 sm:h-72 md:h-80">
         <Image
           src={img1}
           alt=""
@@ -27,10 +27,11 @@ export default async function PromoCards() {
         </div>
       </div>
 
-      <div className="col-span-4  relative">
+      <div className="col-span-12 sm:col-span-6 md:col-span-4 relative h-64 sm:h-72 md:h-80">
         <Image
           src={img2}
           alt=""
+          loading="lazy"
           className="object-cover size-full rounded-[16px]"
         />
         <div className="absolute bottom-6 left-6 rtl:right-6">
@@ -45,10 +46,11 @@ export default async function PromoCards() {
         </div>
       </div>
 
-      <div className="col-span-4  relative">
+      <div className="col-span-12 sm:col-span-6 md:col-span-4 relative h-64 sm:h-72 md:h-80">
         <Image
           src={img3}
           alt=""
+          loading="lazy"
           className="object-cover size-full rounded-[16px]"
         />
         <div className="absolute bottom-6 left-6 rtl:right-6">

@@ -24,9 +24,7 @@ export default function ProductCard({
         href={`/products/${product.id}`}
         aria-label={product.title}
         style={{ backgroundImage: `url(${product.cover})` }}
-        className={
-          'block aspect-302/272 w-full bg-cover bg-center rounded-2xl mb-4 relative'
-        }
+        className="block aspect-[302/272] w-full bg-cover bg-center rounded-2xl mb-4 relative"
       >
         <div className="absolute w-fit top-2 right-2 rtl:left-2 rtl:right-auto flex gap-x-1.5 focus-visible:outline-none">
           {product.stock === 0 && (
@@ -52,6 +50,7 @@ export default function ProductCard({
           <WishlistButton productId={product.id} />
         </div>
       </Link>
+
       <h2
         className="
             text-lg font-semibold
@@ -109,6 +108,7 @@ export default function ProductCard({
         </div>
         {/*add to cart button*/}
         <AddToCart
+          aria-label={`${t('ProductDetails.addToCart')} - ${product.title}`}
           className="w-[42px] 
             h-[42px] rounded-full
              p-0 dark:bg-maroon-500 overflow-hidden"

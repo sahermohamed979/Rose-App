@@ -33,7 +33,7 @@ export default function HeaderDropdown({ name }: { name: string }) {
           </button>
         }
       />
-      <DropdownMenuContent className="w-[224px] bg-bg-plain ">
+      <DropdownMenuContent className="w-56 bg-bg-plain ">
         {/* User name header */}
         <div className="px-1 py-1 text-xl font-bold text-text-primary">
           {name}
@@ -45,7 +45,9 @@ export default function HeaderDropdown({ name }: { name: string }) {
         <DropdownMenuGroup>
           <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
             <User size={16} />
-            <Link href="/profile">{t('userMenu.account')}</Link>
+            <Link href="/account-setting">
+              {t('userMenu.account')}
+            </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
@@ -53,10 +55,12 @@ export default function HeaderDropdown({ name }: { name: string }) {
             <Link href="/addresses">{t('userMenu.addresses')}</Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
-            <ScrollText size={16} />
-            {t('userMenu.orders')}
-          </DropdownMenuItem>
+          <Link href={'/orders'}>
+            <DropdownMenuItem className="flex items-center gap-3 px-2 py-2 text-base cursor-pointer">
+              <ScrollText size={16} />
+              {t('userMenu.orders')}
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         {session?.user?.role === 'ADMIN' && (
           <DropdownMenuGroup>
