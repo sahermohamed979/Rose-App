@@ -13,6 +13,7 @@ import {
   getProductReviews,
   getProductById,
 } from '../apis/product-reviews.actions';
+import { ReviewSubmissionForm } from './review-submision-form';
 
 interface ProductReviewProps {
   productId: string;
@@ -69,7 +70,7 @@ export async function ProductReview({
 
         {/* Placeholder for Add Review Form (takes 1 column - to be added later) */}
         <div className="lg:col-span-1">
-          {/* Reserved space for Add Review Form component */}
+          <ReviewSubmissionForm />
         </div>
       </div>
     </div>
