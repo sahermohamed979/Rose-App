@@ -397,6 +397,7 @@
       "ratingRequired": "Please select a star rating"
     }
   },
+
   "cart": {
     "title": " Cart ",
     "clearCart": " Clear Cart ",

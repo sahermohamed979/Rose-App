@@ -23,6 +23,8 @@ export default function ProductDetailsInfo({
     initialData
   );
 
+  // console.log(product.categoryId);
+
   const locale = useLocale();
 
   if (isLoading) {

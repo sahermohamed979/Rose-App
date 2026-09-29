@@ -17,5 +17,5 @@ export async function getDirectToken() {
     secret: process.env.NEXTAUTH_SECRET!,
   });
 
-  return jwt?.accessToken;
+  return jwt?.accessToken; // or jwt?.accessToken depending on your jwt callback
 }
