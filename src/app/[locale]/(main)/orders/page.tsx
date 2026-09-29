@@ -1,10 +1,9 @@
 import OrdersPage from '@/features/orders/components/orders-page';
 import { getDirectToken } from '@/shared/lib/utils/get-direct-token';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 export default async function page() {
   const token = await getDirectToken();
-  console.log(token);
 
   const dataPromise = fetch(`${process.env.NEXT_API_URL}/orders`, {
     method: 'GET',

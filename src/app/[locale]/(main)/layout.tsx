@@ -5,9 +5,9 @@ interface MainLayoutProps {
 }
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <main className="grow">
+    <main className="grow min-h-screen flex flex-col">
       <Header />
-      {children}
+      <div className="flex-1">{children}</div>
       <Footer />
     </main>
   );

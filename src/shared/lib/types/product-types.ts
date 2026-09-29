@@ -83,7 +83,7 @@ export interface IProduct {
   discountValue: string | null;
 
   cover: string;
-  gallery: string[];
+  gallery: string | string[];
 
   categoryId: string;
   subCategoryId: string | null;
