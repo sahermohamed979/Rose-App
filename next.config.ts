@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         hostname: 'rose-app.elevate-bootcamp.cloud',
         pathname: '/storage/entities/occasion/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'rose-app.elevate-bootcamp.cloud',
+        pathname: '/storage/entities/user/**',
+      },
     ],
   },
 };

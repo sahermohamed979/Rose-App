@@ -18,6 +18,7 @@ import { Link } from '@/i18n/navigation';
 import { CountBadge } from './count-bages';
 import { useLocalCart } from '@/features/cart/hooks/cart-local-hook';
 import { useLocalWishlist } from '@/features/cart-wishlist/hooks/use-local-wishlist';
+import LoginPopover from '../../auth/components/login-popover';
 
 interface HeaderActionsProps {
   mobile?: boolean;
@@ -38,7 +39,7 @@ export default function HeaderActions({
 
   // Displayed counts: server counts for authenticated/loading, local storage only for confirmed guests
   const displayedCartCount = isGuest
-    ? (localCartData?.length ?? 0)
+    ? (localCartData?.cartItems?.length ?? 0)
     : cartCount;
   const displayedWishlistCount = isGuest
     ? (localWishlistData?.length ?? 0)
@@ -112,12 +113,14 @@ export default function HeaderActions({
         ) : (
           <div className="flex items-center gap-1 px-2">
             <User className="w-5 h-5" />
-            <Link
-              href="/login"
-              className="text-text-plain font-medium whitespace-nowrap"
-            >
-              {t('headerLogin')}
-            </Link>
+            <LoginPopover>
+              <Link
+                href="/login"
+                className="text-text-plain font-medium"
+              >
+                {t('headerLogin')}
+              </Link>
+            </LoginPopover>
           </div>
         )}
       </div>
