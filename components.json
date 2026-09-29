@@ -5,21 +5,20 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "app/globals.css",
+    "css": "src/app/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
   "iconLibrary": "lucide",
   "rtl": true,
+  "menuColor": "default-translucent",
+  "menuAccent": "subtle",
   "aliases": {
     "components": "@/shared/components",
     "utils": "@/shared/lib/utils",
     "ui": "@/shared/components/ui",
     "lib": "@/shared/lib",
     "hooks": "@/shared/hooks"
-  },
-  "menuColor": "default-translucent",
-  "menuAccent": "subtle",
-  "registries": {}
+  }
 }

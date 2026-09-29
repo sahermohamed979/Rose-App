@@ -13,6 +13,7 @@ const protectedPages = [
   '/dashboard',
   '/profile',
   '/home',
+  '/checkout',
   '/account-setting',
 ];
 
