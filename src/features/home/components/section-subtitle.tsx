@@ -11,7 +11,7 @@ function SectionSubtitle({
 }: SectionSubtitleProps) {
   return (
     <span
-      className={`text-text-secondary font-bold tracking-[25%] text-sm uppercase block mb-2 ${className}`}
+      className={`text-text-secondary font-bold tracking-[25%] text-xs sm:text-sm uppercase block mb-2 ${className}`}
     >
       {Text}
     </span>

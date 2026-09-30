@@ -2,7 +2,7 @@ import ProductCardSkeletonGrid from './product-card-skeleton';
 
 export default function MostPopularSkeleton() {
   return (
-    <div className="mb-34.5">
+    <div className="w-full px-4 sm:px-6 md:px-9 mb-34.5">
       <div className="mb-10 flex justify-between">
         <div className="h-8 w-48 animate-pulse rounded-full bg-bg-muted" />
         <div className="hidden gap-4 md:flex">

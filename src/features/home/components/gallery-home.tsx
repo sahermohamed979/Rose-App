@@ -10,9 +10,9 @@ function GallerySection() {
   const t = useTranslations('home');
 
   return (
-    <section className="py-16 font-sans">
+    <section className="w-full px-4 sm:px-6 md:px-9 py-10 sm:py-16 font-sans">
       {/* Title*/}
-      <div className="text-center mb-10">
+      <div className="text-center mb-8 sm:mb-10">
         <SectionSubtitle
           Text={t('gallery.label')}
           className="mx-auto"
@@ -21,7 +21,7 @@ function GallerySection() {
       </div>
 
       {/* Gallery*/}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {galleryColumns.map((column, colIndex) => (
           <div key={colIndex} className="flex flex-col gap-4">
             {column.map((image) => (
