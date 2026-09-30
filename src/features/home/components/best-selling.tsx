@@ -47,8 +47,8 @@ export default async function Bestselling() {
   });
 
   return (
-    <div className="container mx-auto px-4 md:px-0 w-full mt-12 sm:mt-16 lg:mt-[107px]">
-      <div className="grid grid-cols-1 gap-8 md:gap-10 px-2 sm:px-4 md:px-0 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,22.7%)_minmax(0,1fr)] mb-16 sm:mb-24 lg:mb-[138px]">
+    <div className="w-full px-4 sm:px-6 md:px-9 mt-12 sm:mt-16 lg:mt-[107px]">
+      <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,22.7%)_minmax(0,1fr)] mb-16 sm:mb-24 lg:mb-[138px]">
         <div className="flex flex-col justify-between mb-5 md:mb-0 gap-6">
           <div>
             <p
