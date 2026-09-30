@@ -216,7 +216,6 @@
     "starSingular": "{n} نجمة",
     "starPlural": "{n} نجوم"
   },
-
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
@@ -360,31 +359,43 @@
     "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
     "buyNow": "سأشتريها!"
   },
-
   "categories": {
     "wedding": "زفاف",
     "engagement": "خطوبة",
     "anniversary": "ذكرى زواج"
   },
-
   "cards": {
     "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
     "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
     "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
   },
-
   "features": {
     "freeDelivery": "توصيل مجاني",
     "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
-
     "refund": "استرجاع الأموال",
     "refundDesc": "استرجاع خلال 30 يومًا",
-
     "safePayment": "دفع آمن",
     "safePaymentDesc": "دفع آمن بنسبة 100٪",
-
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "reviewForm": {
+    "yourRating": "تقييمك",
+    "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المراجعة",
+    "review": "المراجعة",
+    "reviewPlaceholder": "ما رأيك في هذا المنتج؟",
+    "submit": "إضافة مراجعة",
+    "submitting": "جارٍ الإرسال...",
+    "loginRequired": "يرجى تسجيل الدخول حتى تتمكن من إضافة مراجعة.",
+    "reviewFailed": "تعذر إرسال المراجعة.",
+    "validation": {
+      "titleMin": "يجب أن يكون العنوان 5 أحرف على الأقل",
+      "titleMax": "يجب أن يكون العنوان 32 حرفًا كحد أقصى",
+      "contentMin": "يجب أن تكون المراجعة 20 حرفًا على الأقل",
+      "contentMax": "يجب أن تكون المراجعة 100 حرف كحد أقصى",
+      "ratingRequired": "يرجى اختيار تقييم بالنجوم"
+    }
   },
   "cart": {
     "title": "سلة التسوق",
@@ -396,7 +407,9 @@
     "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
     "noImage": "صورة المنتج",
     "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
-    "currency": "ج.م"
+    "currency": "ج.م",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد"
   },
   "cartError": {
     "title": "تعذّر تحميل عربة التسوق",
@@ -498,5 +511,123 @@
       "locationRequired": "يرجى تحديد موقعك على الخريطة",
       "unsafeInput": "غير مسموح بإدخال رموز غير صالحة"
     }
+  },
+  "account-setting": {
+    "account-setting": "اعدادات الحساب",
+    "profile": "الملف الشخصي",
+    "change-password": "تغيير كلمة المرور",
+    "logout": "تسجيل الخروج"
+  },
+  "profileForm": {
+    "changeEmail": "تغيير البريد الالكتروني ",
+    "enterEmail": "ادخل بريدك الالكتروني",
+    "email": "البريد الالكتروني",
+    "emailPlaceholder": "user@example.com",
+    "next": "التالي",
+    "verifyOtp": "تأكيد رمز التحقق",
+    "otpP": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام الذي أرسلناه إلى:",
+    "edit": "تعديل",
+    "resendCode": "اعاده ارسال",
+    "resendTimer": "يمكنك طلب رمز جديد بعد {s} ثانية",
+    "deleteAccount?": "هل أنت متأكد أنك تريد حذف حسابك؟",
+    "actionPermanent": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+    "nope": "لا، لن أفعل ذلك",
+    "delete": "حذف",
+    "deleting": "...جاري الحذف",
+    "fields": {
+      "change": "تغيير",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الالكتروني",
+      "phone": "رقم الهاتف",
+      "gender": "الجنس",
+      "genderPlaceholder": "اختر الجنس",
+      "male": "ذكر",
+      "female": "أنثى"
+    },
+    "deleteAccount": "حذف حسابي",
+    "loading": "جاري تحميل الملف الشخصي...",
+    "loadError": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "saving": "جاري الحفظ",
+    "saveChanges": "حفظ التعديلات",
+    "uploadPhoto": "رفع الصوره",
+    "uploadPhotoType": "يمكنك رفع صور بصيغه jpg, png, git باقصي حجم 5 ميجا",
+    "uploadingPhoto": "جاري تحميل الصوره...",
+    "toast": {
+      "profileUpdatedSuccess": "تم تحديث الحساب بنجاح",
+      "profileUpdatedError": "حدث خطأ ما",
+      "validImage": "من فضلك ارفع صوره صحيحه",
+      "imageSize": "حجم الصوره يجب ان يكون اقل من 5 ميجا",
+      "photoUpdatedSuccess": "تم رفع الصوره بنجاح",
+      "photoUpdatedError": "خطأ في رفع الصوره",
+      "enterNewEmail": "يرجى إدخال بريدك الإلكتروني الجديد",
+      "verificationCodeSent": "تم إرسال رمز التحقق",
+      "enterSixDigits": "يرجى إدخال 6 أرقام",
+      "emailUpdated": "تم تحديث البريد الإلكتروني بنجاح",
+      "accountDeleted": "تم حذف الحساب بنجاح"
+    },
+    "errors": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "phoneInvalid": "من فضلك أدخل رقم هاتف صحيح"
+    },
+    "profileError": {
+      "title": "تعذر تحميل بيانات الحساب",
+      "description": "حصلت مشكلة أثناء جلب بيانات حسابك .",
+      "retry": "حاول مره اخري"
+    }
+  },
+  "changePassword": {
+    "title": "تغيير كلمة المرور",
+    "current": "كلمة المرور الحالية",
+    "new": "كلمة المرور الجديدة",
+    "confirm": "تأكيد كلمة المرور الجديدة",
+    "button": "تغيير كلمة المرور",
+    "incorrectCurrent": "كلمة المرور الحالية غير صحيحة",
+    "samePw": "يجب أن تختلف كلمة المرور الجديدة عن الحالية",
+    "success": "تم تغيير كلمة المرور بنجاح. يرجى تسجيل الدخول مرة أخرى.",
+    "error": "حدث خطأ ما. يرجى المحاولة مجدداً",
+    "errors": {
+      "oldPasswordRequired": "كلمة المرور الحالية مطلوبة",
+      "newPasswordMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+      "newPasswordUppercase": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+      "newPasswordLowercase": "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+      "newPasswordNumber": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "newPasswordSpecial": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
+      "confirmRequired": "يرجى تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين"
+    }
+  },
+  "orders": {
+    "order": "طلب",
+    "createdIn": "تم الإنشاء في",
+    "at": "الساعة",
+    "totalPrice": "السعر الإجمالي",
+    "paid": "تم الدفع",
+    "currency": "جنيه",
+    "status": "الحالة",
+    "paymentMethod": "طريقة الدفع",
+    "cash": "نقدًا",
+    "creditCard": "بطاقة ائتمان",
+    "deliveryStatus": "حالة التوصيل",
+    "orderItems": "منتجات الطلب",
+    "rating": "التقييم",
+    "ratings": "تقييمات",
+    "showAll": "عرض الكل",
+    "showLess": "عرض أقل",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل...",
+    "noMoreOrders": "لا توجد طلبات أخرى.",
+    "loadMoreError": "تعذر تحميل المزيد من الطلبات.",
+    "tryAgain": "حاول مرة أخرى",
+    "statuses": {
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغي",
+      "done": "تم"
+    }
+  },
+  "Forms": {
+    "textareaPlaceholder": "اكتب ملاحظاتك أو رسالتك هنا...",
+    "required": "هذا الحقل مطلوب"
   }
 }

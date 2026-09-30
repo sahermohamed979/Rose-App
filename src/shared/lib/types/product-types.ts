@@ -94,7 +94,7 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
 
-  category: ProductCategory;
+  category?: ProductCategory;
   subCategory?: ProductSubCategory | null;
 
   occasion?: OccasionType;
