@@ -18,7 +18,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "edit": "Edit"
   },
   "pagination": {
     "previous": "Previous",
@@ -174,20 +175,34 @@
     "info": "Info"
   },
   "products": {
-    "noProductMatch": " No products found matching your filters.",
+    "noProductMatch": "No products match your filters.",
     "tryClear": "Try clearing or changing your filters to see more results.",
-    "new": "NEW",
-    "outOfStock": " OUT OF STOCK",
-    "hot": "HOT",
+    "new": "New",
+    "outOfStock": "Out of stock",
+    "hot": "Hot",
     "addToWishList": "Add to wishlist",
-    "removeFromWishList": "Remove From wishlist",
+    "removeFromWishList": "Remove from wishlist",
     "loadingProducts": "Loading products...",
     "addToCartSuccess": "Product added to cart successfully",
     "addToCartError": "Failed to add product to cart",
     "addToWishlistSuccess": "Product added to wishlist successfully",
     "addToWishlistError": "Failed to add product to wishlist",
     "removeFromWishlistSuccess": "Product removed from wishlist successfully",
-    "removeFromWishlistError": "Failed to remove product from wishlist"
+    "removeFromWishlistError": "Failed to remove product from wishlist",
+    "allProducts": "All Products",
+    "addNewProduct": "Add New Product",
+    "name": "Name",
+    "price": "Price",
+    "stock": "Stock",
+    "sales": "Sales",
+    "ratings": "Ratings",
+    "deleteSuccess": "Product deleted successfully.",
+    "deleteError": "Failed to delete product.",
+    "unexpectedError": "An unexpected error occurred.",
+    "noProductsFound": "No products found.",
+    "errorTitle": "Failed to load products.",
+    "errorMessage": "Something went wrong while loading the products. Please try again.",
+    "tryAgain": "Try Again"
   },
   "ProductDetails": {
     "notFound": "Product not found",
@@ -397,7 +412,6 @@
       "ratingRequired": "Please select a star rating"
     }
   },
-
   "cart": {
     "title": " Cart ",
     "clearCart": " Clear Cart ",
@@ -432,7 +446,6 @@
     "noAddresses": "Add your first address to continue",
     "or": "Or",
     "failedLoading": "Failed to load addresses. Please try again",
-    "back": "Back",
     "step2Title": "Payment Method",
     "cashOnDelivery": "Cash on Delivery",
     "cashP": "You’ll pay in cash when your order is delivered.",
@@ -630,6 +643,174 @@
   "Forms": {
     "textareaPlaceholder": "Write your notes or message here...",
     "required": "This field is required"
+  },
+  "categoryDashboard": {
+    "categories": "All Categories",
+    "addNew": "Add a new category",
+    "noMatch": "No categories found",
+    "trySearch": "Try adjusting your search or add a new category.",
+    "name": "Name",
+    "products": "Products",
+    "namePlaceholder": "Enter category name",
+    "image": "Category image",
+    "uploadFile": "Upload file",
+    "noFileChosen": "No file chosen",
+    "uploading": "Uploading...",
+    "adding": "Adding...",
+    "titleError": "Category name is required",
+    "imageError": "Category image is required",
+    "updateCategory": "Update Category",
+    "updating": "Updating...",
+    "viewImage": "View Category Image",
+    "categoryNotFound": "Category not found",
+    "categoryNotFoundSubtitle": "This category may have been deleted or the link is incorrect.",
+    "backToCategories": "Back to Categories",
+    "updateSuccess": "Category updated successfully",
+    "updateError": "Failed to update category",
+    "createSuccess": "Category created successfully",
+    "createError": "Failed to create category",
+    "deleteCategory": "Are you sure you want to delete ",
+    "deleteSuccess": "Category deleted successfully",
+    "deleteError": "Failed to delete category"
+  },
+  "occasionDashboard": {
+    "occasions": "All Occasions",
+    "addNew": "Add a new occasion",
+    "noMatch": "No occasions found",
+    "trySearch": "Try adjusting your search or add a new occasion.",
+    "name": "Name",
+    "description": "Description",
+    "namePlaceholder": "Enter occasion name",
+    "descriptionPlaceholder": "Enter occasion description",
+    "image": "Occasion image",
+    "uploadFile": "Upload file",
+    "noFileChosen": "No file chosen",
+    "uploading": "Uploading...",
+    "adding": "Adding...",
+    "titleError": "Occasion name is required",
+    "descriptionError": "Description is required",
+    "imageError": "Occasion image is required",
+    "updateOccasion": "Update Occasion",
+    "updating": "Updating...",
+    "viewImage": "View Occasion Image",
+    "occasionNotFound": "Occasion not found",
+    "occasionNotFoundSubtitle": "This occasion may have been deleted or the link is incorrect.",
+    "backToOccasions": "Back to Occasions",
+    "updateSuccess": "Occasion updated successfully",
+    "updateError": "Failed to update occasion",
+    "createSuccess": "Occasion created successfully",
+    "createError": "Failed to create occasion",
+    "deleteOccasion": "Are you sure you want to delete ",
+    "deleteSuccess": "Occasion deleted successfully",
+    "deleteError": "Failed to delete occasion"
+  },
+  "dashboard": {
+    "Preview": "Preview website",
+    "overview": "Overview",
+    "overviewPage": {
+      "totalProducts": "Total products",
+      "totalOrders": "Total orders",
+      "totalCategories": "Total categories",
+      "totalRevenue": "Total revenue",
+      "allCategories": "All Categories",
+      "productSingular": "{count} Product",
+      "productPlural": "{count} Products",
+      "noCategories": "No categories found",
+      "orderStatus": "Orders Status",
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "cancelled": "Cancelled",
+      "revenue": "Revenue",
+      "monthly": "Monthly",
+      "lastWeek": "Last Week",
+      "noRevenueData": "No revenue data recorded for this period",
+      "currency": "EGP",
+      "loadError": "Failed to load dashboard data",
+      "months": {
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Aug",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dec"
+      },
+      "days": {
+        "Sat": "Sat",
+        "Sun": "Sun",
+        "Mon": "Mon",
+        "Tue": "Tue",
+        "Wed": "Wed",
+        "Thu": "Thu",
+        "Fri": "Fri"
+      }
+    },
+    "profilePage": {
+      "title": "Account Settings",
+      "uploadPhoto": "Upload Photo",
+      "removePhoto": "Remove photo",
+      "uploadPhotoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "genderMale": "Male",
+      "genderFemale": "Female",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "deleteAccount": "Delete My Account",
+      "changePassword": "Change Password",
+      "loadError": "Failed to load profile",
+      "deleteDialog": {
+        "title": "Are you sure you want to delete your account?",
+        "subtitle": "This action is permanent and cannot be undone.",
+        "cancel": "Nope, not doing it",
+        "confirm": "Yes, delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "firstNameRequired": "First name is required",
+        "firstNameTooLong": "First name is too long",
+        "lastNameRequired": "Last name is required",
+        "lastNameTooLong": "Last name is too long",
+        "phoneInvalid": "Phone must be 10–11 digits",
+        "updateFailed": "Failed to update profile",
+        "deleteFailed": "Failed to delete account"
+      },
+      "success": {
+        "updated": "Profile updated successfully",
+        "deleted": "Account deleted successfully"
+      }
+    },
+    "notfound": {
+      "title": "This page does not exist.",
+      "subtitle": " We couldn't find the page you are looking for, please make sure you are on the right path."
+    },
+    "unauthorized": {
+      "title": " You are not authorized to access this page. ",
+      "subtitle": "If you think this is wrong, please contact the support.",
+      "home": "Go to Homepage"
+    },
+    "error": {
+      "title": "Oops, something went wrong!",
+      "subtitle": "Something unexpected happened, please refresh the page or try again shortly.",
+      "retry": "Try Again"
+    },
+    "userInfo": {
+      "profileUnavailable": "Profile unavailable",
+      "error": "Error"
+    }
+  },
+  "common": {
+    "confirm": "Confirm",
+    "confirming": "Confirming",
+    "cancel": "Cancel"
   },
   "metadata": {
     "app": {
