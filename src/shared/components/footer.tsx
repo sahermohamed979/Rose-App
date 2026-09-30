@@ -10,8 +10,8 @@ import FooterNewsletter from '../../features/home/components/footer-newsletter';
 export default function Footer() {
   // --- Render ---
   return (
-    <footer className="w-full bg-bg-inverse py-12 px-6">
-      <div className="container mx-auto max-w-7xl">
+    <footer className="w-full bg-bg-inverse py-12 px-4 sm:px-6 md:px-9">
+      <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-8 justify-between">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Logo & Copyright */}
