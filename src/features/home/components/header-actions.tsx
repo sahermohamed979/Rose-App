@@ -38,7 +38,7 @@ export default function HeaderActions({
 
   // Displayed counts: server counts for authenticated/loading, local storage only for confirmed guests
   const displayedCartCount = isGuest
-    ? (localCartData?.length ?? 0)
+    ? (localCartData?.cartItems.length ?? 0)
     : cartCount;
   const displayedWishlistCount = isGuest
     ? (localWishlistData?.length ?? 0)
