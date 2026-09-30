@@ -15,6 +15,7 @@ const protectedPages = [
   '/checkout',
   '/account-setting',
   '/orders',
+  '/dashboard',
 ];
 
 export default async function middleware(req: NextRequest) {
