@@ -8,10 +8,10 @@ function BrandsSection() {
   const t = useTranslations('home');
 
   return (
-    <section className="py-10">
-      <div className="bg-bg-carosel rounded-2xl py-10 px-5">
+    <section className="w-full px-4 sm:px-6 md:px-9 py-8 sm:py-10">
+      <div className="bg-bg-carosel rounded-2xl py-8 sm:py-10 px-4 sm:px-6">
         {/* Title */}
-        <h3 className="text-center text-2xl md:text-4xl font-bold text-text-primary mb-5">
+        <h3 className="text-center text-xl sm:text-2xl md:text-4xl font-bold text-text-primary mb-5">
           {t.rich('partners.title', {
             highlight: (chunks) => (
               <span className="text-text-secondary">{chunks}</span>
@@ -20,7 +20,7 @@ function BrandsSection() {
         </h3>
 
         {/* Brands */}
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 w-full mx-auto">
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 md:gap-16 w-full mx-auto">
           {brandsData.map((brand) => (
             <Image
               key={brand.id}
@@ -29,7 +29,7 @@ function BrandsSection() {
               width={140}
               height={50}
               loading="lazy"
-              className="w-auto h-8 md:h-10 object-contain "
+              className="w-auto h-7 sm:h-8 md:h-10 object-contain"
             />
           ))}
         </div>

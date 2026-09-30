@@ -21,7 +21,7 @@ export default async function Page({
   const productsData = getProductAction(resolvedSearchParams);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 my-4 md:my-8 px-4 md:px-8 py-4 md:py-8 max-w-7xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-6 my-4 md:my-8 px-4 sm:px-6 md:px-9 py-4 md:py-8 w-full">
       <aside className="w-full lg:w-1/4 lg:border-r border-border-subtle lg:pe-4">
         <Suspense fallback={<FilterSidebarSkeleton />}>
           <SidebarFilters

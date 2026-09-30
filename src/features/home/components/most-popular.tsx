@@ -44,18 +44,18 @@ export default function MostPopular({
     occasions[0];
 
   return (
-    <div className="container mx-auto px-4 md:px-0 w-full ">
+    <div className="w-full px-4 sm:px-6 md:px-9">
       {hasNoOccasions && (
-        <>
+        <div className="w-full">
           <HeaderTitle text={t('mostPopular')} />
-          <div className="flex min-h-[180px] items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
+          <div className="flex min-h-[180px] w-full items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
             {t('noProductsAvailable')}
           </div>
-        </>
+        </div>
       )}
       {!hasNoOccasions && (
-        <Tabs value={activeOccasionId ?? occasions[0].id}>
-          <div className=" flex justify-between items-center flex-wrap gap-4">
+        <Tabs value={activeOccasionId ?? occasions[0]?.id} className="w-full">
+          <div className="flex w-full justify-between items-center flex-wrap gap-4">
             <HeaderTitle text={t('mostPopular')} />
             <TabsList className="hidden md:flex flex-wrap h-auto bg-transparent">
               {occasions.map((occasion) => (
@@ -75,7 +75,7 @@ export default function MostPopular({
             </TabsList>
             <div className="md:hidden">
               <Select
-                value={activeOccasionId ?? occasions[0].id}
+                value={activeOccasionId ?? occasions[0]?.id}
                 onValueChange={(occasionId) => {
                   const occasion = occasions.find(
                     (item) => item.id === occasionId
@@ -102,13 +102,13 @@ export default function MostPopular({
           </div>
 
           <TabsContent
-            className="mt-10"
-            key={activeOccasionId}
-            value={activeOccasionId}
+            className="mt-10 w-full"
+            key={activeOccasionId ?? occasions[0]?.id}
+            value={activeOccasionId ?? occasions[0]?.id}
           >
             {ProductsByOccasion.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
+                <div className="grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
                   {ProductsByOccasion.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
@@ -128,7 +128,7 @@ export default function MostPopular({
                 </div>
               </>
             ) : (
-              <div className="flex min-h-[180px] items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
+              <div className="flex min-h-[180px] w-full items-center justify-center rounded-2xl bg-bg-muted px-6 text-center text-text-soft">
                 {t('noProductsAvailable')}
               </div>
             )}

@@ -5,7 +5,7 @@ import FeaturesStrip from '../features-section/features-section';
 
 export default function HeroSection() {
   return (
-    <div className="w-full mt-4 sm:mt-8 overflow-hidden">
+    <div className="w-full px-4 sm:px-6 md:px-9 mt-4 sm:mt-8 overflow-hidden">
       {/* hero-section */}
       <div className="grid grid-cols-12 gap-6">
         <div className="hidden lg:block lg:col-span-3">

@@ -34,10 +34,10 @@ function TestimonialsSection() {
   );
 
   return (
-    <section>
+    <section className="py-8 sm:py-12">
       {/* Title */}
-      <div>
-        <div className="text-center mb-12">
+      <div className="w-full px-4 sm:px-6 md:px-9 mb-8 sm:mb-12">
+        <div className="text-center">
           <SectionSubtitle
             Text={t('testimonials.label')}
             className="mx-auto"
