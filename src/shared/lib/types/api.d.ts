@@ -6,9 +6,13 @@ interface IUser {
   firstName: string;
   lastName: string;
   gender: string;
+  photo?: string;
   emailVerified: boolean;
   phoneVerified: boolean;
   role: string;
+}
+interface UserProfilePayload {
+  user: IUser;
 }
 
 interface LoginResponse {
@@ -26,11 +30,15 @@ interface LoginCredentials {
   username: string;
   password: string;
 }
-
+interface ApiFieldError {
+  path: string;
+  message: string;
+}
 interface ErrorResponse {
   status: false;
   message: string;
   code?: number;
+  errors?: ApiFieldError[];
 }
 
 interface SuccessResponse<T> {

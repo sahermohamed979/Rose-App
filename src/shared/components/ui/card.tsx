@@ -1,5 +1,6 @@
-import { cn } from '@/shared/lib/utils/utils';
 import * as React from 'react';
+
+import { cn } from '@/shared/lib/utils/utils';
 
 function Card({
   className,
@@ -101,7 +102,7 @@ function CardFooter({
     <div
       data-slot="card-footer"
       className={cn(
-        'flex items-center rounded-b-xl bg-muted/50 px-(--card-spacing)',
+        'flex items-center rounded-b-xl border-t bg-muted/50 p-(--card-spacing)',
         className
       )}
       {...props}
