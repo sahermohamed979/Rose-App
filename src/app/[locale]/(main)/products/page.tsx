@@ -1,4 +1,7 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import { ProductGridSkeleton } from '@/features/products/skeletons/product-grid-skelton';
 import { FilterSidebarSkeleton } from '@/features/products/skeletons/filter-sidebar-skeleton';
 import {
@@ -10,9 +13,34 @@ import SidebarFilters from '@/features/products/components/filters/sidebar-filte
 import ProductScreen from '@/features/products/screens/product-screen';
 import { getProductAction } from '@/features/products/apis/products-api';
 
-export default async function Page({
-  searchParams,
-}: PageProps<'/[locale]/products'>) {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<ProductsSearchParams>;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  // Translations
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'metadata.products',
+  });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+    },
+  };
+}
+
+export default async function Page({ searchParams }: PageProps) {
   const categoriesPromise = getCategories();
   const occasionsPromise = getOccasions();
 

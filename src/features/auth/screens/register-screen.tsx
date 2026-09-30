@@ -1,10 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import RegisterForm from '../components/register-form';
+
 import AuthTitle from '@/features/auth/components/authTitle';
 import UserInfoTitle from '@/features/auth/components/user-info-title';
-import { Stepper } from '../components/stepper';
 import { Link } from '@/i18n/navigation';
-import { useState } from 'react';
+
+import RegisterForm from '../components/register-form';
+import { Stepper } from '../components/stepper';
 export default function RegisterScreen() {
   // translations
   const t = useTranslations();

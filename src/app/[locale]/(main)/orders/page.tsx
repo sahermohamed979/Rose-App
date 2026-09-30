@@ -1,9 +1,34 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+
 import OrderPage from '@/features/orders/components/order-page';
 import OrderError from '@/features/orders/components/orderError';
 import { getDirectToken } from '@/shared/lib/utils/get-direct-token';
-import Link from 'next/link';
 
-export default async function Page() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  // Translations
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'metadata.orders',
+  });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+    },
+  };
+}
+
+export default async function OrdersPage() {
   const token = await getDirectToken();
 
   // Not authenticated
