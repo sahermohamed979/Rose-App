@@ -630,5 +630,81 @@
   "Forms": {
     "textareaPlaceholder": "Write your notes or message here...",
     "required": "This field is required"
+  },
+  "metadata": {
+    "app": {
+      "name": "Rose",
+      "title": "Rose | Luxury Flowers & Gifts",
+      "description": "Shop hand-crafted flower bouquets, luxury floral arrangements, and unique gifts for every occasion with fast same-day delivery."
+    },
+    "home": {
+      "title": "Luxury Flowers & Gifts",
+      "description": "Discover handcrafted flower bouquets, luxury floral arrangements, and premium gifts for every moment."
+    },
+    "products": {
+      "title": "All Products",
+      "description": "Explore our full collection of fresh flower bouquets, arrangements, and thoughtful gifts."
+    },
+    "productDetails": {
+      "title": "Product Details",
+      "description": "View details, floral composition, and customer reviews for this arrangement.",
+      "notFound": "Product Not Found"
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Shop by category: fresh flowers, luxury bouquets, indoor plants, and special gifts."
+    },
+    "occasions": {
+      "title": "Occasions",
+      "description": "Celebrate birthdays, anniversaries, weddings, graduations, and more with stunning floral gifts."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about Rose, our floral artistry, and our dedication to spreading joy through luxury blooms."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with the Rose customer support team for inquiries, custom orders, or assistance."
+    },
+    "wishlist": {
+      "title": "My Wishlist",
+      "description": "View and manage your favorite saved floral arrangements and gifts."
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "description": "Review your selected flowers and gifts and prepare for checkout."
+    },
+    "checkout": {
+      "title": "Checkout",
+      "description": "Securely finalize your floral order with fast delivery to your desired destination."
+    },
+    "orders": {
+      "title": "My Orders",
+      "description": "Track your flower orders and view your purchase history."
+    },
+    "accountSetting": {
+      "title": "Account Settings",
+      "description": "Manage your profile information, preferences, and personal details."
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "description": "Update your account password securely."
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Rose account to track orders and manage your saved bouquets."
+    },
+    "register": {
+      "title": "Create Account",
+      "description": "Create an account on Rose to enjoy a seamless flower shopping experience."
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Reset your Rose account password quickly and securely."
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your new password to regain access to your Rose account."
+    }
   }
 }
