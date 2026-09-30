@@ -26,7 +26,7 @@ function AboutSection() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-center gap-8 md:gap-12 py-8 overflow-hidden">
+    <section className="w-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-16 py-8 md:py-16 px-4 sm:px-6 md:px-9 overflow-hidden">
       {/* Photos */}
       <div className="flex flex-col sm:flex-row gap-6 w-full md:w-1/2 items-center">
         {/* Main Photo */}
@@ -60,10 +60,10 @@ function AboutSection() {
 
       {/* About */}
       <div className="w-full md:w-1/2">
-        <SectionSubtitle Text={t('label')} className="mx-auto" />
+        <SectionSubtitle Text={t('label')} />
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl text-text-primary font-bold leading-snug mb-5">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-text-primary font-bold leading-tight sm:leading-snug mb-4 sm:mb-5">
           {t.rich('title', {
             highlight: (chunks) => (
               <span className="text-text-secondary">{chunks}</span>
@@ -72,7 +72,7 @@ function AboutSection() {
         </h2>
 
         {/* Description */}
-        <p className="text-text-soft text-base leading-relaxed mb-8 font-normal">
+        <p className="text-text-soft text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 font-normal">
           {t('description')}
         </p>
 
