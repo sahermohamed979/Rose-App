@@ -11,14 +11,17 @@ export default async function WishlistHeader({
 }) {
   const t = await getTranslations('wishlist');
   if (!data.status) {
-    return <p className="text-red-500">Something went wrong</p>;
+    return <p className="text-red-500">{t('errorTitle')}</p>;
   }
 
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       {/* Title */}
       <div className="flex items-center gap-2 sm:gap-2.5">
-        <FolderHeart className="w-8 h-8 sm:w-12 sm:h-12 md:w-15 md:h-15 shrink-0" strokeWidth={1.2} />
+        <FolderHeart
+          className="w-8 h-8 sm:w-12 sm:h-12 md:w-15 md:h-15 shrink-0"
+          strokeWidth={1.2}
+        />
         <p className="font-bold text-2xl sm:text-4xl md:text-5xl text-text-plain mt-0 sm:mt-2 md:mt-4">
           {t('title')}
         </p>
