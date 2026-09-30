@@ -69,6 +69,9 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageProps) {
+  // Translations
+  const t = await getTranslations('ProductDetails');
+
   const { productId } = await params;
 
   const response = await getProductDetailsInfo(productId);
@@ -101,7 +104,7 @@ export default async function Page({ params }: PageProps) {
         <ErrorBoundary
           fallback={
             <p className="text-text-danger">
-              Failed to load related products
+              {t('relatedProductsError')}
             </p>
           }
         >

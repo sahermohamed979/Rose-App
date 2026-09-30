@@ -52,7 +52,9 @@ export default function MobileNav() {
     closeButtonRef.current?.focus();
 
     const drawer = drawerRef.current;
-    if (!drawer) return;
+    if (!drawer) {
+      return;
+    }
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -68,7 +70,9 @@ export default function MobileNav() {
           )
         ).filter((el) => !el.closest('[inert]'));
 
-        if (focusable.length === 0) return;
+        if (focusable.length === 0) {
+          return;
+        }
 
         const first = focusable[0];
         const last = focusable[focusable.length - 1];

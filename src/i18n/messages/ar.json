@@ -215,7 +215,9 @@
     "errorTitle": "حدث خطأ ما",
     "errorDescription": "تعذر تحميل المنتج، يرجى المحاولة مرة أخرى لاحقًا.",
     "backToProducts": "العودة إلى المنتجات",
-    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود."
+    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود.",
+    "relatedProducts": "منتجات ذات صلة",
+    "relatedProductsError": "تعذر تحميل المنتجات ذات الصلة"
   },
   "productReview": {
     "title": "تقييمات المنتج",
@@ -247,12 +249,12 @@
     "loadingMore": "جاري تحميل المزيد",
     "currency": "جنيه مصري",
     "subHeader": {
-      "subHeaderHome": "الرئيسة",
+      "subHeaderHome": "الرئيسية",
       "subHeaderProducts": "المنتجات",
       "subHeaderOccasions": "المناسبات",
       "subHeaderCategories": "الفئات",
       "subHeaderContact": "تواصل معنا",
-      "subHeaderAbout": " حول الموقع"
+      "subHeaderAbout": "حول الموقع"
     },
     "nav": {
       "menu": "القائمة",
@@ -486,6 +488,7 @@
     "exploreSimilarProducts": "استكشف المنتجات المشابهة",
     "continueShopping": "متابعة التسوق",
     "empty": "قائمة المفضلة فارغة",
+    "errorTitle": "حدث خطأ ما",
     "currency": "جنيه"
   },
   "address": {
@@ -613,6 +616,7 @@
     }
   },
   "orders": {
+    "title": "الطلبات",
     "order": "طلب",
     "createdIn": "تم الإنشاء في",
     "at": "الساعة",
@@ -634,6 +638,8 @@
     "noMoreOrders": "لا توجد طلبات أخرى.",
     "loadMoreError": "تعذر تحميل المزيد من الطلبات.",
     "tryAgain": "حاول مرة أخرى",
+    "errorTitle": "حدث خطأ ما",
+    "loginRequired": "يرجى <login>تسجيل الدخول</login> للمتابعة.",
     "statuses": {
       "pending": "قيد الانتظار",
       "cancelled": "ملغي",

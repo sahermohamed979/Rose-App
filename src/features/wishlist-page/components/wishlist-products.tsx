@@ -16,7 +16,7 @@ export default function WishlistProducts({
 }) {
   const t = useTranslations('wishlist');
   if (!data.status) {
-    return <p>Something went wrong</p>;
+    return <p className="text-text-danger">{t('errorTitle')}</p>;
   }
 
   return (
@@ -27,7 +27,10 @@ export default function WishlistProducts({
             {/* product details */}
             <div className="flex gap-3 sm:gap-4 flex-1 min-w-0">
               <div className="relative w-20 h-24 sm:w-28 sm:h-32 md:w-[117px] md:h-[140px] shrink-0 rounded-md overflow-hidden">
-                <Link href={`/products/${item.productId}`} className="block relative w-full h-full">
+                <Link
+                  href={`/products/${item.productId}`}
+                  className="block relative w-full h-full"
+                >
                   <Image
                     fill
                     className="rounded-md object-cover"

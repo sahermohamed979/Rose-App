@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
 import OrderPage from '@/features/orders/components/order-page';
 import OrderError from '@/features/orders/components/orderError';
@@ -29,6 +29,9 @@ export async function generateMetadata({
 }
 
 export default async function OrdersPage() {
+  // Translations
+  const t = await getTranslations('orders');
+
   const token = await getDirectToken();
 
   // Not authenticated
@@ -36,14 +39,16 @@ export default async function OrdersPage() {
     return (
       <div className="my-4 text-center">
         <p className="text-2xl font-bold">
-          You need to{' '}
-          <Link
-            href="/login"
-            className="text-center font-semibold text-text-info hover:mx-4 duration-500 hover:text-3xl"
-          >
-            Login
-          </Link>{' '}
-          to continue.
+          {t.rich('loginRequired', {
+            login: (chunks) => (
+              <Link
+                href="/login"
+                className="text-center font-semibold text-text-info hover:mx-4 duration-500 hover:text-3xl"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
       </div>
     );
@@ -70,7 +75,7 @@ export default async function OrdersPage() {
   return (
     <div className="mx-20 mt-15.5">
       <p className="text-5xl font-bold text-text-plain mb-6">
-        Orders
+        {t('title')}
       </p>
 
       <OrderPage initialData={initialData} />

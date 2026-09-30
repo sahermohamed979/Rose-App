@@ -215,7 +215,9 @@
     "errorTitle": "Something went wrong",
     "errorDescription": "We couldn't load this product. Please try again later.",
     "backToProducts": "Back to products",
-    "productDoesNotExist": "The product you are looking for does not exist."
+    "productDoesNotExist": "The product you are looking for does not exist.",
+    "relatedProducts": "Related Products",
+    "relatedProductsError": "Failed to load related products"
   },
   "productReview": {
     "title": "Product Reviews",
@@ -486,6 +488,7 @@
     "exploreSimilarProducts": "Explore Similar Products",
     "continueShopping": "Continue Shopping",
     "empty": "Your wishlist is empty",
+    "errorTitle": "Something went wrong",
     "currency": "EGP"
   },
   "address": {
@@ -613,6 +616,7 @@
     }
   },
   "orders": {
+    "title": "Orders",
     "order": "Order",
     "createdIn": "Created in",
     "at": "at",
@@ -634,6 +638,8 @@
     "noMoreOrders": "No more orders.",
     "loadMoreError": "Could not load more orders.",
     "tryAgain": "Try Again",
+    "errorTitle": "Something went wrong",
+    "loginRequired": "You need to <login>Login</login> to continue.",
     "statuses": {
       "pending": "Pending",
       "cancelled": "Cancelled",
