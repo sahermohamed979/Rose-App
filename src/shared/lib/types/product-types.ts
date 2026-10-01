@@ -91,7 +91,7 @@ export interface IProduct {
   discountValue: string | null;
 
   cover: string;
-  gallery: string[];
+  gallery: string | string[];
 
   categoryId: string;
   subCategoryId: string | null;
@@ -102,7 +102,7 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
 
-  category: ProductCategory;
+  category?: ProductCategory;
   subCategory?: ProductSubCategory | null;
 
   occasion?: OccasionType;

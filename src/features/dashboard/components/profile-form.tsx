@@ -10,8 +10,14 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { Input } from '@/shared/components/ui/input';
 import { PhoneInput } from '@/shared/components/ui/input-phone';
 import { UserProfile } from '../types/profile.types';
-import { profileSchema, ProfileFormValues } from '../schemas/profile-schema';
-import { useUpdateProfile, useDeleteAccount } from '../hooks/use-profile';
+import {
+  profileSchema,
+  ProfileFormValues,
+} from '../schemas/profile-schema';
+import {
+  useUpdateProfile,
+  useDeleteAccount,
+} from '../hooks/use-profile';
 import ProfileAvatar from './profile-avatar';
 import DeleteAccountDialog from './delete-account-dialog';
 
@@ -48,12 +54,16 @@ export default function ProfileForm({ user }: ProfileFormProps) {
   const locale = useLocale();
   const router = useRouter();
   const [pendingPhoto, setPendingPhoto] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(user.photo ?? null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(
+    user.photo ?? null
+  );
   const [isPhotoRemoved, setIsPhotoRemoved] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const { mutate: updateProfile, isPending: isSaving } = useUpdateProfile();
-  const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount();
+  const { mutate: updateProfile, isPending: isSaving } =
+    useUpdateProfile();
+  const { mutate: deleteAccount, isPending: isDeleting } =
+    useDeleteAccount();
 
   const {
     register,
@@ -76,6 +86,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       lastName: user.lastName ?? '',
       phone: user.phone ?? '',
     });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPhotoPreview(user.photo ?? null);
     setIsPhotoRemoved(false);
     setPendingPhoto(null);
@@ -96,9 +107,15 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
   function onSubmit(values: ProfileFormValues) {
     const formData = new FormData();
-    if (values.firstName) formData.append('firstName', values.firstName);
-    if (values.lastName) formData.append('lastName', values.lastName);
-    if (values.phone) formData.append('phone', values.phone);
+    if (values.firstName) {
+      formData.append('firstName', values.firstName);
+    }
+    if (values.lastName) {
+      formData.append('lastName', values.lastName);
+    }
+    if (values.phone) {
+      formData.append('phone', values.phone);
+    }
     if (pendingPhoto) {
       formData.append('photo', pendingPhoto);
     } else if (isPhotoRemoved) {
@@ -122,7 +139,11 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         }
       },
       onError: (err) => {
-        toast.error(err instanceof Error ? err.message : t('errors.updateFailed'));
+        toast.error(
+          err instanceof Error
+            ? err.message
+            : t('errors.updateFailed')
+        );
       },
     });
   }
@@ -150,7 +171,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       ? t('genderMale')
       : user.gender?.toUpperCase() === 'FEMALE'
         ? t('genderFemale')
-        : user.gender ?? '';
+        : (user.gender ?? '');
 
   return (
     <>
@@ -165,7 +186,9 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
         {/* Photo Upload */}
         <ProfileAvatar
-          photoUrl={isPhotoRemoved ? null : (photoPreview ?? user.photo)}
+          photoUrl={
+            isPhotoRemoved ? null : (photoPreview ?? user.photo)
+          }
           firstName={user.firstName}
           onPhotoChange={handlePhotoChange}
           onPhotoRemove={handlePhotoRemove}
@@ -186,7 +209,11 @@ export default function ProfileForm({ user }: ProfileFormProps) {
               />
               {errors.firstName && (
                 <p className="text-text-danger text-xs">
-                  {t(`errors.${errors.firstName.message}` as Parameters<typeof t>[0])}
+                  {t(
+                    `errors.${errors.firstName.message}` as Parameters<
+                      typeof t
+                    >[0]
+                  )}
                 </p>
               )}
             </div>
@@ -202,7 +229,11 @@ export default function ProfileForm({ user }: ProfileFormProps) {
               />
               {errors.lastName && (
                 <p className="text-text-danger text-xs">
-                  {t(`errors.${errors.lastName.message}` as Parameters<typeof t>[0])}
+                  {t(
+                    `errors.${errors.lastName.message}` as Parameters<
+                      typeof t
+                    >[0]
+                  )}
                 </p>
               )}
             </div>
@@ -239,7 +270,11 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                 />
                 {errors.phone && (
                   <p className="text-text-danger text-xs">
-                    {t(`errors.${errors.phone.message}` as Parameters<typeof t>[0])}
+                    {t(
+                      `errors.${errors.phone.message}` as Parameters<
+                        typeof t
+                      >[0]
+                    )}
                   </p>
                 )}
               </div>
@@ -277,7 +312,10 @@ export default function ProfileForm({ user }: ProfileFormProps) {
           <button
             type="submit"
             id="profile-save-btn"
-            disabled={isSaving || (!isDirty && !pendingPhoto && !isPhotoRemoved)}
+            disabled={
+              isSaving ||
+              (!isDirty && !pendingPhoto && !isPhotoRemoved)
+            }
             className="w-full md:w-auto px-8 py-2.5 rounded-xl bg-bg-primary hover:bg-maroon-700 text-white text-sm font-bold transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px] cursor-pointer"
           >
             {isSaving ? (

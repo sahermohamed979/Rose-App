@@ -24,7 +24,9 @@ export default function DeleteAccountDialog({
   // Close on Escape
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && open) onClose();
+      if (e.key === 'Escape' && open) {
+        onClose();
+      }
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
@@ -42,14 +44,18 @@ export default function DeleteAccountDialog({
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   return (
     <div
       ref={overlayRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={(e) => {
-        if (e.target === overlayRef.current) onClose();
+        if (e.target === overlayRef.current) {
+          onClose();
+        }
       }}
     >
       {/* Backdrop */}

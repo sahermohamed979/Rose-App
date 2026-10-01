@@ -1,30 +1,39 @@
-import { HeartPlus, ShoppingCart } from 'lucide-react';
-import { Button } from '@/shared/components/ui/button';
+import { ShoppingCart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-interface Props {
-  stock: number;
-}
+import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
+import WishlistButton from '@/features/cart-wishlist/components/wishlist-button';
+import { ICart } from '@/features/cart/types/cart-types';
 
-export default function ProductActions({ stock }: Props) {
+type Props = Pick<ICart, 'productId' | 'product'> & {
+  stock: number;
+};
+
+export default function ProductActions({
+  productId,
+  product,
+  stock,
+}: Props) {
+  // Translation
   const t = useTranslations('ProductDetails');
 
   return (
     <div className="flex gap-4">
-      <button
-        className="w-12 h-12 rounded-lg bg-bg-muted flex items-center justify-center"
-        aria-label={t('addToFavorites')}
-      >
-        <HeartPlus size={20} />
-      </button>
-
-      <Button
-        disabled={stock === 0}
+      <WishlistButton
+        className="w-12 h-12 rounded-lg hover:w-12"
+        addedClassName="bg-bg-inverse enabled:hover:bg-bg-inverse hover:w-39.25"
+        notAddedClassName="bg-bg-muted enabled:hover:bg-bg-muted hover:w-39.25"
+        productId={productId}
+      />
+      <AddToCart
         className="flex-1 h-11 flex items-center justify-center gap-2 text-text-inverse"
+        productId={productId}
+        product={product}
+        stock={stock}
       >
         <ShoppingCart size={22} />
         {t('addToCart')}
-      </Button>
+      </AddToCart>
     </div>
   );
 }

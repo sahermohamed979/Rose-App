@@ -23,6 +23,8 @@ export default function ProductDetailsInfo({
     initialData
   );
 
+  // console.log(product.categoryId);
+
   const locale = useLocale();
 
   if (isLoading) {
@@ -82,7 +84,11 @@ export default function ProductDetailsInfo({
           </article>
         </div>
 
-        <ProductActions stock={product.stock} />
+        <ProductActions
+          productId={productId}
+          product={product}
+          stock={product.stock}
+        />
       </div>
     </section>
   );

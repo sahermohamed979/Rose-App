@@ -146,7 +146,10 @@ const CountrySelect = ({
             ))}
         </select>
 
-        <FlagComponent country={currentCountry} countryName={currentCountry} />
+        <FlagComponent
+          country={currentCountry}
+          countryName={currentCountry}
+        />
 
         <span className="mt-px w-14 text-sm font-medium text-text-plain">
           {`${currentCountry}(+${callingCode})`}

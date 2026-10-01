@@ -183,6 +183,12 @@
     "addToWishList": "إضافة إلى المفضلة",
     "removeFromWishList": "إزالة من المفضلة",
     "loadingProducts": "جاري تحميل المنتجات...",
+    "addToCartSuccess": "تم إضافة المنتج إلى السلة بنجاح",
+    "addToCartError": "فشل إضافة المنتج إلى السلة",
+    "addToWishlistSuccess": "تم إضافة المنتج إلى المفضلة بنجاح",
+    "addToWishlistError": "فشل إضافة المنتج إلى المفضلة",
+    "removeFromWishlistSuccess": "تم إزالة المنتج من المفضلة بنجاح",
+    "removeFromWishlistError": "فشل إزالة المنتج من المفضلة",
     "allProducts": "كل المنتجات",
     "addNewProduct": "إضافة منتج جديد",
     "name": "الاسم",
@@ -209,7 +215,9 @@
     "errorTitle": "حدث خطأ ما",
     "errorDescription": "تعذر تحميل المنتج، يرجى المحاولة مرة أخرى لاحقًا.",
     "backToProducts": "العودة إلى المنتجات",
-    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود."
+    "productDoesNotExist": "المنتج الذي تبحث عنه غير موجود.",
+    "relatedProducts": "منتجات ذات صلة",
+    "relatedProductsError": "تعذر تحميل المنتجات ذات الصلة"
   },
   "productReview": {
     "title": "تقييمات المنتج",
@@ -225,7 +233,6 @@
     "starSingular": "{n} نجمة",
     "starPlural": "{n} نجوم"
   },
-
   "header": {
     "searchPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
     "headerLogin": "تسجيل الدخول",
@@ -242,12 +249,22 @@
     "loadingMore": "جاري تحميل المزيد",
     "currency": "جنيه مصري",
     "subHeader": {
-      "subHeaderHome": "الرئيسة",
+      "subHeaderHome": "الرئيسية",
       "subHeaderProducts": "المنتجات",
       "subHeaderOccasions": "المناسبات",
       "subHeaderCategories": "الفئات",
       "subHeaderContact": "تواصل معنا",
-      "subHeaderAbout": " حول الموقع"
+      "subHeaderAbout": "حول الموقع"
+    },
+    "nav": {
+      "menu": "القائمة",
+      "close": "إغلاق القائمة",
+      "openMenu": "فتح قائمة التنقل",
+      "wishlist": "المفضلة",
+      "cart": "سلة التسوق",
+      "prevSlide": "الشريحة السابقة",
+      "nextSlide": "الشريحة التالية",
+      "mainNav": "التنقل الرئيسي"
     }
   },
   "footer": {
@@ -359,31 +376,355 @@
     "flowersSubtitle": "هدايا أنيقة لكل مناسبة مميزة.",
     "buyNow": "سأشتريها!"
   },
-
   "categories": {
     "wedding": "زفاف",
     "engagement": "خطوبة",
     "anniversary": "ذكرى زواج"
   },
-
   "cards": {
     "weddingTitle": "احتفل بها إلى الأبد بهدية ستتذكرها دائمًا",
     "engagementTitle": "احتفل ببداية رحلة جميلة معًا",
     "anniversaryTitle": "اجعل كل ذكرى حب مفاجأة لا تُنسى"
   },
-
   "features": {
     "freeDelivery": "توصيل مجاني",
     "freeDeliveryDesc": "للطلبات التي تزيد عن 120 جنيه",
-
     "refund": "استرجاع الأموال",
     "refundDesc": "استرجاع خلال 30 يومًا",
-
     "safePayment": "دفع آمن",
     "safePaymentDesc": "دفع آمن بنسبة 100٪",
-
     "support": "دعم 24/7",
     "supportDesc": "تواصل معنا في أي وقت"
+  },
+  "reviewForm": {
+    "yourRating": "تقييمك",
+    "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المراجعة",
+    "review": "المراجعة",
+    "reviewPlaceholder": "ما رأيك في هذا المنتج؟",
+    "submit": "إضافة مراجعة",
+    "submitting": "جارٍ الإرسال...",
+    "loginRequired": "يرجى تسجيل الدخول حتى تتمكن من إضافة مراجعة.",
+    "reviewFailed": "تعذر إرسال المراجعة.",
+    "validation": {
+      "titleMin": "يجب أن يكون العنوان 5 أحرف على الأقل",
+      "titleMax": "يجب أن يكون العنوان 32 حرفًا كحد أقصى",
+      "contentMin": "يجب أن تكون المراجعة 20 حرفًا على الأقل",
+      "contentMax": "يجب أن تكون المراجعة 100 حرف كحد أقصى",
+      "ratingRequired": "يرجى اختيار تقييم بالنجوم"
+    }
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "مواصلة التسوق ",
+    "empty": "سلتك فارغة",
+    "startShopping": "ابدأ التسوق ",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟ ",
+    "noImage": "صورة المنتج",
+    "product": "{count, plural, =0 {0 منتجات} one {# منتج} two {# منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "currency": "ج.م",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد"
+  },
+  "cartError": {
+    "title": "تعذّر تحميل عربة التسوق",
+    "subtitle": "حدث خطأ أثناء جلب عربة التسوق الخاصة بك. لا تقلق، منتجاتك بأمان.",
+    "retry": "إعادة المحاولة",
+    "continueShopping": "متابعة التسوق",
+    "goHome": "العودة للرئيسية",
+    "showDetails": "عرض التفاصيل التقنية",
+    "hideDetails": "إخفاء التفاصيل التقنية",
+    "errorDetails": "تفاصيل الخطأ",
+    "message": "الرسالة:",
+    "digest": "رمز الخطأ:"
+  },
+  "checkout": {
+    "step1Title": "عنوان الشحن",
+    "addAddress": "إضافة عنوان جديد",
+    "next": "التالي",
+    "back": "رجوع",
+    "noAddresses": "أضف عنوانك الأول للمتابعة",
+    "or": "أو",
+    "failedLoading": "فشل تحميل العناوين. حاول مجدداً",
+    "step2Title": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "cashP": "ستدفع نقدًا عند استلام طلبك.",
+    "creditCard": "بطاقة ائتمانية",
+    "creditP": "سيتم توجيهك بشكل آمن إلى Stripe لإكمال عملية الدفع.",
+    "orderSuccess": "تم تقديم طلبك بنجاح!",
+    "orderFailed": "فشل تقديم الطلب. حاول مجددا",
+    "tryAgain": "حاول مجدداً",
+    "orderSummary": "الملخص",
+    "couponCode": "كود الخصم",
+    "couponPlaceholder": "كود الخصم",
+    "applyCoupon": "تطبيق الكوبون",
+    "noCoupons": "لا توجد كوبونات مضافة",
+    "couponApplied": "تم تطبيق الكوبون",
+    "removeCoupon": "إزالة الكوبون",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "couponInvalid": "كود الخصم غير صالح أو منتهي الصلاحية",
+    "suggestedProducts": "منتجات قد تعجبك",
+    "errors": {
+      "couponCodeRequired": "كود الخصم مطلوب",
+      "couponCodeTooLong": "كود الخصم طويل جداً"
+    }
+  },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "items": "{count} عناصر",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "ratings": "{count} تقييمات",
+    "addToCart": "أضف إلى السلة",
+    "clearWishlist": "مسح قائمة المفضلة",
+    "clearWishlistConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "exploreSimilarProducts": "استكشف المنتجات المشابهة",
+    "continueShopping": "متابعة التسوق",
+    "empty": "قائمة المفضلة فارغة",
+    "errorTitle": "حدث خطأ ما",
+    "currency": "جنيه"
+  },
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة",
+      "address": "إضافة العنوان"
+    },
+    "city": "المدينة",
+    "title": "اسم العنوان",
+    "details": "العنوان",
+    "phone": "رقم التواصل",
+    "findMyLocation": "حدد موقعي",
+    "mapLoading": "جارٍ تحميل الخريطة...",
+    "mapUnavailable": "الخريطة غير متاحة. تحقق من اتصالك وحاول مرة أخرى.",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "errors": {
+      "titleRequired": "اسم العنوان مطلوب",
+      "titleInvalid": "أدخل اسم عنوان صحيح",
+      "cityRequired": "المدينة مطلوبة",
+      "cityInvalid": "أدخل اسم مدينة صحيح",
+      "streetRequired": "العنوان مطلوب",
+      "streetInvalid": "أدخل عنوان شارع صحيح",
+      "phoneRequired": "رقم التواصل مطلوب",
+      "phoneInvalid": "أدخل رقم تواصل صحيح",
+      "locationRequired": "يرجى تحديد موقعك على الخريطة",
+      "unsafeInput": "غير مسموح بإدخال رموز غير صالحة"
+    }
+  },
+  "account-setting": {
+    "account-setting": "اعدادات الحساب",
+    "profile": "الملف الشخصي",
+    "change-password": "تغيير كلمة المرور",
+    "logout": "تسجيل الخروج"
+  },
+  "profileForm": {
+    "changeEmail": "تغيير البريد الالكتروني ",
+    "enterEmail": "ادخل بريدك الالكتروني",
+    "email": "البريد الالكتروني",
+    "emailPlaceholder": "user@example.com",
+    "next": "التالي",
+    "verifyOtp": "تأكيد رمز التحقق",
+    "otpP": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام الذي أرسلناه إلى:",
+    "edit": "تعديل",
+    "resendCode": "اعاده ارسال",
+    "resendTimer": "يمكنك طلب رمز جديد بعد {s} ثانية",
+    "deleteAccount?": "هل أنت متأكد أنك تريد حذف حسابك؟",
+    "actionPermanent": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+    "nope": "لا، لن أفعل ذلك",
+    "delete": "حذف",
+    "deleting": "...جاري الحذف",
+    "fields": {
+      "change": "تغيير",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الالكتروني",
+      "phone": "رقم الهاتف",
+      "gender": "الجنس",
+      "genderPlaceholder": "اختر الجنس",
+      "male": "ذكر",
+      "female": "أنثى"
+    },
+    "deleteAccount": "حذف حسابي",
+    "loading": "جاري تحميل الملف الشخصي...",
+    "loadError": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "saving": "جاري الحفظ",
+    "saveChanges": "حفظ التعديلات",
+    "uploadPhoto": "رفع الصوره",
+    "uploadPhotoType": "يمكنك رفع صور بصيغه jpg, png, git باقصي حجم 5 ميجا",
+    "uploadingPhoto": "جاري تحميل الصوره...",
+    "toast": {
+      "profileUpdatedSuccess": "تم تحديث الحساب بنجاح",
+      "profileUpdatedError": "حدث خطأ ما",
+      "validImage": "من فضلك ارفع صوره صحيحه",
+      "imageSize": "حجم الصوره يجب ان يكون اقل من 5 ميجا",
+      "photoUpdatedSuccess": "تم رفع الصوره بنجاح",
+      "photoUpdatedError": "خطأ في رفع الصوره",
+      "enterNewEmail": "يرجى إدخال بريدك الإلكتروني الجديد",
+      "verificationCodeSent": "تم إرسال رمز التحقق",
+      "enterSixDigits": "يرجى إدخال 6 أرقام",
+      "emailUpdated": "تم تحديث البريد الإلكتروني بنجاح",
+      "accountDeleted": "تم حذف الحساب بنجاح"
+    },
+    "errors": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "phoneInvalid": "من فضلك أدخل رقم هاتف صحيح"
+    },
+    "profileError": {
+      "title": "تعذر تحميل بيانات الحساب",
+      "description": "حصلت مشكلة أثناء جلب بيانات حسابك .",
+      "retry": "حاول مره اخري"
+    }
+  },
+  "changePassword": {
+    "title": "تغيير كلمة المرور",
+    "current": "كلمة المرور الحالية",
+    "new": "كلمة المرور الجديدة",
+    "confirm": "تأكيد كلمة المرور الجديدة",
+    "button": "تغيير كلمة المرور",
+    "incorrectCurrent": "كلمة المرور الحالية غير صحيحة",
+    "samePw": "يجب أن تختلف كلمة المرور الجديدة عن الحالية",
+    "success": "تم تغيير كلمة المرور بنجاح. يرجى تسجيل الدخول مرة أخرى.",
+    "error": "حدث خطأ ما. يرجى المحاولة مجدداً",
+    "errors": {
+      "oldPasswordRequired": "كلمة المرور الحالية مطلوبة",
+      "newPasswordMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+      "newPasswordUppercase": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+      "newPasswordLowercase": "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+      "newPasswordNumber": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "newPasswordSpecial": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
+      "confirmRequired": "يرجى تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين"
+    }
+  },
+  "orders": {
+    "title": "الطلبات",
+    "order": "طلب",
+    "createdIn": "تم الإنشاء في",
+    "at": "الساعة",
+    "totalPrice": "السعر الإجمالي",
+    "paid": "تم الدفع",
+    "currency": "جنيه",
+    "status": "الحالة",
+    "paymentMethod": "طريقة الدفع",
+    "cash": "نقدًا",
+    "creditCard": "بطاقة ائتمان",
+    "deliveryStatus": "حالة التوصيل",
+    "orderItems": "منتجات الطلب",
+    "rating": "التقييم",
+    "ratings": "تقييمات",
+    "showAll": "عرض الكل",
+    "showLess": "عرض أقل",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل...",
+    "noMoreOrders": "لا توجد طلبات أخرى.",
+    "loadMoreError": "تعذر تحميل المزيد من الطلبات.",
+    "tryAgain": "حاول مرة أخرى",
+    "errorTitle": "حدث خطأ ما",
+    "loginRequired": "يرجى <login>تسجيل الدخول</login> للمتابعة.",
+    "statuses": {
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغي",
+      "done": "تم"
+    }
+  },
+  "Forms": {
+    "textareaPlaceholder": "اكتب ملاحظاتك أو رسالتك هنا...",
+    "required": "هذا الحقل مطلوب"
+  },
+  "metadata": {
+    "app": {
+      "name": "روز",
+      "title": "روز | متجر الزهور والهدايا الفاخرة",
+      "description": "تسوق أرقى باقات الزهور والتنسيقات الفاخرة والهدايا الفريدة لجميع المناسبات مع توصيل سريع في نفس اليوم."
+    },
+    "home": {
+      "title": "زهور وهدايا فاخرة",
+      "description": "اكتشف باقات الزهور المنسقة يدويًا والتنسيقات الفاخرة والهدايا المميزة لكل لحظة."
+    },
+    "products": {
+      "title": "جميع المنتجات",
+      "description": "استكشف مجموعتنا الكاملة من باقات الزهور الطبيعية والتنسيقات والهدايا الراقية."
+    },
+    "productDetails": {
+      "title": "تفاصيل المنتج",
+      "description": "اطلع على تفاصيل وتنسيق الزهور وآراء العملاء لهذه الباقة المميزة.",
+      "notFound": "المنتج غير موجود"
+    },
+    "categories": {
+      "title": "الفئات",
+      "description": "تسوق حسب الفئة: زهور طبيعية، باقات فاخرة، نباتات داخلية، وهدايا مميزة."
+    },
+    "occasions": {
+      "title": "المناسبات",
+      "description": "احتفل بأعياد الميلاد، الذكرى السنوية، حفلات الزفاف، التخرج، والمزيد مع باقات زهور ساحرة."
+    },
+    "about": {
+      "title": "معلومات عنا",
+      "description": "تعرف على متجر روز، وفنون تنسيق الزهور لدينا، وشغفنا بنشر البهجة من خلال أرقى الأزهار."
+    },
+    "contact": {
+      "title": "اتصل بنا",
+      "description": "تواصل مع فريق خدمة عملاء روز للاستفسارات، الطلبات الخاصة، أو المساعدة."
+    },
+    "wishlist": {
+      "title": "قائمة رغباتي",
+      "description": "شاهد وأدر باقات الزهور والهدايا المفضلة لديك المحفوظة في قائمتك."
+    },
+    "cart": {
+      "title": "سلة التسوق",
+      "description": "راجع منتجاتك المختارة من الزهور والهدايا واستعد لإتمام الشراء."
+    },
+    "checkout": {
+      "title": "إتمام الطلب",
+      "description": "أكمل طلبك بأمان مع خيارات توصيل سريعة إلى عنوانك المطلوب."
+    },
+    "orders": {
+      "title": "طلباتي",
+      "description": "تتبع طلبات باقات الزهور الخاصة بك واطلع على سجل مشترياتك السابقة."
+    },
+    "accountSetting": {
+      "title": "إعدادات الحساب",
+      "description": "أدر معلومات ملفك الشخصي وتفضيلاتك وبياناتك الشخصية بسهولة."
+    },
+    "changePassword": {
+      "title": "تغيير كلمة المرور",
+      "description": "قم بتحديث كلمة مرور حسابك بأمان وسهولة."
+    },
+    "login": {
+      "title": "تسجيل الدخول",
+      "description": "سجل الدخول إلى حسابك في روز لتتبع طلباتك وإدارة باقاتك المفضلة."
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "description": "أنشئ حساباً في متجر روز للاستمتاع بتجربة تسوق زهور استثنائية."
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "description": "استرجع كلمة مرور حسابك في متجر روز بسرعة وأمان."
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "أدخل كلمة المرور الجديدة لاستعادة الوصول إلى حسابك في روز."
+    }
   },
   "categoryDashboard": {
     "categories": "كل الفئات ",

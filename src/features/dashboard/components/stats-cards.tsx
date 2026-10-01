@@ -6,7 +6,10 @@ import {
   CircleDollarSign,
 } from 'lucide-react';
 import { StatisticsSummary } from '../types/statistics.types';
-import { formatNumber, formatCurrency } from '@/shared/lib/utils/formatter';
+import {
+  formatNumber,
+  formatCurrency,
+} from '@/shared/lib/utils/formatter';
 
 interface StatsCardsProps {
   summary: StatisticsSummary;

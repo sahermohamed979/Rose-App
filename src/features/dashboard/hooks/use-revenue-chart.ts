@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchRevenuePeriod } from '../actions/statistics.actions';
-import { RevenueDataPoint, RevenuePeriod } from '../types/statistics.types';
+import {
+  RevenueDataPoint,
+  RevenuePeriod,
+} from '../types/statistics.types';
 
 export const REVENUE_QUERY_KEY = (period: RevenuePeriod) =>
   ['dashboard', 'statistics', 'revenue', period] as const;
@@ -27,7 +30,9 @@ export function useRevenueChart(
       return [];
     },
     initialData:
-      period === initialPeriod && initialData && initialData.length > 0
+      period === initialPeriod &&
+      initialData &&
+      initialData.length > 0
         ? initialData
         : undefined,
     staleTime: 1000 * 60 * 5, // 5 minutes cache
