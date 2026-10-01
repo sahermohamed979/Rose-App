@@ -54,7 +54,10 @@ export default function MostPopular({
         </div>
       )}
       {!hasNoOccasions && (
-        <Tabs value={activeOccasionId ?? occasions[0]?.id} className="w-full">
+        <Tabs
+          value={activeOccasionId ?? occasions[0]?.id}
+          className="w-full"
+        >
           <div className="flex w-full justify-between items-center flex-wrap gap-4">
             <HeaderTitle text={t('mostPopular')} />
             <TabsList className="hidden md:flex flex-wrap h-auto bg-transparent">

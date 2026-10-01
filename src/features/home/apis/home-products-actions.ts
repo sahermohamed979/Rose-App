@@ -3,6 +3,7 @@ import {
   IProduct,
   OccasionType,
 } from '@/shared/lib/types/product-types';
+import { PRODUCTS_CACHE_TAG } from '@/features/products/constants/product-cache';
 
 export const getProductsByFilters = async ({
   page,
@@ -42,6 +43,9 @@ export const getProductsByFilters = async ({
         method: 'GET',
         headers: {
           Accept: 'application/json',
+        },
+        next: {
+          tags: [PRODUCTS_CACHE_TAG],
         },
       }
     );

@@ -7,6 +7,7 @@ import {
   searchProducts,
 } from '../apis/search-api';
 import { useDebounce } from '@/shared/lib/hooks/use-debounce';
+import { PRODUCT_QUERY_KEYS } from '@/shared/lib/constants/product-query-keys.constants';
 
 const MIN_SEARCH_LENGTH = 2;
 const SEARCH_DEBOUNCE_MS = 300;
@@ -26,7 +27,7 @@ export function useHeaderSearch() {
   // Query
   const { data: suggestedData, isLoading: isLoadingSuggestions } =
     useQuery({
-      queryKey: ['suggested-products'],
+      queryKey: PRODUCT_QUERY_KEYS.suggested,
       queryFn: fetchSuggestedProducts,
       enabled: isFocused && !isSearching,
     });
@@ -39,7 +40,7 @@ export function useHeaderSearch() {
     isLoading: isLoadingSearch,
     isError,
   } = useInfiniteQuery({
-    queryKey: ['search-products', debouncedQuery],
+    queryKey: PRODUCT_QUERY_KEYS.search(debouncedQuery),
     queryFn: ({ pageParam = 1 }) => {
       return searchProducts(debouncedQuery, pageParam);
     },
