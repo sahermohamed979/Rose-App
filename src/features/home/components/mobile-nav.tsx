@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useSession, signOut } from 'next-auth/react';
-import { LogOut, Menu, ScrollText, User, X } from 'lucide-react';
+import { LogOut, Menu, ScrollText, Settings, User, X } from 'lucide-react';
 
 import HeaderSearch from '../../search/components/header-search';
 import { NAV_LINKS } from '../consts/nav-links.constant';
@@ -194,13 +194,16 @@ export default function MobileNav() {
             <>
               <li>
                 <Link
-                  href="/account"
+                  href="/account-setting"
                   onClick={close}
-                  className={drawerLinkClass(pathname === '/account')}
+                  className={drawerLinkClass(
+                    pathname === '/account-setting'
+                  )}
                 >
                   <User className="w-5 h-5 text-text-primary" />
                   <span>
-                    {session?.user?.firstName || tUserMenu('account')}
+                    {session?.user?.firstName ||
+                      tUserMenu('account-setting')}
                   </span>
                 </Link>
               </li>
@@ -214,6 +217,20 @@ export default function MobileNav() {
                   <span>{tUserMenu('orders')}</span>
                 </Link>
               </li>
+              {session?.user?.role === 'ADMIN' && (
+                <li>
+                  <Link
+                    href="/dashboard"
+                    onClick={close}
+                    className={drawerLinkClass(
+                      pathname === '/dashboard'
+                    )}
+                  >
+                    <Settings className="w-5 h-5 text-text-primary" />
+                    <span>{tUserMenu('dashboard')}</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <button
                   type="button"
