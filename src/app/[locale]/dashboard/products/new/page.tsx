@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import AddNewProductForm from '@/features/products/components/add-new-product-form';
+import ProductOptionsLoadError from '@/features/products/components/product-options-load-error';
 import {
   getCategories,
   getOccasions,
@@ -25,9 +26,7 @@ export default async function AddProductPage() {
       <PageHeader title={t('addNewProduct')} />
       <div className="flex flex-col space-y-6 rounded-2xl bg-bg-plain p-6">
         {!categories?.length || !occasions?.length ? (
-          <p className="text-text-danger" role="alert">
-            {t('optionsLoadError')}
-          </p>
+          <ProductOptionsLoadError />
         ) : (
           <AddNewProductForm
             categories={categories}
