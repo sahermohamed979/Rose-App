@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ImageIcon } from 'lucide-react';
 
@@ -13,20 +13,10 @@ import type {
 } from '@/shared/lib/types/product-types';
 import { Button } from '@/shared/components/ui/button';
 import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/shared/components/ui/field';
-import { Input } from '@/shared/components/ui/input';
-import { FileInput } from '@/shared/components/ui/input-upload-file';
-import { Textarea } from '@/shared/components/ui/textarea';
-import {
   getEditProductSchema,
   type EditProductFormValues,
 } from '../schemas/edit-product-schema';
-import DiscountedPriceField from './discounted-price-field';
-import ProductOptionCombobox from './product-option-combobox';
+import ProductFormFields from './product-form-fields';
 import { useEditProduct } from '../hooks/use-edit-product';
 import ViewImageModal from '@/shared/components/view-image-modal';
 
@@ -43,7 +33,9 @@ export default function EditProductForm({
 }: EditProductFormProps) {
   // Translations
   const t = useTranslations('dashboard.products');
-  const gallery = product.gallery;
+  const gallery = Array.isArray(product.gallery)
+    ? product.gallery
+    : [];
 
   // View-image modal open/close state
   const [isCoverImageOpen, setIsCoverImageOpen] = useState(false);
@@ -88,228 +80,58 @@ export default function EditProductForm({
       onSubmit={handleSubmit(handleFormSubmit)}
       className="flex flex-col gap-6 md:p-0"
     >
-      <FieldGroup>
-        <Field data-invalid={!!errors.title}>
-          <FieldLabel
-            htmlFor="title"
-            className="after:text-text-danger after:content-['*']"
-          >
-            {t('title')}
-          </FieldLabel>
-          <Input
-            id="title"
-            aria-invalid={!!errors.title}
-            placeholder={t('titlePlaceholder')}
-            {...register('title')}
-          />
-          <FieldError errors={[errors.title]} />
-        </Field>
-
-        <Field data-invalid={!!errors.description}>
-          <FieldLabel
-            htmlFor="description"
-            className="after:text-text-danger after:content-['*']"
-          >
-            {t('description')}
-          </FieldLabel>
-          <Textarea
-            className="resize-none field-sizing-fixed"
-            id="description"
-            rows={7}
-            aria-invalid={!!errors.description}
-            placeholder={t('descriptionPlaceholder')}
-            {...register('description')}
-          />
-          <FieldError errors={[errors.description]} />
-        </Field>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <Field data-invalid={!!errors.price}>
-            <FieldLabel
-              htmlFor="price"
-              className="after:text-text-danger after:content-['*']"
-            >
-              {t('price')}
-            </FieldLabel>
-            <Input
-              id="price"
-              type="number"
-              min={0}
-              step="0.01"
-              aria-invalid={!!errors.price}
-              placeholder={t('pricePlaceholder')}
-              {...register('price', { valueAsNumber: true })}
-            />
-            <FieldError errors={[errors.price]} />
-          </Field>
-
-          <Field data-invalid={!!errors.discount}>
-            <FieldLabel
-              htmlFor="discount"
-              className="after:text-text-danger after:content-['*']"
-            >
-              {t('discount')}
-            </FieldLabel>
-            <Input
-              id="discount"
-              type="number"
-              min={0}
-              max={100}
-              step="0.01"
-              aria-invalid={!!errors.discount}
-              placeholder={t('discountPlaceholder')}
-              {...register('discount', { valueAsNumber: true })}
-            />
-            <FieldError errors={[errors.discount]} />
-          </Field>
-          <DiscountedPriceField control={control} />
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
-          <Field data-invalid={!!errors.quantity}>
-            <FieldLabel
-              htmlFor="quantity"
-              className="after:text-text-danger after:content-['*']"
-            >
-              {t('quantity')}
-            </FieldLabel>
-            <Input
-              id="quantity"
-              type="number"
-              min={0}
-              aria-invalid={!!errors.quantity}
-              placeholder={t('quantityPlaceholder')}
-              {...register('quantity', { valueAsNumber: true })}
-            />
-            <FieldError errors={[errors.quantity]} />
-          </Field>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Field data-invalid={!!errors.productCover}>
-            <FieldLabel htmlFor="productCover">
-              {t('productCover')}
-            </FieldLabel>
-            <FileInput
-              id="productCover"
-              accept="image/*"
-              aria-invalid={!!errors.productCover}
-              {...register('productCover')}
-            />
-            <FieldError errors={[errors.productCover]} />
-
-            {product.cover && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setIsCoverImageOpen(true)}
-                  className="inline-flex items-center gap-2 text-sm text-text-info"
-                >
-                  <ImageIcon className="h-4 w-4" />
-                  {t('productCover')}
-                </button>
-                <ViewImageModal
-                  isOpen={isCoverImageOpen}
-                  onClose={() => setIsCoverImageOpen(false)}
-                  imageUrl={product.cover}
-                  title={product.title}
-                />
-              </>
-            )}
-          </Field>
-
-          <Field data-invalid={!!errors.productGallery}>
-            <FieldLabel htmlFor="productGallery">
-              {t('productGallery')}
-            </FieldLabel>
-            <FileInput
-              id="productGallery"
-              accept="image/*"
-              multiple
-              aria-invalid={!!errors.productGallery}
-              {...register('productGallery')}
-            />
-            <FieldError errors={[errors.productGallery]} />
-
-            {gallery.length > 0 ? (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setIsGalleryOpen(true)}
-                  className="inline-flex items-center gap-2 text-sm text-text-info"
-                >
-                  <ImageIcon className="h-4 w-4" />
-                  {t('viewGallery')}
-                </button>
-                <ViewImageModal
-                  isOpen={isGalleryOpen}
-                  onClose={() => setIsGalleryOpen(false)}
-                  imageUrls={gallery}
-                  title={product.title}
-                />
-              </>
-            ) : (
-              <p className="text-sm text-text-muted">
-                {t('noGalleryImages')}
-              </p>
-            )}
-          </Field>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
-          <Controller
-            name="category"
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel
-                  htmlFor="category"
-                  className="after:text-text-danger after:content-['*']"
-                >
-                  {t('category')}
-                </FieldLabel>
-                <ProductOptionCombobox
-                  id="category"
-                  items={categories}
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  onBlur={field.onBlur}
-                  invalid={fieldState.invalid}
-                  placeholder={t('selectOption')}
-                  emptyMessage={t('noOptions')}
-                />
-                <FieldError errors={[fieldState.error]} />
-              </Field>
-            )}
-          />
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
-          <Controller
-            name="occasion"
-            control={control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel
-                  htmlFor="occasion"
-                  className="after:text-text-danger after:content-['*']"
-                >
-                  {t('occasion')}
-                </FieldLabel>
-                <ProductOptionCombobox
-                  id="occasion"
-                  items={occasions}
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  onBlur={field.onBlur}
-                  invalid={fieldState.invalid}
-                  placeholder={t('selectOption')}
-                  emptyMessage={t('noOptions')}
-                />
-                <FieldError errors={[fieldState.error]} />
-              </Field>
-            )}
-          />
-        </div>
-      </FieldGroup>
+      <ProductFormFields
+        register={register}
+        control={control}
+        errors={errors}
+        categories={categories}
+        occasions={occasions}
+        isCoverRequired={false}
+        coverPreview={
+          product.cover && (
+            <>
+              <button
+                type="button"
+                onClick={() => setIsCoverImageOpen(true)}
+                className="inline-flex items-center gap-2 text-sm text-text-info"
+              >
+                <ImageIcon className="h-4 w-4" />
+                {t('productCover')}
+              </button>
+              <ViewImageModal
+                isOpen={isCoverImageOpen}
+                onClose={() => setIsCoverImageOpen(false)}
+                imageUrl={product.cover}
+                title={product.title}
+              />
+            </>
+          )
+        }
+        galleryPreview={
+          gallery.length > 0 ? (
+            <>
+              <button
+                type="button"
+                onClick={() => setIsGalleryOpen(true)}
+                className="inline-flex items-center gap-2 text-sm text-text-info"
+              >
+                <ImageIcon className="h-4 w-4" />
+                {t('viewGallery')}
+              </button>
+              <ViewImageModal
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+                imageUrls={gallery}
+                title={product.title}
+              />
+            </>
+          ) : (
+            <p className="text-sm text-text-muted">
+              {t('noGalleryImages')}
+            </p>
+          )
+        }
+      />
 
       <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? t('updatingProduct') : t('updateProduct')}
