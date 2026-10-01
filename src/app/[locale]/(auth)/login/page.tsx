@@ -1,5 +1,29 @@
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import LoginScreen from '@/features/auth/screens/loginScreen';
-import React from 'react';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  // Translations
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'metadata.login',
+  });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+    },
+  };
+}
 
 export default function LoginPage() {
   return <LoginScreen />;

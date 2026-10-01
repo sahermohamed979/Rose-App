@@ -15,16 +15,24 @@ import {
   RevenueDataPoint,
   RevenuePeriod,
 } from '../types/statistics.types';
-import { formatNumber, formatCurrency } from '@/shared/lib/utils/formatter';
+import {
+  formatNumber,
+  formatCurrency,
+} from '@/shared/lib/utils/formatter';
 import { useRevenueChart } from '../hooks/use-revenue-chart';
 
 interface RevenueChartProps {
   revenueChart?: RevenueDataPoint[];
   currency?: string;
   initialPeriod?: RevenuePeriod;
-  onPeriodChange?: (
-    period: RevenuePeriod
-  ) => Promise<{ status: boolean; revenueChart: RevenueDataPoint[]; message?: string } | RevenueDataPoint[]>;
+  onPeriodChange?: (period: RevenuePeriod) => Promise<
+    | {
+        status: boolean;
+        revenueChart: RevenueDataPoint[];
+        message?: string;
+      }
+    | RevenueDataPoint[]
+  >;
 }
 
 const PERIODS: {
@@ -48,40 +56,45 @@ export default function RevenueChart({
   );
 
   function handlePeriodChange(newPeriod: RevenuePeriod) {
-    if (newPeriod === period) return;
+    if (newPeriod === period) {
+      return;
+    }
     setPeriod(newPeriod);
   }
 
-  const translatedData = (data && data.length > 0 ? data : []).map((item) => {
-    let label = item.label;
-    const cleanLabel = String(item.label || '').trim();
-    const shortLabel = cleanLabel.slice(0, 3);
-    const capitalizedShort =
-      shortLabel.charAt(0).toUpperCase() + shortLabel.slice(1).toLowerCase();
+  const translatedData = (data && data.length > 0 ? data : []).map(
+    (item) => {
+      let label = item.label;
+      const cleanLabel = String(item.label || '').trim();
+      const shortLabel = cleanLabel.slice(0, 3);
+      const capitalizedShort =
+        shortLabel.charAt(0).toUpperCase() +
+        shortLabel.slice(1).toLowerCase();
 
-    if (t.has(`months.${cleanLabel}`)) {
-      label = t(`months.${cleanLabel}`);
-    } else if (t.has(`months.${capitalizedShort}`)) {
-      label = t(`months.${capitalizedShort}`);
-    } else if (t.has(`days.${cleanLabel}`)) {
-      label = t(`days.${cleanLabel}`);
-    } else if (t.has(`days.${capitalizedShort}`)) {
-      label = t(`days.${capitalizedShort}`);
+      if (t.has(`months.${cleanLabel}`)) {
+        label = t(`months.${cleanLabel}`);
+      } else if (t.has(`months.${capitalizedShort}`)) {
+        label = t(`months.${capitalizedShort}`);
+      } else if (t.has(`days.${cleanLabel}`)) {
+        label = t(`days.${cleanLabel}`);
+      } else if (t.has(`days.${capitalizedShort}`)) {
+        label = t(`days.${capitalizedShort}`);
+      }
+
+      const value =
+        typeof item.value === 'number'
+          ? item.value
+          : typeof (item as { revenue?: number }).revenue === 'number'
+            ? (item as { revenue?: number }).revenue!
+            : 0;
+
+      return {
+        ...item,
+        label,
+        value,
+      };
     }
-
-    const value =
-      typeof item.value === 'number'
-        ? item.value
-        : typeof (item as { revenue?: number }).revenue === 'number'
-          ? (item as { revenue?: number }).revenue!
-          : 0;
-
-    return {
-      ...item,
-      label,
-      value,
-    };
-  });
+  );
 
   return (
     <div className="bg-bg-plain rounded-2xl border border-border-subtle shadow-subtle p-6 flex flex-col justify-between h-full gap-5">
@@ -181,7 +194,11 @@ export default function RevenueChart({
                   boxShadow: 'var(--shadow-soft)',
                 }}
                 formatter={(
-                  value: number | string | readonly (number | string)[] | undefined
+                  value:
+                    | number
+                    | string
+                    | readonly (number | string)[]
+                    | undefined
                 ) => [
                   formatCurrency(Number(value || 0), locale),
                   t('revenue'),
@@ -198,11 +215,17 @@ export default function RevenueChart({
                 stroke="var(--maroon-400)"
                 strokeWidth={2}
                 fill="url(#revenueGradient)"
-                dot={(props: { cx?: number; cy?: number; value?: number }) => {
+                dot={(props: {
+                  cx?: number;
+                  cy?: number;
+                  value?: number;
+                }) => {
                   const { cx = 0, cy = 0, value = 0 } = props;
                   const validValues = data.map((d) => d.value || 0);
                   const maxValue =
-                    validValues.length > 0 ? Math.max(...validValues) : 0;
+                    validValues.length > 0
+                      ? Math.max(...validValues)
+                      : 0;
                   if (value === maxValue && maxValue > 0) {
                     return (
                       <g key={`peak-dot-${cx}-${cy}`}>

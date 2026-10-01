@@ -13,11 +13,20 @@ interface ProfileAvatarProps {
 }
 
 function getFullImageUrl(url?: string | null): string | null {
-  if (!url) return null;
-  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:') || url.startsWith('data:')) {
+  if (!url) {
+    return null;
+  }
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('blob:') ||
+    url.startsWith('data:')
+  ) {
     return url;
   }
-  const base = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, '') || 'https://rose-app.elevate-bootcamp.cloud';
+  const base =
+    process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, '') ||
+    'https://rose-app.elevate-bootcamp.cloud';
   return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
@@ -117,7 +126,9 @@ export default function ProfileAvatar({
             </button>
           )}
         </div>
-        <p className="text-text-soft text-sm">{t('uploadPhotoHint')}</p>
+        <p className="text-text-soft text-sm">
+          {t('uploadPhotoHint')}
+        </p>
       </div>
     </div>
   );

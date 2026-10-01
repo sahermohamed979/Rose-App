@@ -12,7 +12,7 @@ export default function AccountLayout({
   const t = useTranslations('account-setting');
 
   return (
-    <div className="min-h-screen  py-6 px-4">
+    <div className="min-h-screen  py-6 px-4 lg:px-20">
       {/* Header */}
       <h1 className="text-5xl font-bold text-text-plain mb-4">
         {t('account-setting')}

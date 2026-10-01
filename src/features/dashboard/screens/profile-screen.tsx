@@ -34,7 +34,7 @@ export default async function ProfileScreen() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-6 px-4 md:px-0">
+    <div className="w-full mx-auto py-6 px-4 md:px-0 lg:px-16">
       <ProfileForm user={user} />
     </div>
   );

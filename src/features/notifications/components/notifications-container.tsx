@@ -57,22 +57,33 @@ export default function NotificationsContainer({
       {/*  Dropdown menu trigger */}
       <DropdownMenuTrigger
         render={
-          <button
-            className="relative"
-            disabled={status !== 'authenticated'}
-          >
-            <Bell className="w-5 h-5 cursor-pointer" />
-            {status === 'authenticated' && (
-              <span
-                className={cn(
-                  `absolute -top-2 -right-2 bg-bg-danger text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm`,
-                  readCount === 0 && 'hidden'
-                )}
-              >
-                {readCount}
-              </span>
-            )}
-          </button>
+          status === 'loading' ? (
+            <button
+              className="relative"
+              aria-label={t('notifications.title')}
+              disabled
+            >
+              <Bell className="w-5 h-5 cursor-pointer" />
+            </button>
+          ) : (
+            <button
+              className="relative"
+              aria-label={t('notifications.title')}
+              disabled={status !== 'authenticated'}
+            >
+              <Bell className="w-5 h-5 cursor-pointer" />
+              {status === 'authenticated' && (
+                <span
+                  className={cn(
+                    `absolute -top-2 -right-2 bg-bg-danger text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full shadow-sm`,
+                    readCount === 0 && 'hidden'
+                  )}
+                >
+                  {readCount}
+                </span>
+              )}
+            </button>
+          )
         }
       />
       {/*  Dropdown menu content */}

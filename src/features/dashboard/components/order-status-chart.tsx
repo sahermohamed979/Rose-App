@@ -39,7 +39,9 @@ const createCustomBadgeLabel = (locale: string) => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    if (!percent || percent < 0.04) return null;
+    if (!percent || percent < 0.04) {
+      return null;
+    }
 
     return (
       <g>
@@ -71,7 +73,9 @@ const createCustomBadgeLabel = (locale: string) => {
 function getStatusCount(
   val: number | { count?: number } | undefined
 ): number {
-  if (typeof val === 'number') return val;
+  if (typeof val === 'number') {
+    return val;
+  }
   if (val && typeof val === 'object' && 'count' in val) {
     return Number(val.count) || 0;
   }
@@ -91,7 +95,8 @@ export default function OrderStatusChart({
   );
 
   const total =
-    typeof orderStatus.totalOrders === 'number' && orderStatus.totalOrders > 0
+    typeof orderStatus.totalOrders === 'number' &&
+    orderStatus.totalOrders > 0
       ? orderStatus.totalOrders
       : completed + inProgress + cancelled;
 
@@ -153,7 +158,11 @@ export default function OrderStatusChart({
             </Pie>
             <Tooltip
               formatter={(
-                value: number | string | readonly (number | string)[] | undefined,
+                value:
+                  | number
+                  | string
+                  | readonly (number | string)[]
+                  | undefined,
                 name: string | number | undefined
               ) => [
                 `${formatNumber(Number(value) || 0, locale)} (${formatNumber(pct(Number(value) || 0), locale)}%)`,

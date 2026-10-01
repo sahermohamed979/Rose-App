@@ -183,6 +183,12 @@
     "addToWishList": "Add to wishlist",
     "removeFromWishList": "Remove from wishlist",
     "loadingProducts": "Loading products...",
+    "addToCartSuccess": "Product added to cart successfully",
+    "addToCartError": "Failed to add product to cart",
+    "addToWishlistSuccess": "Product added to wishlist successfully",
+    "addToWishlistError": "Failed to add product to wishlist",
+    "removeFromWishlistSuccess": "Product removed from wishlist successfully",
+    "removeFromWishlistError": "Failed to remove product from wishlist",
     "allProducts": "All Products",
     "addNewProduct": "Add New Product",
     "name": "Name",
@@ -202,14 +208,16 @@
     "notFound": "Product not found",
     "unitsInStock": "{count} units in stock",
     "outOfStock": "Out of stock",
-    "ratingLabel": "Rating:",
+    "ratingLabel": "Rating: ",
     "ratingsCount": "{count} ratings",
     "addToFavorites": "Add to favorites",
     "addToCart": "Add to cart",
     "errorTitle": "Something went wrong",
     "errorDescription": "We couldn't load this product. Please try again later.",
     "backToProducts": "Back to products",
-    "productDoesNotExist": "The product you are looking for does not exist."
+    "productDoesNotExist": "The product you are looking for does not exist.",
+    "relatedProducts": "Related Products",
+    "relatedProductsError": "Failed to load related products"
   },
   "productReview": {
     "title": "Product Reviews",
@@ -225,7 +233,6 @@
     "starSingular": "{n} star",
     "starPlural": "{n} stars"
   },
-
   "header": {
     "searchPlaceholder": "What awesome gift are you looking for?",
     "headerLogin": "Login",
@@ -248,6 +255,16 @@
       "subHeaderCategories": "categories",
       "subHeaderContact": "contact",
       "subHeaderAbout": "about"
+    },
+    "nav": {
+      "menu": "Menu",
+      "close": "Close menu",
+      "openMenu": "Open navigation menu",
+      "wishlist": "Wishlist",
+      "cart": "Shopping cart",
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "mainNav": "Main navigation"
     }
   },
   "footer": {
@@ -359,31 +376,279 @@
     "flowersSubtitle": "Elegant gifts for every special moment.",
     "buyNow": "I'm buying!"
   },
-
   "categories": {
     "wedding": "Wedding",
     "engagement": "Engagement",
     "anniversary": "Anniversary"
   },
-
   "cards": {
     "weddingTitle": "Celebrate Her Forever with a Gift She'll Always Remember",
     "engagementTitle": "Honor the Beginning of a Beautiful Journey Together",
     "anniversaryTitle": "Mark Every Year of Love with a Meaningful Surprise"
   },
-
   "features": {
     "freeDelivery": "Free Delivery",
     "freeDeliveryDesc": "For orders above 120 EGP",
-
     "refund": "Get Refund",
     "refundDesc": "Refunds within 30 days",
-
     "safePayment": "Safe Payment",
     "safePaymentDesc": "100% Secure Payment",
-
     "support": "24/7 Support",
     "supportDesc": "Contact us at any time"
+  },
+  "reviewForm": {
+    "yourRating": "Your rating",
+    "title": "Title",
+    "titlePlaceholder": "Enter review title",
+    "review": "Review",
+    "reviewPlaceholder": "What do you think of this product?",
+    "submit": "Add Review",
+    "submitting": "Submitting...",
+    "loginRequired": "Please login to be able to review the product",
+    "reviewFailed": "Failed to submit your review.",
+    "validation": {
+      "titleMin": "Title must be at least 5 characters",
+      "titleMax": "Title must be at most 32 characters",
+      "contentMin": "Review must be at least 20 characters",
+      "contentMax": "Review must be at most 100 characters",
+      "ratingRequired": "Please select a star rating"
+    }
+  },
+  "cart": {
+    "title": " Cart ",
+    "clearCart": " Clear Cart ",
+    "continueShopping": "Continue Shopping ",
+    "empty": " Your cart is empty, wanna try shopping?",
+    "startShopping": " Start Shopping ",
+    "remove": " Remove ",
+    "confirmClear": "Are you sure you want to clear the cart? ",
+    "noImage": "No image",
+    "product": "{count} Products",
+    "currency": "EGP",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "cartError": {
+    "title": "Unable to Load Your Cart",
+    "subtitle": "Something went wrong while fetching your shopping cart. Don't worry, your items are safe.",
+    "retry": "Try Again",
+    "continueShopping": "Continue Shopping",
+    "goHome": "Go to Home",
+    "showDetails": "Show technical details",
+    "hideDetails": "Hide technical details",
+    "errorDetails": "Error Details",
+    "message": "Message:",
+    "digest": "Digest code:"
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "back": "Back",
+    "noAddresses": "Add your first address to continue",
+    "or": "Or",
+    "failedLoading": "Failed to load addresses. Please try again",
+    "step2Title": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "cashP": "You’ll pay in cash when your order is delivered.",
+    "creditCard": "Credit Card",
+    "creditP": "You’ll be securely redirected to Stripe to complete your payment.",
+    "orderSuccess": "Order placed successfully",
+    "orderFailed": "Order failed. Please try again.",
+    "tryAgain": "Try again",
+    "orderSummary": "Summary",
+    "couponCode": "Coupon Code",
+    "couponPlaceholder": "Coupon code",
+    "applyCoupon": "Apply Coupon",
+    "noCoupons": "No coupons applied",
+    "couponApplied": "Coupon applied",
+    "removeCoupon": "Remove coupon",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Checkout",
+    "couponInvalid": "Invalid or expired coupon code",
+    "suggestedProducts": "Products You May Like",
+    "errors": {
+      "couponCodeRequired": "Coupon code is required",
+      "couponCodeTooLong": "Coupon code is too long"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "items": "{count} items",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "{count} ratings",
+    "addToCart": "Add to Cart",
+    "clearWishlist": "Clear Wishlist",
+    "clearWishlistConfirmation": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "exploreSimilarProducts": "Explore Similar Products",
+    "continueShopping": "Continue Shopping",
+    "empty": "Your wishlist is empty",
+    "errorTitle": "Something went wrong",
+    "currency": "EGP"
+  },
+  "address": {
+    "modal": {
+      "title": "My Addresses"
+    },
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmDelete": "Are you sure you want to delete this address?",
+    "deleted": "Address deleted",
+    "updated": "Address updated",
+    "add": {
+      "step1Title": "Address Details",
+      "step2Title": "Pin Your Location",
+      "address": "Add Address"
+    },
+    "city": "City",
+    "title": "Address Label",
+    "details": "Address",
+    "phone": "Contact Number",
+    "findMyLocation": "Find My Location",
+    "mapLoading": "Loading map...",
+    "mapUnavailable": "The map is unavailable. Check your connection and try again.",
+    "locationDenied": "Location access denied. Please pin manually.",
+    "added": "Address added",
+    "errors": {
+      "titleRequired": "Address label is required",
+      "titleInvalid": "Enter a valid address label",
+      "cityRequired": "City is required",
+      "cityInvalid": "Enter a valid city name",
+      "streetRequired": "Address is required",
+      "streetInvalid": "Enter a valid street address",
+      "phoneRequired": "Contact number is required",
+      "phoneInvalid": "Enter a valid contact number",
+      "locationRequired": "Please pin your location on the map",
+      "unsafeInput": "Invalid characters are not allowed"
+    }
+  },
+  "account-setting": {
+    "account-setting": "Account Setting",
+    "profile": "Profile",
+    "change-password": "Change Password",
+    "logout": "Logout"
+  },
+  "profileForm": {
+    "changeEmail": "Change Email",
+    "enterEmail": "Enter your new email",
+    "email": "Email",
+    "emailPlaceholder": "user@example.com",
+    "next": " Next",
+    "verifyOtp": "Verify OTP",
+    "otpP": "Please enter the 6-digits code we have sent to:",
+    "edit": "Edit",
+    "resendCode": "Resend Code",
+    "resendTimer": "You can request a new code in: {s}s",
+    "deleteAccount?": "Are you sure you want to delete your account?",
+    "actionPermanent": "This action is permanent and cannot be undone.",
+    "nope": "Nope, not doing it",
+    "delete": "Yes, delete",
+    "deleting": "Deleting...",
+    "fields": {
+      "change": "Change",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "genderPlaceholder": "Select gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "deleteAccount": "Delete my account",
+    "loading": "Loading profile...",
+    "loadError": "Failed to load profile. Please try again.",
+    "saving": "Saving...",
+    "saveChanges": "Save changes",
+    "uploadPhoto": "Upload Photo",
+    "uploadPhotoType": "You can upload a jpg, png, or gif photo with max size of 5MB.",
+    "uploadingPhoto": "Uploading photo...",
+    "toast": {
+      "profileUpdatedSuccess": "Profile updated successfully",
+      "profileUpdatedError": "Something went wrong",
+      "validImage": "Please upload a valid image",
+      "imageSize": "Image size must be less than 5MB",
+      "photoUpdatedSuccess": "Photo uploaded successfully",
+      "photoUpdatedError": "Failed to upload photo",
+      "enterNewEmail": "Please enter your new email",
+      "verificationCodeSent": "Verification code sent",
+      "enterSixDigits": "Please enter 6 digits",
+      "emailUpdated": "Email updated successfully",
+      "accountDeleted": "Account deleted successfully"
+    },
+    "errors": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "phoneInvalid": "Please enter a valid phone number"
+    },
+    "profileError": {
+      "title": "Couldn't load your profile",
+      "description": "Something went wrong while fetching your account details. Try again in a moment.",
+      "retry": "Try again"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "button": "Change Password",
+    "incorrectCurrent": "Incorrect current password",
+    "samePw": "New password must differ from your current password",
+    "success": "Password changed successfully. Please log in again.",
+    "error": "Something went wrong. Please try again",
+    "errors": {
+      "oldPasswordRequired": "Current password is required",
+      "newPasswordMin": "Password must be at least 8 characters",
+      "newPasswordUppercase": "Password must contain at least one uppercase letter",
+      "newPasswordLowercase": "Password must contain at least one lowercase letter",
+      "newPasswordNumber": "Password must contain at least one number",
+      "newPasswordSpecial": "Password must contain at least one special character",
+      "confirmRequired": "Please confirm your password",
+      "mismatch": "Passwords do not match"
+    }
+  },
+  "orders": {
+    "title": "Orders",
+    "order": "Order",
+    "createdIn": "Created in",
+    "at": "at",
+    "totalPrice": "Total Price",
+    "paid": "Paid",
+    "status": "Status",
+    "paymentMethod": "Payment Method",
+    "cash": "Cash",
+    "creditCard": "Credit Card",
+    "deliveryStatus": "Delivery Status",
+    "orderItems": "Order items",
+    "rating": "Rating",
+    "currency": "EGP",
+    "ratings": "ratings",
+    "showAll": "Show All",
+    "showLess": "Show Less",
+    "loadMore": "Load More",
+    "loading": "Loading...",
+    "noMoreOrders": "No more orders.",
+    "loadMoreError": "Could not load more orders.",
+    "tryAgain": "Try Again",
+    "errorTitle": "Something went wrong",
+    "loginRequired": "You need to <login>Login</login> to continue.",
+    "statuses": {
+      "pending": "Pending",
+      "cancelled": "Cancelled",
+      "done": "Done"
+    }
+  },
+  "Forms": {
+    "textareaPlaceholder": "Write your notes or message here...",
+    "required": "This field is required"
   },
   "categoryDashboard": {
     "categories": "All Categories",
@@ -596,5 +861,81 @@
     "confirm": "Confirm",
     "confirming": "Confirming",
     "cancel": "Cancel"
+  },
+  "metadata": {
+    "app": {
+      "name": "Rose",
+      "title": "Rose | Luxury Flowers & Gifts",
+      "description": "Shop hand-crafted flower bouquets, luxury floral arrangements, and unique gifts for every occasion with fast same-day delivery."
+    },
+    "home": {
+      "title": "Luxury Flowers & Gifts",
+      "description": "Discover handcrafted flower bouquets, luxury floral arrangements, and premium gifts for every moment."
+    },
+    "products": {
+      "title": "All Products",
+      "description": "Explore our full collection of fresh flower bouquets, arrangements, and thoughtful gifts."
+    },
+    "productDetails": {
+      "title": "Product Details",
+      "description": "View details, floral composition, and customer reviews for this arrangement.",
+      "notFound": "Product Not Found"
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Shop by category: fresh flowers, luxury bouquets, indoor plants, and special gifts."
+    },
+    "occasions": {
+      "title": "Occasions",
+      "description": "Celebrate birthdays, anniversaries, weddings, graduations, and more with stunning floral gifts."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about Rose, our floral artistry, and our dedication to spreading joy through luxury blooms."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with the Rose customer support team for inquiries, custom orders, or assistance."
+    },
+    "wishlist": {
+      "title": "My Wishlist",
+      "description": "View and manage your favorite saved floral arrangements and gifts."
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "description": "Review your selected flowers and gifts and prepare for checkout."
+    },
+    "checkout": {
+      "title": "Checkout",
+      "description": "Securely finalize your floral order with fast delivery to your desired destination."
+    },
+    "orders": {
+      "title": "My Orders",
+      "description": "Track your flower orders and view your purchase history."
+    },
+    "accountSetting": {
+      "title": "Account Settings",
+      "description": "Manage your profile information, preferences, and personal details."
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "description": "Update your account password securely."
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Rose account to track orders and manage your saved bouquets."
+    },
+    "register": {
+      "title": "Create Account",
+      "description": "Create an account on Rose to enjoy a seamless flower shopping experience."
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Reset your Rose account password quickly and securely."
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your new password to regain access to your Rose account."
+    }
   }
 }

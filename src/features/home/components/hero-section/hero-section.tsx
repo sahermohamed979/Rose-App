@@ -5,13 +5,13 @@ import FeaturesStrip from '../features-section/features-section';
 
 export default function HeroSection() {
   return (
-    <div className="mt-10 px-20 ">
+    <div className="w-full px-4 sm:px-6 md:px-9 mt-4 sm:mt-8 overflow-hidden">
       {/* hero-section */}
-      <div className="grid grid-cols-12  gap-6">
-        <div className="col-span-3">
+      <div className="grid grid-cols-12 gap-6">
+        <div className="hidden lg:block lg:col-span-3">
           <SidePromoCard />
         </div>
-        <div className="col-span-9">
+        <div className="col-span-12 lg:col-span-9">
           <HeroCarousel />
         </div>
       </div>
@@ -20,7 +20,7 @@ export default function HeroSection() {
         <PromoCards />
       </div>
       {/* features-section */}
-      <div className="mt-10">
+      <div className="mt-8 md:mt-10">
         <FeaturesStrip />
       </div>
     </div>

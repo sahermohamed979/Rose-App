@@ -40,10 +40,16 @@ export default async function AllCategories({
               <span className="text-text-soft text-xs font-medium bg-bg-muted rounded-full px-3 py-1 shrink-0">
                 {category.productCount === 1
                   ? t('productSingular', {
-                      count: formatNumber(category.productCount, locale),
+                      count: formatNumber(
+                        category.productCount,
+                        locale
+                      ),
                     })
                   : t('productPlural', {
-                      count: formatNumber(category.productCount, locale),
+                      count: formatNumber(
+                        category.productCount,
+                        locale
+                      ),
                     })}
               </span>
             </div>

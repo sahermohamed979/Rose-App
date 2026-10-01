@@ -50,7 +50,7 @@ export default function LogoutDashboard({
           <DropdownMenuItem>
             <User size={16} />
             <Link
-              href="/account-setting"
+              href="/dashboard/account"
               className="text-sm  text-text-plain"
             >
               {t('userMenu.account')}
