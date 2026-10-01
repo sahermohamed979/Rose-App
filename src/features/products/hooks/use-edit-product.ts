@@ -5,14 +5,11 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { useRouter } from '@/i18n/navigation';
+import { PRODUCT_QUERY_KEYS } from '@/shared/lib/constants/product-query-keys.constants';
 import { editProductAction } from '../actions/edit-product.action';
 import { createProductFormData } from '../lib/create-product-form-data';
 import { ProductActionError } from '../lib/product-action-error';
 import type { EditProductFormValues } from '../schemas/edit-product-schema';
-
-const SUGGESTED_PRODUCTS_QUERY_KEY = ['suggested-products'] as const;
-const SEARCH_PRODUCTS_QUERY_KEY = ['search-products'] as const;
-
 export function useEditProduct(
   productId: string,
   existingGallery: string[]
@@ -36,13 +33,13 @@ export function useEditProduct(
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({
-          queryKey: SUGGESTED_PRODUCTS_QUERY_KEY,
+          queryKey: PRODUCT_QUERY_KEYS.suggested,
         }),
         queryClient.invalidateQueries({
-          queryKey: SEARCH_PRODUCTS_QUERY_KEY,
+          queryKey: PRODUCT_QUERY_KEYS.searchAll,
         }),
         queryClient.invalidateQueries({
-          queryKey: ['product-info', productId],
+          queryKey: PRODUCT_QUERY_KEYS.details(productId),
         }),
       ]);
 
