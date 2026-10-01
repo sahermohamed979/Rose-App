@@ -28,11 +28,13 @@ export const getAddProductSchema = (t: Translate) =>
       }),
     price: z
       .number({ error: t('errors.pricePositive') })
-      .positive({ message: t('errors.pricePositive') }),
+      .positive({ message: t('errors.pricePositive') })
+      .multipleOf(0.01, { message: t('errors.priceDecimals') }),
     discount: z
       .number({ error: t('errors.discountRange') })
       .min(0, { message: t('errors.discountRange') })
-      .max(100, { message: t('errors.discountRange') }),
+      .max(100, { message: t('errors.discountRange') })
+      .multipleOf(0.01, { message: t('errors.discountDecimals') }),
     quantity: z
       .number({ error: t('errors.quantityNonNegative') })
       .int({ message: t('errors.quantityNonNegative') })

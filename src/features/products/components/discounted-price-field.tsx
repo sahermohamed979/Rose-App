@@ -26,10 +26,11 @@ export default function DiscountedPriceField({
   // Variables
   const currentPrice = Number.isFinite(price) ? price : 0;
   const currentDiscount = Number.isFinite(discount) ? discount : 0;
-  const discountedPrice = Math.max(
+  const rawDiscountedPrice = Math.max(
     0,
     currentPrice - (currentPrice * currentDiscount) / 100
   );
+  const discountedPrice = Math.round(rawDiscountedPrice * 100) / 100;
 
   return (
     <Field>
