@@ -5,8 +5,10 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { deleteCategory } from '../apis/delete-category.api';
 import { CATEGORIES_QUERY_KEY } from '../types/categories-type';
+import { useRouter } from '@/i18n/navigation';
 export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const t = useTranslations('categoryDashboard');
 
   return useMutation({
@@ -21,6 +23,7 @@ export const useDeleteCategory = () => {
       queryClient.invalidateQueries({
         queryKey: CATEGORIES_QUERY_KEY,
       });
+      router.refresh();
     },
     onError: (error: Error) => {
       toast.error(error.message || t('deleteError'));
