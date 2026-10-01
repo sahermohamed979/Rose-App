@@ -77,6 +77,7 @@ export default function EditProductForm({
 
   return (
     <form
+      noValidate
       onSubmit={handleSubmit(handleFormSubmit)}
       className="flex flex-col gap-6 md:p-0"
     >
