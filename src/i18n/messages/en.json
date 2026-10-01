@@ -490,6 +490,17 @@
     "exploreSimilarProducts": "Explore Similar Products",
     "continueShopping": "Continue Shopping",
     "empty": "Your wishlist is empty",
+    "emptyWishlist": "Your wishlist is empty",
+    "emptySubtitle": "You haven't saved any items yet. Explore our curated collections and save the pieces you love!",
+    "startShopping": "Explore Products",
+    "features": {
+      "saveFavorites": "Save Favorites",
+      "saveFavoritesDesc": "Keep track of items you love in one organized place",
+      "priceAlerts": "Price Drop Alerts",
+      "priceAlertsDesc": "Never miss out when your saved items go on sale",
+      "fastCheckout": "Easy Move to Cart",
+      "fastCheckoutDesc": "Move items directly to your cart whenever you are ready"
+    },
     "errorTitle": "Something went wrong",
     "currency": "EGP"
   },

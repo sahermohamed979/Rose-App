@@ -7,6 +7,11 @@ import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-action
 export default async function WishlistScreen() {
   const wishlistData = await getWishlistAction();
 
+  const hasItems = Boolean(
+    wishlistData?.status &&
+    wishlistData.payload?.wishlistItems?.length > 0
+  );
+
   return (
     <>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 mt-6 sm:mt-10 lg:mt-15.5 h-full">
@@ -23,13 +28,17 @@ export default async function WishlistScreen() {
           <WishlistProducts data={wishlistData} />
         </div>
 
-        <hr className="my-4"></hr>
+        {hasItems && (
+          <>
+            <hr className="my-4"></hr>
 
-        {/* Wishlist-footer */}
+            {/* Wishlist-footer */}
 
-        <div>
-          <WishlistFooter />
-        </div>
+            <div>
+              <WishlistFooter />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

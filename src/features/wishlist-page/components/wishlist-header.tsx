@@ -31,12 +31,10 @@ export default async function WishlistHeader({
       </div>
 
       {/* Clear wishlist */}
-      {data.payload.wishlistItems.length ? (
+      {data.payload.wishlistItems.length > 0 && (
         <div className="w-full sm:w-auto flex justify-end">
           <ClearWishlist />
         </div>
-      ) : (
-        <p className="font-bold text-xl sm:text-2xl">{t('empty')}</p>
       )}
     </div>
   );

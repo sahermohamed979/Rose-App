@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import { ShoppingCartIcon, Star } from 'lucide-react';
-import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
-import Link from 'next/link';
-import RemoveProduct from './remove-product';
 import { useTranslations } from 'next-intl';
+
+import { Link } from '@/i18n/navigation';
+import AddToCart from '@/features/cart-wishlist/components/add-to-cart';
 import { ApiResponse } from '@/shared/lib/types/api';
 import { WishlistResponse } from '@/features/cart-wishlist/types/cart-wishlist.types';
+import EmptyWishlist from './empty-wishlist';
+import RemoveProduct from './remove-product';
 
 export default function WishlistProducts({
   data,
@@ -15,8 +17,13 @@ export default function WishlistProducts({
   data: ApiResponse<WishlistResponse>;
 }) {
   const t = useTranslations('wishlist');
+
   if (!data.status) {
     return <p className="text-text-danger">{t('errorTitle')}</p>;
+  }
+
+  if (data.payload.wishlistItems.length === 0) {
+    return <EmptyWishlist />;
   }
 
   return (
