@@ -1,5 +1,8 @@
 'use client';
 
+import { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+
 import {
   Table,
   TableBody,
@@ -9,7 +12,6 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 import { IProduct } from '../../../shared/lib/types/product-types';
-import { useTranslations, useLocale } from 'next-intl';
 import {
   formatCurrency,
   formatNumber,
@@ -18,6 +20,7 @@ import { cn } from '@/shared/lib/utils/utils';
 import { useRouter } from '@/i18n/navigation';
 import DashboardButtons from '@/shared/components/dashboard-buttons';
 import { useDeleteProduct } from '@/features/products/hooks/use-delete-product';
+import DeleteProductDialog from './delete-product-dialog';
 
 interface DashboardProductsTableProps {
   products: IProduct[];
@@ -29,10 +32,18 @@ export default function DashboardProductsTable({
   // Translations
   const t = useTranslations('products');
 
-  // Hooks
+  // Navigation
   const locale = useLocale();
   const router = useRouter();
-  const { mutate: deleteProduct } = useDeleteProduct();
+
+  // State
+  const [productToDelete, setProductToDelete] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
+
+  // Mutation
+  const { mutate: deleteProduct, isPending } = useDeleteProduct();
 
   // No Products
   if (!products || products.length === 0) {
@@ -123,7 +134,10 @@ export default function DashboardProductsTable({
                     );
                   }}
                   onDelete={() => {
-                    deleteProduct(product.id);
+                    setProductToDelete({
+                      id: product.id,
+                      title: product.title,
+                    });
                   }}
                 />
               </TableCell>
@@ -131,6 +145,26 @@ export default function DashboardProductsTable({
           ))}
         </TableBody>
       </Table>
+
+      <DeleteProductDialog
+        open={productToDelete !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setProductToDelete(null);
+          }
+        }}
+        productTitle={productToDelete?.title ?? ''}
+        isPending={isPending}
+        onConfirm={() => {
+          if (!productToDelete) {
+            return;
+          }
+
+          deleteProduct(productToDelete.id, {
+            onSuccess: () => setProductToDelete(null),
+          });
+        }}
+      />
     </div>
   );
 }

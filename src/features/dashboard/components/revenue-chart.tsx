@@ -25,9 +25,7 @@ interface RevenueChartProps {
   revenueChart?: RevenueDataPoint[];
   currency?: string;
   initialPeriod?: RevenuePeriod;
-  onPeriodChange?: (
-    period: RevenuePeriod
-  ) => Promise<
+  onPeriodChange?: (period: RevenuePeriod) => Promise<
     | {
         status: boolean;
         revenueChart: RevenueDataPoint[];

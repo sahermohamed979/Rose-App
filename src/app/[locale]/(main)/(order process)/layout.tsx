@@ -30,7 +30,9 @@ export default async function CheckoutLayout({
     <main className="py-6 sm:py-10 lg:py-13 px-4 sm:px-8 md:px-12 lg:px-20">
       {/* Main grid: checkout steps (left) + order summary (right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-x-10">
-        <div className="col-span-1 lg:col-span-8 w-full">{children}</div>
+        <div className="col-span-1 lg:col-span-8 w-full">
+          {children}
+        </div>
         {/* Main Content (here CheckoutScreen or CartScreen is rendered) */}
 
         {/* Order Summary */}

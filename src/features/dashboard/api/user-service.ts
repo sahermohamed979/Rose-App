@@ -48,7 +48,6 @@ export const getUserProfile = cache(async () => {
     };
   }
 });
-
 export async function updateUserProfile(
   payload: FormData | Record<string, unknown>
 ): Promise<
