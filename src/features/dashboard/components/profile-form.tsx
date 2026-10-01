@@ -301,7 +301,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
               {t('deleteAccount')}
             </button>
             <Link
-              href="/dashboard/profile/change-password"
+              href="/dashboard/account/change-password"
               className="text-text-plain text-sm font-semibold hover:underline transition-all cursor-pointer"
             >
               {t('changePassword')}
