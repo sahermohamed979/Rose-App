@@ -5,7 +5,7 @@ import { revalidatePath, updateTag } from 'next/cache';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
 import { HEADERS } from '@/shared/lib/constants/api.constants';
 import type { ApiResponse } from '@/shared/lib/types/api';
-import { uploadImage } from '../apis/upload-image';
+import { uploadPhoto } from '@/shared/lib/actions/upload-photo';
 import { PRODUCTS_CACHE_TAG } from '../constants/product-cache';
 import type { ProductActionResult } from '../types/product-action-result.types';
 
@@ -58,11 +58,11 @@ export async function editProductAction(
 
     const cover = formData.get('productCover');
     if (cover instanceof File && cover.size > 0) {
-      const coverResult = await uploadImage(cover, accessToken);
+      const coverResult = await uploadPhoto(cover);
       if (!coverResult.status) {
         return { success: false, message: coverResult.message };
       }
-      payload.cover = coverResult.url;
+      payload.cover = coverResult.payload.url;
     }
 
     const galleryFiles = formData
@@ -74,7 +74,7 @@ export async function editProductAction(
 
     if (galleryFiles.length > 0) {
       const galleryResults = await Promise.all(
-        galleryFiles.map((file) => uploadImage(file, accessToken))
+        galleryFiles.map((file) => uploadPhoto(file))
       );
 
       const failedGalleryUpload = galleryResults.find(
@@ -87,7 +87,7 @@ export async function editProductAction(
         };
       }
       const newGallery = galleryResults.flatMap((result) =>
-        result.status ? [result.url] : []
+        result.status ? [result.payload.url] : []
       );
 
       payload.gallery = [...existingGallery, ...newGallery];
