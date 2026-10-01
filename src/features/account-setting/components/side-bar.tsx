@@ -20,7 +20,7 @@ export default function AccountSideBar() {
   const isPasswordActive = pathname === passwordPath;
 
   return (
-    <div className="w-64 bg-bg-subtle border border-border-subtle rounded-xl p-4 flex flex-col justify-between min-h-svh">
+    <div className="w-full bg-bg-subtle border border-border-subtle rounded-xl p-4 flex flex-col justify-between">
       {/* Links */}
       <div className="space-y-4">
         <Link
