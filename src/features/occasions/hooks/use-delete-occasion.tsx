@@ -5,9 +5,10 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { deleteOccasion } from '../apis/delete-occasion.api';
 import { OCCASIONS_QUERY_KEY } from '../types/occasions-type';
-
+import { useRouter } from '@/i18n/navigation';
 export const useDeleteOccasion = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const t = useTranslations('occasionDashboard');
 
   return useMutation({
@@ -22,6 +23,7 @@ export const useDeleteOccasion = () => {
       queryClient.invalidateQueries({
         queryKey: OCCASIONS_QUERY_KEY,
       });
+      router.refresh();
     },
     onError: (error: Error) => {
       toast.error(error.message || t('deleteError'));
