@@ -196,6 +196,7 @@
     "stock": "Stock",
     "sales": "Sales",
     "ratings": "Ratings",
+    "deleteProduct": "Are you sure you want to delete {title}?",
     "deleteSuccess": "Product deleted successfully.",
     "deleteError": "Failed to delete product.",
     "unexpectedError": "An unexpected error occurred.",

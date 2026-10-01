@@ -3,9 +3,9 @@
 import { revalidatePath, updateTag } from 'next/cache';
 
 import { PRODUCTS_CACHE_TAG } from '../constants/product-cache';
-import { uploadImage } from '../apis/upload-image';
 import { HEADERS } from '@/shared/lib/constants/api.constants';
 import { getAuthToken } from '@/shared/lib/actions/getToken';
+import { uploadPhoto } from '@/shared/lib/actions/upload-photo';
 import type { ApiResponse } from '@/shared/lib/types/api';
 import type { AddNewProduct } from '../types/add-product.types';
 import type { ProductActionResult } from '../types/product-action-result.types';
@@ -59,13 +59,13 @@ export async function addProductAction(
     }
 
     // Product API accepts image URLs, so upload files before creating the product.
-    const coverResult = await uploadImage(cover, accessToken);
+    const coverResult = await uploadPhoto(cover);
     if (!coverResult.status) {
       return { success: false, message: coverResult.message };
     }
 
     const galleryResults = await Promise.all(
-      gallery.map((file) => uploadImage(file, accessToken))
+      gallery.map((file) => uploadPhoto(file))
     );
     const failedGalleryUpload = galleryResults.find(
       (result) => !result.status
@@ -74,7 +74,7 @@ export async function addProductAction(
       return { success: false, message: failedGalleryUpload.message };
     }
     const galleryUrls = galleryResults.flatMap((result) =>
-      result.status ? [result.url] : []
+      result.status ? [result.payload.url] : []
     );
 
     const payload: AddNewProduct = {
@@ -86,7 +86,7 @@ export async function addProductAction(
       discountValue: discount,
       categoryId,
       // occasionId,
-      cover: coverResult.url,
+      cover: coverResult.payload.url,
       gallery: galleryUrls,
     };
 

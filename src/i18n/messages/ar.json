@@ -196,6 +196,7 @@
     "stock": "المخزون",
     "sales": "المبيعات",
     "ratings": "التقييمات",
+    "deleteProduct": "هل أنت متأكد من حذف {title}؟",
     "deleteSuccess": "تم حذف المنتج بنجاح.",
     "deleteError": "فشل في حذف المنتج.",
     "unexpectedError": "حدث خطأ غير متوقع.",
