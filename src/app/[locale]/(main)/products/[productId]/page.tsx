@@ -97,7 +97,7 @@ export default async function Page({ params }: PageProps) {
           initialData={response.payload.product}
         />
       </div>
-      <div className="ms-10">
+      <div className="w-full px-4 sm:px-6 md:px-9">
         <ProductReview productId={productId} />
       </div>
       <div>

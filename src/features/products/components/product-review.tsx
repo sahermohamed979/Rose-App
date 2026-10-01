@@ -41,7 +41,6 @@ export async function ProductReview({
   const reviews = reviewsResponse.status
     ? (reviewsResponse.payload?.data ?? [])
     : [];
-  const isError = !reviewsResponse.status;
 
   return (
     <div className={`flex flex-col gap-6 w-full ${className}`}>
@@ -60,16 +59,16 @@ export async function ProductReview({
       <hr className="border-border-subtle" />
 
       {/* Grid container (3 columns) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full min-w-0">
         {/* Reviews List Section (takes 2 columns) */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 w-full min-w-0">
           <Suspense fallback={<ReviewsListSkeleton />}>
-            <ReviewsList reviews={reviews} isError={isError} />
+            <ReviewsList reviews={reviews} />
           </Suspense>
         </div>
 
-        {/* Placeholder for Add Review Form (takes 1 column - to be added later) */}
-        <div className="lg:col-span-1">
+        {/* Add Review Form (takes 1 column) */}
+        <div className="lg:col-span-1 w-full min-w-0">
           <ReviewSubmissionForm />
         </div>
       </div>

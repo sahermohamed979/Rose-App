@@ -42,13 +42,9 @@ export function ReviewsListSkeleton() {
 
 interface ReviewsListProps {
   reviews?: ProductReview[];
-  isError?: boolean;
 }
 
-export function ReviewsList({
-  reviews = [],
-  isError = false,
-}: ReviewsListProps) {
+export function ReviewsList({ reviews = [] }: ReviewsListProps) {
   const t = useTranslations('productReview');
 
   return (
@@ -61,13 +57,7 @@ export function ReviewsList({
         className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border-soft flex max-h-[367px] flex-col gap-4 overflow-y-auto pe-1"
         role="list"
       >
-        {isError ? (
-          <div className="flex flex-col items-center gap-2 py-8 text-center">
-            <p className="text-sm text-text-danger">
-              {t('loadError')}
-            </p>
-          </div>
-        ) : reviews.length === 0 ? (
+        {reviews.length === 0 ? (
           <EmptyReviews />
         ) : (
           reviews.map((review) => (
