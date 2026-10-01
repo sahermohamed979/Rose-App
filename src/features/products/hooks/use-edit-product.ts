@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { useRouter } from '@/i18n/navigation';
 import { editProductAction } from '../actions/edit-product.action';
 import { createProductFormData } from '../lib/create-product-form-data';
+import { ProductActionError } from '../lib/product-action-error';
 import type { EditProductFormValues } from '../schemas/edit-product-schema';
 
 const SUGGESTED_PRODUCTS_QUERY_KEY = ['suggested-products'] as const;
@@ -21,12 +22,17 @@ export function useEditProduct(
   const t = useTranslations('dashboard.products');
 
   return useMutation({
-    mutationFn: (values: EditProductFormValues) =>
-      editProductAction(
+    mutationFn: async (values: EditProductFormValues) => {
+      const result = await editProductAction(
         productId,
         createProductFormData(values),
         existingGallery
-      ),
+      );
+      if (!result.success) {
+        throw new ProductActionError(result.message);
+      }
+      return result;
+    },
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({
@@ -43,8 +49,11 @@ export function useEditProduct(
       toast.success(t('editSuccess'));
       router.push('/dashboard/products');
     },
-    onError: () => {
-      toast.error(t('editError'));
+    onError: (error) => {
+      const isExpectedError =
+        error instanceof ProductActionError && error.message;
+
+      toast.error(isExpectedError ? error.message : t('editError'));
     },
   });
 }

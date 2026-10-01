@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { useRouter } from '@/i18n/navigation';
 import { addProductAction } from '../actions/add-product.action';
 import { createProductFormData } from '../lib/create-product-form-data';
+import { ProductActionError } from '../lib/product-action-error';
 import type { AddNewProductFormValues } from '../schemas/add-product-schema';
 
 const SUGGESTED_PRODUCTS_QUERY_KEY = ['suggested-products'] as const;
@@ -16,8 +17,15 @@ export function useAddProduct() {
   const t = useTranslations('dashboard.products');
 
   return useMutation({
-    mutationFn: (values: AddNewProductFormValues) =>
-      addProductAction(createProductFormData(values)),
+    mutationFn: async (values: AddNewProductFormValues) => {
+      const result = await addProductAction(
+        createProductFormData(values)
+      );
+      if (!result.success) {
+        throw new ProductActionError(result.message);
+      }
+      return result;
+    },
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({
@@ -30,8 +38,11 @@ export function useAddProduct() {
       toast.success(t('addSuccess'));
       router.push('/dashboard/products');
     },
-    onError: () => {
-      toast.error(t('addError'));
+    onError: (error) => {
+      const isExpectedError =
+        error instanceof ProductActionError && error.message;
+
+      toast.error(isExpectedError ? error.message : t('addError'));
     },
   });
 }
