@@ -309,7 +309,17 @@
     "clearAll": "Clear all",
     "markRead": "Mark as read",
     "delete": "Delete",
-    "empty": "No notifications yet"
+    "empty": "No notifications yet",
+    "pushTitle": "Enable push notifications",
+    "pushEnabledTitle": "Push notifications enabled",
+    "pushEnable": "Enable",
+    "pushDisable": "Disable",
+    "pushEnabled": "Push notifications enabled",
+    "pushDisabled": "Push notifications disabled",
+    "pushEnableError": "Could not enable push notifications",
+    "pushDisableError": "Could not disable push notifications",
+    "pushPermissionDenied": "Notification permission was denied",
+    "pushNotSupported": "Push notifications are not supported by this browser"
   },
   "home": {
     "about": {

@@ -309,7 +309,17 @@
     "clearAll": "حذف الكل",
     "markRead": "تعيين كمقروء",
     "delete": "حذف",
-    "empty": "لا توجد إشعارات حتى الآن"
+    "empty": "لا توجد إشعارات حتى الآن",
+    "pushTitle": "تفعيل الإشعارات الفورية",
+    "pushEnabledTitle": "الإشعارات الفورية مفعّلة",
+    "pushEnable": "تفعيل",
+    "pushDisable": "إيقاف",
+    "pushEnabled": "تم تفعيل الإشعارات الفورية",
+    "pushDisabled": "تم إيقاف الإشعارات الفورية",
+    "pushEnableError": "تعذر تفعيل الإشعارات الفورية",
+    "pushDisableError": "تعذر إيقاف الإشعارات الفورية",
+    "pushPermissionDenied": "تم رفض إذن الإشعارات",
+    "pushNotSupported": "المتصفح لا يدعم الإشعارات الفورية"
   },
   "home": {
     "about": {
