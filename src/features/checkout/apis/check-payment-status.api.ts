@@ -1,7 +1,7 @@
 'use server';
 
-import { ApiResponse } from '@/shared/lib/types/api';
-import { getAuthToken } from '@/shared/lib/actions/getToken';
+import type { ApiResponse } from '@/shared/lib/types/api';
+import { getDirectToken } from '@/shared/lib/utils/get-direct-token';
 
 export interface CheckPaymentStatusResponse {
   sessionId: string;
@@ -19,7 +19,7 @@ export async function checkPaymentStatus(
   sessionId: string
 ): Promise<ApiResponse<CheckPaymentStatusResponse>> {
   try {
-    const token = await getAuthToken();
+    const token = await getDirectToken();
 
     if (!token) {
       return {
@@ -36,6 +36,7 @@ export async function checkPaymentStatus(
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        cache: 'no-store',
       }
     );
 

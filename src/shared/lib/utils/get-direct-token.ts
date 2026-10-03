@@ -12,10 +12,14 @@ export async function getDirectToken() {
     return null;
   }
 
-  const jwt = await decode({
-    token: sessionToken,
-    secret: process.env.NEXTAUTH_SECRET!,
-  });
+  try {
+    const jwt = await decode({
+      token: sessionToken,
+      secret: process.env.NEXTAUTH_SECRET!,
+    });
 
-  return jwt?.accessToken; // or jwt?.accessToken depending on your jwt callback
+    return (jwt?.accessToken as string | undefined) ?? null;
+  } catch {
+    return null;
+  }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -12,6 +12,7 @@ import { Button } from '@/shared/components/ui/button';
 import EmptyAddresses from './empty-addresses';
 import AddressCard from './address-card';
 import AddressDialog from './address-dialog';
+import { useCheckout } from '../context/checkout-context';
 
 interface CheckoutStepOneProps {
   initialData?: AddressesPayload;
@@ -24,6 +25,7 @@ export default function CheckoutStepOne({
 }: CheckoutStepOneProps) {
   // Translations
   const t = useTranslations('checkout');
+  const checkout = useCheckout();
 
   // State
   const [selectedAddressId, setSelectedAddressId] = useState<
@@ -33,7 +35,11 @@ export default function CheckoutStepOne({
     useState(false);
 
   // Variables
-  const addresses = initialData?.addresses ?? [];
+  const addresses = useMemo(
+    () => initialData?.addresses ?? [],
+    [initialData?.addresses]
+  );
+
   const defaultAddressId = useMemo(() => {
     const primaryAddress = addresses.find(
       (address) => address.isPrimary
@@ -42,10 +48,19 @@ export default function CheckoutStepOne({
     return primaryAddress?.id ?? addresses[0]?.id ?? null;
   }, [addresses]);
 
-  //Final selected address
+  // Final selected address
   const currentSelectedAddressId =
     selectedAddressId ?? defaultAddressId;
   const isEmpty = addresses.length === 0;
+
+  // Effects
+  const setSelectedAddress = checkout?.setSelectedAddress;
+
+  useEffect(() => {
+    if (currentSelectedAddressId && setSelectedAddress) {
+      setSelectedAddress(currentSelectedAddressId);
+    }
+  }, [currentSelectedAddressId, setSelectedAddress]);
 
   // Functions
   const handleNextClick = () => {

@@ -4,8 +4,8 @@ export interface PaymentMethodProps {
   paymentMethod: PaymentMethodType | null;
   onPaymentChange: (value: PaymentMethodType) => void;
   onBack: () => void;
-  onCheckout: () => void;
-  isLoading: boolean;
+  onCheckout?: () => void;
+  isLoading?: boolean;
 }
 export interface CreateOrderBody {
   addressId: string;

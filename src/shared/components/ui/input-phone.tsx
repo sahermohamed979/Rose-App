@@ -3,6 +3,8 @@
 import * as React from 'react';
 import RPNInput, {
   getCountryCallingCode,
+  parsePhoneNumber,
+  isPossiblePhoneNumber,
   type Country,
 } from 'react-phone-number-input';
 import flags from 'react-phone-number-input/flags';
@@ -10,6 +12,37 @@ import { ChevronsUpDown } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils/utils';
 import { Input } from './input';
+
+const safePhoneValue = (
+  rawVal: unknown,
+  defaultCountry: Country = 'EG'
+): string | undefined => {
+  if (typeof rawVal !== 'string') {
+    return undefined;
+  }
+  const trimmed = rawVal.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+
+  // If already a valid E.164 string like +2010...
+  if (isPossiblePhoneNumber(trimmed)) {
+    return trimmed;
+  }
+
+  // If a local number without country code, e.g. 01012345678
+  try {
+    const parsed = parsePhoneNumber(trimmed, defaultCountry);
+    if (parsed?.number) {
+      return parsed.number;
+    }
+  } catch {
+    // Ignore invalid formats
+  }
+
+  // If invalid non-phone string (e.g. "testoooo"), return undefined to prevent RPNInput error
+  return undefined;
+};
 
 type PhoneInputProps = React.ComponentProps<typeof RPNInput> & {
   containerClassName?: string;
@@ -21,15 +54,20 @@ const PhoneInput = React.forwardRef<
 >(
   (
     {
-      className,
+      className: _className,
       containerClassName,
       disabled,
       value,
       onChange,
+      defaultCountry = 'EG',
       ...props
     },
     ref
   ) => {
+    const safeValue = React.useMemo(() => {
+      return safePhoneValue(value, defaultCountry as Country);
+    }, [value, defaultCountry]);
+
     return (
       <RPNInput
         ref={ref}
@@ -43,8 +81,8 @@ const PhoneInput = React.forwardRef<
         countrySelectComponent={CountrySelect}
         inputComponent={InputComponent}
         disabled={disabled}
-        defaultCountry="EG"
-        value={value}
+        defaultCountry={defaultCountry}
+        value={safeValue}
         onChange={onChange}
         {...props}
       />

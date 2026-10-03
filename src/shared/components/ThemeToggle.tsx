@@ -6,7 +6,17 @@ import { useTheme } from 'next-themes';
 
 import { Button } from './ui/button';
 
+const emptySubscribe = () => () => {};
+
 export function ThemeToggle({ className }: { className?: string }) {
+  // Hydration-safe mounted check without setState in effect
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
+  // Hooks
   const { setTheme, resolvedTheme } = useTheme();
 
   return (
@@ -15,9 +25,11 @@ export function ThemeToggle({ className }: { className?: string }) {
         variant="outline"
         size="icon"
         aria-label={
-          resolvedTheme === 'dark'
-            ? 'Switch to light mode'
-            : 'Switch to dark mode'
+          mounted
+            ? resolvedTheme === 'dark'
+              ? 'Switch to light mode'
+              : 'Switch to dark mode'
+            : 'Toggle theme'
         }
         onClick={() =>
           setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')

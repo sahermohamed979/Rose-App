@@ -1,18 +1,21 @@
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getServerSession } from 'next-auth';
+
+import { authOptions } from '@/auth';
 import SubHeader from './sub-header';
 import HeaderActions from './header-actions';
 import MobileNav from './mobile-nav';
 import { Link } from '@/i18n/navigation';
 import { getCart } from '@/features/cart/apis/cart-service';
 import { getWishlistAction } from '@/features/cart-wishlist/apis/wishlist-actions';
+import { getUserAddresses } from '@/features/checkout/apis/get-user-adresses.api';
 
 export default async function Header() {
-  const t = await getTranslations('header');
-
-  const [cart, wishlist] = await Promise.all([
+  const [session, cart, wishlist, addresses] = await Promise.all([
+    getServerSession(authOptions),
     getCart(),
     getWishlistAction(),
+    getUserAddresses(),
   ]);
 
   const wishlistCount =
@@ -21,6 +24,10 @@ export default async function Header() {
       : 0;
   const cartCount =
     cart.status && cart.payload ? cart.payload.cartItems.length : 0;
+  const initialAddresses =
+    addresses.status && addresses.payload
+      ? addresses.payload
+      : undefined;
 
   return (
     <div className="sticky top-0 z-50 overflow-x-hidden">
@@ -41,6 +48,8 @@ export default async function Header() {
           <HeaderActions
             wishlistCount={wishlistCount}
             cartCount={cartCount}
+            initialAddresses={initialAddresses}
+            initialSession={session}
           />
         </div>
 
@@ -50,6 +59,8 @@ export default async function Header() {
             mobile
             wishlistCount={wishlistCount}
             cartCount={cartCount}
+            initialAddresses={initialAddresses}
+            initialSession={session}
           />
           <MobileNav />
         </div>

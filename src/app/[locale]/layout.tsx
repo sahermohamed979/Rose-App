@@ -155,7 +155,7 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col ">
         <Providers>
           {children}
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" />
         </Providers>
       </body>
     </html>

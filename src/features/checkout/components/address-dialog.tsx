@@ -20,7 +20,7 @@ import {
 import AddressForm, { ADDRESS_FORM_ID } from './address-form';
 import CheckoutStepper from './checkout-stepper';
 import { AddressFormFields } from '../schemas/address-form-schema';
-import { useAddress } from '../hooks/address-hook';
+import { useAddress, useUserAddresses } from '../hooks/address-hook';
 import AddressModuleStepOne from './address-module-step-one';
 import { AddressMapLoading } from './address-map-loading';
 
@@ -44,10 +44,21 @@ export default function AddressDialog({
   const t = useTranslations('checkout');
   const tAddress = useTranslations('address');
 
+  // Queries
+  const { data: userAddressesData, isLoading } = useUserAddresses({
+    enabled: open,
+    initialData,
+  });
+
+  const addressesData = userAddressesData ?? initialData;
+
   // State
   const [currentStep, setCurrentStep] = useState(0);
   const [editingAddressId, setEditingAddressId] = useState<
     string | null
+  >(null);
+  const [lastAction, setLastAction] = useState<
+    'save' | 'delete' | null
   >(null);
   const [addressData, setAddressData] = useState<Partial<IAddress>>({
     title: '',
@@ -67,7 +78,9 @@ export default function AddressDialog({
     isPending,
   } = useAddress({
     onSuccess: () => {
-      onOpenChange(false);
+      if (lastAction === 'save') {
+        onOpenChange(false);
+      }
       setCurrentStep(0);
       setEditingAddressId(null);
       setAddressData({
@@ -79,6 +92,7 @@ export default function AddressDialog({
         longitude: '',
         isPrimary: false,
       });
+      setLastAction(null);
     },
   });
 
@@ -107,6 +121,7 @@ export default function AddressDialog({
     });
     setCurrentStep(0);
     setEditingAddressId(null);
+    setLastAction(null);
   };
 
   const handleDialogOpenChange = (isOpen: boolean) => {
@@ -133,7 +148,7 @@ export default function AddressDialog({
   };
 
   const handleEditAddress = (addressId: string) => {
-    const address = initialData?.addresses?.find(
+    const address = addressesData?.addresses?.find(
       (item) => item.id === addressId
     );
 
@@ -155,6 +170,7 @@ export default function AddressDialog({
   };
 
   const handleDeleteAddress = (addressId: string) => {
+    setLastAction('delete');
     deleteAddress(addressId);
   };
 
@@ -188,6 +204,8 @@ export default function AddressDialog({
       latitude: Number(latitude),
       longitude: Number(longitude),
     };
+
+    setLastAction('save');
 
     if (editingAddressId) {
       update({
@@ -239,19 +257,17 @@ export default function AddressDialog({
         showCloseButton={false}
         className="scrollbar-none max-h-[calc(100dvh-2rem)] w-4/5 max-w-4/5 overflow-y-auto p-4 sm:max-w-4/5 md:w-[57.2vw] md:max-w-[70vw] md:py-6"
       >
-        {currentStep !== 0 && (
-          <button
-            type="button"
-            aria-label={tAddress('cancel')}
-            className="absolute inset-e-0 top-0 z-10 mt-4 me-4 border-0 bg-transparent p-0 text-text-default outline-none hover:bg-transparent focus-visible:outline-none disabled:opacity-50"
-            onClick={handleCancel}
-            disabled={isPending}
-          >
-            <X className="size-6.25 text-text-default" />
-          </button>
-        )}
+        <button
+          type="button"
+          aria-label={tAddress('cancel')}
+          className="absolute inset-e-0 top-0 z-10 mt-4 me-4 border-0 bg-transparent p-0 text-text-default outline-none hover:bg-transparent focus-visible:outline-none disabled:opacity-50"
+          onClick={handleCancel}
+          disabled={isPending}
+        >
+          <X className="size-6.25 text-text-default" />
+        </button>
 
-        <DialogHeader className="flex-row items-center justify-between">
+        <DialogHeader className="flex-row items-center justify-between pe-8">
           <DialogTitle className="mb-2 text-2xl font-bold leading-tight text-text-primary md:mb-4 md:text-3xl md:leading-none">
             {currentStep === 0
               ? tAddress('modal.title')
@@ -271,12 +287,18 @@ export default function AddressDialog({
         </DialogHeader>
 
         {currentStep === 0 ? (
-          <AddressModuleStepOne
-            initialData={initialData}
-            onAddAddress={handleStartAddAddress}
-            onEditAddress={handleEditAddress}
-            onDeleteAddress={handleDeleteAddress}
-          />
+          isLoading && !addressesData ? (
+            <div className="flex h-48 w-full items-center justify-center">
+              <span className="size-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            </div>
+          ) : (
+            <AddressModuleStepOne
+              initialData={addressesData}
+              onAddAddress={handleStartAddAddress}
+              onEditAddress={handleEditAddress}
+              onDeleteAddress={handleDeleteAddress}
+            />
+          )
         ) : (
           <>
             <CheckoutStepper currentStep={currentStep} />

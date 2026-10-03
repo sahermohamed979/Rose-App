@@ -46,6 +46,24 @@ export interface Order {
   updatedAt: string;
 
   orderItems: OrderItem[];
+
+  address?: {
+    id?: string;
+    street?: string;
+    city?: string;
+    phone?: string;
+    details?: string;
+    state?: string;
+    postalCode?: string;
+  };
+
+  user?: {
+    id?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+  };
 }
 
 export interface OrderMetadata {
@@ -65,6 +83,14 @@ export interface OrdersSuccess {
   };
 }
 
+export interface SingleOrderSuccess {
+  status: true;
+  code: number;
+  message?: string;
+
+  payload: Order;
+}
+
 export interface TOrderError {
   status: false;
   code: number;
@@ -72,3 +98,4 @@ export interface TOrderError {
 }
 
 export type OrdersResponse = OrdersSuccess | TOrderError;
+export type SingleOrderResponse = SingleOrderSuccess | TOrderError;

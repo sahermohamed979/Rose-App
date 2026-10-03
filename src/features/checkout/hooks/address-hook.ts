@@ -3,7 +3,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useMutation } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useRouter } from '@/i18n/navigation';
 
@@ -18,7 +22,30 @@ import {
   updateAddress,
   deleteAddress,
 } from '../apis/address-action';
-import { IAddress } from '@/shared/lib/types/adresses.type';
+import { getUserAddresses } from '../apis/get-user-adresses.api';
+import { AddressesPayload } from '@/shared/lib/types/adresses.type';
+
+export const ADDRESSES_QUERY_KEY = ['user', 'addresses'] as const;
+
+export function useUserAddresses(options?: {
+  enabled?: boolean;
+  initialData?: AddressesPayload;
+}) {
+  return useQuery({
+    queryKey: ADDRESSES_QUERY_KEY,
+    queryFn: async (): Promise<AddressesPayload> => {
+      const response = await getUserAddresses();
+
+      if (!response.status) {
+        throw new Error(response.message);
+      }
+
+      return response.payload ?? { addresses: [] };
+    },
+    enabled: options?.enabled ?? true,
+    initialData: options?.initialData,
+  });
+}
 
 interface UseAddressOptions {
   initialData?: Partial<AddressFormFields>;
@@ -31,6 +58,9 @@ export function useAddress(options?: UseAddressOptions) {
 
   // Navigation
   const router = useRouter();
+
+  // Query Client
+  const queryClient = useQueryClient();
 
   // Form
   const schema = addressFormSchema(t);
@@ -55,6 +85,9 @@ export function useAddress(options?: UseAddressOptions) {
   // Functions
   const handleMutationSuccess = (message: string) => {
     toast.success(message);
+    queryClient.invalidateQueries({
+      queryKey: ADDRESSES_QUERY_KEY,
+    });
     options?.onSuccess?.();
     router.refresh();
   };
