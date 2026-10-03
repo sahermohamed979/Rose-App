@@ -3,7 +3,8 @@ import { routing } from '@/i18n/routing';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = (
-    process.env.NEXT_PUBLIC_APP_URL || 'https://rose-app.com'
+    process.env.NEXT_PUBLIC_APP_URL ||
+    'https://rose-app-gilt.vercel.app'
   ).replace(/\/+$/, '');
   const currentDate = new Date().toISOString();
 

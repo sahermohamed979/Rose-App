@@ -875,7 +875,8 @@
   "common": {
     "confirm": "Confirm",
     "confirming": "Confirming",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "home": "Home"
   },
   "metadata": {
     "app": {
@@ -951,6 +952,199 @@
     "resetPassword": {
       "title": "Reset Password",
       "description": "Enter your new password to regain access to your Rose account."
+    }
+  },
+  "categoriesPage": {
+    "badge": "Explore Our Blooms",
+    "title": "Flower & Gift Collections",
+    "subtitle": "Handcrafted floral arrangements, fresh blossoms, and curated luxury gifts tailored for every sentiment.",
+    "searchPlaceholder": "Search categories...",
+    "allCategories": "All Collections",
+    "productsCount": "{count} Arrangements",
+    "noProducts": "Explore Collection",
+    "subcategories": "Featured Varieties",
+    "exclusiveCollection": "Exclusive Selection",
+    "explore": "Explore Collection",
+    "emptyTitle": "No categories found",
+    "emptyDescription": "Try searching with different keywords or browse our full floral catalog.",
+    "clearSearch": "Clear Search",
+    "breadcrumb": "Categories",
+    "perks": {
+      "freshTitle": "100% Farm Fresh",
+      "freshDesc": "Harvested daily at sunrise from premier floriculture gardens.",
+      "deliveryTitle": "Express Same-Day Delivery",
+      "deliveryDesc": "Guaranteed doorstep delivery with chilled temperature control.",
+      "artisanTitle": "Master Florist Crafted",
+      "artisanDesc": "Each stem hand-selected and styled with bespoke elegance.",
+      "giftTitle": "Luxury Presentation",
+      "giftDesc": "Delivered with personalized cards and premium satin ribbon wraps."
+    },
+    "popular": "Popular"
+  },
+  "occasionsPage": {
+    "badge": "Moments That Matter",
+    "title": "Shop by Occasion",
+    "subtitle": "Turn life's milestones into cherished memories with unforgettable floral artistry and gift arrangements.",
+    "searchPlaceholder": "Search occasions...",
+    "allOccasions": "All Occasions",
+    "explore": "View Occasion Flowers",
+    "emptyTitle": "No occasions found",
+    "emptyDescription": "Try searching for another celebration or event.",
+    "clearSearch": "Clear Search",
+    "breadcrumb": "Occasions",
+    "guideTitle": "Floral Gifting Guide",
+    "guideSubtitle": "Discover the perfect stems to express your exact feelings for any event.",
+    "guideItems": [
+      {
+        "title": "Love & Romance",
+        "flowers": "Velvet Red Roses, Peonies, Orchids",
+        "desc": "Express timeless passion, romance, and anniversary milestones."
+      },
+      {
+        "title": "Birthdays & Joy",
+        "flowers": "Sunflowers, Pastel Tulips, Vibrant Gerberas",
+        "desc": "Bright, radiant blooms that spread pure happiness and cheer."
+      },
+      {
+        "title": "Weddings & Galas",
+        "flowers": "Calla Lilies, Hydrangeas, White Garden Roses",
+        "desc": "Elegance and devotion tailored for unforgettable wedding moments."
+      },
+      {
+        "title": "Gratitude & Congratulations",
+        "flowers": "Yellow Roses, Carnations, Wildflower Bouquets",
+        "desc": "Warm appreciation, success celebrations, and heartfelt thank-yous."
+      }
+    ],
+    "customTitle": "Planning a Wedding or Special Event?",
+    "customDesc": "Our floral designers craft custom floral installations and event styling tailored to your unique vision.",
+    "customCta": "Inquire for Bespoke Events",
+    "vipBadge": "VIP Event Concierge"
+  },
+  "aboutPage": {
+    "badge": "Our Story & Passion",
+    "heroTitle": "Crafting Moments, Petal by Petal",
+    "heroSubtitle": "At Rose, flowers are more than gifts—they are heartfelt poetry, unspoken emotions, and timeless memories.",
+    "breadcrumb": "About Us",
+    "storyBadge": "Artistry & Heritage",
+    "storyTitle": "Where Nature Meets Master Floristry",
+    "storyP1": "Founded with an unwavering passion for natural beauty and modern elegance, Rose began as a boutique studio with one mission: to transform the simple gesture of giving flowers into an unforgettable sensory experience.",
+    "storyP2": "We partner exclusively with sustainable, ethical flower farms that harvest stems at their optimal bloom stage. Our master florists then hand-arrange each bouquet with architectural precision, balancing colors, scents, and textures.",
+    "stats": {
+      "delivered": "Happy Moments Delivered",
+      "deliveredCount": "50,000+",
+      "freshness": "Freshness Guaranteed",
+      "freshnessCount": "100%",
+      "florists": "Master Florists",
+      "floristsCount": "25+",
+      "rating": "Five-Star Rating",
+      "ratingCount": "4.9/5"
+    },
+    "valuesTitle": "Our Guiding Values",
+    "valuesSubtitle": "The principles woven into every ribbon and blossom we create.",
+    "values": {
+      "quality": {
+        "title": "Uncompromising Freshness",
+        "desc": "Only the top 1% of blossoms meet our strict grading criteria for vibrancy, stem strength, and longevity."
+      },
+      "artistry": {
+        "title": "Bespoke Artistry",
+        "desc": "Every bouquet is a distinct composition crafted by certified florists who treat each stem as fine art."
+      },
+      "sustainability": {
+        "title": "Eco-Conscious Packaging",
+        "desc": "100% biodegradable hydration wraps, recycled gift boxes, and planet-friendly ribbons."
+      },
+      "service": {
+        "title": "White-Glove Delivery",
+        "desc": "Chilled transport fleet ensuring your flowers arrive in crisp, pristine condition right to the door."
+      }
+    },
+    "processTitle": "From Farm to Heart",
+    "processSubtitle": "The meticulous journey of your bouquet from sunrise harvest to doorstep celebration.",
+    "steps": {
+      "step1Title": "Dawn Harvest",
+      "step1Desc": "Stems cut at dawn when hydration and nutrient levels are at their natural peak.",
+      "step2Title": "Artisan Curation",
+      "step2Desc": "Hand-selected by color harmony, fragrance balance, and stem symmetry.",
+      "step3Title": "Hydration Wrapping",
+      "step3Desc": "Sealed with specialized nutrient water pouches to keep blooms fresh during transit.",
+      "step4Title": "Doorstep Delight",
+      "step4Desc": "Delivered with signature gift card, plant food, and easy care instructions."
+    },
+    "ctaTitle": "Bring Natural Elegance Into Your Everyday",
+    "ctaSubtitle": "Discover our latest seasonal bouquets or order a bespoke arrangement today.",
+    "shopNow": "Explore All Bouquets",
+    "contactUs": "Contact Our Florists",
+    "experienceBadge": "The Rose Experience"
+  },
+  "contactPage": {
+    "badge": "Connect With Us",
+    "heroTitle": "We'd Love to Hear From You",
+    "heroSubtitle": "Have a question about an order, custom bouquet, wedding arrangement, or delivery? Our dedicated team is here to assist you.",
+    "breadcrumb": "Contact Us",
+    "form": {
+      "title": "Send Us a Message",
+      "subtitle": "Fill out the form below and our team will get back to you within 2 business hours.",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "e.g. Sarah Jenkins",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "e.g. sarah@example.com",
+      "phoneLabel": "Phone / WhatsApp (Optional)",
+      "phonePlaceholder": "e.g. +20 100 123 4567",
+      "subjectLabel": "Subject / Topic",
+      "subjectPlaceholder": "Select inquiry type",
+      "subjects": {
+        "general": "General Inquiry",
+        "order": "Order Status & Tracking",
+        "custom": "Custom Arrangement / Bespoke Bouquet",
+        "events": "Wedding & Event Floristry",
+        "corporate": "Corporate Gifts & Partnerships"
+      },
+      "messageLabel": "Your Message",
+      "messagePlaceholder": "Tell us about your request, preferred flowers, event date, or any special notes...",
+      "submitBtn": "Send Message",
+      "sendingBtn": "Sending Message...",
+      "successTitle": "Message Sent Successfully!",
+      "successDesc": "Thank you for reaching out. One of our floral specialists will contact you shortly.",
+      "sendAnother": "Send Another Message",
+      "errorMessage": "Failed to submit message. Please try again."
+    },
+    "info": {
+      "phoneTitle": "Call or WhatsApp",
+      "phoneDesc": "Available daily from 9:00 AM to 11:00 PM",
+      "phoneValue": "+20 100 987 6543",
+      "emailTitle": "Email Support",
+      "emailDesc": "We respond within 2-4 hours",
+      "emailValue": "support@roseapp.com",
+      "locationTitle": "Flagship Boutique",
+      "locationDesc": "Visit us to smell the blooms in person",
+      "locationValue": "24 Nile Corniche, Zamalek, Cairo",
+      "hoursTitle": "Working Hours",
+      "hoursDesc": "Open 7 days a week",
+      "hoursValue": "Mon - Sun: 9:00 AM - 11:00 PM"
+    },
+    "faqTitle": "Frequently Asked Questions",
+    "faqSubtitle": "Quick answers to common questions about our flowers and delivery.",
+    "faqs": {
+      "q1": "Can I request same-day flower delivery?",
+      "a1": "Yes! We offer same-day delivery across the city for all orders placed before 5:00 PM. Our chilled courier fleet ensures your bouquet arrives fresh and pristine.",
+      "q2": "How can I keep my flowers fresh for longer?",
+      "a2": "Every Rose bouquet arrives with flower food packets and our care guide. Trim stems diagonally by 1-2 cm, place in clean cool water, and keep away from direct sunlight and heat drafts.",
+      "q3": "Can I include a personalized handwritten message?",
+      "a3": "Absolutely. During checkout, you can write a custom greeting message which we will print or handwrite onto our luxury embossed cardstock with a wax-style seal.",
+      "q4": "Do you design custom arrangements for events and weddings?",
+      "a4": "Yes, our Master Florists specialize in bespoke event styling, bridal bouquets, table centerpieces, and backdrop arches. Contact us via the form above or call our concierge."
+    },
+    "boutiqueBadge": "Boutique Experience",
+    "openInMaps": "Open in Google Maps",
+    "locationCity": "Zamalek Island, Cairo, Egypt",
+    "locationNote": "Valet parking and curbside pickup available",
+    "validation": {
+      "nameRequired": "Name must be at least 2 characters",
+      "emailInvalid": "Please enter a valid email address",
+      "subjectRequired": "Please select an inquiry topic",
+      "messageMin": "Message must be at least 10 characters"
     }
   }
 }

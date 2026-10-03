@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || 'https://rose-app.com'
+    process.env.NEXT_PUBLIC_APP_URL ||
+      'https://rose-app-gilt.vercel.app'
   ),
   title: {
     default: 'Rose | Luxury Flowers & Gifts',
