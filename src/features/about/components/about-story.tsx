@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Sparkles } from 'lucide-react';
 
-import img1 from '@/shared/assets/images/about-home (1).png';
-import img2 from '@/shared/assets/images/about-home (2).png';
-import img3 from '@/shared/assets/images/about-home (3).png';
+import img1 from '@/shared/assets/images/about-home (1).webp';
+import img2 from '@/shared/assets/images/about-home (2).webp';
+import img3 from '@/shared/assets/images/about-home (3).webp';
 
 export function AboutStory() {
   // Translation

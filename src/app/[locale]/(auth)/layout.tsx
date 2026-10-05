@@ -6,7 +6,7 @@ import authTopSeparator from '@/shared/assets/images/auth-top-separator.png';
 import authBottomSeparator from '@/shared/assets/images/auth-bottom-separator.png';
 import darkAuthTopSeparator from '@/shared/assets/images/dark-auth-top-separator.png';
 import darkAuthBottomSeparator from '@/shared/assets/images/dark-auth-bottom-separator.png';
-import authCover from '@/shared/assets/images/auth-cover.jpg';
+import authCover from '@/shared/assets/images/auth-cover.webp';
 
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 

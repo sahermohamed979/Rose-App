@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '@/shared/assets/images/footer-logo-image.png';
+import logo from '@/shared/assets/images/footer-logo-image.webp';
 import { Link } from '@/i18n/navigation';
 import { Flower } from 'lucide-react';
 import DashboardList from './dashboard-list';

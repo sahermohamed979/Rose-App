@@ -1,6 +1,6 @@
 import UserInfo from './user-info';
 import Image from 'next/image';
-import logo from '@/shared/assets/images/footer-logo-image.png';
+import logo from '@/shared/assets/images/footer-logo-image.webp';
 import NavbarBreadcrumb from './navbar-breadcrumb';
 import LangToggle from '@/shared/components/ui/langToggle';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';

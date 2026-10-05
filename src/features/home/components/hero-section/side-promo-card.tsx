@@ -1,4 +1,4 @@
-import bgImg from '../../assets/images/132a2f7f5902767a6f99bcab7221e6bf3f2703e8.png';
+import bgImg from '../../assets/images/132a2f7f5902767a6f99bcab7221e6bf3f2703e8.webp';
 import Image from 'next/image';
 import { Button } from '@base-ui/react/button';
 import { ArrowRight } from 'lucide-react';

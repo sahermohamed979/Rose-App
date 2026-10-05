@@ -1,11 +1,11 @@
 import { StaticImageData } from 'next/image';
 
-import gallery1 from '@/shared/assets/images/gallery1.png';
-import gallery2 from '@/shared/assets/images/gallery2.png';
-import gallery3 from '@/shared/assets/images/gallery3.png';
-import gallery4 from '@/shared/assets/images/gallery4.png';
-import gallery5 from '@/shared/assets/images/gallery5.png';
-import gallery6 from '@/shared/assets/images/gallery6.png';
+import gallery1 from '@/shared/assets/images/gallery1.webp';
+import gallery2 from '@/shared/assets/images/gallery2.webp';
+import gallery3 from '@/shared/assets/images/gallery3.webp';
+import gallery4 from '@/shared/assets/images/gallery4.webp';
+import gallery5 from '@/shared/assets/images/gallery5.webp';
+import gallery6 from '@/shared/assets/images/gallery6.webp';
 
 export type GalleryImage = {
   id: number;

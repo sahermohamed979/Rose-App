@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import img1 from '@/shared/assets/images/about-home (1).png';
-import img2 from '@/shared/assets/images/about-home (2).png';
-import img3 from '@/shared/assets/images/about-home (3).png';
+import img1 from '@/shared/assets/images/about-home (1).webp';
+import img2 from '@/shared/assets/images/about-home (2).webp';
+import img3 from '@/shared/assets/images/about-home (3).webp';
 import Image from 'next/image';
 import { Button } from '@/shared/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';

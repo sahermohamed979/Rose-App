@@ -1,7 +1,7 @@
 import React from 'react';
-import img1 from '../../assets/images/9c80f839880ae4729e2ed36e6a6e2ce4c8acf962.png';
-import img2 from '../../assets/images/650ebce97e11985e0c78fa1a2c8b1633ad6865ae.png';
-import img3 from '../../assets/images/f1ae11b6a3272e3325efa8c7c66af85509d2b54c.png';
+import img1 from '../../assets/images/9c80f839880ae4729e2ed36e6a6e2ce4c8acf962.webp';
+import img2 from '../../assets/images/650ebce97e11985e0c78fa1a2c8b1633ad6865ae.webp';
+import img3 from '../../assets/images/f1ae11b6a3272e3325efa8c7c66af85509d2b54c.webp';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import footerLogo from '@/shared/assets/images/footer-logo-image.png';
+import footerLogo from '@/shared/assets/images/footer-logo-image.webp';
 
 export default function FooterLogo() {
   // Translate footer logo
@@ -15,7 +15,6 @@ export default function FooterLogo() {
           alt="Rose Logo"
           fill
           className="object-cover"
-          priority
         />
       </div>
 

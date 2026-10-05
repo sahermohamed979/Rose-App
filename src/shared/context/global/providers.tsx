@@ -1,4 +1,3 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactQueryProvider from './providers/react-query-providers';
 import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from './providers/ThemeProvider';
@@ -11,7 +10,6 @@ export default function Providers({
 }>) {
   return (
     <ReactQueryProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
       <NextIntlClientProvider>
         <ThemeProvider
           attribute="class"

@@ -1,8 +1,8 @@
 import { StaticImageData } from 'next/image';
 
-import avatar1 from '@/shared/assets/images/Testominail(1).png';
-import avatar2 from '@/shared/assets/images/Testominail(2).png';
-import avatar3 from '@/shared/assets/images/Testominail(3).png';
+import avatar1 from '@/shared/assets/images/Testominail(1).webp';
+import avatar2 from '@/shared/assets/images/Testominail(2).webp';
+import avatar3 from '@/shared/assets/images/Testominail(3).webp';
 
 export type Testimonial = {
   id: number;

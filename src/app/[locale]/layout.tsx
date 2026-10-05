@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist_Mono, Tajawal, Sarabun } from 'next/font/google';
+import { Tajawal, Sarabun } from 'next/font/google';
 import { cn } from '@/shared/lib/utils/utils';
 import Providers from '@/shared/context/global/providers';
 import { hasLocale } from 'next-intl';
@@ -13,20 +13,17 @@ import { Toaster } from '@/shared/components/ui/sonner';
 const tajawal = Tajawal({
   subsets: ['arabic'],
   variable: '--font-tajawal',
-  weight: ['300', '400', '500', '700'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
   fallback: ['system-ui', 'sans-serif'],
 });
 
 const sarabun = Sarabun({
   subsets: ['latin'],
   variable: '--font-sarabun',
-  weight: ['300', '400', '500', '700'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
   fallback: ['system-ui', 'sans-serif'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
 });
 
 interface LocaleLayoutProps {
@@ -148,7 +145,6 @@ export default async function LocaleLayout({
         'antialiased',
         sarabun.variable,
         tajawal.variable,
-        geistMono.variable,
         locale === 'ar' ? 'font-tajawal' : 'font-sans'
       )}
     >
