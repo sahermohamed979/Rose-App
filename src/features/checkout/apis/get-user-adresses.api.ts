@@ -5,13 +5,13 @@ import { RESPONSES } from '@/shared/lib/constants/response.constant';
 import { AddressesResponse } from '@/shared/lib/types/adresses.type';
 
 export async function getUserAddresses(): Promise<AddressesResponse> {
+  const token = await getAuthToken();
+
+  if (!token?.accessToken) {
+    return RESPONSES.Unauthorized;
+  }
+
   try {
-    const token = await getAuthToken();
-
-    if (!token?.accessToken) {
-      return RESPONSES.Unauthorized;
-    }
-
     const response = await fetch(
       `${process.env.NEXT_API_URL}/addresses`,
       {

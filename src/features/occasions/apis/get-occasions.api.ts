@@ -11,14 +11,14 @@ import { OccasionType } from '@/shared/lib/types/product-types';
 export const getOccasions = async (
   params: GetOccasionsParams = {}
 ): Promise<ApiResponse<IPaginationResponse<OccasionType>>> => {
+  const jwt = await getAuthToken();
+  const token = jwt?.accessToken;
+
+  if (!token) {
+    return { status: false, code: 401, message: 'Unauthorized' };
+  }
+
   try {
-    const jwt = await getAuthToken();
-    const token = jwt?.accessToken;
-
-    if (!token) {
-      return { status: false, code: 401, message: 'Unauthorized' };
-    }
-
     const searchParams = new URLSearchParams();
     if (params.page) {
       searchParams.set('page', String(params.page));

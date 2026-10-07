@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/ui/button';
 import { useTranslations } from 'next-intl';
 
 export default function CheckoutError({
-  error,
+  error: _error,
   reset,
 }: {
   error: Error & { digest?: string };

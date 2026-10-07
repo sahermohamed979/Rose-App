@@ -11,14 +11,14 @@ interface GetOccasionPayload {
 export const getOccasion = async (
   id: string
 ): Promise<ApiResponse<GetOccasionPayload>> => {
+  const jwt = await getAuthToken();
+  const token = jwt?.accessToken;
+
+  if (!token) {
+    return { status: false, code: 401, message: 'Unauthorized' };
+  }
+
   try {
-    const jwt = await getAuthToken();
-    const token = jwt?.accessToken;
-
-    if (!token) {
-      return { status: false, code: 401, message: 'Unauthorized' };
-    }
-
     const response = await fetch(
       `${process.env.NEXT_API_URL}/occasions/${id}`,
       {

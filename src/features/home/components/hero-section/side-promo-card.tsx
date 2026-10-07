@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { Button } from '@base-ui/react/button';
 import { ArrowRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+
 export default async function SidePromoCard() {
   const t = await getTranslations();
   return (
@@ -24,7 +25,7 @@ export default async function SidePromoCard() {
           {t('hero.specialGifts')}
         </p>
         <Button className="bg-bg-primary-fade rounded-[10px] text-maroon-700 h-9 mt-2.5 ">
-          <Link href={'products'}>
+          <Link href="/products">
             <p className="flex justify-center items-center py-2.2 px-4 gap-1.5 ">
               {t('hero.shopNow')}
               <ArrowRight className="rtl:rotate-180" size={16} />

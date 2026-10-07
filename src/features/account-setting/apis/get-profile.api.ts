@@ -5,18 +5,18 @@ import { GetProfileResponse } from '../types/profile-types';
 export const getProfileInfo = async (): Promise<
   ApiResponse<GetProfileResponse>
 > => {
+  const jwt = await getAuthToken();
+  const token = jwt?.accessToken;
+
+  if (!token) {
+    return {
+      status: false,
+      code: 401,
+      message: 'Unauthorized',
+    };
+  }
+
   try {
-    const jwt = await getAuthToken();
-    const token = jwt?.accessToken;
-
-    if (!token) {
-      return {
-        status: false,
-        code: 401,
-        message: 'Unauthorized',
-      };
-    }
-
     const response = await fetch(
       `${process.env.NEXT_API_URL}/users/profile`,
       {
