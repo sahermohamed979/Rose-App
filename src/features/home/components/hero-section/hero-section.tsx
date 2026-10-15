@@ -52,7 +52,7 @@ export default function HeroSection(): React.JSX.Element {
           {/* Floating glass chips over the 3D (desktop only) */}
 
           {/* Text */}
-          <div className="relative z-[2] flex flex-col justify-center min-h-[460px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[560px] px-6 sm:px-10 md:px-14 lg:px-16 py-10 max-w-xl lg:max-w-[46%]">
+          <div className="relative z-[2] flex flex-col  justify-end lg:justify-center min-h-[460px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[560px] px-6 sm:px-10 md:px-14 lg:px-16 py-10 max-w-xl lg:max-w-[46%]">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight bg-gradient-to-r from-white via-soft-pink-300 to-soft-pink-400 bg-clip-text text-transparent">
               {t('hero.flowersTitle')}
             </h1>
