@@ -1,153 +1,274 @@
-# Rose App
+# 🌹 Rose App — Enterprise E-Commerce Platform
 
-A modern, highly performant, and fully internationalized Next.js web application built with the latest features of Next.js 16 (App Router) and React 19.
+> **Production-grade, highly performant, and bi-directionally internationalized luxury e-commerce architecture built with Next.js 16 (App Router), React 19, and TypeScript.**
 
----
-
-## 🚀 Key Features
-
-- **🌐 Robust Internationalization (i18n)**: Out-of-the-box multi-locale routing and localization for English (`en`) and Arabic (`ar`) utilizing `next-intl`. Includes dynamic layout support (RTL for Arabic, LTR for English).
-- **⚡ Next.js 16 (App Router)**: Configured with React Server Components (RSC), optimized client rendering, and nested layout boundaries.
-- **🎨 Tailwind CSS v4**: Built with the next-generation Tailwind engine utilizing modern `@tailwindcss/postcss` and PostCSS integration.
-- **🧱 Premium UI Foundation**:
-  - Unstyled, accessible primitives from `@base-ui/react`.
-  - Modern styling components utilizing the **Shadcn** CLI configured for Tailwind v4.
-- **🔄 Robust Caching & Querying**: Integrated TanStack React Query (`@tanstack/react-query`) v5 for seamless asynchronous server state management.
-- **📝 Form Validation**: Fully type-safe forms with `react-hook-form` integrated with `zod` schemas.
-- **🛠️ Production-Ready Tooling**: Strict ESLint rules, automated Prettier formatting, and Husky pre-commit hooks.
+[![Next.js](<https://img.shields.io/badge/Next.js-16%20(App%20Router)-black?style=for-the-badge&logo=next.js>)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![TypeScript](<https://img.shields.io/badge/TypeScript-5%20(Strict)-3178C6?style=for-the-badge&logo=typescript>)](https://www.typescriptlang.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-v5-FF4154?style=for-the-badge&logo=react-query)](https://tanstack.com/query)
+[![Architecture](https://img.shields.io/badge/Architecture-Feature--Sliced-8A2BE2?style=for-the-badge)](#-system-architecture--design-decisions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ---
 
-## 📂 Project Structure
+## 📱 Senior-Level LinkedIn Announcements
 
-The project follows a clean, feature-driven structure to keep code scalable and organized:
+Copy and paste either template directly to LinkedIn to showcase your system design and engineering depth:
+
+<details open>
+<summary><b>Option 1: Senior Software Engineer — Deep Dive & System Architecture (Recommended)</b></summary>
+
+```markdown
+Architecting for Production: Building an enterprise-grade luxury e-commerce platform with Next.js 16, React 19, and TypeScript 🚀
+
+When designing e-commerce web applications at scale, the biggest trap is treating the frontend as just a collection of UI screens. Real-world platforms require deliberate system design: resilient state synchronization, strict schema boundaries, zero-layout-shift localization, and minimal client bundle overhead.
+
+Over the past few weeks, I engineered Rose App — a high-performance flower and luxury gifting e-commerce platform built to solve these architectural challenges.
+
+Here are some of the key technical decisions and architectural patterns implemented:
+
+🧠 1. Server-First Architecture (Next.js 16 App Router & React 19)
+• Minimized JavaScript delivered to the client by maximizing React Server Components (RSC) for initial page loads and data-heavy storefront catalogs.
+• Strictly isolated client components (`"use client"`) to interactive leaves (e.g. address map picker, cart drawer, OTP validation), preventing hydration waterfalls.
+
+🌐 2. Bi-Directional i18n with Zero Cumulative Layout Shift (CLS)
+• Integrated native bi-directional localization (Arabic RTL & English LTR) using `next-intl`.
+• Designed the UI system with CSS logical properties and directional typography scaling to ensure seamless layout mirroring without styling duplication.
+
+⚡ 3. Deterministic State Synchronization & Optimistic UI
+• Leveraged TanStack React Query v5 with centralized Query Key Factories.
+• Implemented optimistic updates on cart modifications, coupon redemptions, and wishlist toggles, ensuring instant perceived performance with automatic rollback on network failure.
+
+🗺️ 4. Geospatial Logistics & Performance Isolation
+• Integrated interactive pinpoint delivery address mapping with Leaflet and React-Leaflet.
+• Code-split heavy client bundles (Leaflet maps and Recharts telemetry graphs) with dynamic loading boundaries and skeleton fallbacks to protect Core Web Vitals.
+
+🛡️ 5. Type Safety & Defensive Engineering
+• Enforced strict TypeScript mode with zero `any` policy.
+• Runtime schema validation using Zod (`z.infer`) across all API payloads, query parameters, and multi-step checkout forms (React Hook Form).
+• Automated static analysis via pre-commit git hooks (Husky + lint-staged + ESLint + Prettier).
+
+📊 6. Administrative Telemetry & Observability
+• Real-time business metrics dashboard featuring revenue trajectory analysis, order fulfillment status distributions, and user lifecycle analytics powered by Recharts.
+
+Engineering is about trade-offs: picking the right abstractions, keeping code maintainable, and prioritizing user experience and runtime resilience above all.
+
+Explore the repository & architectural breakdown:
+🔗 GitHub: [Insert your GitHub Link]
+🌐 Live Demo: [Insert your Live Link]
+
+Fellow engineers: How are you managing client vs. server boundaries in React 19? Would love to connect and hear your thoughts in the comments! 👇
+
+#SoftwareEngineering #Nextjs #React19 #TypeScript #SystemDesign #WebPerformance #FrontendArchitecture #TailwindCSS #CleanCode #Ecommerce #FullStack
+```
+
+</details>
+
+<br />
+
+<details>
+<summary><b>Option 2: Senior Frontend Lead — Impact & Engineering Highlights</b></summary>
+
+```markdown
+🌹 Engineering a high-performance e-commerce platform from the ground up: Rose App (Next.js 16 • React 19 • TypeScript • Tailwind CSS v4)
+
+As frontend systems grow in complexity, clean architecture and strict separation of concerns become non-negotiable.
+
+Here is what I prioritized when building Rose App:
+
+🔹 Architecture: Feature-sliced modular design separating domain business logic, API services, and presentation primitives.
+🔹 Performance: Next.js 16 Server Components to keep client JS slim, paired with streaming Suspense boundaries.
+🔹 Localization: Native bi-directional English (LTR) & Arabic (RTL) with next-intl and zero CLS layout adaptation.
+🔹 Data Layer: TanStack Query v5 with centralized query key factories and optimistic state updates for cart & checkout flows.
+🔹 Geolocation: Interactive Leaflet map integration for precise pin-drop delivery logistics.
+🔹 Analytics: Interactive executive dashboard with real-time revenue and order fulfillment tracking via Recharts.
+🔹 Quality: End-to-end type safety with TypeScript & Zod schemas, backed by automated Husky/lint-staged pipelines.
+
+Check out the code and system design overview:
+🔗 GitHub: [Insert your GitHub Link]
+🌐 Live Application: [Insert your Live Link]
+
+Feedback and technical discussions are always welcome!
+
+#FrontendArchitecture #WebDevelopment #React19 #Nextjs #TypeScript #TailwindCSS #SoftwareEngineering #TechLead
+```
+
+</details>
+
+---
+
+## 🏗️ System Architecture & Design Decisions
+
+### 1. Feature-Sliced Architecture
+
+Rather than grouping files strictly by technical role (all components in one folder, all hooks in another), the codebase is organized by **Domain Features** (`src/features/*`). Each domain feature acts as a self-contained module containing its own:
+
+- `apis/` & `services/`: Network contract wrappers and endpoint definitions.
+- `components/`: Domain-specific UI representations.
+- `hooks/`: Custom state machines and React Query wrappers.
+- `schemas/`: Zod validation models and inferred TypeScript types.
+- `screens/`: Assembled composite views.
+- `skeletons/`: Layout-shift preventing Suspense fallbacks.
+
+### 2. Server vs. Client Boundary Strategy
+
+- **Default to RSC**: Data fetching and static layouts occur exclusively on the server, eliminating client-side API credential exposure and slashing bundle size.
+- **Isolated Leaf Interactivity**: `"use client"` is pushed down to the lowest possible component trees (e.g., button triggers, input fields, interactive map pins) to prevent unnecessary client-side re-renders.
+
+### 3. Server State Management Strategy
+
+- **Client Cache Decoupling**: Global application state is divided cleanly between ephemeral UI state and server state.
+- **Query Key Factories**: All query keys are strictly typed and centralized to guarantee deterministic invalidation and prevent stale-while-revalidate inconsistencies across routes.
+- **Optimistic UI Updates**: High-frequency shopping actions (cart addition, quantity toggling, wishlist updates) provide instant feedback with rollback capabilities.
+
+### 4. Zero-CLS Bi-Directional Localization
+
+- Multi-locale routing powered by `next-intl` supports **English (LTR)** and **Arabic (RTL)**.
+- Document-level dynamic direction handling (`dir="rtl" | "ltr"`).
+- CSS Logical Properties (`margin-inline`, `padding-inline`, `inset-inline`) eliminate custom directional overrides and ensure zero Cumulative Layout Shift during locale switches.
+
+---
+
+## 🚀 Feature Matrix
+
+### 🛒 Customer E-Commerce Engine
+
+- **Curated Collections**: Occasion-based and category-based dynamic discovery workflows.
+- **Search & Filter Pipeline**: Debounced server-side search coupled with multi-attribute filtering.
+- **Shopping Cart & Wishlist**: Persistent synchronized storage with real-time server reconciliations.
+- **Multi-Step Checkout Pipeline**:
+  - Interactive map pin-drop delivery locator using Leaflet.
+  - Multi-address persistence with CRUD capabilities.
+  - Dynamic promo code validation with instant price computation.
+  - Granular delivery scheduling and payment orchestration.
+- **Order Tracking & Receipts**: Real-time status pipeline with itemized order tracking.
+
+### 📊 Administrative Telemetry & Operations
+
+- **KPI Metrics Cards**: Gross order values, fulfillment efficiency rates, and active user metrics.
+- **Data Visualizations**: Recharts-powered telemetry showing sales volume, revenue momentum, and status distributions.
+- **User Profile & Security**: Account management, avatar processing, and credential workflows.
+
+### 🛡️ Authentication & Verification
+
+- NextAuth session orchestration with credential validation.
+- OTP verification mechanism utilizing `input-otp`.
+- International phone standard compliance via `react-phone-number-input`.
+- Comprehensive client and server validation using `zod` schemas.
+
+---
+
+## 📂 Repository Topology
 
 ```
 rose-app/
 ├── src/
-│   ├── app/                 # Next.js App Router root
-│   │   ├── [locale]/        # Localized layouts and routes (en, ar)
-│   │   │   ├── layout.tsx   # Localized base layout (sets dir/lang)
-│   │   │   └── page.tsx     # Home page
-│   │   └── globals.css      # Core global styles (with Tailwind direct imports)
-│   ├── features/            # Domain-specific business components & state
-│   ├── i18n/                # Internationalization config (routing, request, etc.)
-│   │   ├── messages/        # Translation JSON catalogs
-│   │   └── routing.ts       # Supported locales and routing behavior
-│   ├── shared/              # Reusable common code across features
-│   │   ├── assets/          # Static assets (images, icons)
-│   │   ├── components/      # UI components & Shadcn blocks
-│   │   │   └── ui/          # Low-level UI primitives
-│   │   ├── context/         # React Context and Global Providers
-│   │   ├── hooks/           # Custom React hooks
-│   │   ├── layout/          # Page layouts (headers, footers)
-│   │   ├── lib/             # Third-party wrappers, schemas, and utils
-│   │   └── skeletons/       # Loading skeletons
-│   └── proxy.ts             # next-intl localized redirect middleware
+│   ├── app/                      # Next.js App Router Root
+│   │   └── [locale]/             # Localized routes (en, ar)
+│   │       ├── (auth)/           # Authentication route groups
+│   │       ├── (main)/           # Storefront, catalog, cart, checkout
+│   │       ├── dashboard/        # Analytics & administration
+│   │       ├── layout.tsx        # Base localized layout (sets lang & dir)
+│   │       └── globals.css       # Tailwind CSS v4 design tokens
+│   │
+│   ├── features/                 # Domain-driven feature boundaries
+│   │   ├── auth/                 # Authentication state, forms, & OTP logic
+│   │   ├── cart/                 # Cart state, drawer, and mutations
+│   │   ├── checkout/             # Stepper, address map (Leaflet), discounts
+│   │   ├── dashboard/            # Analytics telemetry & management views
+│   │   ├── home/                 # Landing view assemblies & curated banners
+│   │   ├── notifications/        # Web Push notification services
+│   │   ├── orders/               # Purchase fulfillment & order history
+│   │   ├── products/             # Product specifications, galleries, & cards
+│   │   └── wishlist-page/        # Saved items & synchronization
+│   │
+│   ├── i18n/                     # Internationalization layer
+│   │   ├── messages/             # Localized dictionary catalogs (en.json, ar.json)
+│   │   └── routing.ts            # Locale definitions & routing constraints
+│   │
+│   └── shared/                   # Shared cross-domain primitives
+│       ├── components/ui/        # Accessible UI primitives (@base-ui/react, Shadcn)
+│       ├── context/              # Context providers
+│       ├── hooks/                # Universal utility hooks
+│       └── lib/                  # Centralized client configurations & utilities
 ```
 
 ---
 
-## 🛠️ Tech Stack & Dependencies
+## 🛠️ Technology Stack & Architectural Dependencies
 
-### Core Frameworks
-
-- **React 19.2.4**
-- **Next.js 16.2.9**
-- **TypeScript**
-
-### Styling & UI
-
-- **Tailwind CSS v4**
-- **Base UI (`@base-ui/react`)**: Accessible primitives for custom designs.
-- **Shadcn**: Component configuration (`components.json` is set to `base-nova` style).
-- **Lucide React**: Vector icons.
-
-### State & Logic
-
-- **TanStack React Query v5**: Server state management with React Query Devtools.
-- **React Hook Form**: Form state management.
-- **Zod**: Type-safe schema validation.
+| Layer                    | Technology                | Architectural Rationale                                                         |
+| ------------------------ | ------------------------- | ------------------------------------------------------------------------------- |
+| **Framework**            | Next.js 16 (App Router)   | React Server Components, server actions, route handlers, and streaming          |
+| **Runtime**              | React 19                  | Enhanced concurrent capabilities, improved compiler support, and modern hooks   |
+| **Language**             | TypeScript 5 (Strict)     | End-to-end static verification, discriminated unions, zero `any` policy         |
+| **Design System**        | Tailwind CSS v4 + Base UI | High performance PostCSS engine, accessible unstyled primitives, zero CSS bloat |
+| **Server State**         | TanStack React Query v5   | Decoupled server state, automated cache invalidation, and optimistic mutations  |
+| **Internationalization** | next-intl v4              | First-class App Router localization with automated LTR/RTL document structuring |
+| **Forms & Schemas**      | React Hook Form + Zod     | Uncontrolled performant form inputs with single-source-of-truth type inference  |
+| **Geospatial Mapping**   | Leaflet + React Leaflet   | Interactive, lightweight delivery location coordinate picking                   |
+| **Telemetry & Charts**   | Recharts                  | Composable SVG analytics visualizations for administrative metrics              |
+| **Push & Notifications** | Web Push API + Sonner     | Reliable event dispatching and non-blocking toast messaging                     |
 
 ---
 
-## ⚙️ Path Aliases
+## ⚡ Quickstart & Local Setup
 
-To keep imports clean, path aliases are configured in `tsconfig.json` and `components.json`:
+### System Prerequisites
 
-- `@/*` pointing to `./src/*`
-- `@/shared/components/*` for components
-- `@/shared/lib/*` for library code and utilities
-- `@/shared/hooks/*` for hooks
+- **Node.js**: v18.17+ or v20+ (LTS recommended)
+- **Package Manager**: npm, pnpm, or yarn
 
----
+### 1. Clone the repository
 
-## 🚀 Getting Started
+```bash
+git clone https://github.com/sahermohamed979/Rose-App.git
+cd Rose-App
+```
 
-### Prerequisites
-
-Ensure you have **Node.js** installed (v18+ recommended).
-
-### 1. Install Dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Run the Development Server
+### 3. Run development server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+Open [http://localhost:3000](http://localhost:3000) to inspect the application.
 
-### 3. Build for Production
-
-To build a production bundle:
+### 4. Build and validate production bundle
 
 ```bash
 npm run build
-```
-
-To run the built production version:
-
-```bash
 npm run start
 ```
 
 ---
 
-## 🧪 Linting & Formatting
+## 🧪 Quality Assurance & CI Guardrails
 
-We maintain a strict code quality standard using ESLint, Prettier, and Husky pre-commit hooks.
+To prevent regressions and maintain senior engineering standards, strict static analysis and formatting pipelines are automated:
 
-- **Lint Code**:
+```bash
+# Execute ESLint static analysis
+npm run lint
 
-  ```bash
-  npm run lint
-  ```
+# Check code formatting with Prettier
+npx prettier --check .
 
-  _Features custom rules: checks for `no-console` warnings, enforces `prefer-const`, strict quality checks (`eqeqeq`, `curly`), and unused variables configuration._
+# Auto-format files across project
+npx prettier --write .
+```
 
-- **Format Code**:
-
-  ```bash
-  npx prettier --write .
-  ```
-
-- **Git Hooks**: Pre-commit hooks run automatically on staged files via `husky` and `lint-staged`.
+- **Git Hooks**: Pre-commit validation is automated through `husky` and `lint-staged`, guaranteeing that only formatted, lint-clean code can be committed.
 
 ---
 
-## 🌐 Localization Guide (next-intl)
+## 📄 License
 
-### Adding a new language
-
-1. Define the locale in `src/i18n/routing.ts`.
-2. Add the corresponding JSON file under `src/i18n/messages/{locale}.json`.
-3. The layout in `src/app/[locale]/layout.tsx` will automatically detect the language direction (`rtl` or `ltr`) based on the locale:
-   ```typescript
-   lang={locale}
-   dir={locale === 'ar' ? 'rtl' : 'ltr'}
-   ```
+This project is licensed under the [MIT License](LICENSE).
