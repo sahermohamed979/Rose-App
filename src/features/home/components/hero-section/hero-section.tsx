@@ -50,30 +50,6 @@ export default function HeroSection(): React.JSX.Element {
           </div>
 
           {/* Floating glass chips over the 3D (desktop only) */}
-          <div className="hidden lg:flex absolute top-8 end-8 z-[3] items-center gap-2.5 rounded-2xl border border-white/15 bg-white/[0.07] backdrop-blur-md px-4 py-2.5 shadow-lg shadow-black/20">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-soft-pink-400/15">
-              <Truck size={15} className="text-soft-pink-300" />
-            </div>
-            <div className="leading-tight">
-              <p className="text-white text-xs font-semibold">
-                {t('features.freeDelivery')}
-              </p>
-              <p className="text-white/45 text-[10px]">
-                {t('hero.startingFrom')}
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden lg:flex absolute bottom-8 end-[38%] z-[3] items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] backdrop-blur-md px-4 py-2 shadow-lg shadow-black/20">
-            <Star
-              size={14}
-              className="fill-amber-300 text-amber-300"
-            />
-            <span className="text-white text-sm font-semibold">
-              4.9
-            </span>
-            <span className="text-white/45 text-xs">Rating</span>
-          </div>
 
           {/* Text */}
           <div className="relative z-[2] flex flex-col justify-center min-h-[460px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[560px] px-6 sm:px-10 md:px-14 lg:px-16 py-10 max-w-xl lg:max-w-[46%]">
