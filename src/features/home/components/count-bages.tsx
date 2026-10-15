@@ -4,7 +4,7 @@ export function CountBadge({ count }: { count: number }) {
   }
 
   return (
-    <span className="absolute -top-2 -end-2 rtl:-left-2 rtl:right-auto bg-bg-danger text-text-inverse text-[10px] font-bold min-w-4 h-4 px-0.5 flex items-center justify-center rounded-full shadow-sm pointer-events-none">
+    <span className="absolute -top-1 -end-1.5 rtl:-left-1.5 rtl:right-auto bg-gradient-to-r from-maroon-600 to-soft-pink-600 text-white text-[10px] font-bold min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full ring-2 ring-background shadow-xs pointer-events-none animate-in zoom-in-50 duration-200">
       {count > 99 ? '99+' : count}
     </span>
   );

@@ -12,10 +12,10 @@ export default function SubHeader() {
   return (
     <nav
       aria-label={t('nav.mainNav')}
-      className="hidden md:block bg-bg-primary-saturated overflow-x-auto"
+      className="hidden md:block bg-background/50 dark:bg-background/20 backdrop-blur-md border-t border-border/30 overflow-x-auto py-1"
     >
       <ul
-        className="capitalize flex flex-row justify-center items-center gap-4 px-4"
+        className="flex flex-row justify-center items-center gap-1.5 lg:gap-2 px-4 max-w-7xl mx-auto"
         role="list"
       >
         {NAV_LINKS.map(({ href, label, Icon }) => {
@@ -25,14 +25,20 @@ export default function SubHeader() {
               <Link
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`flex flex-row items-center gap-2 py-2 px-3 text-[16px] transition-all whitespace-nowrap ${
+                className={`group flex flex-row items-center gap-2 py-1.5 px-3.5 rounded-full text-[13px] lg:text-[14px] font-medium transition-all duration-200 whitespace-nowrap ${
                   isActive
-                    ? 'border-soft-pink-200 border-b-2 text-soft-pink-200 dark:border-maroon-800 dark:text-maroon-800'
-                    : 'text-text-inverse'
+                    ? 'bg-gradient-to-r from-maroon-700 via-maroon-600 to-soft-pink-600 text-white shadow-xs font-semibold'
+                    : 'text-foreground/70 hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {t(`subHeader.${label}`)}
+                <Icon
+                  className={`w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 ${
+                    isActive
+                      ? 'text-soft-pink-200'
+                      : 'text-muted-foreground'
+                  }`}
+                />
+                <span>{t(`subHeader.${label}`)}</span>
               </Link>
             </li>
           );

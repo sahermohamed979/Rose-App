@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import type { Session } from 'next-auth';
 import {
-  LocationEdit,
-  User,
+  MapPin,
+  User as UserIcon,
   ShoppingCart,
   Heart,
 } from 'lucide-react';
@@ -30,6 +30,7 @@ interface HeaderActionsProps {
   initialAddresses?: AddressesPayload;
   initialSession?: Session | null;
 }
+
 export default function HeaderActions({
   wishlistCount = 0,
   cartCount = 0,
@@ -60,7 +61,7 @@ export default function HeaderActions({
   const { data: localCartData } = useLocalCart(isGuest);
   const { data: localWishlistData } = useLocalWishlist(isGuest);
 
-  // Displayed counts: server counts for authenticated/loading, local storage only for confirmed guests
+  // Displayed counts
   const displayedCartCount = isGuest
     ? (localCartData?.cartItems.length ?? 0)
     : cartCount;
@@ -68,31 +69,32 @@ export default function HeaderActions({
     ? (localWishlistData?.length ?? 0)
     : wishlistCount;
 
+  // ── Mobile compact row ──
   if (mobile) {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <Link
           href={'/wishlist'}
           aria-label={t('nav.wishlist')}
-          className="relative"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-foreground/80 hover:text-maroon-600 dark:hover:text-soft-pink-400 hover:bg-muted/80 transition-colors relative"
         >
-          <Heart className="w-5 h-5" />
+          <Heart className="w-[18px] h-[18px]" />
           <CountBadge count={displayedWishlistCount} />
         </Link>
 
         <Link
           href={'/cart'}
           aria-label={t('nav.cart')}
-          className="relative"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-foreground/80 hover:text-maroon-600 dark:hover:text-soft-pink-400 hover:bg-muted/80 transition-colors relative"
         >
-          <ShoppingCart className="w-5 h-5" />
+          <ShoppingCart className="w-[18px] h-[18px]" />
           <CountBadge count={displayedCartCount} />
         </Link>
 
         <NotificationsContainer status={status} />
 
-        <div className="flex items-center gap-1">
-          <LangToggle />
+        <div className="flex items-center gap-1 ps-1">
+          <LangToggle className="text-xs font-semibold px-1.5 py-1 text-foreground/80 hover:text-maroon-600" />
           <ThemeToggle />
         </div>
       </div>
@@ -102,83 +104,99 @@ export default function HeaderActions({
   // ── Full desktop bar ──
   return (
     <>
-      <div className="flex items-center w-full min-w-0">
-        {/* Location — desktop only */}
+      <div className="flex items-center justify-between w-full min-w-0 gap-3 lg:gap-5">
+        {/* Delivery location chip (authenticated only) */}
         {isAuthenticated && (
           <button
             type="button"
             onClick={() => setIsAddressOpen(true)}
-            className="hidden lg:flex flex-col justify-center items-center px-2 shrink-0 cursor-pointer text-start hover:opacity-80 transition-opacity"
+            className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-soft-pink-500/10 dark:bg-maroon-950/40 border border-soft-pink-200/50 dark:border-maroon-800/40 text-start hover:bg-soft-pink-500/20 dark:hover:bg-maroon-900/40 transition-colors shrink-0 group"
           >
-            <h2 className="text-text-default text-[12px]">
-              {t('deliver')}
-            </h2>
-            <span className="text-text-primary text-[14px] flex items-center gap-1 font-medium">
-              <LocationEdit className="w-5 h-5 text-primary" />{' '}
-              {deliverCity}
-            </span>
+            <div className="w-6 h-6 rounded-full bg-maroon-600/10 dark:bg-soft-pink-400/15 flex items-center justify-center text-maroon-600 dark:text-soft-pink-300">
+              <MapPin className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
+                {t('deliver')}
+              </span>
+              <span className="text-xs font-semibold text-foreground group-hover:text-maroon-600 dark:group-hover:text-soft-pink-300 transition-colors truncate max-w-[100px]">
+                {deliverCity}
+              </span>
+            </div>
           </button>
         )}
 
-        {/* Search — fills remaining space */}
-        <div className="flex-1 min-w-0">
+        {/* Central Search Bar */}
+        <div className="flex-1 min-w-0 max-w-xl mx-auto">
           <HeaderSearch />
         </div>
 
-        {/* User auth */}
-        <div className="flex items-center gap-1 shrink-0">
+        {/* Right side actions group */}
+        <div className="flex items-center gap-2 lg:gap-3 shrink-0">
+          {/* User Auth */}
           {isAuthenticated ? (
-            <div className="flex items-center gap-2 px-2 cursor-pointer">
-              <div className="hidden lg:flex flex-col leading-none">
-                <span className="text-[12px] text-text-default">
+            <div className="flex items-center gap-2 ps-1">
+              <div className="hidden lg:flex flex-col text-end leading-tight">
+                <span className="text-[11px] text-muted-foreground">
                   {t('hello')}
                 </span>
-                <span className="text-[14px] font-bold text-text-primary">
+                <span className="text-xs font-bold text-foreground truncate max-w-[110px]">
                   {session?.user?.firstName}
                 </span>
               </div>
-              <HeaderDropdown
-                name={session?.user?.firstName}
-                onOpenAddresses={() => setIsAddressOpen(true)}
-              />
+              <div className="flex items-center gap-1.5 p-1 pe-2 rounded-full hover:bg-muted/70 transition-colors border border-border/40">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-maroon-600 to-soft-pink-600 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                  {session?.user?.firstName?.[0]?.toUpperCase() ||
+                    'U'}
+                </div>
+                <HeaderDropdown
+                  name={session?.user?.firstName}
+                  onOpenAddresses={() => setIsAddressOpen(true)}
+                />
+              </div>
             </div>
           ) : (
-            <div className="flex items-center gap-1 px-2">
-              <User className="w-5 h-5" />
-              <Link
-                href="/login"
-                className="text-text-plain font-medium whitespace-nowrap"
-              >
-                {t('headerLogin')}
-              </Link>
-            </div>
+            <Link
+              href="/login"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/60 hover:border-maroon-600/40 hover:bg-muted/50 text-foreground font-medium text-xs lg:text-sm transition-all shadow-xs shrink-0 group"
+            >
+              <UserIcon className="w-4 h-4 text-muted-foreground group-hover:text-maroon-600 dark:group-hover:text-soft-pink-400 transition-colors" />
+              <span>{t('headerLogin')}</span>
+            </Link>
           )}
-        </div>
 
-        {/* Action icons */}
-        <div className="flex items-center gap-3 ps-2 border-s border-border-muted shrink-0">
+          {/* Divider */}
+          <div className="h-5 w-px bg-border/60 mx-0.5" />
+
+          {/* Wishlist */}
           <Link
             href={'/wishlist'}
             aria-label={t('nav.wishlist')}
-            className="relative"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-foreground/80 hover:text-maroon-600 dark:hover:text-soft-pink-400 hover:bg-muted/80 transition-colors relative"
           >
-            <Heart className="w-5 h-5 cursor-pointer" />
+            <Heart className="w-[19px] h-[19px]" />
             <CountBadge count={displayedWishlistCount} />
           </Link>
 
+          {/* Cart */}
           <Link
             href={'/cart'}
             aria-label={t('nav.cart')}
-            className="relative"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-foreground/80 hover:text-maroon-600 dark:hover:text-soft-pink-400 hover:bg-muted/80 transition-colors relative"
           >
-            <ShoppingCart className="w-5 h-5 cursor-pointer" />
+            <ShoppingCart className="w-[19px] h-[19px]" />
             <CountBadge count={displayedCartCount} />
           </Link>
 
+          {/* Notifications */}
           <NotificationsContainer status={status} />
 
-          <div className="flex items-center gap-2 border-s ps-4 border-border-muted">
-            <LangToggle />
+          {/* Divider */}
+          <div className="h-5 w-px bg-border/60 mx-0.5" />
+
+          {/* Language & Theme toggles */}
+          <div className="flex items-center gap-1.5">
+            <LangToggle className="text-xs font-semibold px-2 py-1.5 rounded-full hover:bg-muted/80 text-foreground/80 hover:text-maroon-600 transition-colors" />
             <ThemeToggle />
           </div>
         </div>

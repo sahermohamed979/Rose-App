@@ -30,20 +30,25 @@ export default async function Header() {
       : undefined;
 
   return (
-    <div className="sticky top-0 z-50 overflow-x-hidden">
-      <div className="bg-bg-muted px-4 md:px-9 py-1 flex flex-row items-center justify-between gap-2">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-background/90 dark:bg-background/80 border-b border-border/40 shadow-xs transition-colors">
+      <div className="px-4 sm:px-6 md:px-9 py-2.5 flex flex-row items-center justify-between gap-3 lg:gap-6 max-w-[1600px] mx-auto">
         {/* Logo */}
-        <Link href="/" aria-label="Rose App, home">
+        <Link
+          href="/"
+          aria-label="Rose App, home"
+          className="shrink-0 transition-transform duration-300 hover:scale-105"
+        >
           <Image
             src="/Logo.svg"
             alt="Rose App"
-            width={85}
-            height={80}
+            width={78}
+            height={70}
             priority
+            className="h-11 sm:h-12 md:h-13 w-auto object-contain"
           />
         </Link>
 
-        {/* Desktop header actions */}
+        {/* Desktop Header Actions & Search */}
         <div className="hidden md:flex flex-1 min-w-0">
           <HeaderActions
             wishlistCount={wishlistCount}
@@ -54,7 +59,7 @@ export default async function Header() {
         </div>
 
         {/* Mobile: compact icons row + hamburger */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-1.5">
           <HeaderActions
             mobile
             wishlistCount={wishlistCount}
@@ -66,8 +71,8 @@ export default async function Header() {
         </div>
       </div>
 
-      {/* Desktop sub-navigation — hidden on mobile */}
+      {/* Desktop sub-navigation */}
       <SubHeader />
-    </div>
+    </header>
   );
 }
