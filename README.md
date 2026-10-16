@@ -1,3 +1,4 @@
+<img width="1536" height="1024" alt="rose" src="https://github.com/user-attachments/assets/994e7c1f-977a-4512-8316-003580844294" />
 # 🌹 Rose App — Enterprise E-Commerce Platform
 
 > **Production-grade, highly performant, and bi-directionally internationalized luxury e-commerce architecture built with Next.js 16 (App Router), React 19, and TypeScript.**
