@@ -7,6 +7,7 @@
 [![TypeScript](<https://img.shields.io/badge/TypeScript-5%20(Strict)-3178C6?style=for-the-badge&logo=typescript>)](https://www.typescriptlang.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![TanStack Query](https://img.shields.io/badge/TanStack_Query-v5-FF4154?style=for-the-badge&logo=react-query)](https://tanstack.com/query)
+[![Three.js](https://img.shields.io/badge/Three.js-R3F-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
 [![Architecture](https://img.shields.io/badge/Architecture-Feature--Sliced-8A2BE2?style=for-the-badge)](#-system-architecture--design-decisions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -44,12 +45,17 @@ Here are some of the key technical decisions and architectural patterns implemen
 • Integrated interactive pinpoint delivery address mapping with Leaflet and React-Leaflet.
 • Code-split heavy client bundles (Leaflet maps and Recharts telemetry graphs) with dynamic loading boundaries and skeleton fallbacks to protect Core Web Vitals.
 
-🛡️ 5. Type Safety & Defensive Engineering
+🎨 5. 3D WebGL Immersion & GPU Performance (Three.js & React Three Fiber)
+• Engineered an interactive procedural 3D hero centerpiece featuring a bouquet of roses and luxury gift box with cursor-driven damping physics.
+• Designed high-performance particle burst systems using `THREE.InstancedMesh` to render hundreds of animating 3D primitives in a single GPU draw call at 60 FPS.
+• Code-split WebGL bundles via dynamic SSR-disabled imports (`next/dynamic({ ssr: false })`) and React Suspense to guarantee zero impact on First Contentful Paint.
+
+🛡️ 6. Type Safety & Defensive Engineering
 • Enforced strict TypeScript mode with zero `any` policy.
 • Runtime schema validation using Zod (`z.infer`) across all API payloads, query parameters, and multi-step checkout forms (React Hook Form).
 • Automated static analysis via pre-commit git hooks (Husky + lint-staged + ESLint + Prettier).
 
-📊 6. Administrative Telemetry & Observability
+📊 7. Administrative Telemetry & Observability
 • Real-time business metrics dashboard featuring revenue trajectory analysis, order fulfillment status distributions, and user lifecycle analytics powered by Recharts.
 
 Engineering is about trade-offs: picking the right abstractions, keeping code maintainable, and prioritizing user experience and runtime resilience above all.
@@ -60,7 +66,7 @@ Explore the repository & architectural breakdown:
 
 Fellow engineers: How are you managing client vs. server boundaries in React 19? Would love to connect and hear your thoughts in the comments! 👇
 
-#SoftwareEngineering #Nextjs #React19 #TypeScript #SystemDesign #WebPerformance #FrontendArchitecture #TailwindCSS #CleanCode #Ecommerce #FullStack
+#SoftwareEngineering #Nextjs #React19 #TypeScript #Threejs #WebGL #SystemDesign #WebPerformance #FrontendArchitecture #TailwindCSS #CleanCode #Ecommerce #FullStack
 ```
 
 </details>
@@ -79,6 +85,7 @@ Here is what I prioritized when building Rose App:
 
 🔹 Architecture: Feature-sliced modular design separating domain business logic, API services, and presentation primitives.
 🔹 Performance: Next.js 16 Server Components to keep client JS slim, paired with streaming Suspense boundaries.
+🔹 3D WebGL: Immersive procedural Three.js / React Three Fiber hero experience with single-draw-call InstancedMesh particles and zero-SSR code splitting.
 🔹 Localization: Native bi-directional English (LTR) & Arabic (RTL) with next-intl and zero CLS layout adaptation.
 🔹 Data Layer: TanStack Query v5 with centralized query key factories and optimistic state updates for cart & checkout flows.
 🔹 Geolocation: Interactive Leaflet map integration for precise pin-drop delivery logistics.
@@ -91,7 +98,7 @@ Check out the code and system design overview:
 
 Feedback and technical discussions are always welcome!
 
-#FrontendArchitecture #WebDevelopment #React19 #Nextjs #TypeScript #TailwindCSS #SoftwareEngineering #TechLead
+#FrontendArchitecture #WebDevelopment #React19 #Nextjs #TypeScript #Threejs #TailwindCSS #SoftwareEngineering #TechLead
 ```
 
 </details>
@@ -128,12 +135,19 @@ Rather than grouping files strictly by technical role (all components in one fol
 - Document-level dynamic direction handling (`dir="rtl" | "ltr"`).
 - CSS Logical Properties (`margin-inline`, `padding-inline`, `inset-inline`) eliminate custom directional overrides and ensure zero Cumulative Layout Shift during locale switches.
 
+### 5. 3D WebGL Architecture & GPU Performance
+
+- **Zero-Hydration Penalty**: The 3D scene is decoupled using `next/dynamic` (`ssr: false`) and React `Suspense`, completely avoiding hydration overhead and keeping initial bundle sizes minimal.
+- **Batched Instanced Rendering**: Ambient and side-burst particle effects (mini flowers, petals, hearts, gift boxes, sparks) are rendered via `THREE.InstancedMesh`, condensing hundreds of animated 3D geometries into single GPU draw calls.
+- **Pointer Interaction & Responsiveness**: Features delta-damped cursor tracking (`THREE.MathUtils.damp`) for fluid camera and model tilt, paired with viewport-aware responsive scaling across mobile, tablet, and desktop displays.
+
 ---
 
 ## 🚀 Feature Matrix
 
 ### 🛒 Customer E-Commerce Engine
 
+- **Interactive 3D Hero Experience**: Procedural Three.js / React Three Fiber centerpiece with floating rose bouquet, cursor tilt dynamics, soft ambient glows, and batched particle bursts.
 - **Curated Collections**: Occasion-based and category-based dynamic discovery workflows.
 - **Search & Filter Pipeline**: Debounced server-side search coupled with multi-attribute filtering.
 - **Shopping Cart & Wishlist**: Persistent synchronized storage with real-time server reconciliations.
@@ -177,7 +191,7 @@ rose-app/
 │   │   ├── cart/                 # Cart state, drawer, and mutations
 │   │   ├── checkout/             # Stepper, address map (Leaflet), discounts
 │   │   ├── dashboard/            # Analytics telemetry & management views
-│   │   ├── home/                 # Landing view assemblies & curated banners
+│   │   ├── home/                 # Landing view assemblies, 3D Three.js canvas & curated banners
 │   │   ├── notifications/        # Web Push notification services
 │   │   ├── orders/               # Purchase fulfillment & order history
 │   │   ├── products/             # Product specifications, galleries, & cards
@@ -198,18 +212,19 @@ rose-app/
 
 ## 🛠️ Technology Stack & Architectural Dependencies
 
-| Layer                    | Technology                | Architectural Rationale                                                         |
-| ------------------------ | ------------------------- | ------------------------------------------------------------------------------- |
-| **Framework**            | Next.js 16 (App Router)   | React Server Components, server actions, route handlers, and streaming          |
-| **Runtime**              | React 19                  | Enhanced concurrent capabilities, improved compiler support, and modern hooks   |
-| **Language**             | TypeScript 5 (Strict)     | End-to-end static verification, discriminated unions, zero `any` policy         |
-| **Design System**        | Tailwind CSS v4 + Base UI | High performance PostCSS engine, accessible unstyled primitives, zero CSS bloat |
-| **Server State**         | TanStack React Query v5   | Decoupled server state, automated cache invalidation, and optimistic mutations  |
-| **Internationalization** | next-intl v4              | First-class App Router localization with automated LTR/RTL document structuring |
-| **Forms & Schemas**      | React Hook Form + Zod     | Uncontrolled performant form inputs with single-source-of-truth type inference  |
-| **Geospatial Mapping**   | Leaflet + React Leaflet   | Interactive, lightweight delivery location coordinate picking                   |
-| **Telemetry & Charts**   | Recharts                  | Composable SVG analytics visualizations for administrative metrics              |
-| **Push & Notifications** | Web Push API + Sonner     | Reliable event dispatching and non-blocking toast messaging                     |
+| Layer                    | Technology                          | Architectural Rationale                                                                 |
+| ------------------------ | ----------------------------------- | --------------------------------------------------------------------------------------- |
+| **Framework**            | Next.js 16 (App Router)             | React Server Components, server actions, route handlers, and streaming                  |
+| **Runtime**              | React 19                            | Enhanced concurrent capabilities, improved compiler support, and modern hooks           |
+| **Language**             | TypeScript 5 (Strict)               | End-to-end static verification, discriminated unions, zero `any` policy                 |
+| **Design System**        | Tailwind CSS v4 + Base UI           | High performance PostCSS engine, accessible unstyled primitives, zero CSS bloat         |
+| **3D Graphics & WebGL**  | Three.js + React Three Fiber + Drei | Procedural 3D visuals, GPU InstancedMesh particles, and zero-SSR dynamic code splitting |
+| **Server State**         | TanStack React Query v5             | Decoupled server state, automated cache invalidation, and optimistic mutations          |
+| **Internationalization** | next-intl v4                        | First-class App Router localization with automated LTR/RTL document structuring         |
+| **Forms & Schemas**      | React Hook Form + Zod               | Uncontrolled performant form inputs with single-source-of-truth type inference          |
+| **Geospatial Mapping**   | Leaflet + React Leaflet             | Interactive, lightweight delivery location coordinate picking                           |
+| **Telemetry & Charts**   | Recharts                            | Composable SVG analytics visualizations for administrative metrics                      |
+| **Push & Notifications** | Web Push API + Sonner               | Reliable event dispatching and non-blocking toast messaging                             |
 
 ---
 
