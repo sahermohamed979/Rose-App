@@ -5,6 +5,7 @@ import StatsCards from '../components/stats-cards';
 import AllCategories from '../components/all-categories';
 import OrderStatusChart from '../components/order-status-chart';
 import RevenueChart from '../components/revenue-chart';
+import ProductsAnalaytics from '../components/product-analytics/product-analytics';
 
 export default async function OverviewScreen() {
   const t = await getTranslations('dashboard.overviewPage');
@@ -51,6 +52,7 @@ export default async function OverviewScreen() {
             initialPeriod="monthly"
             onPeriodChange={fetchRevenuePeriod}
           />
+          {/* <ProductsAnalaytics/> */}
         </div>
       </div>
     </div>

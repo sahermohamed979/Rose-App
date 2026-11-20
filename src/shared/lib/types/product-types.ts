@@ -1,3 +1,4 @@
+import { Product } from './../../../features/search/types/search-types';
 // ─────────────────────────────────────────────────────────────
 // Category
 // ─────────────────────────────────────────────────────────────
@@ -111,6 +112,14 @@ export interface IProduct {
   reviews?: ProductReview[];
 
   _count?: ProductCount;
+}
+
+export interface ProductResponse {
+  status: boolean;
+  code: number;
+  payload: {
+    data: [IProduct];
+  };
 }
 
 // ─────────────────────────────────────────────────────────────
